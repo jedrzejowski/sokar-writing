@@ -94,7 +94,58 @@ Dlaczego wektor, a nie drzewo
 
 \subsection{Generowanie obrazów z danych}
 
+Wszystkie obrazy pod koniec nalezy wyświetlić na ekranie. 
+Biblioteka QT wymaga aby obrazy do wyświetlania podawać jej za pomocą obiektu klasy \qtclass{QPixmap}, którego można utworzyć z \qtclass{QImage}, który z koleji można wytworzyć z tabilicy wypełnionej pikselami.
+Tabilca ta musi mieć strukture RGB888, czyli trzy ośmio bitowe inty, odpowiednio: czerwony, zielony i niebieski.
+Tablica ta dalej będzie zawana jako tablicą obrazu(tablica obrazu).
+
 \subsubsection{Monochorme}
 
-Obrazy
+Obraz monochromatyczny to obraz w odcieniach szarości, od białego do czarnego lub od czarnego do białego. Dane są zapisane w sposób ciągły wartość po wartości.
 
+
+Algorytm składa się z dwóch głównych części.
+Pierwsza część to wygenerowanie tablicy konwersji, dana na kolor.
+Druga to iteracja po wszystkich danych i zamiany ich na kolory za pomocą tablicy wygenerowanej na w kroku pierwszym.
+
+
+\paragraph{Tablica konwersji, dana na kolor}
+
+Alokowana jest tablica struktur \sokarclass{Pixel} o długości 2 do potęgi N, gdzie N jest ilością zaalokowanych bitów danych w obrazie.
+Czyli w przypadku 16 bitowego int'a, nie zależnie od posiadania znaku czy nie, 2
+
+\paragraph{Okienkowanie}
+
+Generowanie polega na utworzeniu tablicy LUT i wypełnieniu jej odpowiednimi wartośćiami, tak aby po odwołaniu się do indeksu tablicy równego wartośći danej, zwracany był piksel RGB, czyli taki jaki wyświetlany.
+
+Przyjmijmy, że dane oznaczymy jako oś X.
+
+
+\paragraph{Okienkowanie}
+W okienkowaniu przyjeło się, że podaje się środek okienka oraz jego szerokość, również interferjs użytkowanika pozwala na zmienianie tych parametrów.
+
+
+
+Na początku wyliczane są granice okienka na osi X.
+Wszystkie wartości, które są po lewo od lewej granicy, otrzymują wartości 0,0f.
+Wszystkie wartośći, które są po prawo od lewej granicy, otrzymują wartośći 1,0f.
+
+\begin{itemize}
+    \item w przypadku liczb ze znakiem, dodawana jest stała 
+    \item given name complex - imię, np. Adam
+    \item middle name - środkowe imię, brak odpowiednika w polskim nazewnictwie
+    \item name prefix - prefiks przed imieniem, np: mgr. inż.
+    \item name suffix - sufiks po imieniu, brak odpowiednika
+\end{itemize}
+
+
+\paragraph{Palety} 
+Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do kolorowania obrazu monochromatycznego.
+Mianowicie po paleta przerabia float od zera do jedynki na jakiś kolor, zwracając \sokarclass{Pixel}, który z koleji jest wkładany do tablicy LUT.
+
+\subsubsection{RGB}
+
+Obrazów zapisanych w RGB nie trzeba w żaden sposób obrabiać, dane już są prawie gotowe do wyświetlenia, należy je tylko odpowiednio posortować, tak jak wymaga biblioteka QT.
+\qtclass{}
+
+\subsubsection{YBR}

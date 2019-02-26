@@ -3,5 +3,6 @@
 *.fls
 *.synctex.gz
 *.fdb_latexmk
+*.out
 
 index.pdf
