@@ -109,44 +109,98 @@ Pierwsza część to wygenerowanie tablicy konwersji, dana na kolor.
 Druga to iteracja po wszystkich danych i zamiany ich na kolory za pomocą tablicy wygenerowanej na w kroku pierwszym.
 
 
-\paragraph{Tablica konwersji, dana na kolor}
-
-Tablica konwersji to tablica, która działa podobnie do tablicy LUT
-Alokowana jest tablica struktur \sokarclass{Pixel} o długości 2 do potęgi N, gdzie N jest ilością zaalokowanych bitów danych w obrazie.
-Czyli w przypadku 16 bitowego int'a, nie zależnie od posiadania znaku czy nie, 2
-
-\paragraph{Okienkowanie}
-
-Generowanie polega na utworzeniu tablicy LUT i wypełnieniu jej odpowiednimi wartośćiami, tak aby po odwołaniu się do indeksu tablicy równego wartośći danej, zwracany był piksel RGB, czyli taki jaki wyświetlany.
-
-Przyjmijmy, że dane oznaczymy jako oś X.
-
-
-\paragraph{Okienkowanie}
-W okienkowaniu przyjeło się, że podaje się środek okienka oraz jego szerokość, również interferjs użytkowanika pozwala na zmienianie tych parametrów.
-
-
-
-Na początku wyliczane są granice okienka na osi X.
-Wszystkie wartości, które są po lewo od lewej granicy, otrzymują wartości 0,0f.
-Wszystkie wartośći, które są po prawo od lewej granicy, otrzymują wartośći 1,0f.
-
-\begin{itemize}
-    \item w przypadku liczb ze znakiem, dodawana jest stała 
-    \item given name complex - imię, np. Adam
-    \item middle name - środkowe imię, brak odpowiednika w polskim nazewnictwie
-    \item name prefix - prefiks przed imieniem, np: mgr. inż.
-    \item name suffix - sufiks po imieniu, brak odpowiednika
-\end{itemize}
-
-
 \paragraph{Palety} 
 Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do kolorowania obrazu monochromatycznego.
-Mianowicie po paleta przerabia float od zera do jedynki na jakiś kolor, zwracając \sokarclass{Pixel}, który z koleji jest wkładany do tablicy LUT.
+Mianowicie po paleta przerabia liczbe zmiennoprzecinokowa od zera do jedynki na jakiś kolor, zwracając \sokarclass{Pixel}, który z koleji jest wkładany do tablicy okienka.
+
+\paragraph{Tablica okienka, wartość na kolor}
+
+Tablica konwersji to tablica, która jest tak na prawde tablicą LUT(Look Up Table), tylko, że w naszym przypadku zmienia ona wartość obrazu na piksel.
+Alokowana jest tablica struktur \sokarclass{Pixel} o długości 2 do potęgi N, gdzie N jest ilością zaalokowanych bitów, która jest pobrana z \dicomtag{BitsAllocated}{0028}{0100}.
+Czyli w przypadku 16 bitowego int'a, nie zależnie od posiadania znaku czy nie, zostanie zaalokowanych 65536 struktur \sokarclass{Pixel}, czyli 196608 bajtów.
+Ta operacja jest jedno razowa.
+
+\paragraph{Wyznaczanie okienka}
+Najpierw wyznaczam okienko, które zmienia wartości obrazu na skale od zera do jeden:
+\[x_0 = center - width / 2\]
+\[x_1 = center + width / 2\]
+\[y_1 = 0.0\]
+\[y_0 = 1.0\]
+gdzie:
+\begin{conditions}
+center  &   środek okienka \\
+width   &   szerokość okienka \\
+x0, y0  &   współżędne pierwszego punktu \\
+x1, y1  &   współżędne drugego punktu
+\end{conditions}
+Przeglądarka pozwala na inwersje okienka.
+Dlatego kiedy użytkownik zażyczy sobie inwersji, zmienne y\textsubscript{0} i y\textsubscript{1} zamienią się wartoścami.
+
+Standart DICOM przewiduje, że wszystkie dane powinny być wyskalowane, za pomocą wzoru.
+\[OutputUnits = m*SV + b\]
+gdzie:
+\begin{conditions}
+m           &    warość z \dicomtag{RescaleSlope}{0028}{1053} \\
+b           &    warość z \dicomtag{RescaleIntercept}{0028}{1052} \\
+SV          &    stored values - warość pixela z pliku  \\
+OutputUnits &    wartość wynikowa
+\end{conditions}
+
+Wartości okienka odnoszą się do wartości już wyskalowanej, a ponieważ skalowanie całego obrazu jest czasochłonne, przeskalowaie okienka da taki sam efekt:
+\[(OutputUnits - b ) / m = SV \]
+więc:
+\[x_0 -= rescaleIntercept\]
+\[x_1 -= rescaleIntercept\]
+\[x_0 /= rescaleSlope\]
+\[x_1 /= rescaleSlope\]
+
+Posiadamy, teraz dwa punkty okienka odnoszące się do wartośći obrazu.
+Wyznaczam parametry prostej przechodzącej przez dwa punkty:
+\[a = (y_1 - y_0) / (x_1 - x_0)\]
+\[b = y_1 - a * x_1\]
+
+Teraz iterujemy po wszystkich możliwych wartościach wartośćiach obrazu i wykonujemy takie operacje.
+\begin{itemize}
+    \item wyznaczenie wartości okienka.
+    \[y = a * x + b\]
+    \item y zostaje obcięcie do 1.0 lub 0.0 jeżeli wyjdzie poza zakres od 1.0 do 0.0
+    \item pobranie z palety piksel odpowiadający wartości
+    \item wsadzenie piksela do tablicy, tak aby najmniejsza wartości obrazu miała indeks 0 a największy ostani
+\end{itemize}
 
 \subsubsection{RGB}
 
 Obrazów zapisanych w RGB nie trzeba w żaden sposób obrabiać, dane już są prawie gotowe do wyświetlenia, należy je tylko odpowiednio posortować, tak jak wymaga biblioteka QT.
-\qtclass{}
+Sposób posortowania wartości w pilku określa \dicomtag{PlanarConfiguration}{0x0028}{0006}. Może o przyjąć dwie następujące wartośći:
+
+\begin{itemize}
+    \item 0 - oznacza to, że wartości pikseli są ułożone w taki sposób
+        \[R1, G1, B1, R2, G2, B2, R3, G3, B3, R4, G4, B4,  ...\]
+    \item 1 - oznacza to, że wartości pikseli są ułożone w taki sposób
+        \[R1, R2, R3, R4, ... , G1, G2, G3, G4, ..., B1, B2, B3, B4, ...\]
+\end{itemize}
+gdzie:
+\begin{conditions}
+Rn  &   wartość czerwonego kanału \\
+Gn  &   wartość zielonego kanału \\
+Bn  &   wartość niebieskiego kanału
+\end{conditions}
+
+Wartości obrazu są przepisywane do buffora dla biblioteki QT.
 
 \subsubsection{YBR}
+
+Skórt YBR odpowiada skrótowi YCbCr.
+Wartości są ułożone w taki sposób.
+\[Y1, B1, R1, Y2, B2, R2, Y3, B3, R3, Y4, B4, R4,  ...\]
+
+Ponieważ wartości te reprezentują kolory, są już w pewnym sensie są obrazem, ale nie można go wyświetlić, ponieważ komputery bazują na kolorach RGB.
+Dlatego odpowieni algorytm konwertuje kolor YBR na kolor RGB, iterując po wszystkich wartościach obrazu.
+
+\paragraph{Konwersja koloru YBR na kolor RGB}
+
+YBR albo YCbCr to model przestrzeni kolorów do przechowywania obrazów i wideo.
+Wykorzystuje do tego trzy typy danych: Y – składową luminancji, B lub Cb – składową różnicową chrominancji Y-B, stanowiącą różnicę między luminancją a niebieskim, oraz R lub Cr – składową chrominancji Y-R, stanowiącą różnicę między luminancją a czerwonym.
+Kolor zielony jest uzyskiwany na podstawie tych trzech wartości.
+YBR nie pokrywa w całości RGB, tak jak RGB nie pokrywa YBR.
+Posiadają one część wspólną, co uniemożliwia wyświetlenie obrazu w stu procentach bez zniekształceń.
