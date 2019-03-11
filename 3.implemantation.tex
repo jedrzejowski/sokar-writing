@@ -111,8 +111,10 @@ Druga to iteracja po wszystkich danych i zamiany ich na kolory za pomocą tablic
 
 \paragraph{Tablica konwersji, dana na kolor}
 
-Alokowana jest tablica struktur \sokarclass{Pixel} o długości 2 do potęgi N, gdzie N jest ilością zaalokowanych bitów danych w obrazie.
-Czyli w przypadku 16 bitowego int'a, nie zależnie od posiadania znaku czy nie, 2
+Alokowana jest tablica struktur \sokarclass{Pixel} o długości 2 do potęgi N, gdzie N jest ilością zaalokowanych bitów, która jest pobrana z \dicomtag{BitsAllocated}{0028}{0100}.
+Czyli w przypadku 16 bitowego int'a, nie zależnie od posiadania znaku czy nie, zostanie zaalokowanych 65536 struktur \sokarclass{Pixel}, czyli 196608 bajtów.
+Następnie wyznaczane są punkty 
+
 
 \paragraph{Okienkowanie}
 
