@@ -19,6 +19,79 @@ Zdecydowana większość czasu przeglądarka była testowana i debugowana na akt
 
 Cały projekt jest zaprojektowany w sposób obiektowy, za wyjątkiem kilku pomniejszych elementów.
 
+\subsubsection{Konwertowanie i analiza danych w tagach}
+
+Każdy plik DICOM posiada "Data Set", czyli zbiór informacji składający się z "Data Element".
+"Data Element" jest strukturą przechowującą wszystkie dane dotyczące obrazu.
+
+\paragraph{Budowa "Data Element"}
+
+\begin{itemize}
+    \item Data Element Tag - to unikalny identyfikator, złożony z dwóch liczb: grupy(uint16) i elementu(uint16) grupy.
+    Obiekt używany do przechowywania taga to \gdcmclass{Tag}.
+    Informuje o znaczeniu danych.
+    Na przykład: jeżeli tag przyjmie wartość \dicomtag{PatientName}{0010}{0010}, oznacza to, że dane w "Data Element" zawierają nazwę pacjenta.
+    \item Value Representation, w skrócie VR – typ danych umożliwiający poprawną interpretację danych.
+    Informuje w jaki sposób dane są zapisane.
+    Obiekt używany do przechowywania taga to \gdcmclass{VR}.
+    Na przykład: Decimal String, w skrócie DS, oznacza liczbę zapisaną za pomocą teksu.
+    Czasami to pole może być puste, wtedy należy się odnieść do VR przypisanego do taga, który określa standard.
+    \item Value Length, w skrócie VL – rozmiar elementu
+    \item Value Field (opcjonalne) – pole z właściwymi danymi
+\end{itemize}
+
+\paragraph{Konwerter}
+
+Obiekt klasy \sokarclass{DataConverter} to obiekt zajmujący się konwersją danych z pliku DICOM na dane w formacie odpowiadającej przeglądarce.
+
+Kilka rzeczy które się tyczą wszystkich danych i konwersji:
+\begin{itemize}
+    \item większość VR jest to zapisane jako tekst, kodowanie i dekodowanie tekstu jest zapewniane przez bibliotekę, a konkretniej przez klasę \gdcmclass{StringFilter}, dlatego nie przejmuje się takimi rzeczami jak zapisem LittleEndian i BigEndian.
+    \item większość danych może mieć kilka wartości oddzielonych backslashem "\textbackslash", dlatego konwerter dla VR w, których standard przewiduje wiele wartości, zawsze zwraca \qtclass{QVector} z tymi wartościami
+\end{itemize}
+
+Klasa obsługuje następujące VR:
+\begin{itemize}
+    \item AS - Age String - wiek lub długość życia\\
+    Długość danych zawsze wynosi 4 bajty.
+    Pierwsze trzy bajty to liczba całkowita zapisana za pomocą tekstu.
+    Czwarty bajt to znaku określający jednostkę czasu.
+    Standard definiuje cztery możliwe jednostki czasu: "D" jako dzień, "W" jako tydzień, "M" jako miesiąc, oraz "Y" jako jeden rok.
+    Konwerter zmienia tą wartość na tekst w postaci czytelnej, np: "18 weeks" lub "3 years", oraz jest wrażliwy na obecny język aplikacji.
+    \\\\
+    Przykład: "018M" oznacza 18 miesięcy, "123D" oznacza 123 dni.
+
+    \item AT - Attribute Tag - inny tag
+    Długość danych to zawsze 32 bity, są to dwie 16 bitowe liczby.
+    Odpowiednio grupa i element grupy.
+    Ten VR jest używany kiedy wskazujemy na inny tag.
+    Wartość nie jest nigdy pokazywana użytkownikowi, a jedynie używana w interpretacji przez algotyrm tworzenia filmu.
+    \\\\
+    Przykład: tag \dicomtag{FrameIncrementPointer}{0028}{0009} jest używany kiedy w pliku jest zapisana sekwencja kilku obrazów, wskazuje on na inny tag zawierający informacje w jaki sposób ta sekwencja ma być wyświetlona.
+    
+    \item DA - Date - data lub dzień
+    Długość danych zawsze wynosi 8 bajtów.
+    Data zapisana w formacie YYYYMMDD, gdzie: YYYY cztery cyfry roku, MM cztery cyfry miesiąca, DD dwie cyfry dnia w kalendarzu Gregoriańskim.
+    Konwerter zamienia dane na obiekt klasy \qtclass{QDate}, który ma w sobie wbudowaną konwersję na tekst zależny od ustawień językowych aplikacji.
+    \\\\
+    Przykład: "19800716" oznacza 16 lipca 1980
+    \\\\
+    UWAGA: Standard "ACR-NEMA Standard 300", czyli poprzednik DICOM definiował date w sposób "YYYY.MM.DD", według standardu DICOM, taki zapis jest nie poprawny, ale zdarzają się stare obrazy z takimi datami i \sokarclass{DataConverter} obsługuje taki format.
+
+    \item DS - Decimal String - liczba zmienno przecinkowa lub ciąg kilku liczb zmienno przecinkowych zapisanych za pomocą tekstu w notacji wykładniczej
+    Długość jednej liczby powinna maksymalne wynosić 16 bajtów.
+    Dostępne znaki to "0"-"9", "+", "-", "E", "e", ".".
+    Biblioteka QT posiada wbudowany konwerter takich liczb, dlatego mój konwerter dzieli tekst i konwertuje za pomocą QT.
+    \\\\
+    Przykład:
+
+    \item IS
+    \item PN
+    \item SS
+    \item US    
+    \item UT
+\end{itemize}
+
 \subsubsection{DicomScene}
 
 Klasa dziedzicząca pośrednio po \qtclass{QGraphicsScene} przez \sokarclass{Scene}.
