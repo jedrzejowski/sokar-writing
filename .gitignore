@@ -4,5 +4,5 @@
 *.synctex.gz
 *.fdb_latexmk
 *.out
-
+*_temp.tex
 index.pdf

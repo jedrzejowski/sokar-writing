@@ -1,0 +1,177 @@
+Informacje na obrazie są wyświetlane za pomocą obiektów \sokarclass{SceneIndicator}.
+Obiekty te mają dostęp do bazy danych obrazu DICOM i odpowiednio zmieniają swoją zawartość.
+
+Domyślnie obiekty wyświetlające informacje:
+\begin{itemize}
+
+    \item \sokarclass{PatientDataIndicator}
+
+    Obiekt wyświetlający dane pacjenta, pojawia się od zawsze na obrazie w lewym górnym rogu i zawiera następujące linie:
+    \begin{itemize}
+        \item Nazwa pacjenta oraz płeć
+
+        Nazwa pacjenta znajduje się w \dicomtag{PatientName}{0010}{0010} o \dicomvr{PN}.
+        
+        Płeć, zapisana jest w \dicomtag{PatientSex}{0010}{0040} i może mieć następujące wartości:
+        \begin{itemize}
+            \item "\texttt{M }" - oznacza mężczyznę, wyświetlana jako O
+            \item "\texttt{F }" - oznacza kobietę, wyświetlana jako O
+            \item "\texttt{O }" - oznacza inną płeć i nie jest wyświetlana
+        \end{itemize}
+        
+        W przypadku określenia inne płci niż jest w standardzie bądź braku tagu płeć nie będzie widoczna.
+
+        Przykład: "\texttt{Adam Jędrzejowski O}".
+
+        \item Identyfikator pacjenta
+
+        Unikalny identyfikator pacjenta z tagu \dicomtag{PatientID}{0010}{0020} wyświetlane w takiej formie jakiej jest zapisane, bez żadnej obróbki.
+        W praktyce najczęściej jest to numer z systemu używanego w danym szpitalu, rzadziej numer pesel.
+        
+        Przykład: "\texttt{HIS/000000}".
+
+        \item Data urodzenia oraz wiek pacjenta w trakcie badania
+
+        Data urodzenia znajdująca się w \dicomtag{PatientBirthDate}{0010}{0030} i jest zamieniana na format "\texttt{YYYY-MM-DD}"
+        Dodatkowo, jeżeli tag \dicomtag{PatientAge}{0010}{1010} jest obecny wyświetlany jest także wiek pacjenta w czasie badania.
+    
+        Przykład: "\texttt{born 1982-08-09, 28 years}".
+
+        \item Opis wykonany przez instytucję opis lub klasyfikację badania (komponentu)
+        
+        Tekst brany z \dicomtag{StudyDescription}{0008}{1030} i wyświetlany bez żadnej obróbki.
+
+        UWAGA: Ta wartość jest wpisywana przez technika, operatora lub lekarza wykonującego badanie, więc wartość ta może być nie przewidywalna.
+
+        \item Opis serii
+        
+        Tekst brany z \dicomtag{SeriesDescription}{0008}{103E} i wyświetlany bez żadnej obróbki.
+        
+        UWAGA: Ta wartość jest wpisywana przez technika, operatora lub lekarza wykonującego badanie, więc wartość ta może być nie przewidywalna.
+    \end{itemize}
+
+    Przykład pełnego teksu:
+    
+    \texttt{\textbf{Adam Jędrzejowski} O\\
+    HIS/123456\\
+    born 1996-07-16, 19 years\\
+    Kregoslup ledzwiowy a-p + boczne\\
+    AP
+    }
+    
+    \item \sokarclass{HospitalDataIndicator}
+    
+    Obiekt wyświetlający dane szpitala/instytucji, pojawia się od zawsze na obrazie w prawym górnym rogu i zawiera następujące linie:
+    \begin{itemize}
+        \item Nazwa instytucji
+        
+        Tekst brany z \dicomtag{InstitutionalDepartmentName}{0008}{1040} i wyświetlany bez żadnej obróbki.
+        
+    \end{itemize}
+
+    \item \sokarclass{ImageOrientationIndicator}
+
+    Obiekt wyświetlający cztery litery oznaczające orientacje obrazu w stosunku do pacjenta, przykład można zobaczyć na rysunku \ref{fig:imageorientationindicator1}.
+
+    \begin{figure}[h]
+        \caption{
+            Przykład jak wygląda \sokarclass{ImageOrientationIndicator} w praktyce.
+            Widzimy tu, że lewa strona pacjenta znajduje się po prawej stronie obrazu, prawa strona pacjenta po lewej, góra pacjenta na górnej części obrazu.
+            Wynika z tego, że obraz przedstawia pacjenta skierowanego twarzą do nas.
+            }
+        \includegraphics[width=\textwidth]{img/imageorientationindicator-002.png}
+        \centering
+        \label{fig:imageorientationindicator1}
+    \end{figure}
+    
+    
+    Każda z sześciu możliwych liter oznacza kierunek oraz zwrot w jakim jest ułożony pacjent:
+    \begin{itemize}
+        \item \texttt{R} - right - część prawa pacjenta
+        \item \texttt{L} - left - część 
+        \item \texttt{A} - anterior - przód pacjenta
+        \item \texttt{P} - posterior - tył pacjenta
+        \item \texttt{F} - feet - część dolna
+        \item \texttt{H} - head - część górna
+    \end{itemize}
+
+    Pary poszczególnych liter tworzą osie:
+    \begin{itemize}
+        \item \texttt{x} - oś przechodząca od prawej do lewej strony pacjenta, \texttt{L} oznacza zwrot zgodny z osią, a \texttt{R} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator2}
+
+        \begin{figure}[h]
+            \caption{Wizualizacja osi \texttt{x} pacjenta}
+            \includegraphics[]{img/imageorientationindicator-101.png}
+            \centering
+            \label{fig:imageorientationindicator2}
+        \end{figure}
+
+        \item \texttt{y} - oś przechodząca od przodu do tył pacjenta, \texttt{P} oznacza zwrot zgodny z osią, a \texttt{A} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator3}
+
+        \begin{figure}[h]
+            \caption{Wizualizacja osi \texttt{y} pacjenta}
+            \includegraphics[]{img/imageorientationindicator-102.png}
+            \centering
+            \label{fig:imageorientationindicator3}
+        \end{figure}
+
+        \item \texttt{z} -  - oś przechodząca od dołu do góry pacjenta, \texttt{H} oznacza zwrot zgodny z osią, a \texttt{F} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator4}
+
+        \begin{figure}[h]
+            \caption{Wizualizacja osi \texttt{z} pacjenta}
+            \includegraphics[]{img/imageorientationindicator-103.png}
+            \centering
+            \label{fig:imageorientationindicator4}
+        \end{figure}
+
+    \end{itemize}
+
+    Informacje o orientacji oraz pozycji względem pacjenta znajdują się w odpowiednio w tagach \dicomtag{ImageOrientation}{0020}{0037} i \dicomtag{ImagePosition}{0020}{0032}.
+    Wartość \dicomtag{ImageOrientation}{0020}{0037} składa się z sześciu liczb, opowiednio oznaczanych dalej X\textsubscript{x}, X\textsubscript{y}, X\textsubscript{z}, Y\textsubscript{x}, Y\textsubscript{y}, Y\textsubscript{z}.
+
+    Standard DICOM definiuje, że te dane mają być z interpretowane w następujący sposób:    
+    \[
+        \begin{bmatrix}
+            P_x \\ P_y \\ P_z \\ 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            X_x\Delta_i & Y_x\Delta_j & 0 & S_x \\
+            X_y\Delta_i & Y_y\Delta_j & 0 & S_y \\
+            X_z\Delta_i & Y_z\Delta_j & 0 & S_z \\
+            0 & 0 & 0 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            i \\ j \\ 0 \\ 1
+        \end{bmatrix}
+        =
+        M
+        \begin{bmatrix}
+            i \\ j \\ 0 \\ 1
+        \end{bmatrix}
+    \]
+    gdzie:
+    \begin{conditions}
+    P_{xyz} & The coordinates of the voxel (i,j) in the frame's image plane in units of mm.\\
+    S_{xyz} & The three values of Image Position (Patient) (0020,0032). It is the location in mm from the origin of the RCS.\\
+    X_{xyz} & The values from the row (X) direction cosine of Image Orientation (Patient) (0020,0037).\\
+    Y_{xyz} & The values from the column (Y) direction cosine of Image Orientation (Patient) (0020,0037).\\
+    i & Column index to the image plane. The first column is index zero.\\
+    \Delta_i & Column pixel resolution of Pixel Spacing (0028,0030) in units of mm.\\
+    j & Row index to the image plane. The first row index is zero.\\    
+    \Delta_j & Row pixel resolution of Pixel Spacing (0028,0030) in units of mm.
+    \end{conditions}
+
+    Brak tłumaczenia jest celowy, aby uniknąć nie porozumień.
+
+    Wyjaśnienia:
+    \begin{itemize}
+        \item P\textsubscript{xyz} oznacza punkt pozycji pacjenta wyrażony w milimetrach
+        \item S\textsubscript{xyz} oznacza punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar, dane brane z \dicomtag{ImagePosition}{0020}{0032}
+        \item X\textsubscript{xyz} oznacza trzy pierwsze wartości z \dicomtag{ImageOrientation}{0020}{0037}
+        \item Y\textsubscript{xyz} oznacza trzy ostatnie wartości z \dicomtag{ImageOrientation}{0020}{0037}
+    \end{itemize}
+
+    \item \sokarclass{ModalityIndicator}
+    \item \sokarclass{PixelSpacingIndicator}
+\end{itemize}
