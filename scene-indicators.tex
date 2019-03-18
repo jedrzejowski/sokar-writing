@@ -14,28 +14,28 @@ Domyślnie obiekty wyświetlające informacje:
         
         Płeć, zapisana jest w \dicomtag{PatientSex}{0010}{0040} i może mieć następujące wartości:
         \begin{itemize}
-            \item "\texttt{M }" - oznacza mężczyznę, wyświetlana jako O
-            \item "\texttt{F }" - oznacza kobietę, wyświetlana jako O
-            \item "\texttt{O }" - oznacza inną płeć i nie jest wyświetlana
+            \item \quotett{M } - oznacza mężczyznę, wyświetlana jako O
+            \item \quotett{F } - oznacza kobietę, wyświetlana jako O
+            \item \quotett{O } - oznacza inną płeć i nie jest wyświetlana
         \end{itemize}
         
         W przypadku określenia inne płci niż jest w standardzie bądź braku tagu płeć nie będzie widoczna.
 
-        Przykład: "\texttt{Adam Jędrzejowski O}".
+        Przykład: \quotett{Adam Jędrzejowski O}.
 
         \item Identyfikator pacjenta
 
         Unikalny identyfikator pacjenta z tagu \dicomtag{PatientID}{0010}{0020} wyświetlane w takiej formie jakiej jest zapisane, bez żadnej obróbki.
         W praktyce najczęściej jest to numer z systemu używanego w danym szpitalu, rzadziej numer pesel.
         
-        Przykład: "\texttt{HIS/000000}".
+        Przykład: \quotett{HIS/000000}.
 
         \item Data urodzenia oraz wiek pacjenta w trakcie badania
 
-        Data urodzenia znajdująca się w \dicomtag{PatientBirthDate}{0010}{0030} i jest zamieniana na format "\texttt{YYYY-MM-DD}"
+        Data urodzenia znajdująca się w \dicomtag{PatientBirthDate}{0010}{0030} i jest zamieniana na format \quotett{YYYY-MM-DD}.
         Dodatkowo, jeżeli tag \dicomtag{PatientAge}{0010}{1010} jest obecny wyświetlany jest także wiek pacjenta w czasie badania.
     
-        Przykład: "\texttt{born 1982-08-09, 28 years}".
+        Przykład: \quotett{born 1982-08-09, 28 years}.
 
         \item Opis wykonany przez instytucję opis lub klasyfikację badania (komponentu)
         
@@ -72,6 +72,7 @@ Domyślnie obiekty wyświetlające informacje:
     \item \sokarclass{ImageOrientationIndicator}
 
     Obiekt wyświetlający cztery litery oznaczające orientacje obrazu w stosunku do pacjenta, przykład można zobaczyć na rysunku \ref{fig:imageorientationindicator1}.
+    Obiekt posiada cztery pola: lewe, górne, prawe i dolne.
 
     \begin{figure}[h]
         \caption{
@@ -84,41 +85,40 @@ Domyślnie obiekty wyświetlające informacje:
         \label{fig:imageorientationindicator1}
     \end{figure}
     
-    
     Każda z sześciu możliwych liter oznacza kierunek oraz zwrot w jakim jest ułożony pacjent:
     \begin{itemize}
-        \item \texttt{R} - right - część prawa pacjenta
-        \item \texttt{L} - left - część 
-        \item \texttt{A} - anterior - przód pacjenta
-        \item \texttt{P} - posterior - tył pacjenta
-        \item \texttt{F} - feet - część dolna
-        \item \texttt{H} - head - część górna
+        \item \quotett{R} - right - część prawa pacjenta
+        \item \quotett{L} - left - część 
+        \item \quotett{A} - anterior - przód pacjenta
+        \item \quotett{P} - posterior - tył pacjenta
+        \item \quotett{F} - feet - część dolna
+        \item \quotett{H} - head - część górna
     \end{itemize}
 
     Pary poszczególnych liter tworzą osie:
     \begin{itemize}
-        \item \texttt{x} - oś przechodząca od prawej do lewej strony pacjenta, \texttt{L} oznacza zwrot zgodny z osią, a \texttt{R} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator2}
+        \item \quotett{x} - oś przechodząca od prawej do lewej strony pacjenta, \quotett{L} oznacza zwrot zgodny z osią, a \quotett{R} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator2}
 
         \begin{figure}[h]
-            \caption{Wizualizacja osi \texttt{x} pacjenta}
+            \caption{Wizualizacja osi \quotett{x} pacjenta}
             \includegraphics[]{img/imageorientationindicator-101.png}
             \centering
             \label{fig:imageorientationindicator2}
         \end{figure}
 
-        \item \texttt{y} - oś przechodząca od przodu do tył pacjenta, \texttt{P} oznacza zwrot zgodny z osią, a \texttt{A} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator3}
+        \item \quotett{y} - oś przechodząca od przodu do tył pacjenta, \quotett{P} oznacza zwrot zgodny z osią, a \quotett{A} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator3}
 
         \begin{figure}[h]
-            \caption{Wizualizacja osi \texttt{y} pacjenta}
+            \caption{Wizualizacja osi \quotett{y} pacjenta}
             \includegraphics[]{img/imageorientationindicator-102.png}
             \centering
             \label{fig:imageorientationindicator3}
         \end{figure}
 
-        \item \texttt{z} -  - oś przechodząca od dołu do góry pacjenta, \texttt{H} oznacza zwrot zgodny z osią, a \texttt{F} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator4}
+        \item \quotett{z} -  - oś przechodząca od dołu do góry pacjenta, \quotett{H} oznacza zwrot zgodny z osią, a \quotett{F} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator4}
 
         \begin{figure}[h]
-            \caption{Wizualizacja osi \texttt{z} pacjenta}
+            \caption{Wizualizacja osi \quotett{z} pacjenta}
             \includegraphics[]{img/imageorientationindicator-103.png}
             \centering
             \label{fig:imageorientationindicator4}
@@ -166,12 +166,113 @@ Domyślnie obiekty wyświetlające informacje:
 
     Wyjaśnienia:
     \begin{itemize}
-        \item P\textsubscript{xyz} oznacza punkt pozycji pacjenta wyrażony w milimetrach
-        \item S\textsubscript{xyz} oznacza punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar, dane brane z \dicomtag{ImagePosition}{0020}{0032}
-        \item X\textsubscript{xyz} oznacza trzy pierwsze wartości z \dicomtag{ImageOrientation}{0020}{0037}
-        \item Y\textsubscript{xyz} oznacza trzy ostatnie wartości z \dicomtag{ImageOrientation}{0020}{0037}
+        \item $P_{xyz}$ oznacza punkt pozycji pacjenta wyrażony w milimetrach
+        \item $S_{xyz}$ oznacza punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar, dane brane z \dicomtag{ImagePosition}{0020}{0032}
+        \item $X_{xyz}$ oznacza trzy pierwsze wartości z \dicomtag{ImageOrientation}{0020}{0037}
+        \item $Y_{xyz}$ oznacza trzy ostatnie wartości z \dicomtag{ImageOrientation}{0020}{0037}
+        \item $i$ i $j$ oznaczają współrzędne na obrazu
+        \item $\Delta_i$ i $\Delta_j$ oznaczają rzeczywistą wielkość piksela obrazu wyrażoną w mm, w algorytmie wyznaczania strony pacjenta ta wartość, może wynosić 1, ponieważ odpowiada za skale
     \end{itemize}
 
-    \item \sokarclass{ModalityIndicator}
+    Praktycznie rzecz biorąc, pierwsza macierz to wektor reprezentujący pozycje pacjenta.
+    Druga jest to transformata.
+    Trzecia to pozycja na obrazie.
+    
+    Interesuje nas wyznaczenie pozycji sześciu (punktów) na płaszczyźnie obrazu, o następujących współrzędnych, dalej używanych pod nazwą $PatientPosition$:
+    \begin{itemize}
+        \item \quotett{R} - $[-1, 0, 0, 1]$
+        \item \quotett{L} - $[+1, 0, 0, 1]$
+        \item \quotett{A} - $[0, -1, 0, 1]$
+        \item \quotett{P} - $[0, +1, 0, 1]$
+        \item \quotett{F} - $[0, 0, -1, 1]$
+        \item \quotett{H} - $[0, 0, +1, 1]$
+    \end{itemize}
+
+    UWAGA: Wszystkie obliczenia odbywają się w współrzędnych jednorodnych.
+
+    Wykonuje takie przekształcenie:
+    \[PatientPosition = imgMatrix * ScenePosition\]
+	\[imgMatrix^{-1} * PatientPosition = imgMatrix^{-1} * imgMatrix * ScenePosition\]
+	\[imgMatrix^{-1} * PatientPosition = ScenePosition\]
+    \[ScenePosition = imgMatrix^{-1} * PatientPosition\]
+    gdzie:
+    \begin{conditions}
+        imgMatrix & macierz przekształcenia obrazu, o której będzie dalej\\
+        ScenePosition & pozycja na obrazie, która naz interesuje \\
+        PatientPosition & któryś z punktów względem pacjenta.
+    \end{conditions}
+
+    Wygląd macierzy $imgMatrix$:
+    \[
+        \begin{bmatrix}
+            X_x & Y_x & 0 & 0 \\
+            X_y & Y_y & 0 & 0 \\
+            X_z & Y_z & 0 & 0\\
+            0 & 0 & 0 & 1
+        \end{bmatrix}
+    \]
+    Powyższa macierz różni się od macierzy definiowanej w standardzie.
+    Po pierwsze PikselSpacing został pominięty, a konkretniej nadałem mu wartość 1.
+    Po drugie pozycja z \dicomtag{ImagePosition}{0020}{0032} została zrównana do punktu zerowego, dzięki temu, wynik też będzie względem punktu zero.
+    Wyznaczenie macierzy $imgMatrix$ jest jednorazowe.
+
+    Po wyznaczeniu sześciu punktów $ScenePosition$, po jednej dla każdego punktu względem pacjenta są zapisywane. $ScenePosition$ odpowiada pozycji punktów na obrazie w pozycji startowej.
+
+    Na scenie, której jest wyświetlany obraz, użytkownik, może obracać obraz do woli, według własnego uznania.
+    Te przekształcenia, są realizowane za pomocą macierzy rotacji, dalej znana jako $rotateTransform$.
+    Macierz $rotateTransform$ jest przesyłana do naszego obiektu \sokarclass{ImageOrientationIndicator} za każdym razem kiedy zostanie zmieniona.
+
+    Ostateczne wyznaczenie pozycji punktów pacjent na obrazie odbywa sie przez przemnożenie lewostronne $rotateTransform$ i $ScenePosition$.
+    \[rotateTransform * ScenePosition\]
+    Wyznaczane jest w ten sposób pozycja sześciu punktów pacjenta na płaszczyźnie sceny wyświetlanej.
+    Następnie określane jest na, której z ośmiu części płaszczyzny jest umieszczony dany punkt, podział płaszczyzny jest widoczny na rysunku \ref{fig:imageorientationindicator5}.
+    Tej płaszczyźnie nadawany jest tytuł w postaci litery, która oznacza punkt pacjenta.
+    Jeżeli punkt znajduje się w centrum, na przecięciu osi, to oznacza, że punkt znajduje się za lub przed ekranem, więc jest pomijany.
+    Następnie do czterech pól wyświetlających zostają wstawione następujące teksty:
+    \begin{itemize}
+        \item lewe pole: tytuł części 7, tytuł części 0 i tytuł części 1
+        \item górne pole: tytuł części 1, tytuł części 2 i tytuł części 3
+        \item prawe pole: tytuł części 3, tytuł części 4 i tytuł części 5
+        \item dolne pole: tytuł części 7, tytuł części 6 i tytuł części 5
+    \end{itemize}
+
+    Przykład:\\
+    Punkt \quotett{H}, czyli punkt reprezentujący kierunek głowy, został przypisany do części 1 i odpowiednio \quotett{L} do części 7, \quotett{R} do części 3 i \quotett{F} do części 5.
+    Punkty \quotett{A} i \quotett{P} zostały pominięte ponieważ znalazły się na środku.
+    Do lewego pola wstawiany jest tekst \quotett{HL}, do górnego \quotett{HR}, do prawego \quotett{RF} i do dolnego \quotett{LF}.
+
+    \begin{figure}[h]
+        \caption{Podział płaszczyzny sceny. Wyróżniono osiem części.}
+        \includegraphics[width=\textwidth]{img/imageorientationindicator-300.png}
+        \centering
+        \label{fig:imageorientationindicator5}
+    \end{figure}
+
     \item \sokarclass{PixelSpacingIndicator}
+    
+    Obiekt wyświetlający miarkę z podziałką informującą jakich rozmiarów jest obiekt na obrazie w rzeczywistości, pojawia się na dole i po prawie stronie sceny, gdy tag \dicomtag{PixelSpacing}{0028}{0030} jest obecny.
+    Wygląd podziałki można zaobserwować na rysunku \ref{fig:imageorientationindicator1}.
+
+    Podziałka dostosowuje swoją wielkość do obecnej sceny, jak i do innych elementów na scenie.
+    Wartości wyświetlane biorą pod uwagę transformatę skali i rotacji obrazu.
+
+    \item \sokarclass{ModalityIndicator}
+    
+    Obiekt wyświetla informacje o akwizycji obrazu.
+    Dane różnią się w zależności od modalności obrazu.
+    Domyślnie zawierają następujące linie:
+    \begin{itemize}
+        \item bla bla bla
+        \item bla bla bla
+        \item bla bla bla
+        \item bla bla bla
+    \end{itemize}
+
+    W przypadku następujących modalności zawierają również następujące informacje:
+    \begin{itemize}
+        \item bla bla bla
+        \item bla bla bla
+        \item bla bla bla
+        \item bla bla bla
+    \end{itemize}
 \end{itemize}
