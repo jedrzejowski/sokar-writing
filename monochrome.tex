@@ -1,0 +1,96 @@
+
+Obraz monochromatyczny to obraz w odcieniach szarości, od białego do czarnego lub od czarnego do białego. Dane są zapisane w sposób ciągły wartość po wartości.
+
+\paragraph{Zamysł generowania obrazu}
+
+Na początku tworzymy funkcje okienka.
+Wyznaczamy zakres okienka $x_0$ i $x_2$ z środka okienka $center$ i długości $width$.
+Wyznaczamy $a$ i $b$ prostej przechodzącej przez dwa punkty $(x_0, 0)$ i $(x_1, 1)$.
+Funkcja okienka wygląda następuąco:
+\[
+    f(v)=
+    \begin{cases}
+    0     & \text{gdy $0 \le v \wedge v \le x_0$ }\\
+    a*x+b & \text{gdy $x_0 < v \wedge v < x_1$}\\
+    1     & \text{gdy $x_1 \le v \wedge v \le 1$ } 
+    \end{cases}
+\]
+
+gdzie $v$ to wartość piksela danych obrazu.
+
+Następnie przepuszczamy cały obraz przez funkcje okienka i otrzymujemy obraz w skali od $0$ do $1$.
+Finalnie pokolorujemy taki obraz jakąś paletą i możemy go wyświetlić.
+
+
+\paragraph{Implementacja algorytmu}
+
+Tego nie będzie:
+
+Algorytm składa się z dwóch głównych części.
+Pierwsza część to wygenerowanie tablicy konwersji, dana na kolor.
+Druga to iteracja po wszystkich danych i zamiany ich na kolory za pomocą tablicy wygenerowanej na w kroku pierwszym.
+
+\subparagraph{Implementacja dynamiczna}
+
+To jes tekst
+
+\subparagraph{Implementacja statyczna}
+
+\paragraph{Palety} 
+Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do kolorowania obrazu monochromatycznego.
+Mianowicie po paleta przerabia liczbe zmiennoprzecinokowa od zera do jedynki na jakiś kolor, zwracając \sokarclass{Pixel}, który z koleji jest wkładany do tablicy okienka.
+
+\paragraph{Tablica okienka, wartość na kolor}
+
+Tablica konwersji to tablica, która jest tak na prawde tablicą LUT(Look Up Table), tylko, że w naszym przypadku zmienia ona wartość obrazu na piksel.
+Alokowana jest tablica struktur \sokarclass{Pixel} o długości 2 do potęgi N, gdzie N jest ilością zaalokowanych bitów, która jest pobrana z \dicomtag{BitsAllocated}{0028}{0100}.
+Czyli w przypadku 16 bitowego int'a, nie zależnie od posiadania znaku czy nie, zostanie zaalokowanych 65536 struktur \sokarclass{Pixel}, czyli 196608 bajtów.
+Ta operacja jest jedno razowa.
+
+\paragraph{Wyznaczanie okienka}
+Najpierw wyznaczam okienko, które zmienia wartości obrazu na skale od zera do jeden:
+\[x_0 = center - width / 2\]
+\[x_1 = center + width / 2\]
+\[y_1 = 0.0\]
+\[y_0 = 1.0\]
+gdzie:
+\begin{conditions}
+center  &   środek okienka \\
+width   &   szerokość okienka \\
+x0, y0  &   współżędne pierwszego punktu \\
+x1, y1  &   współżędne drugego punktu
+\end{conditions}
+Przeglądarka pozwala na inwersje okienka.
+Dlatego kiedy użytkownik zażyczy sobie inwersji, zmienne y\textsubscript{0} i y\textsubscript{1} zamienią się wartoścami.
+
+Standart DICOM przewiduje, że wszystkie dane powinny być wyskalowane, za pomocą wzoru.
+\[OutputUnits = m*SV + b\]
+gdzie:
+\begin{conditions}
+m           &    warość z \dicomtag{RescaleSlope}{0028}{1053} \\
+b           &    warość z \dicomtag{RescaleIntercept}{0028}{1052} \\
+SV          &    stored values - warość pixela z pliku  \\
+OutputUnits &    wartość wynikowa
+\end{conditions}
+
+Wartości okienka odnoszą się do wartości już wyskalowanej, a ponieważ skalowanie całego obrazu jest czasochłonne, przeskalowaie okienka da taki sam efekt:
+\[(OutputUnits - b ) / m = SV \]
+więc:
+\[x_0 -= rescaleIntercept\]
+\[x_1 -= rescaleIntercept\]
+\[x_0 /= rescaleSlope\]
+\[x_1 /= rescaleSlope\]
+
+Posiadamy, teraz dwa punkty okienka odnoszące się do wartośći obrazu.
+Wyznaczam parametry prostej przechodzącej przez dwa punkty:
+\[a = (y_1 - y_0) / (x_1 - x_0)\]
+\[b = y_1 - a * x_1\]
+
+Teraz iterujemy po wszystkich możliwych wartościach wartośćiach obrazu i wykonujemy takie operacje.
+\begin{itemize}
+    \item wyznaczenie wartości okienka.
+    \[y = a * x + b\]
+    \item y zostaje obcięcie do 1.0 lub 0.0 jeżeli wyjdzie poza zakres od 1.0 do 0.0
+    \item pobranie z palety piksel odpowiadający wartości
+    \item wsadzenie piksela do tablicy, tak aby najmniejsza wartości obrazu miała indeks 0 a największy ostani
+\end{itemize}
