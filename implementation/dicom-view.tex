@@ -15,7 +15,35 @@ Dodatkowo posiada obiekt \sokarclass{DicomSceneSet}, który jest zbiorem obrazó
 Poniżej jest opisane zachowanie tych elementów:
 
 \subsection{Elementy interfejsu graficznego}
+
 \subsubsection{\sokarclass{DicomToolBar}}
+
+Jest to pasek narzędzi znajdujący się na górze \sokarclass{DicomView}.
+Posiada on zespół ikonek z rozwijalnymi menu kontekstowymi.
+Kliknięcie odpowiedniej ikony spowoduje wysłanie sygnału do obecnie wyświetlanej sceny.
+
+Są dwa sygnału Qt wysyłane przez klase:
+\begin{itemize}
+    \item \cppcode{void stateToggleSignal(State state);}
+
+    Sygnał ten oznacza zmianę stanu interfejsu
+
+    \item \cppcode{void actionTriggerSignal(Action action, bool state = false);}
+\end{itemize}
+
+
+Ikony na pasku:
+\begin{itemize}
+    \item Okienkowanie
+    \item Przesuwanie
+    \item Skalowanie
+    \item Rotacja
+    \item Indicators
+    \item Tagi - czerwona ikonka dwóch metek
+
+    Kliknięcie 
+\end{itemize}
+
 \subsubsection{\sokarclass{DicomGraphics}}
 \subsubsection{\sokarclass{MovieBar}}
 \subsubsection{\sokarclass{FrameChooser}}
