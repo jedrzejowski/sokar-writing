@@ -1,0 +1,129 @@
+
+Obraz monochromatyczny to obraz w odcieniach szarości, od białego do czarnego lub od czarnego do białego. Dane są zapisane w sposób ciągły wartość po wartości.
+
+\paragraph{Zamysł generowania obrazu}
+
+Mamy obraz, którego piksele to n-bitowe liczby, na przykład 16 bitowa liczba całkowita.
+W takiej postaci nie da się wyświetlić obrazu na monitorze RGB lub nawet na profesjonalnym 10-bitowym.
+Należy taką liczbę przerobić na trzy liczby, reprezentujące 3 kanały RGB, czerwony, zielony i niebieski.
+Dlatego do wyświetlania obrazów monochromatycznych o dużym kontraście stosuję się twór zwany okienkiem.
+Jest to funkcja która mapuje n-bitwy obraz na 8-bitowy obraz w skali szarości.
+8-bitów, ponieważ monitor RGB jest wstanie wyświetlić 256 odcieni szarości.
+
+\subparagraph{Wyznaczanie funckji okienka}
+Przyjeło się, że okienko definiuje się dwoma liczbami: środkiem, oznaczanym jako $center$ i długością, oznaczaną jako $width$.
+Wyznaczamy zakres okienka $x_0$ i $x_1$ z środka okienka $center$ i długości $width$.
+\[x_0 = center - width / 2\]
+\[x_1 = center + width / 2\]
+Wyznaczamy parametry $a$ i $b$, prostej przechodzącej przez dwa punkty $(x_0, y_0)$ i $(x_1, y,_1)$.
+Gdzie $y_0$ jest równe 0, a $y_1$ jest równe 255.
+Funkcja okienka wygląda następująco:
+\[
+    f(v)=
+    \begin{cases}
+    0     & \text{gdy $0 \le v \wedge v \le x_0$ }\\
+    a*x+b & \text{gdy $x_0 < v \wedge v < x_1$}\\
+    1     & \text{gdy $x_1 \le v \wedge v \le 1$ } 
+    \end{cases}
+\]
+
+gdzie $v$ to wartość piksela danych obrazu.
+
+Następnie przepuszczamy cały obraz przez funkcje okienka i otrzymujemy obraz w skali od $0$ do $255$.
+
+\subparagraph{Kolorowanie obrazu}
+
+Taki odraz w skali od $0$ do $255$ można wyświetlić.
+Natomiast standard DICOM przewiduje, że obraz można jeszcze wyświetlić w wielokolorowej palecie barw.
+Przykład takiej palety można zobaczyć na rysunku WSTAĆ RYSUNEK.
+Taka paleta barw nie koniecznie musi mieć 256 odcieni, dlatego lepiej jest zrobić aby okienko, mapowało na liczbę od 0 do 1, a później paleta mapowała na kolor RGB.
+
+
+\paragraph{Implementacja algorytmu}
+
+Implementacja powyżej przedstawionego algorytmu w sposób dosłowny była by co najmniej beznadziejna i słaba.
+Wymagało by tablic: tablicy danymi, tablicy pomocniczej oraz tablicy z finalnym obrazem.
+Trzeba też zauważyć, że do wyliczenie jakiegoś piksela nie potrzeba liczyć, żadnego innego piksela, co skutkuje, że każdy piksel można wyliczyć oddzielnie.
+Dlatego najlepiej było by współbieżnie przelecieć po całym obrazie i zamienić dane na piksele.
+Ale do zamiany dane na piksel, musimy mnożyć i dzielić liczby zmiennoprzecinkowe, a to do najszybszych nie należy.
+Dlatego dobrym pomysłem jest zrobienie mniejszej tablicy typu LookUpTable, wypełnienie jej wszystkimi możliwymi wartościami obrazu, a następnie przerobić obraz z tablicą LUT.
+Ale ponieważ tablica LUT posiada wszystkie możliwe kombinacje wartości, jej rozmiar można wyznaczyć wzorem: $2^N*3$, gdzie N to liczba bitów liczby.
+Standard DICOM definiuje, że liczby mogą mieć $8$, $12$, $16$, $32$ i $64$ bity, jednakże, $12$ bitowe i tak się zapisuje w postaci 16-bitowych w pamięci RAM.
+Dlatego możliwe wartości wielkości tablicy LUT to w przybliżeniu: $768$ bajtów, $196$ kilobajtów, $12,5$ gigabajtów i $56$ eksabajta($55*10^{6}$ terabajtów).
+Alokowanie dwóch największych wartości może być lekko problematyczne, dlatego zrobiłem dwie implementacje algorytmu: z tablicą LUT(dla 8 i 16 bitowych obrazów i bez tablicy LUT(dla 32 i 64 bitowych obrazów).
+
+UWAGA: Standard DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe. Dlatego założyłem, że takie obrazy nie istnieją.
+
+\subparagraph{Implementacja}
+
+W obu przypadkach algorytm dostosowuje się do bitowej wielkości oraz znaku piksela.
+Implementacja jest zrobiona za pomocą klasy \sokarclass{Monochrome::Window} i klas pochodnych.
+Scena 
+
+\subparagraph{Implementacja dynamiczna bez tablicy LUT}
+
+UWAGA: ponieważ nie dysponuje rzeczywistym obrazem o pikselu danych 32-bitowym.
+Implementacja dynamiczna nie była testowana w warunkach rzeczywistych.
+
+
+
+\subparagraph{Implementacja statyczna z tablicą LUT}
+
+\paragraph{Palety} 
+Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do kolorowania obrazu monochromatycznego.
+Mianowicie po paleta przerabia liczbe zmiennoprzecinokowa od zera do jedynki na jakiś kolor, zwracając \sokarclass{Pixel}, który z koleji jest wkładany do tablicy okienka.
+
+\paragraph{Tablica okienka, wartość na kolor}
+
+Tablica konwersji to tablica, która jest tak na prawde tablicą LUT(Look Up Table), tylko, że w naszym przypadku zmienia ona wartość obrazu na piksel.
+Alokowana jest tablica struktur \sokarclass{Pixel} o długości 2 do potęgi N, gdzie N jest ilością zaalokowanych bitów, która jest pobrana z \dicomtag{BitsAllocated}{0028}{0100}.
+Czyli w przypadku 16 bitowego int'a, nie zależnie od posiadania znaku czy nie, zostanie zaalokowanych 65536 struktur \sokarclass{Pixel}, czyli 196608 bajtów.
+Ta operacja jest jedno razowa.
+
+\paragraph{Wyznaczanie okienka}
+Najpierw wyznaczam okienko, które zmienia wartości obrazu na skale od zera do jeden:
+\[x_0 = center - width / 2\]
+\[x_1 = center + width / 2\]
+\[y_1 = 0.0\]
+\[y_0 = 1.0\]
+gdzie:
+\begin{conditions}
+center  &   środek okienka \\
+width   &   szerokość okienka \\
+x0, y0  &   współżędne pierwszego punktu \\
+x1, y1  &   współżędne drugego punktu
+\end{conditions}
+Przeglądarka pozwala na inwersje okienka.
+Dlatego kiedy użytkownik zażyczy sobie inwersji, zmienne y\textsubscript{0} i y\textsubscript{1} zamienią się wartoścami.
+
+Standard DICOM przewiduje, że wszystkie dane powinny być wyskalowane, za pomocą wzoru.
+\[OutputUnits = m*SV + b\]
+gdzie:
+\begin{conditions}
+m           &    warość z \dicomtag{RescaleSlope}{0028}{1053} \\
+b           &    warość z \dicomtag{RescaleIntercept}{0028}{1052} \\
+SV          &    stored values - warość pixela z pliku  \\
+OutputUnits &    wartość wynikowa
+\end{conditions}
+
+Wartości okienka odnoszą się do wartości już wyskalowanej, a ponieważ skalowanie całego obrazu jest czasochłonne, przeskalowaie okienka da taki sam efekt:
+\[(OutputUnits - b ) / m = SV \]
+więc:
+\[x_0 -= rescaleIntercept\]
+\[x_1 -= rescaleIntercept\]
+\[x_0 /= rescaleSlope\]
+\[x_1 /= rescaleSlope\]
+
+Posiadamy, teraz dwa punkty okienka odnoszące się do wartośći obrazu.
+Wyznaczam parametry prostej przechodzącej przez dwa punkty:
+\[a = (y_1 - y_0) / (x_1 - x_0)\]
+\[b = y_1 - a * x_1\]
+
+Teraz iterujemy po wszystkich możliwych wartościach wartośćiach obrazu i wykonujemy takie operacje.
+\begin{itemize}
+    \item wyznaczenie wartości okienka.
+    \[y = a * x + b\]
+    \item y zostaje obcięcie do 1.0 lub 0.0 jeżeli wyjdzie poza zakres od 1.0 do 0.0
+    \item pobranie z palety piksel odpowiadający wartości
+    \item wsadzenie piksela do tablicy, tak aby najmniejsza wartości obrazu miała indeks 0 a największy ostani
+\end{itemize}

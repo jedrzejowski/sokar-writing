@@ -1,0 +1,18 @@
+
+Obrazów zapisanych w RGB nie trzeba w żaden sposób obrabiać, dane już są prawie gotowe do wyświetlenia, należy je tylko odpowiednio posortować, tak jak wymaga biblioteka QT.
+Sposób posortowania wartości w pilku określa \dicomtag{PlanarConfiguration}{0x0028}{0006}. Może o przyjąć dwie następujące wartośći:
+
+\begin{itemize}
+    \item 0 - oznacza to, że wartości pikseli są ułożone w taki sposób
+        \[R1, G1, B1, R2, G2, B2, R3, G3, B3, R4, G4, B4,  ...\]
+    \item 1 - oznacza to, że wartości pikseli są ułożone w taki sposób
+        \[R1, R2, R3, R4, ... , G1, G2, G3, G4, ..., B1, B2, B3, B4, ...\]
+\end{itemize}
+gdzie:
+\begin{conditions}
+Rn  &   wartość czerwonego kanału \\
+Gn  &   wartość zielonego kanału \\
+Bn  &   wartość niebieskiego kanału
+\end{conditions}
+
+Wartości obrazu są przepisywane do buffora dla biblioteki QT.

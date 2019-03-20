@@ -1,4 +1,4 @@
-\documentclass{report}
+\documentclass{article}
 
 \input{packages}
 \input{commands}
@@ -16,9 +16,12 @@
 
 \maketitle
 
-\include{1.medical-diagnostics}
-\include{2.browsers}
-\include{3.implemantation}
+\input{1.medical-diagnostics}
+\input{2.browsers}
 
+\part{Interfejs graficzny}
+
+\part{Implementacja}
+\input{implementation/index.tex}
 
 \end{document}
