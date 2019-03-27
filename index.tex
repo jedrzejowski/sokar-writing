@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper,12pt,twoside,openany]{report}
 
 \input{packages}
 \input{commands}
@@ -6,26 +6,42 @@
 \inputencoding{utf8}
 \input{utf8-symbols}
 
+\def\oprawa{1.05cm}
+\addtolength{\oddsidemargin}{\oprawa}
+\addtolength{\evensidemargin}{-\oprawa}
+
+
+\title{Wieloplatformowa przeglądarka obrazów DICOM w C++}
 
 \author{Adam Jędrzejowski}
-\title{Wieloplatformowa przeglądarka obrazów DICOM w C++}
-\date{\today}
+\nrindeksu{123456}
+
+\opiekun{prof dr hab. inż. Waldemar Smolik}
+\terminwykonania{30 lutego 2019}
+\rok{2019}
+
+\miasto{Warszawa}
+\uczelnia{POLITECHNIKA WARSZAWSKA}
+\wydzial{Wydział Elektroniki i Technik Informacyjnych Politechniki Warszawskiej}
+\instytut{Instytut Radioelektroniki i Technik Multimedialnych}
+\zaklad{Zakład Elektroniki Jądrowej i Medycznej}
+\kierunekstudiow{Elektronika}
+
+
+\opinie{%
+  \input{opiniaopiekuna.tex}
+  \newpage
+  \input{recenzja.tex}
+}
+
+\streszczenia{
+  \input{streszczenia.tex}
+}
 
 \begin{document}
 
 \maketitle
 
-\part{Wstęp}
-\input{introduction/index.tex}
-
-\part{Standard DICOM}
-
-\part{Biblioteki}
-
-\part{Funkcje przeglądarki}
-
-\part{Implementacja}
-\input{implementation/index.tex}
-
+\input{text/text.tex}
 
 \end{document}
