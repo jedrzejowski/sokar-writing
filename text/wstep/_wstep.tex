@@ -1,14 +1,45 @@
 \section{Wprowadzenie}
 
-specyficzność
+W dzisiejszych czasach obrazowanie diagnostyczne odgrywa kluczową role w medycynie.
+Obrazy medyczne pomagają lekarzą w podejmowaniu decyzji w sprawie dalszych losów pacjenta.
+Nie można pozwolić aby błąd techniczny wpłynął negatywnie na zdrowie lub życie pacjenta.
+Dlatego tak bardzo ważnym aspektem obrazowania jest jego dokładność, rzetelność, nie zawodność. oraz powtarzalność.
 
-\section{Cel pracy}
+Obrazowanie posiada dwa etapy, pierwszy do wykonanie badania na pacjencie, a drugi to analiza badania przez personel medyczny.
 
-Podstawowym celem jest zaliczenie studiów i osiągnięcie tytułu inżyniera.
+Wygląd pierwszego etapu, który jest wykonywany najczęściej przez technika, jest zależny od techniki badania.
+Technika badania to sposób na wejście w oddziaływanie fizyczne z ciałem pacjenta a następnie, a następnie na agregacji, czyli zbierania, tego przeszło przez ciało pacjenta.
+Przykładami najbardziej popularnych badań są: radiografia, tomografia rentgenowska, obrazowanie metodą rezonansu magnetycznego, ultrasonografia, scyntygrafia, tomografia SPECT oraz tomografii PET.
+Każda z wymienionych technik jest szerzej opisana w sekcji \ref{sec:basic-imaging-technics}.
+Podczas badania zapisywanie są też wszystkie parametry dotyczące badania oraz tego w jakich warunkach zostało przeprowadzone.
+Parametrami badania, są na przykład dane pozwalające zidentyfikować pacjenta w sposób jednoznaczny oraz jego płeć, date urodzenia, wiek w trakcie badania, sposób ułożenia ciała w urządzeniu pomiarowym.
+Parametrem badania jest też model urządzenia, unikalny identyfikator urządzenia, nazwę producenta, date badania, date ostatniego przeglądu urządzenia oraz dane personalne osoby wykonującej badanie.
 
-Celem pracy jest zrobienie oprogramowania do przeglądania obrazów DICOM, która jest niezależna od systemu i środowiska w którym się znajduje
+Na końcu tego procesu, wszystkie dane oraz parametry są zapisywane do ustandaryzowanego formatu pliku o nazwie DICOM.
+DICOM definiuje między innymi format zapisu danych i parametrów obrazowania w pliku w postaci cyfrowej.
+Standard DICOM został opracowany przez dwie organizacje American College of Radiology (w skrócie ACR) i National Electrical Manufacturers Association (w skrócie NEMA) i opublikowany w swojej ostatecznej wersji w 1993.
+W obecnym czasie jest to jedyny wiodący standard zapisu w obrazowaniu medycznym.
 
-Dotyczyne medcycznyh techink obrazowanej
+Drugi etap, czyli analiza danych i parametrów badania przez personel medyczny, sprowadza się do wyświetlenia danych i parametrów badania w taki sposób aby były zrozumiane i miały wartość diagnostyczną.
+Nie jest to trywialny proces i posiada wiele aspektów.
+Standard DICOM przewiduje praktyczną możliwość zapisania danych i parametrów w jakiejkolwiek formie z jakiejkolwiek techniki obrazowania.
+Sprawia to, że po wczytaniu parametrów badania i ich analizie należy podjąć decyzje w jaki sposób mamy je wyświetlić użytkownikowi.
+Wszystkie aspekty analizy dokonywanej przez program będą wyjaśnione w dalszych częściach dokumentu.
+
+Dlatego celem tej pracy inżynierskiej jest zrobienie niezawodnej przeglądarki działającej niezależnie od platformy.
+Można to zrealizować na wiele sposobów.
+
+Możliwość uruchomienia na wielu platformach można uzyskać w wiele różnych sposobów.
+Pierwszym rozwiązaniem z jest napisanie oprogramowania w środowisku, który pozwala na uruchomienie na wielu platformach.
+Do takich należą Java firmy Oracle, która po skompilowaniu, tworzy jednolity kod bajtowy, który może być uruchomiany na każdej platformie na której działa maszyna wirtualna Javy.
+Jednakże takie rozwiązanie sprawia, że nie jesteśmy wstanie osiągnąć pełnego potencjału obliczeniowego maszyny przez pewien poziom wirtualizacji.
+
+Drugim rozwiązaniem jest napisanie jednolitego kodu, który można skompilować do kodu natywnego na każdą z docelowych platform.
+Taką możliwość daje C++, którego kod wynikowy, posiada wysoką wydajnością z bezpośrednim dostępem do zasobów sprzętowych i funkcji systemowych, łatwością dodawania innych bibliotek, napisanych w innych niż języku niż C++.
+
+Wybrany został drugi sposób ponieważ został w pewnym sensie narzucony przez tytuł pracy ale daje też większą możliwość wykorzystania możliwości obliczeniowych dzisiejszych komputerów.
+
+Do pisania programu zostały wykorzystane dwie biblioteki. Qt do tworzenia interfejsu graficznego w stylu obecnej platformy. Oraz Grassroots DICOM library(w skrócie GDCM) do obsługi plików DICOM.
 
 \section{Obrazowe techniki diagnostyczne}
 
@@ -21,6 +52,7 @@ Obrazowanie medyczne pozwala również na agregacje danych o normalnej anatomii 
 
 Istnieje wiele technik obrazowania wykorzystujące różne zjawiska fizyczne zachodzące w materii.
 Podstawowe techniki obrazowania medycznego to:
+\label{sec:basic-imaging-technics}
 \begin{itemize}
     \item Radiografia - RTG
 
@@ -67,12 +99,30 @@ Podstawowe techniki obrazowania medycznego to:
     W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{US}.
 
     \item Scyntygrafia
+    
+    Obrazowa technika diagnostyczna z gałęzi medycyny nuklearnej.
+    Polega na wprowadzenia do organizmu ciał obcych, środków chemicznych zwanymi również radiofarmaceutykami, charakteryzującymi się krótkim czasie rozpadu i powinowactwem chemicznym z badanymi organami.
+    Następnie wykrywanie rozpadów zachodzących w ciele poprzez rejestracje promieniowania wytwarzanego podczas rozpadu, a następnie przedstawienie to w formie graficznej.
+    Kontrast zależy od długości trwania pomiaru, oraz od ilości wstrzykniętego radiofarmaceutyka.
+    Rozdzielczość zależy od ułożenia i możliwości rozdzielczej kamer scyntylacyjnych, zwanymi także scyntykamerami, gammakamerami lub kamerami Angera.
+
+    W standardzie DICOM obraz scyntygraficzny jest oznaczana jako \quotett{NM}.
+
+    Radiofarmaceutyki to związki chemiczne zawierające radioizotop.
 
     \item Tomografia SPECT
+    
+    Technika obrazowania  z gałęzi medycyny nuklearnej. w której rejestruje się promieniowanie powstające rozpadu gamma.
+    Źródłem promieniowania(fotonów) jest podana pacjentowi radiofarmaceutyk, ulegająca rozpadowi gamma.
+    Rejestrujemy fotony powstające podczas anihilacji pozytonów.
+    Kontrast zależy od wydajności detektorów, odległość detektora od obiektu oraz położenie obiektu.
+    Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów, dyskretyzację.
+
+    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{PT}.
 
     \item Tomografii PET
     
-    Technika obrazowania w której rejestruje się promieniowanie powstające podczas anihilacji pozytonów (antyelektronów).
+    Technika obrazowania  z gałęzi medycyny nuklearnej. w której rejestruje się promieniowanie powstające podczas anihilacji pozytonów (antyelektronów).
     Źródłem promieniowania(pozytonów) jest podana pacjentowi substancja promieniotwórcza, ulegająca rozpadowi beta plus
     Rejestrujemy fotony powstające podczas anihilacji pozytonów.
     Kontrast zależy od wydajności detektorów, odległość detektora od obiektu oraz położenie obiektu.
@@ -88,6 +138,8 @@ Takie jak:
     \item PET-CT, PET/CT - połączenie PET z wielorzędowym tomografem komputerowym
     \item PET-MRI, PET/MRI - połączenie PET z rezonansem magnetycznym
 \end{itemize}
+
+Standard DICOM nazywa techniki obrazowania modalnościami(z ang. modality).
 
 \section{Obrazy diagnostyczne}
 
@@ -196,17 +248,6 @@ Należy, więc posiadać jakieś narzędzie do wyświetlenia w sposób poprawny,
 Trudno jest porównywać coś tak złożonego jak przeglądarka obrazów medycznych, nie można jednoznacznie powiedzieć, że jedna jest lepsza od drugiej.
 W celu porównań wyróżniono 26 kryteriów do porównywania przeglądarek w postaci „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcie, obrazowanie dwu i trój wymiarowego.
 Kryteria te w jasny sposób pozwalają na ocenę praktycznych aspektów użytkowania przeglądarki.
-
-
-\section{Wybór C++}
-
-%dodać w wprowadzenia
-
-Jest wiele środowisk, które w łatwy, miły i przyjemny sposób pozwalają tworzyć oprogramowanie, które jest wstanie pracować na wielu platformach.
-Do takich należą Java firmy Oracle, która po skompilowaniu, tworzy jednolity kod bajtowy, który może być uruchomiany na każdej platformie na której działa maszyna wirtualna Javy.
-Jednakże takie rozwiązanie sprawia, że nie jesteśmy wstanie osiągnąć pełnego potencjału obliczeniowego maszyny przez pewien poziom wirtualizacji.
-Rozwiązaniem jest więc C++, którego kod wynikowy, posiada wysoką wydajnością z bezpośrednim dostępem do zasobów sprzętowych i funkcji systemowych, łatwością dodawania innych bibliotek, napisanych w innych niż języku niż C++.
-Dodatkowo jest niezależny od konkretnej platformy sprzętowej lub systemowej, co pozwala na przeniesienie kodu na inną platformę.
 
 \section{Układ pracy}
 
