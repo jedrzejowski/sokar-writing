@@ -6,4 +6,6 @@
 *.out
 *.toc
 *_temp.tex
+*.bcf
+*.run.xml
 index.pdf

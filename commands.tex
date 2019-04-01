@@ -1,14 +1,14 @@
-\newcommand{\dicomtag}[3] {#1(#2, #3)}
-
 \newcommand{\wiki}[1]{https://pl.wikipedia.org/wiki/Teksel}
 
-\newcommand{\gdcmclass}[1]{gdcm::#1}
+\newcommand{\dicomtag}[3]{#1(#2, #3)}
 
-\newcommand{\sokarclass}[1]{Sokar::#1}
+\def\gdcmclass#1{gdcm::#1}
 
-\newcommand{\qtclass}[1]{Qt::#1}
+\def\sokarclass#1{\texttt{Sokar::#1}}
 
-\newcommand{\dicomvr}[1]{VR #1}
+\def\qtclass#1{\texttt{Qt::#1}}
+
+\def\dicomvr#1{\texttt{VR #1}}
 
 \newenvironment{conditions}
   {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
@@ -16,7 +16,7 @@
 
 \newcommand{\quotett}[1]{\enquote{\texttt{#1}}}
 
-\newcommand{\cppcode}[1]{{\color{blue}\texttt{#1}}}
+\def\cppcode#1{{\color{blue}\texttt{#1}}}
 
 % \renewcommand\paragraph{%
 %     \@startsection{paragraph}{4}{0mm}%

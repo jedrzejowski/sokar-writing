@@ -1,3 +1,6 @@
+\section{Wprowadzenie}
+
+specyficzność
 
 \section{Cel pracy}
 
@@ -5,7 +8,7 @@ Podstawowym celem jest zaliczenie studiów i osiągnięcie tytułu inżyniera.
 
 Celem pracy jest zrobienie oprogramowania do przeglądania obrazów DICOM, która jest niezależna od systemu i środowiska w którym się znajduje
 
-\section{Wprowadzenie}
+Dotyczyne medcycznyh techink obrazowanej
 
 \section{Obrazowe techniki diagnostyczne}
 
@@ -17,8 +20,7 @@ Głównym celem obrazowanie medycznego jest ujawnienie wewnętrznych struktur ci
 Obrazowanie medyczne pozwala również na agregacje danych o normalnej anatomii i fizjologii i ich zapisywania, w celu poźniejszej identyfikacji patologii poprzez porównanie jej ze zdrowymi narządami.
 
 Istnieje wiele technik obrazowania wykorzystujące różne zjawiska fizyczne zachodzące w materii.
-
-Kilka wybranych technik obrazowania medycznego:
+Podstawowe techniki obrazowania medycznego to:
 \begin{itemize}
     \item Radiografia - RTG
 
@@ -33,6 +35,16 @@ Kilka wybranych technik obrazowania medycznego:
     Rozdzielczość zależy od rozdzielczości detektora i rozmiaru ogniska lampy.
 
     W standardzie DICOM radiografia cyfrowa jest oznaczana jako \quotett{RT}.
+
+    \item Tomografia rentgenowska - CT - Computer Tomography
+    
+    Agregacja w tomografii komputerowej jest podobna do badania RTG, ale w CT wykonujemy wiele pomiarów w różnych pozycjach względem obiektu badanego i pod różnym kontem.
+    Następnie z tych pomiarów tworzymy obraz przez zastosowanie odpowiednich algorytmów tworzących obraz.
+    Rejestrujemy współczynnik osłabienia promieniowania rentgenowskiego przez badany obiekt.
+    Kontrast zależy od rozmiarów szczegółów badanego obiektu, napięcie anodowe, przyłożone masy (prąd katodowy i czas akwizycji).
+    Rozdzielczość zależy od geometrii pomiaru, rozmiaru ogniska lampy rentgenowskiej, przestrzenna rozdzielczość matrycy detektora, liczby detektorów, dyskretyzację i filtru rekonstrukcyjnego.
+
+    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{CT}.
 
     \item Obrazowanie metodą rezonansu magnetycznego - MRI
 
@@ -54,17 +66,12 @@ Kilka wybranych technik obrazowania medycznego:
 
     W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{US}.
 
-    \item Tomografia komputerowa - CT
-    
-    Agregacja w tomografii komputerowej jest podobna do badania RTG, ale w CT wykonujemy wiele pomiarów w różnych pozycjach względem obiektu badanego i pod różnym kontem.
-    Następnie z tych pomiarów tworzymy obraz przez zastosowanie odpowiednich algorytmów tworzących obraz.
-    Rejestrujemy współczynnik osłabienia promieniowania rentgenowskiego przez badany obiekt.
-    Kontrast zależy od rozmiarów szczegółów badanego obiektu, napięcie anodowe, przyłożone masy (prąd katodowy i czas akwizycji).
-    Rozdzielczość zależy od geometrii pomiaru, rozmiaru ogniska lampy rentgenowskiej, przestrzenna rozdzielczość matrycy detektora, liczby detektorów, dyskretyzację i filtru rekonstrukcyjnego.
+    \item Scyntygrafia
 
-    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{CT}.
+    \item Tomografia SPECT
 
     \item Tomografii PET
+    
     Technika obrazowania w której rejestruje się promieniowanie powstające podczas anihilacji pozytonów (antyelektronów).
     Źródłem promieniowania(pozytonów) jest podana pacjentowi substancja promieniotwórcza, ulegająca rozpadowi beta plus
     Rejestrujemy fotony powstające podczas anihilacji pozytonów.
@@ -72,6 +79,7 @@ Kilka wybranych technik obrazowania medycznego:
     Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów, dyskretyzację.
 
     W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{PT}.
+    
 \end{itemize}
 
 Istnieją też techniki, które są połączeniem kilku innych technik.
@@ -92,7 +100,7 @@ Jest to kluczowy element obrazowania.
 Brak możliwości stwierdzenia co na obrazie się znajduje, stawia sens takiego obrazowania pod znakiem zapytania.
 Poco nam obraz w 4K na, którym można zobaczyć wyraźne plamy niczego.
 
-Warość diagnostyczną można określić na podstawie następujących parametrów
+Wartość diagnostyczną można określić na podstawie następujących parametrów
 \begin{itemize}
     \item Jakości obrazu
     
@@ -136,7 +144,7 @@ Warość diagnostyczną można określić na podstawie następujących parametr�
 
     W obrazach zawsze występuje szum, widoczny w różnych postaciach, na przykład w postaci cyfrowego ziarna.
     Rodzaj i poziom szumu zależy od techniki obrazowania.
-    Stosunek sygnału użytecznego ma decydująy wpływ na widoczności obiektów, kontrast oraz percepcję szczegółów w obrazie.
+    Stosunek sygnału użytecznego ma decydujący wpływ na widoczności obiektów, kontrast oraz percepcję szczegółów w obrazie.
 
     \item Poziom artefaktów
     
@@ -158,28 +166,41 @@ Ale ponieważ mamy wielu producentów sprzętów i urządzeń medycznych to poja
 Tak aby każdy obraz nie był w innym formacie i to jeszcze zastrzeżonym przez producenta.
 Dodatkowo nie możemy pozwolić aby obraz, w jakiejkolwiek formie by nie był, stracił nieodwracalnie część informacji podczas zapisu.
 
-\subsubsection{Standard ACR-NEMA}
+\paragraph{Standard DICOM}
 
+
+%wypunktować wersje
 Pierwsze tomografy komputerowe przeżyły swój rozkwit w latach siedemdziesiątych ubiegłego wieku.
-Obrazów, które przedstawiały przekroje, sprawiły wiele trudności w ich interpretacji personelowi medycznemu.
-Nie ułatwiał fakt, że każdy producent stosował inne metryki oraz inne oznaczenia.
-Zwyczjane pliki graficzne (jak np. jpg, png, gif), nie nadawały się do zapisu takich obrazów, ponieważ nie byłu wstanie zapisać dodatkowych informacji oraz parametrów 
-Dlatego bardzo szybko pojawiła się potrzeba ujednolicenia sposobu zapisu.
-
-\subsubsection{Standard DICOM}
+Spowodowało to, że obrazu medyczne nie były bezpośrednim wynikiem badania, a jedynie wynikiem obróbki danych pomiarowych przez komputer.
+Dodatkowo obrazy przedstawiały przekroje, co sprawiły wiele trudności w ich interpretacji personelowi medycznemu.
+Ponieważ zwyczajne pliki graficzne (jak np. jpg, png, gif), nie nadawały się do zapisu takich obrazów, ponieważ nie były wstanie zapisać dodatkowych informacji oraz parametrów jakie były ważne w badaniu diagnostycznym.
+Nie ułatwiał fakt, że każdy producent stosował inne metryki oraz inne oznaczenia swojego sprzętu.
+Dlatego bardzo szybko pojawiła się potrzeba ujednolicenia sposobu zapisu i wprowadzeniu jednolitego standardu(https://xkcd.com/927/).
+Dwie organizacje, ACR (American College of Radiology) i NEMA (National Electrical Manufactures Association) połączyły swoje siły i w 1983 roku rozpoczęły pracę nad standardem, który miał rozwiązać ten problem.
+Pierwsza wersja nowego standardu została nazwana ACR-NEMA 1.0 (od American College of Radiology i National Electrical Manufacturers Association) i została opublikowana 2 lata później.
+Pierwsza wersja okazała się fiaskiem, więc po kolejnych 3 latach opublikowano wersje drugą.
+Trzecia wersja została wydana w 1993 i zaczęła funkcjonować pod nazwą DICOM. Od tamtego czasu jest stale aktualizowana i rozszerzana.
 
 W obecnej chwili standard DICOM definiuje 81 różnych typów badań, w tym
 
 \subsection{Wyświetlanie obrazów}
 
-
 Posiadanie wielu obrazów wiąże się z potrzebą ich przeglądania i porównywania.
-Należy mieć, więc jakieś narzędzie do wyświetlenia w sposób poprawny, najlepiej jednym i tym samym programem.
+Należy, więc posiadać jakieś narzędzie do wyświetlenia w sposób poprawny, najlepiej jednym i tym samym programem.
 
-jakie cechy posinna spełniać przglądrka obrazów
+
+\subsubsection{Cechy przeglądrki obrazów}
+
+\subsubsection{Kryteria porównywania przglądarek}
+
+Trudno jest porównywać coś tak złożonego jak przeglądarka obrazów medycznych, nie można jednoznacznie powiedzieć, że jedna jest lepsza od drugiej.
+W celu porównań wyróżniono 26 kryteriów do porównywania przeglądarek w postaci „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcie, obrazowanie dwu i trój wymiarowego.
+Kryteria te w jasny sposób pozwalają na ocenę praktycznych aspektów użytkowania przeglądarki.
 
 
 \section{Wybór C++}
+
+%dodać w wprowadzenia
 
 Jest wiele środowisk, które w łatwy, miły i przyjemny sposób pozwalają tworzyć oprogramowanie, które jest wstanie pracować na wielu platformach.
 Do takich należą Java firmy Oracle, która po skompilowaniu, tworzy jednolity kod bajtowy, który może być uruchomiany na każdej platformie na której działa maszyna wirtualna Javy.
@@ -188,3 +209,5 @@ Rozwiązaniem jest więc C++, którego kod wynikowy, posiada wysoką wydajności
 Dodatkowo jest niezależny od konkretnej platformy sprzętowej lub systemowej, co pozwala na przeniesienie kodu na inną platformę.
 
 \section{Układ pracy}
+
+???

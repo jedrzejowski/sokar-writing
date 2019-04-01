@@ -1,3 +1,4 @@
+
 Informacje na obrazie są wyświetlane za pomocą obiektów \sokarclass{SceneIndicator}.
 Obiekty te mają dostęp do bazy danych obrazu DICOM i odpowiednio zmieniają swoją zawartość.
 
@@ -74,7 +75,7 @@ Domyślnie obiekty wyświetlające informacje:
     Obiekt wyświetlający cztery litery oznaczające orientacje obrazu w stosunku do pacjenta, przykład można zobaczyć na rysunku \ref{fig:imageorientationindicator1}.
     Obiekt posiada cztery pola: lewe, górne, prawe i dolne.
 
-    \begin{figure}[h]
+    \begin{figure}[!htbp]
         \caption{
             Przykład jak wygląda \sokarclass{ImageOrientationIndicator} w praktyce.
             Widzimy tu, że lewa strona pacjenta znajduje się po prawej stronie obrazu, prawa strona pacjenta po lewej, góra pacjenta na górnej części obrazu.
@@ -99,7 +100,7 @@ Domyślnie obiekty wyświetlające informacje:
     \begin{itemize}
         \item \quotett{x} - oś przechodząca od prawej do lewej strony pacjenta, \quotett{L} oznacza zwrot zgodny z osią, a \quotett{R} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator2}
 
-        \begin{figure}[h]
+        \begin{figure}[!htbp]
             \caption{Wizualizacja osi \quotett{x} pacjenta}
             \includegraphics[]{img/imageorientationindicator-101.png}
             \centering
@@ -108,7 +109,7 @@ Domyślnie obiekty wyświetlające informacje:
 
         \item \quotett{y} - oś przechodząca od przodu do tył pacjenta, \quotett{P} oznacza zwrot zgodny z osią, a \quotett{A} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator3}
 
-        \begin{figure}[h]
+        \begin{figure}[!htbp]
             \caption{Wizualizacja osi \quotett{y} pacjenta}
             \includegraphics[]{img/imageorientationindicator-102.png}
             \centering
@@ -117,7 +118,7 @@ Domyślnie obiekty wyświetlające informacje:
 
         \item \quotett{z} -  - oś przechodząca od dołu do góry pacjenta, \quotett{H} oznacza zwrot zgodny z osią, a \quotett{F} oznacza zwrot przeciwny, wizualizacja na rysunku \ref{fig:imageorientationindicator4}
 
-        \begin{figure}[h]
+        \begin{figure}[!htbp]
             \caption{Wizualizacja osi \quotett{z} pacjenta}
             \includegraphics[]{img/imageorientationindicator-103.png}
             \centering
@@ -241,7 +242,7 @@ Domyślnie obiekty wyświetlające informacje:
     Punkty \quotett{A} i \quotett{P} zostały pominięte ponieważ znalazły się na środku.
     Do lewego pola wstawiany jest tekst \quotett{HL}, do górnego \quotett{HR}, do prawego \quotett{RF} i do dolnego \quotett{LF}.
 
-    \begin{figure}[h]
+    \begin{figure}[!htbp]
         \caption{Podział płaszczyzny sceny. Wyróżniono osiem części.}
         \includegraphics[width=\textwidth]{img/imageorientationindicator-300.png}
         \centering
