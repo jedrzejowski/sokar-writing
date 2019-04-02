@@ -1,14 +1,21 @@
 \section{Wprowadzenie}
 
+
 W dzisiejszych czasach obrazowanie diagnostyczne odgrywa kluczową role w medycynie.
 Obrazy medyczne pomagają lekarzą w podejmowaniu decyzji w sprawie dalszych losów pacjenta.
 Nie można pozwolić aby błąd techniczny wpłynął negatywnie na zdrowie lub życie pacjenta.
 Dlatego tak bardzo ważnym aspektem obrazowania jest jego dokładność, rzetelność, nie zawodność. oraz powtarzalność.
 
-Obrazowanie posiada dwa etapy, pierwszy do wykonanie badania na pacjencie, a drugi to analiza badania przez personel medyczny.
+Diagnostyka obrazowa lub obrazowanie medyczne to dział diagnostyki medycznej zajmujący się tworzeniem i zbieraniem obrazów ludzkiego ciała za pomocą różnych rodzaju oddziaływań fizycznych.
+Obrazowe techniki diagnostyczne to techniki i procesy tworzenia wizualnych reprezentacji wnętrza obiektu do analizy medycznej.
+A także wizualne przedstawienie funkcjonowania narządów lub tkanek (fizjologia) w czasie, np. bicie serca.
+Głównym celem obrazowanie medycznego jest ujawnienie wewnętrznych struktur ciała.
+Obrazowanie medyczne pozwala również na agregacje danych o normalnej anatomii i fizjologii i ich zapisywania, w celu poźniejszej identyfikacji patologii poprzez porównanie jej ze zdrowymi narządami.
+
+Proces obrazowania diagnostycznego można podzielić na dwa główne etapy, pierwszy to wykonanie pomiarów na pacjencie, a drugi to analiza badania przez personel medyczny i decyzja o podjęciu działań.
 
 Wygląd pierwszego etapu, który jest wykonywany najczęściej przez technika, jest zależny od techniki badania.
-Technika badania to sposób na wejście w oddziaływanie fizyczne z ciałem pacjenta a następnie, a następnie na agregacji, czyli zbierania, tego przeszło przez ciało pacjenta.
+Technika badania to sposób na wejście w oddziaływanie fizyczne z ciałem pacjenta a następnie, a następnie na agregacji, czyli zbierania, danych pomiarowych.
 Przykładami najbardziej popularnych badań są: radiografia, tomografia rentgenowska, obrazowanie metodą rezonansu magnetycznego, ultrasonografia, scyntygrafia, tomografia SPECT oraz tomografii PET.
 Każda z wymienionych technik jest szerzej opisana w sekcji \ref{sec:basic-imaging-technics}.
 Podczas badania zapisywanie są też wszystkie parametry dotyczące badania oraz tego w jakich warunkach zostało przeprowadzone.
@@ -26,8 +33,8 @@ Standard DICOM przewiduje praktyczną możliwość zapisania danych i parametró
 Sprawia to, że po wczytaniu parametrów badania i ich analizie należy podjąć decyzje w jaki sposób mamy je wyświetlić użytkownikowi.
 Wszystkie aspekty analizy dokonywanej przez program będą wyjaśnione w dalszych częściach dokumentu.
 
-Dlatego celem tej pracy inżynierskiej jest zrobienie niezawodnej przeglądarki działającej niezależnie od platformy.
-Można to zrealizować na wiele sposobów.
+Dlatego celem tej pracy inżynierskiej jest zrobienie niezawodnej przeglądarki działającej niezależnie od platformy i mogącej obsłużyć wiele typów obrazów medycznych.
+Implementacje takiego rozwiązania, można zrealizować na wiele sposobów.
 
 Możliwość uruchomienia na wielu platformach można uzyskać w wiele różnych sposobów.
 Pierwszym rozwiązaniem z jest napisanie oprogramowania w środowisku, który pozwala na uruchomienie na wielu platformach.
@@ -42,13 +49,6 @@ Wybrany został drugi sposób ponieważ został w pewnym sensie narzucony przez 
 Do pisania programu zostały wykorzystane dwie biblioteki. Qt do tworzenia interfejsu graficznego w stylu obecnej platformy. Oraz Grassroots DICOM library(w skrócie GDCM) do obsługi plików DICOM.
 
 \section{Obrazowe techniki diagnostyczne}
-
-Diagnostyka obrazowa lub obrazowanie medyczne to dział diagnostyki medycznej zajmujący się tworzeniem i zbieraniem obrazów ludzkiego ciała za pomocą różnych rodzaju oddziaływań fizycznych.
-
-Obrazowe techniki diagnostyczne to techniki i procesy tworzenia wizualnych reprezentacji wnętrza obiektu do analizy medycznej.
-A także wizualne przedstawienie funkcjonowania narządów lub tkanek (fizjologia) w czasie, np. bicie serca.
-Głównym celem obrazowanie medycznego jest ujawnienie wewnętrznych struktur ciała.
-Obrazowanie medyczne pozwala również na agregacje danych o normalnej anatomii i fizjologii i ich zapisywania, w celu poźniejszej identyfikacji patologii poprzez porównanie jej ze zdrowymi narządami.
 
 Istnieje wiele technik obrazowania wykorzystujące różne zjawiska fizyczne zachodzące w materii.
 Podstawowe techniki obrazowania medycznego to:
@@ -116,7 +116,7 @@ Podstawowe techniki obrazowania medycznego to:
     Źródłem promieniowania(fotonów) jest podana pacjentowi radiofarmaceutyk, ulegająca rozpadowi gamma.
     Rejestrujemy fotony powstające podczas anihilacji pozytonów.
     Kontrast zależy od wydajności detektorów, odległość detektora od obiektu oraz położenie obiektu.
-    Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów, dyskretyzację.
+    Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów.
 
     W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{PT}.
 
@@ -126,7 +126,7 @@ Podstawowe techniki obrazowania medycznego to:
     Źródłem promieniowania(pozytonów) jest podana pacjentowi substancja promieniotwórcza, ulegająca rozpadowi beta plus
     Rejestrujemy fotony powstające podczas anihilacji pozytonów.
     Kontrast zależy od wydajności detektorów, odległość detektora od obiektu oraz położenie obiektu.
-    Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów, dyskretyzację.
+    Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów.
 
     W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{PT}.
     
@@ -175,7 +175,9 @@ Wartość diagnostyczną można określić na podstawie następujących parametr
 \label{sec:image-quality}
 
 \begin{itemize}
-    \item kontrast
+    \item Kontrast
+    
+    ???
 
     \item Rozdzielczość przestrzenna
 
@@ -213,27 +215,46 @@ Wartość diagnostyczną można określić na podstawie następujących parametr
 
 \subsection{Zapisywanie obrazów}
 
+TO SIE WYWALI:
+
 Każdy obraz cyfrowy można zapisać na nośniku danych.
 Ale ponieważ mamy wielu producentów sprzętów i urządzeń medycznych to pojawia się problem jednolitego zapisania wszystkich obrazów.
 Tak aby każdy obraz nie był w innym formacie i to jeszcze zastrzeżonym przez producenta.
 Dodatkowo nie możemy pozwolić aby obraz, w jakiejkolwiek formie by nie był, stracił nieodwracalnie część informacji podczas zapisu.
 
-\paragraph{Standard DICOM}
-
-
-%wypunktować wersje
 Pierwsze tomografy komputerowe przeżyły swój rozkwit w latach siedemdziesiątych ubiegłego wieku.
 Spowodowało to, że obrazu medyczne nie były bezpośrednim wynikiem badania, a jedynie wynikiem obróbki danych pomiarowych przez komputer.
 Dodatkowo obrazy przedstawiały przekroje, co sprawiły wiele trudności w ich interpretacji personelowi medycznemu.
 Ponieważ zwyczajne pliki graficzne (jak np. jpg, png, gif), nie nadawały się do zapisu takich obrazów, ponieważ nie były wstanie zapisać dodatkowych informacji oraz parametrów jakie były ważne w badaniu diagnostycznym.
 Nie ułatwiał fakt, że każdy producent stosował inne metryki oraz inne oznaczenia swojego sprzętu.
-Dlatego bardzo szybko pojawiła się potrzeba ujednolicenia sposobu zapisu i wprowadzeniu jednolitego standardu(https://xkcd.com/927/).
+
+\paragraph{Standard ACR/NEMA v1.0}
+
+Bardzo szybko pojawiła się potrzeba ujednolicenia sposobu zapisu i wprowadzeniu jednolitego standardu(https://xkcd.com/927/).
 Dwie organizacje, ACR (American College of Radiology) i NEMA (National Electrical Manufactures Association) połączyły swoje siły i w 1983 roku rozpoczęły pracę nad standardem, który miał rozwiązać ten problem.
 Pierwsza wersja nowego standardu została nazwana ACR-NEMA 1.0 (od American College of Radiology i National Electrical Manufacturers Association) i została opublikowana 2 lata później.
-Pierwsza wersja okazała się fiaskiem, więc po kolejnych 3 latach opublikowano wersje drugą.
-Trzecia wersja została wydana w 1993 i zaczęła funkcjonować pod nazwą DICOM. Od tamtego czasu jest stale aktualizowana i rozszerzana.
+Standard określał format danych, zastosowaną transmisję „Point-to-point” oraz pierwsze słowniki komunikatów.
+Niemal od razu okazała się fiaskiem, zawierał liczne błędy i niejasności, a także nie był pozbawiony pewnych niespójności wewnętrznych.
+Dlatego zaraz po opublikowaniu okazało się, że konieczne są liczne poprawki. 
 
-W obecnej chwili standard DICOM definiuje 81 różnych typów badań, w tym
+\paragraph{Standard ACR/NEMA v2.0}
+
+\TODO{To zarąbałem z wikipedii}
+
+Po 3 latach prac powstała druga, lepsza wersja, znacznie lepiej dostosowana do pracy z urządzeniami medycznymi.
+Pierwszy pokaz ACR/NEMA v2.0 odbył się na Uniwersytecie Georgetown, od 21 do 23 maja 1990 roku.
+Sześć firm uczestniczyło w tym wydarzeniu: DeJarnette Research Systems, General Electric Medical Systems, Merge Technologies, Siemens Medical Systems, Vortech oraz 3M. 
+Wersja rozszerzona była o bardziej precyzyjne definicje protokołów software’owych oraz standaryzację zbioru komunikatów.
+Sprzęt wykorzystujący ARC/NEMA v2.0 został zaprezentowany na corocznym spotkaniu towarzystwa Radiologicznego Ameryki Północnej (RSNA) w 1990 roku.
+Praktyczne zastosowanie odkryło nowe błędy i konieczność zmian.
+Wdrożenie standardu ARC/NEMA na dużą skalę miało miejsce w 1992 roku.
+
+\paragraph{Standard DICOM v3.0}
+
+Za sprawą Armii Stanów Zjednoczonych, w 1993 roku trzecia wersja została wydana, zaczęła funkcjonować pod nazwą DICOM.
+Od tamtego czasu jest stale aktualizowana i rozszerzana.
+
+W obecnej chwili standard DICOM definiuje 81 różnych typów badań, w tym 39 już przedawnionych.
 
 \subsection{Wyświetlanie obrazów}
 
