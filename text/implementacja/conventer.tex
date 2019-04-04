@@ -2,22 +2,6 @@
 Każdy plik DICOM posiada \quotett{Data Set}, czyli zbiór informacji składający się z \quotett{Data Element}.
 \quotett{Data Element} jest strukturą przechowującą wszystkie dane dotyczące obrazu.
 
-\paragraph{Budowa \textquote{Data Element}}
-
-\begin{itemize}
-    \item Data Element Tag - to unikalny identyfikator, złożony z dwóch liczb: grupy(uint16) i elementu(uint16) grupy.
-    Obiekt używany do przechowywania taga to \gdcmclass{Tag}.
-    Informuje o znaczeniu danych.
-    Na przykład: jeżeli tag przyjmie wartość \dicomtag{PatientName}{0010}{0010}, oznacza to, że dane w \textquote{Data Element} zawierają nazwę pacjenta.
-    \item Value Representation, w skrócie VR – typ danych umożliwiający poprawną interpretację danych.
-    Informuje w jaki sposób dane są zapisane.
-    Obiekt używany do przechowywania taga to \gdcmclass{VR}.
-    Na przykład: Decimal String, w skrócie DS, oznacza liczbę zapisaną za pomocą teksu.
-    Czasami to pole może być puste, wtedy należy się odnieść do VR przypisanego do taga, który określa standard.
-    \item Value Length, w skrócie VL – rozmiar elementu
-    \item Value Field (opcjonalne) – pole z właściwymi danymi
-\end{itemize}
-
 \paragraph{Konwerter}
 
 Obiekt klasy \sokarclass{DataConverter} to obiekt zajmujący się konwersją danych z pliku DICOM na dane w formacie odpowiadającej przeglądarce.

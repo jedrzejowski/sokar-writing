@@ -1,10 +1,7 @@
-\section{Wprowadzenie}
-
-
-W dzisiejszych czasach obrazowanie diagnostyczne odgrywa kluczową role w medycynie.
-Obrazy medyczne pomagają lekarzą w podejmowaniu decyzji w sprawie dalszych losów pacjenta.
+W dzisiejszych czasach obrazowanie diagnostyczne odgrywa kluczową rolę w medycynie.
+Obrazy medyczne pomagają lekarzom w podejmowaniu decyzji w sprawie dalszych losów pacjenta.
 Nie można pozwolić aby błąd techniczny wpłynął negatywnie na zdrowie lub życie pacjenta.
-Dlatego tak bardzo ważnym aspektem obrazowania jest jego dokładność, rzetelność, nie zawodność. oraz powtarzalność.
+Dlatego tak bardzo ważnym aspektem obrazowania jest jego dokładność, rzetelność, niezawodność oraz powtarzalność.
 
 Diagnostyka obrazowa lub obrazowanie medyczne to dział diagnostyki medycznej zajmujący się tworzeniem i zbieraniem obrazów ludzkiego ciała za pomocą różnych rodzaju oddziaływań fizycznych.
 Obrazowe techniki diagnostyczne to techniki i procesy tworzenia wizualnych reprezentacji wnętrza obiektu do analizy medycznej.
@@ -22,7 +19,7 @@ Podczas badania zapisywanie są też wszystkie parametry dotyczące badania oraz
 Parametrami badania, są na przykład dane pozwalające zidentyfikować pacjenta w sposób jednoznaczny oraz jego płeć, date urodzenia, wiek w trakcie badania, sposób ułożenia ciała w urządzeniu pomiarowym.
 Parametrem badania jest też model urządzenia, unikalny identyfikator urządzenia, nazwę producenta, date badania, date ostatniego przeglądu urządzenia oraz dane personalne osoby wykonującej badanie.
 
-Na końcu tego procesu, wszystkie dane oraz parametry są zapisywane do ustandaryzowanego formatu pliku o nazwie DICOM.
+Na końcu tego procesu, wszystkie dane oraz parametry są zapisywane do pliku o formacie zgodnym ze standardem DICOM.
 DICOM definiuje między innymi format zapisu danych i parametrów obrazowania w pliku w postaci cyfrowej.
 Standard DICOM został opracowany przez dwie organizacje American College of Radiology (w skrócie ACR) i National Electrical Manufacturers Association (w skrócie NEMA) i opublikowany w swojej ostatecznej wersji w 1993.
 W obecnym czasie jest to jedyny wiodący standard zapisu w obrazowaniu medycznym.
@@ -32,6 +29,8 @@ Nie jest to trywialny proces i posiada wiele aspektów.
 Standard DICOM przewiduje praktyczną możliwość zapisania danych i parametrów w jakiejkolwiek formie z jakiejkolwiek techniki obrazowania.
 Sprawia to, że po wczytaniu parametrów badania i ich analizie należy podjąć decyzje w jaki sposób mamy je wyświetlić użytkownikowi.
 Wszystkie aspekty analizy dokonywanej przez program będą wyjaśnione w dalszych częściach dokumentu.
+
+%rozpendówka o przetwarzaniu
 
 Dlatego celem tej pracy inżynierskiej jest zrobienie niezawodnej przeglądarki działającej niezależnie od platformy i mogącej obsłużyć wiele typów obrazów medycznych.
 Implementacje takiego rozwiązania, można zrealizować na wiele sposobów.
@@ -48,228 +47,3 @@ Wybrany został drugi sposób ponieważ został w pewnym sensie narzucony przez 
 
 Do pisania programu zostały wykorzystane dwie biblioteki. Qt do tworzenia interfejsu graficznego w stylu obecnej platformy. Oraz Grassroots DICOM library(w skrócie GDCM) do obsługi plików DICOM.
 
-\section{Obrazowe techniki diagnostyczne}
-
-Istnieje wiele technik obrazowania wykorzystujące różne zjawiska fizyczne zachodzące w materii.
-Podstawowe techniki obrazowania medycznego to:
-\label{sec:basic-imaging-technics}
-\begin{itemize}
-    \item Radiografia - RTG
-
-    Najstarsza i najbardziej rozpoznawalna technika obrazowania.
-    Pierwsze zdjęcie analogowe zostało wykonane przez Röntgena w 1896 roku.
-    Polega na przepuszczeniu przez obiekt badany promieniowania, a następnie detekcji tego promieniowania za obiektem badanym.
-    W praktyce rejestrujemy współczynnik osłabienia promieniowania rentgenowskiego przez badany obiekt.
-    Wyróżniamy dwa typu radiografii: analogowy i cyfrowy.
-    Radiografia analogowa odchodzi powoli w zapomnienie.
-    W radiografii cyfrowej obrazowana jest ilość promieniowania X przenikające przez badany obiekt.
-    Kontrast zależy od położenia obiektu między źródłem a detektorem (położenie optymalne), napięcie anodowe, filtracja, grubość okładek wzmacniających.
-    Rozdzielczość zależy od rozdzielczości detektora i rozmiaru ogniska lampy.
-
-    W standardzie DICOM radiografia cyfrowa jest oznaczana jako \quotett{RT}.
-
-    \item Tomografia rentgenowska - CT - Computer Tomography
-    
-    Agregacja w tomografii komputerowej jest podobna do badania RTG, ale w CT wykonujemy wiele pomiarów w różnych pozycjach względem obiektu badanego i pod różnym kontem.
-    Następnie z tych pomiarów tworzymy obraz przez zastosowanie odpowiednich algorytmów tworzących obraz.
-    Rejestrujemy współczynnik osłabienia promieniowania rentgenowskiego przez badany obiekt.
-    Kontrast zależy od rozmiarów szczegółów badanego obiektu, napięcie anodowe, przyłożone masy (prąd katodowy i czas akwizycji).
-    Rozdzielczość zależy od geometrii pomiaru, rozmiaru ogniska lampy rentgenowskiej, przestrzenna rozdzielczość matrycy detektora, liczby detektorów, dyskretyzację i filtru rekonstrukcyjnego.
-
-    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{CT}.
-
-    \item Obrazowanie metodą rezonansu magnetycznego - MRI
-
-    Sposób tworzenie obrazu MRI jest wysoce skomplikowanym procesem i ciężko opisać go w kilku zdaniach.
-    Obrazowana jest sumaryczna gęstość atomów wodoru (protonów) w badanym obiekcie.
-    Kontrast zależy od gęstości protonów, czasu relaksacji podłużnej i poprzecznej, prędkości przepływu płynu.
-    Rozdzielczość zależy od parametrów skanera (rozmiar woksela).
-    
-    W standardzie DICOM obraz rezonansu magnetycznego jest oznaczana jako \quotett{MR}.
-    
-    \item Ultrasonografia
-    
-    Jest to badanie, które wszyscy kojarzą z badaniem płodu podczas ciąży z obrazem w kształcie łuku na, którym nic nie widać.
-    Badanie ultrasonograficzne polega na wygenerowaniu fali akustycznej o wysokich częstotliwości, a następnie wprowadzeniu jej do ciała pacjenta.
-    Następnie nasłuchuje się echa po tej fali.
-    Obrazowana jest odbita fala ultradźwiękowa, osłabienia po odbiciach, zmienna częstotliwość i opóźnienie w czasie.
-    Kontrast zależy od częstotliwości fali, głębokości badanego obiektu, ilości piezoelektryków w głowicy, obrazowanej struktury.
-    Rozdzielczość zależy od czasu trwania impulsu zaburzenia oraz od szerokości wiązki ultradźwiękowej (powierzchnia czynna przetworników).
-
-    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{US}.
-
-    \item Scyntygrafia
-    
-    Obrazowa technika diagnostyczna z gałęzi medycyny nuklearnej.
-    Polega na wprowadzenia do organizmu ciał obcych, środków chemicznych zwanymi również radiofarmaceutykami, charakteryzującymi się krótkim czasie rozpadu i powinowactwem chemicznym z badanymi organami.
-    Następnie wykrywanie rozpadów zachodzących w ciele poprzez rejestracje promieniowania wytwarzanego podczas rozpadu, a następnie przedstawienie to w formie graficznej.
-    Kontrast zależy od długości trwania pomiaru, oraz od ilości wstrzykniętego radiofarmaceutyka.
-    Rozdzielczość zależy od ułożenia i możliwości rozdzielczej kamer scyntylacyjnych, zwanymi także scyntykamerami, gammakamerami lub kamerami Angera.
-
-    W standardzie DICOM obraz scyntygraficzny jest oznaczana jako \quotett{NM}.
-
-    Radiofarmaceutyki to związki chemiczne zawierające radioizotop.
-
-    \item Tomografia SPECT
-    
-    Technika obrazowania  z gałęzi medycyny nuklearnej. w której rejestruje się promieniowanie powstające rozpadu gamma.
-    Źródłem promieniowania(fotonów) jest podana pacjentowi radiofarmaceutyk, ulegająca rozpadowi gamma.
-    Rejestrujemy fotony powstające podczas anihilacji pozytonów.
-    Kontrast zależy od wydajności detektorów, odległość detektora od obiektu oraz położenie obiektu.
-    Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów.
-
-    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{PT}.
-
-    \item Tomografii PET
-    
-    Technika obrazowania  z gałęzi medycyny nuklearnej. w której rejestruje się promieniowanie powstające podczas anihilacji pozytonów (antyelektronów).
-    Źródłem promieniowania(pozytonów) jest podana pacjentowi substancja promieniotwórcza, ulegająca rozpadowi beta plus
-    Rejestrujemy fotony powstające podczas anihilacji pozytonów.
-    Kontrast zależy od wydajności detektorów, odległość detektora od obiektu oraz położenie obiektu.
-    Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów.
-
-    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{PT}.
-    
-\end{itemize}
-
-Istnieją też techniki, które są połączeniem kilku innych technik.
-Takie jak:
-\begin{itemize}
-    \item PET-CT, PET/CT - połączenie PET z wielorzędowym tomografem komputerowym
-    \item PET-MRI, PET/MRI - połączenie PET z rezonansem magnetycznym
-\end{itemize}
-
-Standard DICOM nazywa techniki obrazowania modalnościami(z ang. modality).
-
-\section{Obrazy diagnostyczne}
-
-\subsection{Parametry obrazów}
-
-\subsubsection{Wartość diagnostyczna obrazu}
-
-W obrazowaniu medycznym chodzi o wyciągnięcie wniosków z obrazów i postawienie diagnozy.
-Jest to kluczowy element obrazowania.
-Brak możliwości stwierdzenia co na obrazie się znajduje, stawia sens takiego obrazowania pod znakiem zapytania.
-Poco nam obraz w 4K na, którym można zobaczyć wyraźne plamy niczego.
-
-Wartość diagnostyczną można określić na podstawie następujących parametrów
-\begin{itemize}
-    \item Jakości obrazu
-    
-    Parametry jakościowe obrazów są szczegółowo opisane w sekcji \ref{sec:image-quality}
-
-    \item Warunków obserwacji obrazu
-
-    W brew pozorom warunki obserwacji mają kluczowe znaczenie dla wartości diagnostycznej.
-    Jeżeli będziemy mieli dobry obraz, który wyświetlimy na budżetowym monitorze RGB, który w rzeczywistości posiada 6-bite kanały RGB i tworzy odcienie za pomocą techniki dithering'u, to niewiele zobaczymy.
-
-    \item wiarygodności diagnostycznej obrazów
-
-    \item charakterystyki pracy lekarza-specjalisty
-
-\end{itemize}
-
-\paragraph{Krzywa ROC}
-
-\subsubsection{Jakość obrazów}
-\label{sec:image-quality}
-
-\begin{itemize}
-    \item Kontrast
-    
-    ???
-
-    \item Rozdzielczość przestrzenna
-
-    Rozdzielczość przestrzenna obrazu to najmniejsza odległość między dwoma punktami obrazu, które można rozróżnić.
-    W radiografii rozdzielczość określa się zazwyczaj jako liczbę równoległych linii, czarnych i białych, które można rozróżnić ma 1 milimetrze obrazu(paralinie na milimetr).
-
-    Porównanie zdolności rozdzielczych różnych technik obrazowania:
-    \begin{itemize}
-        \item scyntygrafia - 
-        \item USG - 
-        \item MRI -
-        \item CT -
-        \item radiografia -
-    \end{itemize}
-    TUTAJ COŚ WPISAĆ
-
-    \item Stosunek sygnału użytecznego do szumu (SNR)
-
-    W obrazach zawsze występuje szum, widoczny w różnych postaciach, na przykład w postaci cyfrowego ziarna.
-    Rodzaj i poziom szumu zależy od techniki obrazowania.
-    Stosunek sygnału użytecznego ma decydujący wpływ na widoczności obiektów, kontrast oraz percepcję szczegółów w obrazie.
-
-    \item Poziom artefaktów
-    
-    Artefakty to zjawiska fałszujące obraz poprzez tworzeni nie istniejących struktur w obrazie.
-    Problemem występującym w różnych technikach obrazowania.
-    Najbardziej widocznymi artefaktami są warkocz komety i odbicie zwierciadlane w obrazach USG.
-
-    \item Poziom zniekształceń przestrzennych
-    
-    Zniekształcenia przestrzenne powstają w wyniku geometrycznego ułożenia i kształtu obiektu badanego i aparat pomiarowego.
-    Przykładem takiego zniekształcenia mogą być różne powiększenia obiektów zależne od głębokości ich ułożenia w USG, zmiana pozycji pacjenta(przez ruchy klatki piersiowej w czasie badani), czy deformacja obrazu spowodowana zmianami rozkładu pola magnetycznego przez metalowe obiekty w znaldujące się w tym samym pomieszczeniu, co MRI.
-
-\end{itemize}
-
-\subsection{Zapisywanie obrazów}
-
-TO SIE WYWALI:
-
-Każdy obraz cyfrowy można zapisać na nośniku danych.
-Ale ponieważ mamy wielu producentów sprzętów i urządzeń medycznych to pojawia się problem jednolitego zapisania wszystkich obrazów.
-Tak aby każdy obraz nie był w innym formacie i to jeszcze zastrzeżonym przez producenta.
-Dodatkowo nie możemy pozwolić aby obraz, w jakiejkolwiek formie by nie był, stracił nieodwracalnie część informacji podczas zapisu.
-
-Pierwsze tomografy komputerowe przeżyły swój rozkwit w latach siedemdziesiątych ubiegłego wieku.
-Spowodowało to, że obrazu medyczne nie były bezpośrednim wynikiem badania, a jedynie wynikiem obróbki danych pomiarowych przez komputer.
-Dodatkowo obrazy przedstawiały przekroje, co sprawiły wiele trudności w ich interpretacji personelowi medycznemu.
-Ponieważ zwyczajne pliki graficzne (jak np. jpg, png, gif), nie nadawały się do zapisu takich obrazów, ponieważ nie były wstanie zapisać dodatkowych informacji oraz parametrów jakie były ważne w badaniu diagnostycznym.
-Nie ułatwiał fakt, że każdy producent stosował inne metryki oraz inne oznaczenia swojego sprzętu.
-
-\paragraph{Standard ACR/NEMA v1.0}
-
-Bardzo szybko pojawiła się potrzeba ujednolicenia sposobu zapisu i wprowadzeniu jednolitego standardu(https://xkcd.com/927/).
-Dwie organizacje, ACR (American College of Radiology) i NEMA (National Electrical Manufactures Association) połączyły swoje siły i w 1983 roku rozpoczęły pracę nad standardem, który miał rozwiązać ten problem.
-Pierwsza wersja nowego standardu została nazwana ACR-NEMA 1.0 (od American College of Radiology i National Electrical Manufacturers Association) i została opublikowana 2 lata później.
-Standard określał format danych, zastosowaną transmisję „Point-to-point” oraz pierwsze słowniki komunikatów.
-Niemal od razu okazała się fiaskiem, zawierał liczne błędy i niejasności, a także nie był pozbawiony pewnych niespójności wewnętrznych.
-Dlatego zaraz po opublikowaniu okazało się, że konieczne są liczne poprawki. 
-
-\paragraph{Standard ACR/NEMA v2.0}
-
-\TODO{To zarąbałem z wikipedii}
-
-Po 3 latach prac powstała druga, lepsza wersja, znacznie lepiej dostosowana do pracy z urządzeniami medycznymi.
-Pierwszy pokaz ACR/NEMA v2.0 odbył się na Uniwersytecie Georgetown, od 21 do 23 maja 1990 roku.
-Sześć firm uczestniczyło w tym wydarzeniu: DeJarnette Research Systems, General Electric Medical Systems, Merge Technologies, Siemens Medical Systems, Vortech oraz 3M. 
-Wersja rozszerzona była o bardziej precyzyjne definicje protokołów software’owych oraz standaryzację zbioru komunikatów.
-Sprzęt wykorzystujący ARC/NEMA v2.0 został zaprezentowany na corocznym spotkaniu towarzystwa Radiologicznego Ameryki Północnej (RSNA) w 1990 roku.
-Praktyczne zastosowanie odkryło nowe błędy i konieczność zmian.
-Wdrożenie standardu ARC/NEMA na dużą skalę miało miejsce w 1992 roku.
-
-\paragraph{Standard DICOM v3.0}
-
-Za sprawą Armii Stanów Zjednoczonych, w 1993 roku trzecia wersja została wydana, zaczęła funkcjonować pod nazwą DICOM.
-Od tamtego czasu jest stale aktualizowana i rozszerzana.
-
-W obecnej chwili standard DICOM definiuje 81 różnych typów badań, w tym 39 już przedawnionych.
-
-\subsection{Wyświetlanie obrazów}
-
-Posiadanie wielu obrazów wiąże się z potrzebą ich przeglądania i porównywania.
-Należy, więc posiadać jakieś narzędzie do wyświetlenia w sposób poprawny, najlepiej jednym i tym samym programem.
-
-
-\subsubsection{Cechy przeglądrki obrazów}
-
-\subsubsection{Kryteria porównywania przglądarek}
-
-Trudno jest porównywać coś tak złożonego jak przeglądarka obrazów medycznych, nie można jednoznacznie powiedzieć, że jedna jest lepsza od drugiej.
-W celu porównań wyróżniono 26 kryteriów do porównywania przeglądarek w postaci „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcie, obrazowanie dwu i trój wymiarowego.
-Kryteria te w jasny sposób pozwalają na ocenę praktycznych aspektów użytkowania przeglądarki.
-
-\section{Układ pracy}
-
-???

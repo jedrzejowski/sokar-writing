@@ -1,11 +1,6 @@
 *.aux
-*.log
-*.fls
-*.synctex.gz
-*.fdb_latexmk
 *.out
-*.toc
-*_temp.tex
-*.bcf
-*.run.xml
-index.pdf
+index.*
+!index.tex
+__latexindent_temp.tex
+dicom/*
