@@ -1,6 +1,6 @@
 \newcommand{\wiki}[1]{https://pl.wikipedia.org/wiki/Teksel}
 
-\newcommand{\dicomtag}[3]{#1(#2, #3)}
+\newcommand{\dicomtag}[3]{DicomTag::#1(#2, #3)}
 
 \def\gdcmclass#1{gdcm::#1}
 
@@ -14,10 +14,10 @@
   {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
   {\end{tabular}\par\vspace{\belowdisplayskip}}
 
-\newcommand{\quotett}[1]{\enquote{\texttt{#1}}}
-
+\def\quotett#1{\enquote{\texttt{#1}}}
 \def\cppcode#1{{\color{blue}\texttt{#1}}}
 \def\keyword#1{{\color{blue}\texttt{#1}}}
+\def\dataword#1{{\color{gray}\enquote{\texttt{#1}}}}
 
 % \renewcommand\paragraph{%
 %     \@startsection{paragraph}{4}{0mm}%

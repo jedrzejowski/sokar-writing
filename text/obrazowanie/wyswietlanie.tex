@@ -62,95 +62,144 @@ Generowanie powierzchni, dzięki różnym algorytmom można generować powierzch
 
 \subsection{Funkcje przeglądarki obrazów}
 
+\subsubsection{Obsługa wielu formatów danych}
+
+Standard DICOM przewidział możliwość zapisania danych w różnych formatach.
+
 \subsubsection{Podstawowe operacje na obrazie}
 
 \begin{itemize}
-    \item Skalowaniu lub powiększenie.
-          Możliwość powiększenia lub zmniejszenia wyświetlanego obrazu o pewny współczynnik skalujący.
+      \item Skalowaniu lub powiększenie.
+            Możliwość powiększenia lub zmniejszenia wyświetlanego obrazu o pewny współczynnik skalujący.
 
-    \item Przesuwanie(\fromEng{pan})
-          Możliwość przesuwania obrazu o dowolny wektor.
-          Przydatne gdy powiększymy obraz do takiego stopnia, że nie będzie mieścił się na ekranie lub w okienku programu.
+      \item Przesuwanie(\fromEng{pan})
+            Możliwość przesuwania obrazu o dowolny wektor.
+            Przydatne gdy powiększymy obraz do takiego stopnia, że nie będzie mieścił się na ekranie lub w okienku programu.
 
-    \item Lupa, skalowanie miejscowe
-          Możliwość miejscowego powiększenia obrazu.
-          Przykład użycia takiego narzędzia znajduje się na rysunku \ref{fig:wyswietlanie001}.
+      \item Lupa, skalowanie miejscowe
+            Możliwość miejscowego powiększenia obrazu.
+            Przykład użycia takiego narzędzia znajduje się na rysunku \ref{fig:wyswietlanie001}.
 
-          \begin{figure}[!htbp]
-              \caption{Przykład narzędzia Lupa w przeglądarce \href{https://www.softneta.com/products/meddream-dicom-viewer/}{MedDream DICOM Viewer}.}
-              \includegraphics[width=\textwidth]{img/wyswietlanie001.png}
-              \centering
-              \label{fig:wyswietlanie001}
-          \end{figure}
+            \begin{figure}[!htbp]
+                  \caption{Przykład narzędzia Lupa w przeglądarce \href{https://www.softneta.com/products/meddream-dicom-viewer/}{MedDream DICOM Viewer}.}
+                  \includegraphics[width=\textwidth]{img/wyswietlanie001.png}
+                  \centering
+                  \label{fig:wyswietlanie001}
+            \end{figure}
 
-    \item Rotacja i odbicia lustrzane
-          Możliwość obrócenia obrazu o zadany kąt.
-          Oraz możliwość odbicia lustrzanego obrazu w dwóch osiach X i Y.
+      \item Rotacja i odbicia lustrzane
+            Możliwość obrócenia obrazu o zadany kąt.
+            Oraz możliwość odbicia lustrzanego obrazu w dwóch osiach X i Y.
 
 \end{itemize}
 
 \subsubsection{Analiza parametrów w celu lepszej informacji}
 
 \begin{itemize}
-    \item Okienkowanie
-    \item Maski lub nakładki(\fromEng{overlay})
+      \item Okienkowanie.
+            Termin odnosi się do używania funkcji okna cyfrowego w celu zamiany obrazu danych na obraz monochromatyczny możliwy do wyświetlenia.
+            Okienkowanie jest szczegółowo opisane w sekcji \ref{sec:windowing}.
+
+      \item Maski lub nakładki(\fromEng{overlay}).
+            Możliwość nałożenia maski, elementu, który będzie przysłaniał fragment obrazu w celu lepszej wizualizacji bądź ukrycie mało wartościowych obiektów, np. tła.
+\end{itemize}
+
+\subsubsection{Obsługa wielu plików}
+
+\begin{itemize}
+
+      \item Obsługa DICOMDIR.
+            Możliwość wczytania pliku DICOMDIR i wyświetlenie struktury serii badań.
+
+      \item Wczytanie wielu plików i ich połączenie w formie filmu.
+            Możliwość wczytania wielu plików z tej samej serii, ułożenia ich według pozycji geometrycznej i wyświetlenia ich jako film.
+            Czyli periodyczna podmiana obrazu na obraz następny w serii.
+
+      \item Wyświetlanie wielu obrazów jednocześnie.
+            Możliwość wyświetlenia obrazów w postaci kratki, w której każda komórka była by innym obrazem.
+
+            Przykład wyświetlenia wielu obrazów na raz w jednym oknie znajduje się na rysunku \ref{fig:dicomviewer001}
+
+            \begin{figure}[!htbp]
+                  \caption{Przykład wyświetlenia wielu obrazów na raz w jednym oknie w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
+                  \includegraphics[width=\textwidth]{img/dicom-viewer-001.png}
+                  \centering
+                  \label{fig:dicomviewer001}
+            \end{figure}
 \end{itemize}
 
 \subsubsection{Generowanie obrazów woliumetrcznych}
 
-Jeżeli mamy do dyspozycji wiele obrazów tomograficznych o znanych parametrach
+Jeżeli mamy do dyspozycji wiele obrazów tomograficznych o znanych parametrach to możemy wczytać je, posegregować a następnie wygenerować trój-wymiarowy obiekt a następnie wyświetlić go na ekranie komputera za pomocą trójwymiarowej grafiki komputerowej.
+
+Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
+
+\begin{figure}[!htbp]
+      \caption{Przykład generowania obrazów 3D z wielu obrazów tomograficznych w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
+      \includegraphics[width=\textwidth]{img/dicom-viewer-002.png}
+      \centering
+      \label{fig:dicomviewer002}
+\end{figure}
 
 \subsubsection{Analiza i przetwarznie danych}
 
 \begin{itemize}
-    \item Histogram
-          Możliwość wygenerowania histogramu obrazu.
+      \item Histogram
+            Możliwość wygenerowania histogramu obrazu.
 
-          Histogram to wykres przedstawiający dystrybucje wartości numerycznych obrazu.
+            Histogram to wykres przedstawiający dystrybucje wartości numerycznych obrazu.
 
+      \item Mierzenie obrazu, wykonywanie pomiarów
+            Możliwość zmierzenia odległości pomiędzy dwoma punktami przez lekarza lub zmierzenia wielkości/pola zadanego kształtu.
 
-          \begin{figure}[!htbp]
-            \caption{Przykładowy histogram.}
-            \includegraphics[width=\textwidth]{img/wyswietlanie002.svg}
-            \centering
-            \label{fig:wyswietlanie002}
-        \end{figure}
+      \item Tworzenie obrazów transwersalnych.
+            Obrazy tomograficzne obrazują przekroje, jeżeli parametry wielkości woksela są dostępne to istnieje możliwość wygenerowania nowego obrazu który byłby obrazem ułożonym w poprzek.
 
-    \item Mierzenie obrazu, wykonywanie pomiarów
-          Możliwość zmierzenia odległości pomiędzy dwoma punktami przez lekarza lub zmierzenia wielkości/pola zadanego kształtu.11
+            Przykład generowania obrazów transwersalnych jest pokazany na rysunku \ref{fig:dicomviewer003}
+
+            \begin{figure}[!htbp]
+                  \caption{Przykład generowania obrazów transwersalnych w przeglądarce \href{https://athenadicomviewer.com/}{Athena DICOM Viewer}}
+                  \includegraphics[width=\textwidth]{img/dicom-viewer-003.jpeg}
+                  \centering
+                  \label{fig:dicomviewer003}
+            \end{figure}
 \end{itemize}
 
 \subsubsection{Edycja danych}
 
 \begin{itemize}
-    \item Dodawanie nowych obiektów.
-          Możliwość rysowania, dodawania figur geometrycnych lub tekstu przez lekarza i możliwość zapisu tych informacji w pliku DICOM.
+      \item Dodawanie nowych obiektów.
+            Możliwość rysowania, dodawania figur geometrycznych lub tekstu przez lekarza i możliwość zapisu tych informacji w pliku DICOM.
+            Chodzi tu głównie o szkice i notatki tworzone podczas analizy obrazu przez personel medyczny.
 
-    \item Mierzenie obrazu, wykonywanie pomiarów.
+      \item Edycja Parametrów oraz anonimizacja danych.
+            Możliwość edycji parametrów w poliku DICOM w różnych celach.
+            Najczęściej funkcja jest używana do usuwania danych osobowych pacjenta w celu poźniejszej publikacji obrazu.
+
 \end{itemize}
-
-
-- dodawanie obiektów
-
-- rysowanie
-
-- edycja parametrów
-
 
 \subsection{Możliwości mojej przeglądarki}
 
 Po analizie możliwości przeglądarek plików DICOM dostępnych na rynku postanowiłem zaimplementować następujące komponenty w mojej przeglądarce:
 
 \begin{itemize}
-    \item Przesuwanie(\fromEng{pan})
+      \item Przesuwanie(\fromEng{pan})
 
-    \item Skalowaniu lub powiększenie
+      \item Skalowaniu lub powiększenie
 
-    \item Rotacja i odbicia lustrzane
+      \item Rotacja i odbicia lustrzane
 
-    \item Okienkowanie
+      \item Okienkowanie
 
-    \item Wczytywanie wielu plików na raz
+      \item Obsługa wielu formatów zapisu
+
+            \begin{itemize}
+                  \item Monochrome
+                  \item RGB
+                  \item YBR
+            \end{itemize}
+
+      \item Wczytanie wielu plików i ich połączenie w formie filmu
 \end{itemize}
 
 Moją przeglądarkę nazwałem Sokar.
