@@ -4,55 +4,63 @@ Podstawowe techniki obrazowania medycznego to:
 \begin{itemize}
     \item Radiografia - RTG
 
-    Najstarsza i najbardziej rozpoznawalna technika obrazowania.
+    Radiografia to najstarsza i najbardziej rozpoznawalna technika obrazowania.
     Pierwsze zdjęcie analogowe zostało wykonane przez Röntgena w 1896 roku.
-    Polega na przepuszczeniu przez obiekt badany promieniowania, a następnie detekcji tego promieniowania za obiektem badanym.
-    W praktyce rejestrujemy współczynnik osłabienia promieniowania rentgenowskiego przez badany obiekt.
-    Wyróżniamy dwa typu radiografii: analogowy i cyfrowy.
-    Radiografia analogowa odchodzi powoli w zapomnienie.
-    W radiografii cyfrowej obrazowana jest ilość promieniowania X przenikające przez badany obiekt.
-    Kontrast zależy od położenia obiektu między źródłem a detektorem (położenie optymalne), napięcie anodowe, filtracja, grubość okładek wzmacniających.
-    Rozdzielczość zależy od rozdzielczości detektora i rozmiaru ogniska lampy.
-
+    Polega na transmisji promieniowania X przez badany obiekt, a następnie detekcji tego promieniowania za obiektem badanym.
+    Promieniowanie za obiektem jest funkcją współczynnika osłabiania promieniowania rentgenowskiego dla materii znajdującej się na drodze tego promieniowania.
+    Wyróżniamy dwa typy radiografii: analogową i cyfrową.
+    Radiografia analogowa wykorzystująca naświetlanie filmów światłoczułych odchodzi powoli w zapomnienie ze względu na koszt i uciążliwość wywoływania filmów.
+    \todo {WS: powtórzenie z analogówki; jakie dwa typy detektorów są stosowane? }
+		W radiografii cyfrowej obrazowana jest ilość promieniowania X przenikające przez badany obiekt.
+    
+		\todo {WS podać ogólne cechy obrazu!!!; }
+		Kontrast zależy od położenia obiektu między źródłem a detektorem (położenie optymalne), napięcie anodowe, filtracja, grubość okładek wzmacniających.
+    \todo {WS: masło jest maślane; }
+		Rozdzielczość zależy od rozdzielczości detektora i rozmiaru ogniska lampy.
+    
     W standardzie DICOM radiografia cyfrowa jest oznaczana jako \quotett{RT}.
 
-    \item Tomografia rentgenowska - CT - Computer Tomography
+    \item Tomografia komputerowa (Computer Tomography - CT)
     
-    Agregacja w tomografii komputerowej jest podobna do badania RTG, ale w CT wykonujemy wiele pomiarów w różnych pozycjach względem obiektu badanego i pod różnym kontem.
-    Następnie z tych pomiarów tworzymy obraz przez zastosowanie odpowiednich algorytmów tworzących obraz.
+    \todo {agregacja?! }Akwizycja w tomografii komputerowej jest podobna do badania RTG, ale w CT wykonujemy wiele pomiarów w różnych pozycjach względem obiektu badanego i pod różnym kątem.
+		W tomografii komputerowej podobnie jak w radiografii wykorzystuje się promieniowanie X do pomiaru projekcji (stąd inna nazwa tomografia rentgenowska). W wybranej płaszczyźnie dokonuje się pomiarów projekcji po liniach biegnących pod różnym kątem i w różnych odległościach od badanego obiektu. Przekrój obiektu jest rekonstruowany numerycznie na podstawie zmierzonych projekcji projekcji.
+    \todo {tworzymy tworzący? }
+		Następnie z tych pomiarów tworzymy obraz przez zastosowanie odpowiednich algorytmów tworzących obraz.
     Rejestrujemy współczynnik osłabienia promieniowania rentgenowskiego przez badany obiekt.
-    Kontrast zależy od rozmiarów szczegółów badanego obiektu, napięcie anodowe, przyłożone masy (prąd katodowy i czas akwizycji).
+\todo {WS: to już było i jest bez większego znaczenia dla pracy; jakie są obrazy? rozdzielczość przestrzenna, próbkowanie, kwantyzacja? }
+    Kontrast zależy od rozmiarów szczegółów badanego obiektu, napięcie anodowe, przyłożone masy (prąd katodowy i czas akwizycji).\todo {jakie mAs-y? prąd na lampie? }
     Rozdzielczość zależy od geometrii pomiaru, rozmiaru ogniska lampy rentgenowskiej, przestrzenna rozdzielczość matrycy detektora, liczby detektorów, dyskretyzację i filtru rekonstrukcyjnego.
 
-    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{CT}.
+    W standardzie DICOM technika jest oznaczana skrótowcem \quotett{CT}.
 
     \item Obrazowanie metodą rezonansu magnetycznego - MRI
 
     Sposób tworzenie obrazu MRI jest wysoce skomplikowanym procesem i ciężko opisać go w kilku zdaniach.
-    Obrazowana jest sumaryczna gęstość atomów wodoru (protonów) w badanym obiekcie.
+		\todo {to zależy od sekwencji! są obrazy PD, T1 i T2; }Obrazowana jest sumaryczna gęstość atomów wodoru (protonów) w badanym obiekcie.
     Kontrast zależy od gęstości protonów, czasu relaksacji podłużnej i poprzecznej, prędkości przepływu płynu.
-    Rozdzielczość zależy od parametrów skanera (rozmiar woksela).
+    \todo {są obrazy statyczne ale też dynamiczne ; są też obrazy pokazujące funkcje (fMRI); te są pokazywane w innej skali barwnej}
+		Rozdzielczość zależy od parametrów skanera (rozmiar woksela).
     
-    W standardzie DICOM obraz rezonansu magnetycznego jest oznaczana jako \quotett{MR}.
+    W standardzie DICOM modalność rezonansu magnetycznego jest oznaczana jako \quotett{MR}.
     
     \item Ultrasonografia
     
-    Jest to badanie, które wszyscy kojarzą z badaniem płodu podczas ciąży z obrazem w kształcie łuku na, którym nic nie widać.
-    Badanie ultrasonograficzne polega na wygenerowaniu fali akustycznej o wysokich częstotliwości, a następnie wprowadzeniu jej do ciała pacjenta.
+    Jest to badanie, które wszyscy kojarzą z badaniem płodu podczas ciąży z obrazem w kształcie łuku na, którym nic nie widać.\todo {usunąć to zdanie} 
+    Badanie ultrasonograficzne polega na wygenerowaniu fali akustycznej o wysokich częstotliwości, a następnie wprowadzeniu jej do ciała pacjenta.\todo {niefortunne 'wprowadzenie'; tu powinno by c coś o odbiciu} 
     Następnie nasłuchuje się echa po tej fali.
-    Obrazowana jest odbita fala ultradźwiękowa, osłabienia po odbiciach, zmienna częstotliwość i opóźnienie w czasie.
+    Obrazowana jest odbita fala ultradźwiękowa, osłabienia po odbiciach, zmienna częstotliwość i opóźnienie w czasie.\todo {od czago zależy położenie, a od czego wielkość sygnału}
     Kontrast zależy od częstotliwości fali, głębokości badanego obiektu, ilości piezoelektryków w głowicy, obrazowanej struktury.
     Rozdzielczość zależy od czasu trwania impulsu zaburzenia oraz od szerokości wiązki ultradźwiękowej (powierzchnia czynna przetworników).
 
-    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{US}.
+    W standardzie DICOM obraz ultrasonograficzny jest oznaczana jako \quotett{US}.\todo {mamy też obrazy doplerowskie; jak są zapisywane w DICOM?}
 
     \item Scyntygrafia
     
     Obrazowa technika diagnostyczna z gałęzi medycyny nuklearnej.
-    Polega na wprowadzenia do organizmu ciał obcych, środków chemicznych zwanymi również radiofarmaceutykami, charakteryzującymi się krótkim czasie rozpadu i powinowactwem chemicznym z badanymi organami.
-    Następnie wykrywanie rozpadów zachodzących w ciele poprzez rejestracje promieniowania wytwarzanego podczas rozpadu, a następnie przedstawienie to w formie graficznej.
-    Kontrast zależy od długości trwania pomiaru, oraz od ilości wstrzykniętego radiofarmaceutyka.
-    Rozdzielczość zależy od ułożenia i możliwości rozdzielczej kamer scyntylacyjnych, zwanymi także scyntykamerami, gammakamerami lub kamerami Angera.
+    Polega na wprowadzenia do organizmu \todo {to nie są ciała obce, środków chemicznych} radiofarmaceutyków znakowanych izotopem, \todo {izotop, którym znakowany jest farmacuetyk ma tę cechę}charakteryzującym się krótkim czasem rozpadu i powinowactwem chemicznym z badanymi organami.
+    Następnie wykrywanie rozpadów zachodzących w ciele poprzez rejestracje promieniowania wytwarzanego podczas rozpadu, a następnie przedstawienie to w formie graficznej. \todo {detekcja}
+    Kontrast zależy od czasu trwania pomiaru, oraz od aktywności wstrzykniętego radiofarmaceutyka.
+    Rozdzielczość zależy od ułożenia \todo {ułożenia???} i możliwości rozdzielczej \todo {znowu masło maślane} kamer scyntylacyjnych, zwanymi także scyntykamerami, gammakamerami lub kamerami Angera.
 
     W standardzie DICOM obraz scyntygraficzny jest oznaczana jako \quotett{NM}.
 
@@ -60,8 +68,8 @@ Podstawowe techniki obrazowania medycznego to:
 
     \item Tomografia SPECT
     
-    Technika obrazowania  z gałęzi medycyny nuklearnej. w której rejestruje się promieniowanie powstające rozpadu gamma.
-    Źródłem promieniowania(fotonów) jest podana pacjentowi radiofarmaceutyk, ulegająca rozpadowi gamma.
+    Technika obrazowania  z gałęzi medycyny nuklearnej, w której rejestruje się promieniowanie powstające rozpadu gamma.
+    Źródłem promieniowania(fotonów) jest podany pacjentowi radiofarmaceutyk, ulegająca rozpadowi gamma.
     Rejestrujemy fotony powstające podczas anihilacji pozytonów.
     Kontrast zależy od wydajności detektorów, odległość detektora od obiektu oraz położenie obiektu.
     Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów.
@@ -71,7 +79,7 @@ Podstawowe techniki obrazowania medycznego to:
     \item Tomografii PET
     
     Technika obrazowania  z gałęzi medycyny nuklearnej. w której rejestruje się promieniowanie powstające podczas anihilacji pozytonów (antyelektronów).
-    Źródłem promieniowania(pozytonów) jest podana pacjentowi substancja promieniotwórcza, ulegająca rozpadowi beta plus
+    Źródłem promieniowania(pozytonów) jest podana pacjentowi substancja promieniotwórcza, ulegająca rozpadowi beta plus.
     Rejestrujemy fotony powstające podczas anihilacji pozytonów.
     Kontrast zależy od wydajności detektorów, odległość detektora od obiektu oraz położenie obiektu.
     Na rozdzielczość ma wpływ przestrzenna rozdzielczość matrycy detektora, liczby detektorów.
