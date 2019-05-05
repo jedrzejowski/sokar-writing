@@ -109,7 +109,6 @@ Przykładowe VR:
     Pierwsze trzy bajty to liczba całkowita zapisana za pomocą tekstu.
     Czwarty bajt to znaku określający jednostkę czasu.
     Standard definiuje cztery możliwe jednostki czasu: \dataword{D} jako dzień, \dataword{W} jako tydzień, \dataword{M} jako miesiąc, oraz \dataword{Y} jako jeden rok.
-    Konwerter w mojej aplikacji zmienia tą wartość na tekst w postaci czytelnej, np: \dataword{18 weeks} lub \dataword{3 years}, oraz jest wrażliwy na obecny język aplikacji.
     
     Przykład: \dataword{018M} oznacza 18 miesięcy, \dataword{123D} oznacza 123 dni.
 
@@ -126,13 +125,12 @@ Przykładowe VR:
 
     Długość danych zawsze wynosi 8 bajtów.
     Data zapisana w formacie \dataword{YYYYMMDD}, gdzie: \dataword{YYYY} cztery cyfry roku, \dataword{MM} dwie cyfry miesiąca, \dataword{DD} dwie cyfry dnia w kalendarzu Gregoriańskim.
-    %Konwerter zamienia dane na obiekt klasy \qtclass{QDate}, który ma w sobie wbudowaną konwersję na tekst zależny od ustawień językowych aplikacji.
-    
+
     Przykład: \dataword{19800716} oznacza 16 lipca 1980
     
     UWAGA: Standard \enquote{ACR-NEMA Standard 300}, czyli poprzednik DICOM definiował date w sposób \dataword{YYYY.MM.DD}, według standardu DICOM, taki zapis jest nie poprawny, ale zdarzają się stare obrazy z takimi datami i \sokarclass{DataConverter} obsługuje taki format.
 
-    \item DS - Decimal String - liczba zmienno-przecinkowa lub ciąg kilku liczb zmienno przecinkowych zapisanych za pomocą tekstu w notacji wykładniczej
+    \item DS - Decimal String - liczba zmiennoprzecinkowa lub ciąg kilku liczb zmienno przecinkowych zapisanych za pomocą tekstu w notacji wykładniczej
 
     Długość jednej liczby powinna maksymalne wynosić 16 bajtów.
     Dostępne znaki to \dataword{0}-\dataword{9}, \dataword{+}, \dataword{-}, \dataword{E}, \dataword{e}, \dataword{.}.

@@ -1,14 +1,63 @@
 
-Każdy plik DICOM posiada \quotett{Data Set}, czyli zbiór informacji składający się z \quotett{Data Element}.
-\quotett{Data Element} jest strukturą przechowującą wszystkie dane dotyczące obrazu.
+\par
+Każdy plik DICOM posiada zbiór elementów danych.
+Elementy danych posiadają zapisane dane, ale w sposób nie odpowiadający potrzebą programu.
 
-\paragraph{Konwerter}
+\par
+Dlatego został zaimplementowany obiekt klasy \sokarclass{DataConverter} zajmujący się konwersją danych z pliku DICOM na dane w formacie odpowiadającym potrzebą oprogramowania.
 
-Obiekt klasy \sokarclass{DataConverter} to obiekt zajmujący się konwersją danych z pliku DICOM na dane w formacie odpowiadającej przeglądarce.
+\par
+Obiekt konwertera jest tworzony na podstawie pliku DICOM i przy wywoływaniu konwersji należy podać tylko znacznik, który nas interesuje.
+Taki rozwiązanie pozwala na przesłanie do wszystkich obiektów, jednego względnie małego obiektu konwertera co ułatwia zarządzanie plikiem DICOM.
 
+\par
+Klasa \sokarclass{DataConverter} posiada następujące funkcje:
+\begin{itemize}
+    \item \cppcode{QString toString(const gdcm::Tag \&tag);}
+
+          Funkcja konwertuje element na obiekt tekstu.
+
+    \item \cppcode{gdcm::Tag toAttributeTag(const gdcm::Tag \&tag);}
+
+          Funkcja konwertuje element o znaczniku typu \dicomvr{AT} na obiekt znacznika.
+
+    \item \cppcode{QString toAgeString(const gdcm::Tag \&tag);}
+
+          Funkcja konwertuje element o znaczniku typu \dicomvr{AS} na tekst w postaci czytelnej, np: „18 weeks” lub „3 years”, oraz jest wrażliwy na obecny język aplikacji.
+
+    \item \cppcode{QDate toDate(const gdcm::Tag \&tag);}
+
+          Funkcja konwertuje element o znacznik typu \dicomvr{DA} na obiekt klasy \qtclass{QDate}, który ma w sobie wbudowaną konwersję na tekst zależny od ustawień językowych aplikacji.
+
+    \item \cppcode{QVector<qreal> toDecimalString(const gdcm::Tag \&tag);}
+
+          Funkcja konwertuje element o znacznik typu \dicomvr{DS} na obiekt wektora posiadającego liczby rzeczywiste.
+          \cppcode{qreal} jest aliasem do typu zmiennoprzecinkowego, na systemach 64-bitowy jest to \cppcode{double}.
+
+    \item \cppcode{qint32 toIntegerString(const gdcm::Tag \&tag);}
+
+          Funkcja konwertuje element o znacznik typu \dicomvr{IS} na obiekt 32-bitowa liczbę całkowitą.
+
+    \item \cppcode{QString toPersonName(const gdcm::Tag \&tag);}
+
+          Funkcja konwertuje element o znacznik typu \dicomvr{PN} na obiekt tekst zawierający imię w formie pisanej.
+
+    \item \cppcode{qint16 toShort(const gdcm::Tag \&tag);}
+
+          Funkcja konwertuje element o znacznik typu \dicomvr{SS} na obiekt 16-bitowa liczbę całkowitą ze znakiem.
+
+    \item \cppcode{quint16 toUShort(const gdcm::Tag \&tag);}
+
+          Funkcja konwertuje element o znacznik typu \dicomvr{US} na obiekt 16-bitowa liczbę całkowitą bez znaku.
+
+\end{itemize}
+Oprócz powyższych funkcji jest jeszcze kilka innych funkcji pobocznych oraz kilka aliasów.
+
+\par
 Kilka rzeczy które się tyczą wszystkich danych i konwersji:
 \begin{itemize}
-    \item większość VR jest to zapisane jako tekst, kodowanie i dekodowanie tekstu jest zapewniane przez bibliotekę, a konkretniej przez klasę \gdcmclass{StringFilter}, dlatego nie przejmuje się takimi rzeczami jak zapisem LittleEndian i BigEndian.
-    \item większość danych może mieć kilka wartości oddzielonych backslashem \quotett{\textbackslash}, dlatego konwerter dla VR w, których standard przewiduje wiele wartości, zawsze zwraca \qtclass{QVector} z tymi wartościami
+    \item większość VR jest to zapisane jako tekst, kodowanie i dekodowanie tekstu jest zapewniane przez bibliotekę, a konkretniej przez klasę \gdcmclass{StringFilter}
+    \item większość danych może mieć kilka wartości oddzielonych backslashem \quotett{\textbackslash}, dlatego konwerter dla VR w, których standard przewiduje wiele wartości, zawsze zwraca wektor z tymi wartościami
     \item wszystkie dane są zapisane parzystą ilością bajtów, w przypadku tekstu dodaje się znak spacji na końcu danych, taka spacja jest pomijana w analizie danych
 \end{itemize}
+

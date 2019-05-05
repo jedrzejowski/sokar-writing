@@ -1,0 +1,1 @@
+pdfcrop --margin 5 osie.pdf 
