@@ -1,6 +1,8 @@
 
-Posiadanie wielu obrazów wiąże się z potrzebą ich przeglądania i porównywania.
-Należy, więc posiadać jakieś narzędzie do wyświetlenia w sposób poprawny, najlepiej jednym i tym samym programem.
+\par
+W celu przeglądania i porównywania należy posiadać jakieś narzędzie do wyświetlenia w sposób poprawny, najlepiej jednym i tym samym programem.
+\par
+Standard DICOM przewiduje sposób prezentacji danych administracyjnych i danych związanych z rejestracją badania, ajk wyświetlać obrazy radiologiczne i obrazy TK, obrazy scyntylacyjne, itd.
 
 \subsection{Przeglądarki obrazów}
 
@@ -9,9 +11,9 @@ Zwykłe przeglądarki obrazów takich jak jpg, png lub gif wyświetlają obraz w
 W przypadku obrazów medycznych najczęściej nie mamy do czynienia z danymi reprezentującymi kolory w spektrum światła widzialnego.
 Przeglądarka obrazów DICOM musi wygenerować kolorowy obraz z danych na podstawie parametrów obrazu.
 
-\subsection{Porównanie przeglądarek obrazów}
+\subsection{Funkcje przeglądarek obrazów}
 
-Trudno jest porównywać coś tak złożonego jak przeglądarka obrazów medycznych, nie można jednoznacznie powiedzieć, że jedna jest lepsza od drugiej. W celu porównań wyróżniono 26 kryteriów do porównywania przeglądarek w postaci „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcie, obrazowanie dwu i trój wymiarowego.
+Wyróżniono 26 kryteriów do porównywania przeglądarek w postaci „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcie, obrazowanie dwu i trój wymiarowego.
 Kryteria te w jasny sposób pozwalają na ocenę praktycznych aspektów użytkowania przeglądarki.
 
 \paragraph{Platforma}
@@ -177,29 +179,3 @@ Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
             Najczęściej funkcja jest używana do usuwania danych osobowych pacjenta w celu poźniejszej publikacji obrazu.
 
 \end{itemize}
-
-\subsection{Możliwości mojej przeglądarki}
-
-Po analizie możliwości przeglądarek plików DICOM dostępnych na rynku postanowiłem zaimplementować następujące komponenty w mojej przeglądarce:
-
-\begin{itemize}
-      \item Przesuwanie(\fromEng{pan})
-
-      \item Skalowaniu lub powiększenie
-
-      \item Rotacja i odbicia lustrzane
-
-      \item Okienkowanie
-
-      \item Obsługa wielu formatów zapisu
-
-            \begin{itemize}
-                  \item Monochrome
-                  \item RGB
-                  \item YBR
-            \end{itemize}
-
-      \item Wczytanie wielu plików i ich połączenie w formie filmu
-\end{itemize}
-
-Moją przeglądarkę nazwałem Sokar.

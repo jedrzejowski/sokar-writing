@@ -1,14 +1,9 @@
-
-
-Pierwsze tomografy komputerowe przeżyły swój rozkwit w latach siedemdziesiątych ubiegłego wieku.
-Spowodowało to, że obrazu medyczne nie były bezpośrednim wynikiem badania, a jedynie wynikiem obróbki danych pomiarowych przez komputer.
-Dodatkowo obrazy przedstawiały przekroje, co sprawiły wiele trudności w ich interpretacji personelowi medycznemu.
-Zwyczajne pliki graficzne (jak np. jpg, png, gif), nie nadawały się do zapisu takich obrazów, ponieważ zapisywały obraz w spektrum światła widzialnego, a konkretniej w postaci pozwalającej na odtworzenie światła widzialnego.
-Natomiast obrazy medyczne sa zapisywanie w spektrum rentgenowskim.
-Nie ułatwiał fakt, że każdy producent stosował inne metryki oraz inne oznaczenia swojego sprzętu.
-
 \subsection{Standard DICOM v3.0}
 
+\par
+Standard DICOM jest odpowiedzią społeczności radiologów, radiofarmaceutów, fizyków medycznych na potrzebę wymiany danych pomiędzy różnymi systemami komputerowymi, przeglądarek obrazów,  stacji do przetwarzania i analizowania obrazów medycznych.
+
+\par
 Standard DICOM wersji trzeciej to standard definiujący ujednolicony sposób zapisu i przekazywania danych medycznych reprezentujących lub związanych z obrazami diagnostycznymi w medycynie.
 Standard został wydany w 1993 przez dwie agencje ACR (American College of Radiology) i NEMA (National Electrical Manufactures Association).
 Wcześniejsze wersje nazywały się ACR/NEMA v1.0, wydana w 1983 roku i ACR/NEMA v2.0, wydana w 1990 roku, stąd wersja trzecia.
@@ -19,11 +14,13 @@ UWAGA: Za każdym razem kiedy jest odniesienie do obecnego standardu DICOM, w do
 
 \subsection{Sposób zapisu danych w pliku DICOM}
 
-Plik w formacie DICOM przypomina bazę danych z rekordami.
-Baza danych nazywa się \keyword{Data Set} i składa się z rekordów, które nazywają się \keyword{Data Element}.
+Plik w formacie DICOM przypomina zbiór \enquote{elementów danych} z rekordami.
+Zbiór nazywa się \keyword{Data Set} i składa się z rekordów, które nazywają się \keyword{Data Element}.
+Elementy danych są ułożone w postaci listy.
+Element danych może zawierać w sobie listę elementów danych.
 
 \begin{figure}[!htbp]
-    \caption{Wizualizacja ułożenia \keyword{Data Element}(wraz z budową) w \keyword{Data Set}}
+    \caption{Elementy danych w zbiorze elementów danych}
     \includegraphics[]{img/dicom-dataelement001.pdf}
     \centering
     \label{fig:dicom-dataelement}
@@ -36,40 +33,38 @@ Składa się z czterem elementów:
 
 \begin{itemize}
 
-    \item \keyword{Tag} - to unikalny identyfikator, złożony z dwóch liczb: grupy(uint16) i elementu(uint16) grupy.
+    \item \keyword{Tag} - to unikalny identyfikator, dalej zwany zanczniekiem, złożony z dwóch liczb: numer grupy (\cppcode{uint16}) i numer elementu (\cppcode{uint16}) grupy.
     Informuje o tym co dany rekord w sobie zawiera.
-    W jednym \keyword{Data Set} nie mogą się pojawić dwa \keyword{Data Element} posiadających ten sam \keyword{Tag}
-    
-    Obiekt reprezentujący \gdcmclass{Tag}.
+    W jednym zbiorze elementów nie mogą się pojawić dwa elementy posiadających ten sam znacznik.
 
     Na przykład: jeżeli liczby \keyword{Tag} przyjmą wartości odpowiednio wartość $0010_{16}$ i $0010_{16}$ to oznacza, że jest to tag \dicomtag{PatientName}{0010}{0010}, czyli zwiera w sobie parametr zawierają nazwę pacjenta.
 
-    Dokładne omówienie \keyword{Tag}-ów znajduje się w sekcji \ref{sec:dicom-tag}.
+    Dokładne omówienie \keyword{Tag}-ów znajduje się w dalszej części sekcji.
 
     \item \keyword{Value Representation}, w skrócie \keyword{VR} – to dwa bajty w postaci tekstu, informujący o formacie w jaki parametr został zapisany.
     
-    Dokładne omówienie \keyword{VR}-ów znajduje się w sekcji \ref{sec:dicom-vr}.
+    Dokładne omówienie \keyword{VR}-ów znajduje się w dalszej części sekcji.
 
-    \item \keyword{Value \keyword{Data Element}Length}, w skrócie \keyword{VL} - 32-bitowa lub 16-bitowa liczba nieoznaczona, która informuj o długości pola danych(\keyword{Value Field}).
+    \item \keyword{Value Length}, w skrócie \keyword{VL} - 32-bitowa lub 16-bitowa liczba nieoznaczona, która informuje o długości pola danych (\keyword{Value Field}).
     
     Wartość \keyword{VL} zwykle jest liczbą parzystą.
-    Standard DICOM zakłada, że wszystkie dane powinny być dopełniane do parzystej ilości bajtów.
+    Standard DICOM zakłada, że wszystkie dane powinny być dopełniane do parzystej liczby bajtów.
     
     \item \keyword{Value Field} (opcjonalne) - pole z parametrem o długości VL.
     
 \end{itemize}
 
-Wizualizacja budowy \keyword{Data Element} jest na rysunku \ref{fig:dicom-dataelement}.
-
-\subsubsection{Tag}
+\subsubsection{Znacznik}
 \label{sec:dicom-tag}
 
 Tagi to unikalne znaczniki pozwalające określać co jest zapisane w \keyword{Data Element}.
 Tag jest zrobiony z dwóch liczb: numeru grupy i numeru elementu.
 Obie liczby to 16-bitowe liczby całkowite zapisywane w postaci  heksadecymalnej.
 
-Istnieją dwa rodzaje tagów: publiczne o parzystym numerze grupy i prywatne o nieparzystym numerze.
-Pierwsza grupa jest definiowana przez standard DICOM, zawiera ona podstawowe tagi, które muszą się zawsze pojawić w pliku DICOM.
+Istnieją dwa rodzaje znaczników: publiczne o parzystym numerze grupy i prywatne o nieparzystym numerze.
+Pierwsza grupa jest definiowana przez standard DICOM, zawiera ona podstawowe znaczniki
+Publiczne znaczniki dzielę się na obowiązkowe, opcjonalne i warunkowe.
+Są określane przy definicji obiektów informacyjnych.
 Natomiast druga grupa to tagi, pozostawione do dyspozycji producentom sprzętu, tak by mogli zapisywać dodatkowe informacje, które nie zostały przewidziane w standardzie DICOM.
 Taki umożliwia podział umożliwia zapisywane ogromnej liczby informacji ustandaryzowanej jak i informacji niestandardowej w sposób bezkonfliktowy i z możliwosćią odczytania danych przez aplikacje nie związane z producentem sprzętu.
 
@@ -86,9 +81,9 @@ Oto kilka przykładów:
 
     \item \dicomtag{PatientAge}{0010}{1010} - wiek pacjenta w czasie badania
 
-    \item \dicomtag{StudyDescription}{0008}{1030} - opis badania
+    \item \dicomtag{StudyDescription}{0008}{1030} - opis badania, pole wypełniane przez technika lub lekarza
 
-    \item \dicomtag{SeriesDescription}{0008}{103E} - ops serii
+    \item \dicomtag{SeriesDescription}{0008}{103E} - ops serii, pole wypełniane przez technika lub lekarza
 
     \item \dicomtag{SeriesInstanceUID}{0020}{000E} - unikalny numer serii, jest nadawany każdemu badaniu
 
@@ -103,7 +98,7 @@ Oto kilka przykładów:
 \subsubsection{VR - Value Representation}
 \label{sec:dicom-vr}
 
-VR informuje w jaki formacie jest zapisany parametr obrazu.
+VR informuje w jakim formacie jest zapisany parametr obrazu.
 Składa się z dwóch bajtów.
 
 Przykładowe VR:
@@ -114,7 +109,7 @@ Przykładowe VR:
     Pierwsze trzy bajty to liczba całkowita zapisana za pomocą tekstu.
     Czwarty bajt to znaku określający jednostkę czasu.
     Standard definiuje cztery możliwe jednostki czasu: \dataword{D} jako dzień, \dataword{W} jako tydzień, \dataword{M} jako miesiąc, oraz \dataword{Y} jako jeden rok.
-    Konwerter zmienia tą wartość na tekst w postaci czytelnej, np: \dataword{18 weeks} lub \dataword{3 years}, oraz jest wrażliwy na obecny język aplikacji.
+    Konwerter w mojej aplikacji zmienia tą wartość na tekst w postaci czytelnej, np: \dataword{18 weeks} lub \dataword{3 years}, oraz jest wrażliwy na obecny język aplikacji.
     
     Przykład: \dataword{018M} oznacza 18 miesięcy, \dataword{123D} oznacza 123 dni.
 
@@ -123,21 +118,21 @@ Przykładowe VR:
     Długość danych to zawsze 32 bity, są to dwie 16 bitowe liczby.
     Odpowiednio grupa i element grupy.
     Ten VR jest używany kiedy wskazujemy na inny tag.
-    Wartość nie jest nigdy pokazywana użytkownikowi, a jedynie używana w interpretacji przez algorytm tworzenia filmu.
+    Wartość nie jest nigdy pokazywana użytkownikowi, a jedynie używana w interpretacji przez inne algorytmu do analizy obrazu.
     
-    Przykład: tag \dicomtag{FrameIncrementPointer}{0028}{0009} jest używany kiedy w pliku jest zapisana sekwencja kilku obrazów, wskazuje on na inny tag zawierający informacje w jaki sposób ta sekwencja ma być wyświetlona.
+    Przykład: tag \dicomtag{FrameIncrementPointer}{0028}{0009} jest używany kiedy w pliku jest zapisana sekwencja kilku obrazów, wskazuje on na inny tag zawierający informacje, w jaki sposób ta sekwencja ma być wyświetlona.
     
     \item DA - Date - data lub dzień
 
     Długość danych zawsze wynosi 8 bajtów.
     Data zapisana w formacie \dataword{YYYYMMDD}, gdzie: \dataword{YYYY} cztery cyfry roku, \dataword{MM} dwie cyfry miesiąca, \dataword{DD} dwie cyfry dnia w kalendarzu Gregoriańskim.
-    Konwerter zamienia dane na obiekt klasy \qtclass{QDate}, który ma w sobie wbudowaną konwersję na tekst zależny od ustawień językowych aplikacji.
+    %Konwerter zamienia dane na obiekt klasy \qtclass{QDate}, który ma w sobie wbudowaną konwersję na tekst zależny od ustawień językowych aplikacji.
     
     Przykład: \dataword{19800716} oznacza 16 lipca 1980
     
     UWAGA: Standard \enquote{ACR-NEMA Standard 300}, czyli poprzednik DICOM definiował date w sposób \dataword{YYYY.MM.DD}, według standardu DICOM, taki zapis jest nie poprawny, ale zdarzają się stare obrazy z takimi datami i \sokarclass{DataConverter} obsługuje taki format.
 
-    \item DS - Decimal String - liczba zmienno przecinkowa lub ciąg kilku liczb zmienno przecinkowych zapisanych za pomocą tekstu w notacji wykładniczej
+    \item DS - Decimal String - liczba zmienno-przecinkowa lub ciąg kilku liczb zmienno przecinkowych zapisanych za pomocą tekstu w notacji wykładniczej
 
     Długość jednej liczby powinna maksymalne wynosić 16 bajtów.
     Dostępne znaki to \dataword{0}-\dataword{9}, \dataword{+}, \dataword{-}, \dataword{E}, \dataword{e}, \dataword{.}.
@@ -155,7 +150,7 @@ Przykładowe VR:
 
     \item PN - Person Name - nazwa osoby
 
-    Jako, że pacjenta, bądź obiekt badany można nazwać w sposób dowolny i odbiegający od polskiego standardu nazewnictwa, standard DICOM nie przewiduje rozdzielenie poszczególnych składowych nazwy na oznaczone fragmenty.
+    Jako, że pacjenta, bądź obiekt badany można nazwać w sposób dowolny i odbiegający od polskiego standardu nazewnictwa, standard DICOM nie przewiduje rozdzielenia poszczególnych składowych nazwy na oznaczone fragmenty.
     \enquote{Person Name} dzieli nazwę na podane fragmenty, rozdzielony znakiem \dataword{\^{}} (94 znak kodu ASCII):
     \begin{itemize}
         \item family name complex - nazwisko, np. Smolik
@@ -181,6 +176,6 @@ Przykładowe VR:
 \subsection{DICOMDIR}
 
 W przypadku większych instytucji pojawia się problem indeksowania plików i ich przeszukiwania.
-Wyszukanie konkretnego badania lub pliku w folderze w którym znajduje się kilkaset plików poprzez wczytanie pliku i jego odczyt nie jest rozwiązaniem optymalnym.
+Wyszukanie konkretnego badania lub pliku w folderze, w którym znajduje się kilkaset plików poprzez wczytanie pliku i jego odczyt nie jest rozwiązaniem optymalnym.
 Dlatego standard DICOM definiuje również pliki typu DICOMDIR, który jest plikiem indeksującym pliki DICOM w folderze.
 Pozwala to na efektywne przeglądanie wielu serii badań bez wczytywania plików badań.
