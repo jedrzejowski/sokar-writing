@@ -48,42 +48,23 @@ Biblioteka Qt implementuje klasę \qtclass{QObect}, która jest bazą dla wszyst
 
 \subsubsection{Drzewa obiektów}
 \label{sec:qt-pareting}
-
-\par
-W C++ jednym z największych problemów jest wyciek pamięci, pojawia się wtedy gdy zaalokujemy na stercie ony obiekt za pomocą operatora \cppcode{new} i nie go usunąć gdy ten będzie potrzebny.
-\par
-\qtclass{QObject} zakłada, że obiekty mogą mięć jednego rodzica, a rodzic może mieć wiele dzieci.
-Rodzica można przypisać podczas tworzenia obiektu oraz zmieniać go dowolnie w trackie działania programu.
-Przypisanie rodzica dziecku oznacza to, że gdy wywołamy destruktor rodzica, ten wywoła destruktory dzieci i w ten sposób całe drzewo obiektów zostanie zniszczone.
-\par
-Mechanizm ten pozwala nam tworzyć nowe obiekty na stercie i nie martwić się o ich poźniejsze sprzątnięcie.
-Jest to o tyle efektywne, że nie trzeba dla każdego obiektu tworzyć odrębnego wskaźnika lub wektora wskaźników w deklaracji klasy, a dzięki temu można mieć czystszy i czytelniejszy kod źródłowy.
-Przykładowe użycie:
-\par
-\begin{lstlisting}[language=C++]
-int main() {
-
-    // Tworzymy obiekt przycisku
-    auto *quit = new QPushButton("Quit");
-    // Tworzymy obiekt okna
-    auto *window = new QWidget();
-
-    // Przypisujemy rodzica przyciskowi
-    quit->setParent(window);
-    
-    ...
-
-    // W tym momencie przycisk wraz z oknem zostaja usuniete
-    delete window;
-}
-\end{lstlisting}
+\input{text/biblioteki/qt-parenting.tex}
 
 \subsubsection{Sygnały i sloty}
 \label{sec:qt-signals}
 \input{text/biblioteki/qt-signlas.tex}
 
+\subsubsection{Przykładowa klasa dziedzicząca po QObject}
+\input{text/biblioteki/qt-qobject.tex}
+
 \subsection{Graficzny interfejs użytkownika}
+\label{sec:qt-gui}
+\input{text/biblioteki/qt-gui.tex}
 
 \subsection{Oddzielenie od platformy}
 
-\par
+Biblioteka standardowa
+
+Własne wektroy
+
+Własne wątki

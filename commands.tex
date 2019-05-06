@@ -3,23 +3,23 @@
 \newcommand{\dicomtag}[3]{#1 (0x#2, 0x#3)}
 
 \def\zerospace{\hspace{0px}}
+\def\scopedots{\zerospace::\zerospace}
 
 
-%\newcommand{\sokarclass}[2]{\texttt{Sokar::#1::#2}}
 
-\DeclareDocumentCommand\sokarclass{ m g }{%
-\texttt{Sokar\zerospace::\zerospace#1\IfNoValueF{#2}{\zerospace::\zerospace#2}}
-}
+\newcommand{\sokarclass}[1]{\textit{Qt\scopedots#1}}
+\newcommand{\sokarfunction}[2]{\textit{Qt\scopedots#1\scopedots#2}}
 
 \def\gdcmclass#1{\href{http://gdcm.sourceforge.net/html/classgdcm_1_1#1.html}{gdcm::#1}}
 
-\def\qtclass#1{\lowercase{\href{https://doc.qt.io/qt-5/#1.html}}{Qt::#1}}
+\newcommand{\qtclass}[1]{\textit{\lowercase{\href{https://doc.qt.io/qt-5/#1.html}}{Qt\scopedots#1}}}
+\newcommand{\qtfunction}[2]{\textit{\lowercase{\href{https://doc.qt.io/qt-5/#1.html\##2}}{Qt\scopedots#1\scopedots#2}}}
 
 \def\dicomvr#1{VR:#1}
 
 \newenvironment{conditions}
 {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
-    {\end{tabular}\par\vspace{\belowdisplayskip}}
+        {\end{tabular}\par\vspace{\belowdisplayskip}}
 
 \def\quotett#1{\enquote{\texttt{#1}}}
 \def\cppcode#1{{\color{blue}\texttt{#1}}}
