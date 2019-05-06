@@ -1,0 +1,120 @@
+\subsection{Podstawowe parametry obrazu cyfrowego}
+
+\par
+Każdy obraz cyfrowy jest matrycą pikseli o ustalonych rozmiarach.
+Tak samo obrazy DICOM są matrycami pikseli, posiadającymi wysokość(zapisaną w \dicomtag{Rows}{0028}{0010}) oraz szerokość(zapisaną w \dicomtag{Columns}{0028}{0011}).
+
+\par
+Istnieje jeszcze tag \dicomtag{PhotometricInterpretation}{0028}{0004} informujące jak mamy interpretować piksel pod względem fotometrycznym.
+Standard DICOM definiuje następujące wartości tego tagu:
+\begin{itemize}
+    \item \dataword{MONOCHROME1} i \dataword{MONOCHROME2} ---
+
+    \item \dataword{PALETTE COLOR} --- wartość piksela jest używana jako indeks w każdej z tabel wyszukiwania kolorów palety czerwonej, niebieskiej i zielonej.
+          Palety mają swoje własne tagi.
+          Wartość raczej nie spotykana i rzadka.
+
+    \item \dataword{RGB} --- piksel trzy-kanałowy, czerwony, zielony i niebieski
+
+    \item \dataword{HSV} \fromEng{Hue Saturation Value} --- model opisu przestrzeni barw zaproponowany w 1978 roku przez Alveya Raya Smitha.
+          Wartość wycofana.
+
+    \item \dataword{ARGB} --- kolor RGB z dodatkowym kanałem przezroczystości.
+          Wartość wycofana.
+
+    \item \dataword{CMYK} --- zestaw czterech podstawowych kolorów farb drukarskich stosowanych powszechnie w druku wielobarwnym w poligrafii: cyjan, magenta, żółty, czarny.
+          Wartość wycofana.
+
+    \item \dataword{YBR\_FULL} --- Kolor
+
+          Dodatkowo standard zdefiniował pochodne YBR: \dataword{YBR\_FULL\_422}, \dataword{YBR\_PARTIAL\_422}, \dataword{YBR\_PARTIAL\_420}, \dataword{YBR\_ICT}, \dataword{YBR\_RCT}, ale wszystkie są już wycofane.
+\end{itemize}
+
+\par
+Kwantyzacja obrazu, czyli informacja mówiąca o tym ile poziomów jest na obrazie jest zapisana w czterech tagach:
+\begin{itemize}
+    \item \dicomtag{BitsAllocated}{0028}{0100} --- informuje na jak wiele bitów zostało zaalokowancyh do zapisany jedego piksela
+    \item \dicomtag{BitsStored}{0028}{0101} --- informuje jak wiele bitów z zaalokowanych posiada wartość piksela
+    \item \dicomtag{HighBit}{0028}{0102} --- informuje gdzie znajduje się najstarszy bit
+    \item \dicomtag{PixelRepresentation}{0028}{0103} --- informuje czy poziomu są ze znakiem czy bez
+\end{itemize}
+
+\par
+Obraz DICOM również zawiera w sobie informacje o próbkowaniu, ale z uwagi, że próbkowanie wygląda inaczej w każdej technice, dlatego standard posada oddzielne tagi informujące o próbkowania dla każdej techniki.
+Próbkowanie poszczególnych technik opisałem w sekcji \ref{sec:basic-imaging-technics}, przytaczanie tagów dla każdej techniki jest bezcelowe.
+
+\subsection{Wartość diagnostyczna obrazu}
+
+W obrazowaniu medycznym chodzi o wyciągnięcie wniosków z obrazów i postawienie diagnozy.
+Jest to kluczowy element obrazowania.
+Ocena wartości diagnostycznej to złożone zagadnienie z teorii hipotez statystycznych.
+Brak możliwości stwierdzenia co na obrazie się znajduje, stawia sens takiego obrazowania pod znakiem zapytania.
+Poco nam obraz w 4K na, którym można zobaczyć wyraźne plamy niczego.
+
+Wartość diagnostyczną można określić na podstawie następujących parametrów
+\begin{itemize}
+    \item Jakości obrazu
+
+          Parametry jakościowe obrazów są szczegółowo opisane w sekcji \ref{sec:image-quality}
+
+    \item Warunków obserwacji obrazu
+
+          W brew pozorom warunki obserwacji mają kluczowe znaczenie dla wartości diagnostycznej.
+          Jeżeli będziemy mieli dobry obraz, który wyświetlimy na budżetowym monitorze RGB, który w rzeczywistości posiada 6-bitowe kanały RGB i tworzy odcienie za pomocą techniki dithering'u, to niewiele zobaczymy.
+
+    \item wiarygodności diagnostycznej obrazów
+
+    \item charakterystyki pracy lekarza-specjalisty
+
+\end{itemize}
+
+\subsection{Rozdzielczość}
+
+\subsubsection{Przestrzenna}
+
+\par
+Rozdzielczość przestrzenna obrazu to najmniejsza odległość między dwoma punktami obrazu, które można rozróżnić.
+W radiografii rozdzielczość określa się zazwyczaj jako liczbę równoległych linii, czarnych i białych, które można rozróżnić ma 1 milimetrze obrazu(paralinie na milimetr).
+
+\par
+Rozdzielczość przestrzenna jest zależna od kontrastu obrazu.
+Jednakże ta zależność jest troche inna dla każdej techniki.
+
+\subsubsection{Czasowa}
+
+Każdy pomiar wymaga pewnego czasu pobierania danych, ale w nie których przypadkach interesuje nas zmiana w czasie.
+Rozdzielczość czasowa pojawia się w obrazach dynamicznych kiedy mamy pomiar w czasie i ustalone markery czasowe.
+Jest definiowana jako odległość w czasie od dwóch klatek obrazowania.
+
+\subsection{Jakość obrazów}
+\label{sec:image-quality}
+
+\begin{itemize}
+    \item Kontrast
+
+          ???
+
+          kontrast mikelsona
+
+          max-min / max+min
+
+          amplidua sinusoidy do wartości średniej
+
+
+    \item Stosunek sygnału do szumu (SNR)
+
+          Rodzaj i poziom szumu zależy od techniki obrazowania.
+          Stosunek sygnału ma decydujący wpływ na widoczności obiektów, kontrast oraz percepcję szczegółów w obrazie.
+
+    \item Poziom artefaktów
+
+          Artefakty to zjawiska fałszujące obraz poprzez tworzenie nie istniejących struktur w obrazie.
+          Jest to problemem występujący w różnych technikach obrazowania.
+          Najbardziej widocznymi artefaktami są warkocz komety i odbicie zwierciadlane w obrazach USG.
+
+    \item Poziom zniekształceń przestrzennych
+
+          Zniekształcenia przestrzenne powstają w wyniku geometrycznego ułożenia i kształtu obiektu badanego i aparat pomiarowego.
+          Przykładem takiego zniekształcenia mogą być różne powiększenia obiektów zależne od głębokości ich ułożenia w USG, zmiana pozycji pacjenta(przez ruchy klatki piersiowej w czasie badania), czy deformacja obrazu spowodowana zmianami rozkładu pola magnetycznego przez metalowe obiekty w znajdujące się w tym samym pomieszczeniu, co MRI.
+
+\end{itemize}
