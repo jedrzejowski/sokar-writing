@@ -4,17 +4,18 @@
 
 \def\zerospace{\hspace{0px}}
 
-\def\gdcmclass#1{gdcm::#1}
 
 %\newcommand{\sokarclass}[2]{\texttt{Sokar::#1::#2}}
 
 \DeclareDocumentCommand\sokarclass{ m g }{%
-  \texttt{Sokar\zerospace::\zerospace#1\IfNoValueF{#2}{\zerospace::\zerospace#2}}
+\texttt{Sokar\zerospace::\zerospace#1\IfNoValueF{#2}{\zerospace::\zerospace#2}}
 }
 
-\def\qtclass#1{\texttt{Qt::#1}}
+\def\gdcmclass#1{\href{http://gdcm.sourceforge.net/html/classgdcm_1_1#1.html}{gdcm::#1}}
 
-\def\dicomvr#1{\texttt{VR:#1}}
+\def\qtclass#1{\lowercase{\href{https://doc.qt.io/qt-5/#1.html}}{Qt::#1}}
+
+\def\dicomvr#1{VR:#1}
 
 \newenvironment{conditions}
 {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
@@ -34,4 +35,3 @@
 \newcommand{\TODO}[1]{{\color{red}TODO #1}}
 
 \newcommand{\fromEng}[1]{(ang. \textit{#1})}
-

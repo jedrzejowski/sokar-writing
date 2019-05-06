@@ -21,9 +21,9 @@ Elementy danych są ułożone w postaci listy.
 Element danych może zawierać w sobie listę elementów danych.
 
 \begin{figure}[!htbp]
-    \caption{Elementy danych w zbiorze elementów danych}
-    \includegraphics[]{img/dicom-dataelement001.pdf}
     \centering
+    \includegraphics[]{img/dicom-dataelement001.pdf}
+    \caption{Elementy danych w zbiorze elementów danych}
     \label{fig:dicom-dataelement}
 \end{figure}
 
@@ -35,24 +35,24 @@ Składa się z czterem elementów:
 \begin{itemize}
 
     \item \keyword{Tag} - to unikalny identyfikator, dalej zwany zanczniekiem, złożony z dwóch liczb: numer grupy (\cppcode{uint16}) i numer elementu (\cppcode{uint16}) grupy.
-    Informuje o tym co dany rekord w sobie zawiera.
-    W jednym zbiorze elementów nie mogą się pojawić dwa elementy posiadających ten sam znacznik.
+          Informuje o tym co dany rekord w sobie zawiera.
+          W jednym zbiorze elementów nie mogą się pojawić dwa elementy posiadających ten sam znacznik.
 
-    Na przykład: jeżeli liczby \keyword{Tag} przyjmą wartości odpowiednio wartość $0010_{16}$ i $0010_{16}$ to oznacza, że jest to tag \dicomtag{PatientName}{0010}{0010}, czyli zwiera w sobie parametr zawierają nazwę pacjenta.
+          Na przykład: jeżeli liczby \keyword{Tag} przyjmą wartości odpowiednio wartość $0010_{16}$ i $0010_{16}$ to oznacza, że jest to tag \dicomtag{PatientName}{0010}{0010}, czyli zwiera w sobie parametr zawierają nazwę pacjenta.
 
-    Dokładne omówienie \keyword{Tag}-ów znajduje się w dalszej części sekcji.
+          Dokładne omówienie \keyword{Tag}-ów znajduje się w dalszej części sekcji.
 
     \item \keyword{Value Representation}, w skrócie \keyword{VR} – to dwa bajty w postaci tekstu, informujący o formacie w jaki parametr został zapisany.
-    
-    Dokładne omówienie \keyword{VR}-ów znajduje się w dalszej części sekcji.
+
+          Dokładne omówienie \keyword{VR}-ów znajduje się w dalszej części sekcji.
 
     \item \keyword{Value Length}, w skrócie \keyword{VL} - 32-bitowa lub 16-bitowa liczba nieoznaczona, która informuje o długości pola danych (\keyword{Value Field}).
-    
-    Wartość \keyword{VL} zwykle jest liczbą parzystą.
-    Standard DICOM zakłada, że wszystkie dane powinny być dopełniane do parzystej liczby bajtów.
-    
+
+          Wartość \keyword{VL} zwykle jest liczbą parzystą.
+          Standard DICOM zakłada, że wszystkie dane powinny być dopełniane do parzystej liczby bajtów.
+
     \item \keyword{Value Field} (opcjonalne) - pole z parametrem o długości VL.
-    
+
 \end{itemize}
 
 \subsubsection{Znacznik}
@@ -106,70 +106,70 @@ Przykładowe VR:
 \begin{itemize}
     \item AS - Age String - wiek lub długość życia
 
-    Długość danych zawsze wynosi 4 bajty.
-    Pierwsze trzy bajty to liczba całkowita zapisana za pomocą tekstu.
-    Czwarty bajt to znaku określający jednostkę czasu.
-    Standard definiuje cztery możliwe jednostki czasu: \dataword{D} jako dzień, \dataword{W} jako tydzień, \dataword{M} jako miesiąc, oraz \dataword{Y} jako jeden rok.
-    
-    Przykład: \dataword{018M} oznacza 18 miesięcy, \dataword{123D} oznacza 123 dni.
+          Długość danych zawsze wynosi 4 bajty.
+          Pierwsze trzy bajty to liczba całkowita zapisana za pomocą tekstu.
+          Czwarty bajt to znaku określający jednostkę czasu.
+          Standard definiuje cztery możliwe jednostki czasu: \dataword{D} jako dzień, \dataword{W} jako tydzień, \dataword{M} jako miesiąc, oraz \dataword{Y} jako jeden rok.
+
+          Przykład: \dataword{018M} oznacza 18 miesięcy, \dataword{123D} oznacza 123 dni.
 
     \item AT - Attribute Tag - inny tag
 
-    Długość danych to zawsze 32 bity, są to dwie 16 bitowe liczby.
-    Odpowiednio grupa i element grupy.
-    Ten VR jest używany kiedy wskazujemy na inny tag.
-    Wartość nie jest nigdy pokazywana użytkownikowi, a jedynie używana w interpretacji przez inne algorytmu do analizy obrazu.
-    
-    Przykład: tag \dicomtag{FrameIncrementPointer}{0028}{0009} jest używany kiedy w pliku jest zapisana sekwencja kilku obrazów, wskazuje on na inny tag zawierający informacje, w jaki sposób ta sekwencja ma być wyświetlona.
-    
+          Długość danych to zawsze 32 bity, są to dwie 16 bitowe liczby.
+          Odpowiednio grupa i element grupy.
+          Ten VR jest używany kiedy wskazujemy na inny tag.
+          Wartość nie jest nigdy pokazywana użytkownikowi, a jedynie używana w interpretacji przez inne algorytmu do analizy obrazu.
+
+          Przykład: tag \dicomtag{FrameIncrementPointer}{0028}{0009} jest używany kiedy w pliku jest zapisana sekwencja kilku obrazów, wskazuje on na inny tag zawierający informacje, w jaki sposób ta sekwencja ma być wyświetlona.
+
     \item DA - Date - data lub dzień
 
-    Długość danych zawsze wynosi 8 bajtów.
-    Data zapisana w formacie \dataword{YYYYMMDD}, gdzie: \dataword{YYYY} cztery cyfry roku, \dataword{MM} dwie cyfry miesiąca, \dataword{DD} dwie cyfry dnia w kalendarzu Gregoriańskim.
+          Długość danych zawsze wynosi 8 bajtów.
+          Data zapisana w formacie \dataword{YYYYMMDD}, gdzie: \dataword{YYYY} cztery cyfry roku, \dataword{MM} dwie cyfry miesiąca, \dataword{DD} dwie cyfry dnia w kalendarzu Gregoriańskim.
 
-    Przykład: \dataword{19800716} oznacza 16 lipca 1980
-    
-    UWAGA: Standard \enquote{ACR-NEMA Standard 300}, czyli poprzednik DICOM definiował date w sposób \dataword{YYYY.MM.DD}, według standardu DICOM, taki zapis jest nie poprawny, ale zdarzają się stare obrazy z takimi datami i \sokarclass{DataConverter} obsługuje taki format.
+          Przykład: \dataword{19800716} oznacza 16 lipca 1980
+
+          UWAGA: Standard \enquote{ACR-NEMA Standard 300}, czyli poprzednik DICOM definiował date w sposób \dataword{YYYY.MM.DD}, według standardu DICOM, taki zapis jest nie poprawny, ale zdarzają się stare obrazy z takimi datami i \sokarclass{DataConverter} obsługuje taki format.
 
     \item DS - Decimal String - liczba zmiennoprzecinkowa lub ciąg kilku liczb zmienno przecinkowych zapisanych za pomocą tekstu w notacji wykładniczej
 
-    Długość jednej liczby powinna maksymalne wynosić 16 bajtów.
-    Dostępne znaki to \dataword{0}-\dataword{9}, \dataword{+}, \dataword{-}, \dataword{E}, \dataword{e}, \dataword{.}.
-    Biblioteka QT posiada wbudowany konwerter liczb zapisanych w formacie wykładniczym, dlatego mój konwerter dzieli tekst i konwertuje za pomocą QT.
-    
-    Przykład: \dataword{426\textbackslash468 } oznacza dwie liczby 426 i 468. Proszę zwrócić uwagę na spacje na końcu.
+          Długość jednej liczby powinna maksymalne wynosić 16 bajtów.
+          Dostępne znaki to \dataword{0}-\dataword{9}, \dataword{+}, \dataword{-}, \dataword{E}, \dataword{e}, \dataword{.}.
+          Biblioteka QT posiada wbudowany konwerter liczb zapisanych w formacie wykładniczym, dlatego mój konwerter dzieli tekst i konwertuje za pomocą QT.
 
-    \item IS - Integer String - liczba całkowita 
+          Przykład: \dataword{426\textbackslash468 } oznacza dwie liczby 426 i 468. Proszę zwrócić uwagę na spacje na końcu.
 
-    Długość jednej liczby powinna maksymalne wynosić 12 bajtów.
-    Dostępne znaki to \dataword{0}-\dataword{9}, \dataword{+}, \dataword{-}.
-    Biblioteka QT posiada wbudowany konwerter liczb całkowitych, dlatego mój konwerter używa konwertera z QT.
-    
-    Przykład: \dataword{426 }  oznacza liczbę 426.
+    \item IS - Integer String - liczba całkowita
+
+          Długość jednej liczby powinna maksymalne wynosić 12 bajtów.
+          Dostępne znaki to \dataword{0}-\dataword{9}, \dataword{+}, \dataword{-}.
+          Biblioteka QT posiada wbudowany konwerter liczb całkowitych, dlatego mój konwerter używa konwertera z QT.
+
+          Przykład: \dataword{426 }  oznacza liczbę 426.
 
     \item PN - Person Name - nazwa osoby
 
-    Jako, że pacjenta, bądź obiekt badany można nazwać w sposób dowolny i odbiegający od polskiego standardu nazewnictwa, standard DICOM nie przewiduje rozdzielenia poszczególnych składowych nazwy na oznaczone fragmenty.
-    \enquote{Person Name} dzieli nazwę na podane fragmenty, rozdzielony znakiem \dataword{\^{}} (94 znak kodu ASCII):
-    \begin{itemize}
-        \item family name complex - nazwisko, np. Smolik
-        \item given name complex - imię, np. Adam
-        \item middle name - środkowe imię, brak odpowiednika w polskim nazewnictwie
-        \item name prefix - prefiks przed imieniem, np: mgr. inż.
-        \item name suffix - sufiks po imieniu, brak odpowiednika
-    \end{itemize}
-    Długość jednego fragmenty powinna maksymalne wynosić 64 znaki.
-    W przypadku mniejszej ilości segmentów, mamy założyć, że są puste.
-    
-    Przykład: \enquote{prof. dr. hab. inż. Waldemar Smolik pracownik ZEJIM} był by zapisany w sposób następujący: \dataword{Smolik\^{}Waldemar\^{}\^{}prof. dr. hab. inż.\^{}pracownik ZEJIM}
+          Jako, że pacjenta, bądź obiekt badany można nazwać w sposób dowolny i odbiegający od polskiego standardu nazewnictwa, standard DICOM nie przewiduje rozdzielenia poszczególnych składowych nazwy na oznaczone fragmenty.
+          \enquote{Person Name} dzieli nazwę na podane fragmenty, rozdzielony znakiem \dataword{\^{}} (94 znak kodu ASCII):
+          \begin{itemize}
+              \item family name complex - nazwisko, np. Smolik
+              \item given name complex - imię, np. Adam
+              \item middle name - środkowe imię, brak odpowiednika w polskim nazewnictwie
+              \item name prefix - prefiks przed imieniem, np: mgr. inż.
+              \item name suffix - sufiks po imieniu, brak odpowiednika
+          \end{itemize}
+          Długość jednego fragmenty powinna maksymalne wynosić 64 znaki.
+          W przypadku mniejszej ilości segmentów, mamy założyć, że są puste.
+
+          Przykład: \enquote{prof. dr. hab. inż. Waldemar Smolik pracownik ZEJIM} był by zapisany w sposób następujący: \dataword{Smolik\^{}Waldemar\^{}\^{}prof. dr. hab. inż.\^{}pracownik ZEJIM}
 
     \item SS - Signed Short - 16 bitowa liczba całkowita bez znaku
-    
+
     \item US - Unsigned Short - 16 bitowa liczba całkowita ze znakiem
 
     \item UT - Unlimited Text - tekst o nieograniczonej długości.
 
-    Zwykły tekst o długości maksymalnie $2^{32}-2$ bajtów.
+          Zwykły tekst o długości maksymalnie $2^{32}-2$ bajtów.
 \end{itemize}
 
 \subsection{DICOMDIR}

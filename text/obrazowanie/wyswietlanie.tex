@@ -16,26 +16,26 @@ Przeglądarka obrazów DICOM musi wygenerować kolorowy obraz z danych na podsta
 Wyróżniono 26 kryteriów do porównywania przeglądarek w postaci „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcie, obrazowanie dwu i trój wymiarowego.
 Kryteria te w jasny sposób pozwalają na ocenę praktycznych aspektów użytkowania przeglądarki.
 
-\paragraph{Platforma}
+\subsubsection{Platforma}
 
 Samodzielność, aplikacje samodzielne są zaprojektowane tak, aby nie wymagały żadnego dodatkowego sprzętu fizycznego bądź infrastruktury do poprawnego działania(np. systemu Windows oraz serwisów przez niego dostarczanych).
 Rozwiązania sieciowe, określają czy aplikacja jest usługą sieciową i można z przeglądarki korzystać jak ze strony WWW.
 Wieloplatformowość, możliwość uruchomienia ich na różnych systemach operacyjnych Linux/MacOS/Windows
 Rozwiązania mobilne, możliwość używania na urządzeniach mobilnych takich jak telefon.
 
-\paragraph{Interfejs}
+\subsubsection{Interfejs}
 
 Przeglądarka powinna mieć możliwość komunikacji z interfejsami innych systemów.
 Podstawowe interfejsy sieciowe to: C-STORE SCP DICOM C-STORE, C-STORE SCU, Query-Retrieve, WADO, Parameter Transfer.
 
-\paragraph{Wsparcie techniczne}
+\subsubsection{Wsparcie techniczne}
 
 Dokumentacja, dostępność pisemnej dokumentacji oprogramowania (np. podręczniki lub strony internetowej).
 Wsparcie przez pocztę internetową, możliwość porozumienia się z twórcą lub opiekunem oprogramowania.
 Forum, możliwość pytania się społeczności o opinie i ich wymiana.
 Wiki, strona internetowa w formacie Wikipedii dostępna dla użytkownika.
 
-\paragraph{Obrazowanie dwu-wymiarowe}
+\subsubsection{Obrazowanie dwu-wymiarowe}
 
 Przewijanie(\fromEng{scroll}), proces wyświetlania obrazów, można poprawić dzięki zmniejszeniu interakcji z klawiaturą oraz myszką. Można to osiągnąć na przykład, oferując możliwość przejścia do następnego lub poprzedniego obrazu przez przesunięcie kółkiem myszy lub używając przycisków góra/dół na klawiaturze.
 Metadane, przeglądania powinna obejmować analizowanie i wyświetlanie metadanych obiektów DICOM, powinna obejmować wyświetlanie rozdzielczości obrazu, badanie (np. identyfikator podmiotu) oraz znaczniki DICOM specyficzne dla dostawcy (np. specjalne ustawienie urządzenia rejestrującego).
@@ -48,7 +48,7 @@ Wymiarowanie, możliwości rysowania bądź zaznaczania linii lub innych kształ
 Jest to możliwe gdyż nagłówki pliku DICOM zawierają parametry sprzętowe urządzenia (np. ilość pikseli na centymetr).
 Adnotacje(opisy), które były wytworzone przez personel medyczny powinny być zapisywane w odpowiedni sposób w pliku.
 
-\paragraph{Obrazowanie trój-wymiarowe}
+\subsubsection{Obrazowanie trój-wymiarowe}
 
 Rekonstrukcja wtórna, zwykle dane dotyczące objętości medycznej są gromadzone wzdłuż jednej osi ciała (np. poprzecznej).
 W wielu przypadkach ważne jest przeglądanie danych w innych kierunkach (np. strzałkowych lub czołowych), aby poprawić wizualizację niektórych struktur.
@@ -83,9 +83,9 @@ Standard DICOM przewidział możliwość zapisania danych w różnych formatach.
             Przykład użycia takiego narzędzia znajduje się na rysunku \ref{fig:wyswietlanie001}.
 
             \begin{figure}[!htbp]
-                  \caption{Przykład narzędzia Lupa w przeglądarce \href{https://www.softneta.com/products/meddream-dicom-viewer/}{MedDream DICOM Viewer}.}
-                  \includegraphics[width=\textwidth]{img/wyswietlanie001.png}
                   \centering
+                  \includegraphics[width=\textwidth]{img/wyswietlanie001.png}
+                  \caption{Przykład narzędzia Lupa w przeglądarce \href{https://www.softneta.com/products/meddream-dicom-viewer/}{MedDream DICOM Viewer}.}
                   \label{fig:wyswietlanie001}
             \end{figure}
 
@@ -123,9 +123,9 @@ Standard DICOM przewidział możliwość zapisania danych w różnych formatach.
             Przykład wyświetlenia wielu obrazów na raz w jednym oknie znajduje się na rysunku \ref{fig:dicomviewer001}
 
             \begin{figure}[!htbp]
-                  \caption{Przykład wyświetlenia wielu obrazów na raz w jednym oknie w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
-                  \includegraphics[width=\textwidth]{img/dicom-viewer-001.png}
                   \centering
+                  \includegraphics[width=\textwidth]{img/dicom-viewer-001.png}
+                  \caption{Przykład wyświetlenia wielu obrazów na raz w jednym oknie w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
                   \label{fig:dicomviewer001}
             \end{figure}
 \end{itemize}
@@ -137,9 +137,9 @@ Jeżeli mamy do dyspozycji wiele obrazów tomograficznych o znanych parametrach 
 Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
 
 \begin{figure}[!htbp]
-      \caption{Przykład generowania obrazów 3D z wielu obrazów tomograficznych w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
-      \includegraphics[width=\textwidth]{img/dicom-viewer-002.png}
       \centering
+      \includegraphics[width=\textwidth]{img/dicom-viewer-002.png}
+      \caption{Przykład generowania obrazów 3D z wielu obrazów tomograficznych w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
       \label{fig:dicomviewer002}
 \end{figure}
 
@@ -154,15 +154,15 @@ Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
       \item Mierzenie obrazu, wykonywanie pomiarów
             Możliwość zmierzenia odległości pomiędzy dwoma punktami przez lekarza lub zmierzenia wielkości/pola zadanego kształtu.
 
-      \item Tworzenie obrazów transwersalnych.
+      \item Rekonstrukcja wielopłaszczyznowa.
             Obrazy tomograficzne obrazują przekroje, jeżeli parametry wielkości woksela są dostępne to istnieje możliwość wygenerowania nowego obrazu który byłby obrazem ułożonym w poprzek.
 
-            Przykład generowania obrazów transwersalnych jest pokazany na rysunku \ref{fig:dicomviewer003}
+            Przykład generowania rekonstrukcja wielopłaszczyznowej jest pokazany na rysunku \ref{fig:dicomviewer003}
 
             \begin{figure}[!htbp]
-                  \caption{Przykład generowania obrazów transwersalnych w przeglądarce \href{https://athenadicomviewer.com/}{Athena DICOM Viewer}}
-                  \includegraphics[width=\textwidth]{img/dicom-viewer-003.jpeg}
                   \centering
+                  \includegraphics[width=\textwidth]{img/dicom-viewer-003.jpeg}
+                  \caption{Przykład rekonstrukcji wielopłaszczyznowej w przeglądarce \href{https://athenadicomviewer.com/}{Athena DICOM Viewer}}
                   \label{fig:dicomviewer003}
             \end{figure}
 \end{itemize}

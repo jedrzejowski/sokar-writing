@@ -1,0 +1,48 @@
+
+\begin{lstlisting}[language=C++]
+#include <QObject>
+
+class Counter : public QObject {
+    // Każdy klasa dziedzicząca po QObject musi na samym początku swojej definicji mieć makro "Q_OBJECT"
+    Q_OBJECT
+
+public:
+    Counter() { m_value = 0; }
+
+    int value() const { return m_value; }
+
+    // Sloty powinny być poprzedzone makrem "slots"
+    // Widoczność slotów można zmieniać 
+public slots:
+    void setValue(int value){
+        if (value != m_value) {
+            m_value = value;
+
+            // Podczas wywoływania sygnału należy poprzedzić to makrem "emit"
+            emit valueChanged(value);
+        }
+    }
+
+    // Sygnały powinny być poprzedzone makrem "signals"
+    // Wszystkie sygnały są publiczne
+signals:
+    void valueChanged(int newValue);
+
+private:
+    int m_value;
+};
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=C++]
+Counter a, b;
+QObject::connect(&a, &Counter::valueChanged,
+                    &b, &Counter::setValue);
+
+a.setValue(12);     // a.value() == 12, b.value() == 12
+b.setValue(48);     // a.value() == 12, b.value() == 48
+
+\end{lstlisting}
+
+\par
+Pełna dokumentacja na temat sygnałów i slotów znajduje się na oficjalne stronie Qt pod adresem \url{https://doc.qt.io/qt-5/signalsandslots.html}
