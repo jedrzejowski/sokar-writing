@@ -9,8 +9,8 @@
 \newcommand{\sokarfunction}[2]{\textit{Sokar\scopedots#1\scopedots#2()}}
 
 \def\gdcmdocurl{http://gdcm.sourceforge.net/html}
-\newcommand{\gdcmclass}[1]{\textit{\lowercase{\href{\gdcmdocurl/classgdcm_1_1#1.html}}{gdcm\scopedots#1}}}
-\newcommand{\gdcmfunction}[2]{\textit{\lowercase{\href{\gdcmdocurl/classgdcm_1_1#1.html\##2}}{gdcm\scopedots#1\scopedots#2()}}}
+\newcommand{\gdcmclass}[1]{\textit{\href{\gdcmdocurl/classgdcm_1_1#1.html}{gdcm\scopedots#1}}}
+\newcommand{\gdcmfunction}[2]{\textit{\href{\gdcmdocurl/classgdcm_1_1#1.html\##2}{gdcm\scopedots#1\scopedots#2()}}}
 
 \def\qtdocurl{https://doc.qt.io/qt-5}
 \newcommand{\qtclass}[1]{\textit{\lowercase{\href{\qtdocurl/#1.html}}{Qt\scopedots#1}}}
@@ -36,3 +36,26 @@
 
 
 \newcommand{\fromEng}[1]{(ang. \textit{#1})}
+
+
+\newenvironment{infobox}[1][]
+{\begin{mdframed}[
+            frametitle={#1},
+            skipabove=\baselineskip plus 2pt minus 1pt,
+            skipbelow=\baselineskip plus 2pt minus 1pt,
+            frametitleaboveskip= 7pt,
+            frametitlebelowskip= 7pt,
+            linewidth=0pt,
+            linecolor=black,
+            frametitlerule=false,
+            frametitlebackgroundcolor=blue!10,
+            backgroundcolor=blue!10,
+            roundcorner=7pt,
+        ]}
+        {\end{mdframed}}
+
+\newenvironment{zeroindent}
+{\par\setlength{\parindent}{0pt}}
+{\par}
+
+\input{commands2.tex}

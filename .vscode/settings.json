@@ -1,4 +1,5 @@
 {
     "editor.wordWrap": "on",
-    "editor.renderWhitespace": "all"
+    "editor.renderWhitespace": "all",
+    "editor.tabSize": 4,
 }
