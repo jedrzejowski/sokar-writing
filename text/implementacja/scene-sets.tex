@@ -1,4 +1,4 @@
-\label{sec:scene-sets}
+\label{sec:sokar-scenesets}
 
 Abstrakcyjna klasa \sokarclass{DicomSceneSet} implementuje kolekcje scen.
 Jest to obiekt, który grupuje w jakiś sposób sceny a następnie tworzy obiekt \sokarclass{SceneSequence}, który jest rzeczywistą sekwencją scen, ułożoną w taki sposób, jaki obrazy powinny być wyświetlane.
@@ -7,18 +7,12 @@ Są dwie implementacje zbioru scen: zbiór plików i zbiór ramek z jednego plik
 \subsection{SceneSequence}
 
 \par
-Sekwencja scen, implementowana przez \sokarclass{SceneSequence} to lista dwukierunkowa zawierającą kroki.
-Implementuje strukture danych informującyh o przejściach pomiędzy scenami.
-Lista ta zawiera dodatkowe informacje o obecnym stanie sekwencji:
-\begin{itemize}
-    \item \cppcode{int index} --- indeks w którym obecnie znajduje się sekwencja
-    \item \cppcode{int direction} --- zwrot sekwencji, sekwencja może iść do przodu lub w tył
-    \item \cppcode{bool sweeping} --- wartość logiczna informująca w jaki sposób ma zachować się gdy sekwencja dojdzie do końca:
-    \begin{itemize}
-        \item \cppcode{true} --- po dojściu do końca sekwencja skoczy do pierwszego elementu
-        \item \cppcode{false} --- po dojściu do końca sekwencja zmieni zwrot
-    \end{itemize}
-\end{itemize}
+Sekwencja scen implementuje strukturę danych informującą o przejściach pomiędzy scenami poprzez klasę \sokarclass{SceneSequence}.
+Sekwencja to wektor zawierającą kroki z dodatkowymi informacjami o stanie sekwencji.
+Indeksem w którym obecnie znajduje się sekwencja.
+Kierunkiem sekwencji, sekwencja może iść w stronę początku lub koca.
+Rodzajem przemiatania, jest to wartość logiczna informująca w jaki sposób ma zachować się gdy sekwencja dojdzie do końca, lub początku.
+Po dojściu do końca sekwencja skoczy do pierwszego elementu lub może zmienić kierunek i zacząć iść do tyłu.
 
 \par
 Kroki, implementowane, przez klasą \sokarclass{Step}, zawierają następujące informacje: wskaźnik do sceny oraz czas trwania sceny.
