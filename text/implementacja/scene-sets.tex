@@ -17,6 +17,14 @@ Po dojściu do końca sekwencja skoczy do pierwszego elementu lub może zmienić
 \par
 Kroki, implementowane, przez klasą \sokarclass{Step}, zawierają następujące informacje: wskaźnik do sceny oraz czas trwania sceny.
 
+\par
+Sekwencja ma wbudowane funkcje zapewniające przemieszczanie się:
+\begin{itemize}
+    \item \sokarfunction{SceneSequence}{stepForward} --- krok do przodu, zwiększa indeks tym samym wykonuje krok w stronę końca sekwencji
+    \item \sokarfunction{SceneSequence}{stepBackward} --- krok do tyłu, zmniejsza indeks tym samym wykonując krok w stronę początku sekwencji
+    \item \sokarfunction{SceneSequence}{step} --- wykonuje krok w tył lub przód w zależności od kierunku sekwencji
+\end{itemize}
+Wszystkie powyższe funkcje są zarazem slotami dla sygnałów oraz emitują sygnał \sokarfunction{SceneSequence}{steped}.
 
 \subsection{DicomFrameSet}
 

@@ -53,3 +53,14 @@
 }
 
 \lstset{style=cppstyle}
+
+% Enter po tytule patagrafu
+% https://latex.org/forum/viewtopic.php?t=1383
+\makeatletter
+\renewcommand\paragraph{%
+    \@startsection{paragraph}{4}{0mm}%
+       {-\baselineskip}%
+       {.5\baselineskip}%
+       {\normalfont\normalsize\bfseries}}
+\makeatother
+ 

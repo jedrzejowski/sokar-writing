@@ -1,21 +1,23 @@
 \newcommand{\wiki}[1]{https://pl.wikipedia.org/wiki/Teksel}
 
-\newcommand{\dicomtag}[3]{#1 (0x#2, 0x#3)}
+
 
 \def\zerospace{\hspace{0px}}
 \def\scopedots{\zerospace::\zerospace}
 
+\newcommand{\sokarclass}[1]{\textit{Sokar\scopedots#1}}
+\newcommand{\sokarfunction}[2]{\textit{Sokar\scopedots#1\scopedots#2()}}
 
+\def\gdcmdocurl{http://gdcm.sourceforge.net/html}
+\newcommand{\gdcmclass}[1]{\textit{\lowercase{\href{\gdcmdocurl/classgdcm_1_1#1.html}}{gdcm\scopedots#1}}}
+\newcommand{\gdcmfunction}[2]{\textit{\lowercase{\href{\gdcmdocurl/classgdcm_1_1#1.html\##2}}{gdcm\scopedots#1\scopedots#2()}}}
 
-\newcommand{\sokarclass}[1]{\textit{Qt\scopedots#1}}
-\newcommand{\sokarfunction}[2]{\textit{Qt\scopedots#1\scopedots#2}}
+\def\qtdocurl{https://doc.qt.io/qt-5}
+\newcommand{\qtclass}[1]{\textit{\lowercase{\href{\qtdocurl/#1.html}}{Qt\scopedots#1}}}
+\newcommand{\qtfunction}[2]{\textit{\lowercase{\href{\qtdocurl/#1.html\##2}}{Qt\scopedots#1\scopedots#2()}}}
 
-\def\gdcmclass#1{\href{http://gdcm.sourceforge.net/html/classgdcm_1_1#1.html}{gdcm::#1}}
-
-\newcommand{\qtclass}[1]{\textit{\lowercase{\href{https://doc.qt.io/qt-5/#1.html}}{Qt\scopedots#1}}}
-\newcommand{\qtfunction}[2]{\textit{\lowercase{\href{https://doc.qt.io/qt-5/#1.html\##2}}{Qt\scopedots#1\scopedots#2}}}
-
-\def\dicomvr#1{VR:#1}
+\newcommand{\dicomvr}[1]{VR:#1}
+\newcommand{\dicomtag}[3]{#1 (0x#2, 0x#3)}
 
 \newenvironment{conditions}
 {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
@@ -32,6 +34,5 @@
 %        {.5\baselineskip}%
 %        {\normalfont\normalsize\bfseries}}
 
-\newcommand{\TODO}[1]{{\color{red}TODO #1}}
 
 \newcommand{\fromEng}[1]{(ang. \textit{#1})}
