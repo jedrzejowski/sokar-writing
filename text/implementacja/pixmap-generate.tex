@@ -32,15 +32,15 @@ Klasa \sokarclass{DicomScene} dostarcza następujące obiekty do generowania obr
     \item \cppcode{QPixmap iconPixmap} obiekt obrazu ikonu, docelowo powinien mieć 128 pikseli na 128 pikseli.
     
     \item \cppcode{QGraphicsPixmapItem *pixmapItem} wskaźnik do obiektu na scenie, który wyświetla \cppcode{pixmap}.
-    
+
 \end{itemize}
 
-Generowanie obrazu jest robione przez funkcje \sokarclass{DicomScene::generatePixmap()}.
+Generowanie obrazu jest robione przez cyzsto wirtualną funkcje \sokarfunction{DicomScene}{generatePixmap}.
 Po wywołaniu funkcji obiekt \cppcode{pixmap} powinien zawierać obraz wygenerowany z obecnymi parametrami.
-Funkcja zwraca również \cppcode{bool}, który informuje nas czy \cppcode{pixmap} rzeczywiście został zmieniony.
+Funkcja zwraca również wartość logiczną, który informuje nas czy \cppcode{pixmap} rzeczywiście został zmieniony.
 
-Całe odświeżanie obrazu jest implementowane w funkcji \sokarclass{DicomScene::reloadPixmap()}.
-Funkcja wywołuje \sokarclass{DicomScene::generatePixmap()} i odświeża \cppcode{pixmapItem} kiedy zajdzie taka potrzeba
+Całe odświeżanie obrazu jest implementowane w funkcji \sokarfunction{DicomScene}{reloadPixmap}.
+Funkcja wywołuje \sokarfunction{DicomScene}{generatePixmap} i odświeża \cppcode{pixmapItem} kiedy zajdzie taka potrzeba
 
 Generowanie poszczególnych typów obrazów jest wyjaśnione poniżej.
 

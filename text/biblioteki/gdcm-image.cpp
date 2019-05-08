@@ -21,8 +21,8 @@ int main() {
 
     /* Pobieramy wymiary obrazu */
     const unsigned int* dimension = gimage.GetDimensions();
-    unsigned int dimX = dimension[0];
-    unsigned int dimY = dimension[1];
+    quint dimX = dimension[0];
+    quint dimY = dimension[1];
 
     if (gimage.GetPhotometricInterpretation() == 
         gdcm::PhotometricInterpretation::RGB)

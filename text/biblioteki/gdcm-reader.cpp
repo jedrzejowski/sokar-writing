@@ -35,12 +35,12 @@ int main() {
         /* Pobieramy element ze zbiory danych */
         const DataElement& ele = dataset->GetDataElement(tag);
         /* Pobieramy 16-bitowego inta */
-        short center = ele.GetByteValue()->GetPointer();
+        quint16 center = ele.GetByteValue()->GetPointer();
     }
 
     if (dataset->FindDataElement(TagWindowWidth)){
         const DataElement& ele = dataset->GetDataElement(tag);
-        short width = ele.GetByteValue()->GetPointer();
+        quint16 width = ele.GetByteValue()->GetPointer();
     }
 
 }

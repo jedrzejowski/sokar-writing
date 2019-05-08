@@ -28,6 +28,7 @@
 
 %https://www.overleaf.com/learn/latex/Code_listing
 \lstdefinestyle{cppstyle}{
+    language=C++,
     backgroundcolor=\color{white},   
     commentstyle=\color{teal},
     keywordstyle=\color{blue},
@@ -46,6 +47,12 @@
     tabsize=4,
     inputencoding=utf8,
     extendedchars=true,
+    morekeywords={
+        override,
+        qreal, emit, slots, signals,
+        qint8, qint16, qint32, qint64,
+        quint8, quint16, quint32, quint64,
+    },
     literate={ą}{{\k{a}}}1 {ć}{{\'{c}}}1 {ę}{{\k{e}}}1 {Ł}{{\L{}}}1 {ł}{{\l{}}}1 {ń}{{\'{n}}}1 {ó}{{\'{o}}}1 {ś}{{\'{s}}}1 {ż}{{\.{z}}}1 {ź}{{\'{z}}}1 ,
 }
 
@@ -56,6 +63,14 @@
 \makeatletter
 \renewcommand\paragraph{%
     \@startsection{paragraph}{4}{0mm}%
+       {-\baselineskip}%
+       {.5\baselineskip}%
+       {\normalfont\normalsize\bfseries}}
+\makeatother
+ 
+\makeatletter
+\renewcommand\subparagraph{%
+    \@startsection{subparagraph}{4}{0mm}%
        {-\baselineskip}%
        {.5\baselineskip}%
        {\normalfont\normalsize\bfseries}}

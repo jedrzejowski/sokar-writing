@@ -121,9 +121,21 @@ Pobieranie wartości z okienka odbywa się za pomocą funkcji \sokarclass{Monoch
 \subparagraph{Implementacja dynamiczna bez tablicy LUT}
 
 \par
-W tej wersji funkcja \sokarclass{Monochrome}{Window\zerospace::{\zerospace}getPixel()}wygląda następująco:
+W tej wersji funkcja \sokarfunction{Monochrome{\scopedots}Windowget}{Pixel} wygląda następująco:
 \par
-NAUCZYĆ SIĘ WSTAWIAĆ KOD C++
+\begin{lstlisting}
+inline const Pixel &getPixel(quint64 value) override {
+    value += signedMove;
+
+    if (value < x0) {
+        return background;
+    } else if (value > x1) {
+        return foreground;
+    } else {
+        return palette->getPixel(a * value + b);
+    }
+}
+\end{lstlisting}
 \par
 Widzimy tutaj, że funkcja najperw sprawdza czy zakres okienka został przekroczony, następnie wylicza wartość obrazu i pobiera kolor z palety.
 \par

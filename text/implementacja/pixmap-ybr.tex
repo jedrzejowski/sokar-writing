@@ -5,10 +5,35 @@ Wartości są ułożone w taki sposób.
 Ponieważ wartości te reprezentują kolory, są już w pewnym sensie są obrazem, ale nie można go wyświetlić, ponieważ komputery bazują na kolorach RGB.
 Dlatego odpowieni algorytm konwertuje kolor YBR na kolor RGB, iterując po wszystkich wartościach obrazu.
 
-\paragraph{Konwersja koloru YBR na kolor RGB}
+\paragraph*{Konwersja koloru YBR na kolor RGB}
 
 YBR albo YCbCr to model przestrzeni kolorów do przechowywania obrazów i wideo.
 Wykorzystuje do tego trzy typy danych: Y – składową luminancji, B lub Cb – składową różnicową chrominancji Y-B, stanowiącą różnicę między luminancją a niebieskim, oraz R lub Cr – składową chrominancji Y-R, stanowiącą różnicę między luminancją a czerwonym.
 Kolor zielony jest uzyskiwany na podstawie tych trzech wartości.
 YBR nie pokrywa w całości RGB, tak jak RGB nie pokrywa YBR.
 Posiadają one część wspólną, co uniemożliwia wyświetlenie obrazu w stu procentach bez zniekształceń.
+
+\paragraph*{Algorytm konwersji}
+
+Poniżej przedstawiono kod źródłowy funkcji zamiany kolory YBR na RGB.
+Proszę zwrócić uwagę na linie 12, 13 i 14, jest ma dokonywana pewna utrata danych.
+
+\begin{lstlisting}
+Sokar::Pixel ybr2Pixel(quint8 y, quint8 b, quint8 r) {
+    qreal red, green, blue;
+
+    red = green = blue = (255.0 / 219.0) * (y - 16.0);
+
+    red += 255.0 / 224 * 1.402 * (r - 128);
+    green -= 255.0 / 224 * 1.772 * (b - 128) * (0.114 / 0.587);
+    green -= 255.0 / 224 * 1.402 * (r - 128) * (0.299 / 0.587);
+    blue += 255.0 / 224 * 1.772 * (b - 128);
+
+
+    red = qBound(0.0, red, 255.0);
+    green = qBound(0.0, green, 255.0);
+    blue = qBound(0.0, blue, 255.0);
+
+    return Sokar::Pixel(quint8(red), quint8(green), quint8(blue));
+}
+\end{lstlisting}

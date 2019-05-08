@@ -1,23 +1,26 @@
 \newcommand{\wiki}[1]{https://pl.wikipedia.org/wiki/Teksel}
 
-
-
 \def\zerospace{\hspace{0px}}
 \def\scopedots{\zerospace::\zerospace}
 
-\newcommand{\sokarclass}[1]{\textit{Sokar\scopedots#1}}
-\newcommand{\sokarfunction}[2]{\textit{Sokar\scopedots#1\scopedots#2()}}
+\def\sokarprefix{Sokar\scopedots}
+\newcommand{\sokarclass}[1]{\textit{\sokarprefix#1}}
+\newcommand{\sokarfunction}[2]{\textit{\sokarprefix#1\scopedots#2()}}
 
+\def\gdcmprefix{gdcm\scopedots}
 \def\gdcmdocurl{http://gdcm.sourceforge.net/html}
-\newcommand{\gdcmclass}[1]{\textit{\href{\gdcmdocurl/classgdcm_1_1#1.html}{gdcm\scopedots#1}}}
-\newcommand{\gdcmfunction}[2]{\textit{\href{\gdcmdocurl/classgdcm_1_1#1.html\##2}{gdcm\scopedots#1\scopedots#2()}}}
+\newcommand{\gdcmclass}[1]{\textit{\href{\gdcmdocurl/classgdcm_1_1#1.html}{\gdcmprefix#1}}}
+\newcommand{\gdcmfunction}[2]{\textit{\href{\gdcmdocurl/classgdcm_1_1#1.html\##2}{\gdcmprefix#1\scopedots#2()}}}
 
+\def\qtprefix{Qt\scopedots}
 \def\qtdocurl{https://doc.qt.io/qt-5}
-\newcommand{\qtclass}[1]{\textit{\lowercase{\href{\qtdocurl/#1.html}}{Qt\scopedots#1}}}
-\newcommand{\qtfunction}[2]{\textit{\lowercase{\href{\qtdocurl/#1.html\##2}}{Qt\scopedots#1\scopedots#2()}}}
+\newcommand{\qtclass}[1]{\textit{\lowercase{\href{\qtdocurl/#1.html}}{\qtprefix#1}}}
+\newcommand{\qtfunction}[2]{\textit{\lowercase{\href{\qtdocurl/#1.html\##2}}{\qtprefix#1\scopedots#2()}}}
 
 \newcommand{\dicomvr}[1]{VR:#1}
-\newcommand{\dicomtag}[3]{#1 (0x#2, 0x#3)}
+
+\def\dicomtagprefix{{\small$^\text{Dicom}_\text{Tag}$}}
+\newcommand{\dicomtag}[3]{\dicomtagprefix #1 (0x#2, 0x#3)}
 
 \newenvironment{conditions}
 {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
