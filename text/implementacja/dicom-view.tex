@@ -19,38 +19,13 @@ Poniżej jest opisane zachowanie tych elementów:
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{img/sokar-dicomview-001.png}
-    \caption{Wygląd DicomView}
+    \caption{Wygląd DicomView wraz z numeracją elementów interfejsu. Zdjęcie własne.}
     \label{fig:sokar-dicomview001}
 \end{figure}
 
 \subsubsection{\sokarclass{DicomToolBar}}
 \label{sec:sokar-dicomtoolbar}
-
-Jest to pasek narzędzi znajdujący się na górze \sokarclass{DicomView}.
-Posiada on zespół ikonek z rozwijalnymi menu kontekstowymi.
-Kliknięcie odpowiedniej ikony spowoduje wysłanie sygnału do obecnie wyświetlanej sceny.
-
-Są dwa sygnału Qt wysyłane przez klase:
-\begin{itemize}
-    \item \cppcode{void stateToggleSignal(State state);}
-
-          Sygnał ten oznacza zmianę stanu interfejsu
-
-    \item \cppcode{void actionTriggerSignal(Action action, bool state = false);}
-\end{itemize}
-
-
-Ikony na pasku:
-\begin{itemize}
-    \item Okienkowanie
-    \item Przesuwanie
-    \item Skalowanie
-    \item Rotacja
-    \item Indicators
-    \item Tagi - czerwona ikonka dwóch metek
-
-          Kliknięcie
-\end{itemize}
+\input{text/implementacja/dicom-toolbar.tex}
 
 \subsubsection{\sokarclass{DicomGraphics}}
 \label{sec:sokar-dicomgraphics}
@@ -67,21 +42,21 @@ Pasek jest podzielony na trzy części: trzy przyciski znajdujące się po lewej
 
 \par
 Trzy lewe przyciski odpowiadają za poruszanie się po sekwencji.
-Wciśniecie pierwszego przycisku (XXX) powoduje zatrzymanie upływu sekwencji i wysłanie sygnału \sokarfunction{SceneSequence}{stepBackward} do sekwencji.
-Wciśniecie drugiego przycisku (XXX) powoduje włączenie lub wyłączenie upływu sekwencji.
-Wciśniecie trzeciego przycisku (XXX) powoduje zatrzymanie upływu sekwencji i wysłanie sygnału \sokarfunction{SceneSequence}{stepForward} do sekwencji.
+Wciśniecie pierwszego przycisku (z indeksem 8 na rysunku \ref{fig:sokar-dicomview001}) powoduje zatrzymanie upływu sekwencji i wysłanie sygnału \sokarfunction{SceneSequence}{stepBackward} do sekwencji.
+Wciśniecie drugiego przycisku (9) powoduje włączenie lub wyłączenie upływu sekwencji.
+Wciśniecie trzeciego przycisku (10) powoduje zatrzymanie upływu sekwencji i wysłanie sygnału \sokarfunction{SceneSequence}{stepForward} do sekwencji.
 \par
-Pasek (XXX) pokazujący postępu sekwencji jest obiektem klasy \qtclass{QSlider}.
+Pasek (11) pokazujący postępu sekwencji jest obiektem klasy \qtclass{QSlider}.
 Odświeżanie paska jest wrażliwe na sygnał \sokarfunction{SceneSequence}{steped} of sekwencji.
 \par
 Elementy po prawej stronie definiuje parametry trybu filmowego.
-Prządka, element do wprowadzania liczby zmiennoprzecinkowej klasy \qtclass{QDoubleSpinBox}.
+Prządka (12), element do wprowadzania liczby zmiennoprzecinkowej klasy \qtclass{QDoubleSpinBox}.
 Im większa wartość liczby tym klatki filmu są dłużej wyświetlane.
-Drugi przycisk pozwala zmienić sposób przemiatania.
-Trzeci przycisk wymusza tryb jednego okna dla wszystkich klatek filmu.
+Drugi (13) przycisk pozwala zmienić sposób przemiatania.
+Trzeci (14) przycisk wymusza tryb jednego okna dla wszystkich klatek filmu.
 Jeżeli mamy załadowanych wile obrazów tego samego badania, to nie koniecznie muszą mieć to samo okno.
 Dodatkowo ten tryb pozwala wprowadzić jednolite okienko dla wszystkich klatek po zmianie parametrów tego okienka na jednej klatce.
-Czwarty i ostatni przycisk służy do użycia jednej macierzy transformaty na wszystkich klatkach.
+Czwarty (15) i ostatni przycisk służy do użycia jednej macierzy transformaty na wszystkich klatkach.
 
 \paragraph*{Tryb filmowy}
 
