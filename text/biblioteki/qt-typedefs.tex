@@ -1,0 +1,24 @@
+\par
+W różnych systemach operacyjnych są różne kompilatory i w śród tej różnorodności pojawia się problem dotyczący zmiennych fundamentalnych.
+Na przykład: Ile bitów ma zmienna \cppcode{int}?
+Udając się do oficjalnej dokumentacji C++, dostępnej pod adresem \url{https://pl.cppreference.com/w/cpp/language/types}, możemy dowiedzieć się, że \cppcode{int} ma minimum 16 bitów.
+Natomiast w dokumentacji MSVC, kompilatora firmy Microsoft, znajdującej się pod adresem \url{https://docs.microsoft.com/pl-pl/cpp/cpp/int8-int16-int32-int64?view=vs-2019}, widnieje informacja z której wynika, żeby mieć pewność o długości liczby całkowitej należy użyć takich typów: \cppcode{\_\_int8}, \cppcode{\_\_int16}, \cppcode{\_\_int32}, \cppcode{\_\_int64}.
+\par
+Jest to problem, który biblioteka Qt rozwiązała.
+Wprowadziła dodatkowe typy literałów, które dostosowują się do systemu i kompilatora i zapewniają pewność podczas deklaracji, że dana zmienna będzie zakładanej długości.
+Dodatkowe typy literałów są dostępne w nagłówku \cppcode{<QtGlobal>}, dokumentacja dostępna pod adresem \url{https://doc.qt.io/qt-5/qtglobal.html}.
+
+\par
+Dlatego w pracy zostały użyte typu fundamentalne dostarczane przez bibliotekę Qt.
+Kilka przykładów:
+\begin{itemize}
+    \item \cppcode{qint8} --- liczba całkowita, 8 bitowa, ze znakiem
+    \item \cppcode{qint16} --- liczba całkowita, 16 bitowa, ze znakiem
+    \item \cppcode{qint32} --- liczba całkowita, 32 bitowa, ze znakiem
+    \item \cppcode{qint64} --- liczba całkowita, 64 bitowa, ze znakiem
+    \item \cppcode{quint8} --- liczba całkowita, 8 bitowa, beq znaku
+    \item \cppcode{quint16} --- liczba całkowita, 16 bitowa, beq znaku
+    \item \cppcode{quint32} --- liczba całkowita, 32 bitowa, beq znaku
+    \item \cppcode{quint64} --- liczba całkowita, 64 bitowa, beq znaku
+    \item \cppcode{qreal} --- największa dostępna liczba zmiennoprzecinkowa
+\end{itemize}
