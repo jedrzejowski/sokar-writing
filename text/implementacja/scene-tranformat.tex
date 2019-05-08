@@ -1,0 +1,37 @@
+\par
+Już wygenerowany obraz można wyświetlić bez większego problemu.
+Wyświetlanie odbywa \cppcode{pixmap}, obiektu klasy \qtclass{QPixmap}, odbywa się za pomocą obiektu \cppcode{pixmapItem}, obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
+Ta ostatnia klasa ma w sobie zaimplementowaną funkcjonalność pozwalającą na nałożenie transformaty na nią.
+Transformata to obiekt klasy \qtclass{QTransform}, który reprezentuje transformatę dwu wymiarowa na obiekt, praktycznie jest to macierz 3 na 3 reprezentująca przekształcenie w współrzędnych jednorodnych.
+\par
+
+Zostało zdefiniowanych 4 transformat:
+\begin{itemize}
+    \item \cppcode{centerTransform} --- transformata wyśrodkowująca, zadanie tego przekształcenia jest przeniesienie obrazu na środek sceny
+    \item \cppcode{panTransform} --- transformata przesunięcia
+    \item \cppcode{scaleTransform} --- transformata skali
+    \item \cppcode{rotateTransform} --- transformata rotacji
+\end{itemize}
+
+Te cztery transformaty są łączone za pomocą wirtualnej funkcji \sokarfunction{DicomScene}{getPixmapTransformation}.
+Kod funkcji:
+\begin{lstlisting}
+QTransform DicomScene::getPixmapTransformation() {
+	QTransform transform;
+	transform *= centerTransform;
+	transform *= scaleTransform;
+	transform *= rotateTransform;
+	transform *= panTransform;
+	return transform;
+}
+\end{lstlisting}
+Realizuje on takie równanie:
+\[panTransform*rotateTransform*scaleTransform*centerTransform\]
+
+
+\subsubsection{Współżędne jednorodne}
+
+\subsubsection{Interakcja z użytkownikiem}
+
+Trzy transformaty (bez wyśrodkowującej) są zmieniane w trakcie interakcji z użytkownikiem.
+Są zmieniane w dwóch przypadkach: po odebraniu sygnału od paska zadań, obiektu klasy \sokarclass{DicomToolbar} lub podczas ruchu myszki, gdy wciśnięty jest prawy przycisk.
