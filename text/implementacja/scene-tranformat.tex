@@ -1,3 +1,5 @@
+\label{sec:sokar-dicomscene-tranformat}
+
 \par
 Już wygenerowany obraz można wyświetlić bez większego problemu.
 Wyświetlanie odbywa \cppcode{pixmap}, obiektu klasy \qtclass{QPixmap}, odbywa się za pomocą obiektu \cppcode{pixmapItem}, obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
@@ -27,11 +29,105 @@ QTransform DicomScene::getPixmapTransformation() {
 \end{lstlisting}
 Realizuje on takie równanie:
 \[panTransform*rotateTransform*scaleTransform*centerTransform\]
-
+Funkcja ta jest wirtualna, co umożliwia innym klasą, które dziedziczą po niej dodanie nowych transformat.
 
 \subsubsection{Współżędne jednorodne}
+
+Współrzędne jednorodne definiuje się jako sposób reprezentacji punktów n-wymiarowej przestrzeni rzutowej za pomocą układu $n+1$ współrzędnych.
+W bibliotece Qt jedną z implementacji współrzędny jednorodnych jest klasa \qtclass{QTransform}.
+Implementuje ona podstawowe zachowania macierzy 3 na 3 jak również wbudowane operacje takie jak: przesuwanie implementowane prze \qtfunction{QTransform}{translate}, obrót implementowany przez funkcje \qtfunction{QTransform}{rotate} i skalowanie implementowane przez \qtfunction{QTransform}{scale}.
+
+Przykład działania:
+\begin{lstlisting}
+QTransform transform;
+transform.translate(50, 50);
+transform.rotate(45);
+transform.scale(0.5, 1.0);
+\end{lstlisting}
+Powyższa transformata skaluje obiekt na 50\% szerokości, obraca o 45 stopni, przesuwa o 50 punktów na osi $x$ i $y$.
+
+\par
+Taką transformatę można nałożyć na obiekty klasy \qtclass{QGraphicsPixmapItem}.
 
 \subsubsection{Interakcja z użytkownikiem}
 
 Trzy transformaty (bez wyśrodkowującej) są zmieniane w trakcie interakcji z użytkownikiem.
 Są zmieniane w dwóch przypadkach: po odebraniu sygnału od paska zadań, obiektu klasy \sokarclass{DicomToolbar} lub podczas ruchu myszki, gdy wciśnięty jest prawy przycisk.
+
+\paragraph{Zmiany poprzez oderanie sygnału}
+
+\par
+Na pasku zadań, nad sceną, znajduje się szereg przycisków, które po wciśnięciu wysyłają sygnał do obecnej sceny poprzez obiekt klasy \sokarclass{DicomView}.
+Sposób wysyłania sygnałów jest szerzej opisany w sekcji \ref{sec:sokar-dicomtoolbar}.
+
+\par
+Po otrzymaniu odpowiedniego sygnału jest wykonywana operacja na transformacie.
+Wszystkie transformaty są implementowane przez wirtualną funkcje \sokarfunction{DicomScene}{toolBarActionSlot}, która jest slotem.
+
+\par
+Lista opisów reakcji na sygnały (stan zerowy transformaty, to stan w którym transformata nic nie robi):
+\begin{itemize}
+
+    \item \cppcode{ClearPan} --- przywraca transformatę przesunięcia do stanu zerowego
+
+    \item \cppcode{Fit2Screen} --- przywraca transformatę skali do stanu zerowego, następnie wylicza nową skalę w zależności od wymiarów obrazu i sceny
+
+    \item \cppcode{OriginalResolution} --- przywraca transformatę skali do stanu zerowego
+
+    \item \cppcode{RotateRight90} --- na transformacie rotacji zostaje użyta funkcja \qtfunction{QTransform}{rotate} z parametrem $90$.
+
+    \item \cppcode{RotateLeft90} --- na transformacie rotacji zostaje użyta funkcja \qtfunction{QTransform}{rotate} z parametrem $-90$.
+
+    \item \cppcode{FlipHorizontal} --- na transformacie rotacji zostaje użyta funkcja \qtfunction{QTransform}{scale} z parametrami $1$ i $-1$.
+
+    \item \cppcode{FlipVertical} --- na transformacie rotacji zostaje użyta funkcja \qtfunction{QTransform}{scale} z parametrami $-1$ i $1$.
+
+    \item \cppcode{ClearRotate} --- przywraca rotacji do stanu zerowego
+
+\end{itemize}
+Oczywiście po zmianie transformaty jest wywoływana funkcja \sokarfunction{DicomScene}{updatePixmapTransformation}, która odświeża transformatę na obiekcie \cppcode{pixmapItem}.
+
+\paragraph{Zmiany poprzez obsługę myszki}
+
+\par
+\qtclass{QGraphicsScene} dostarcza możliwość obsługi myszki poprzez wirtualną funkcje \qtfunction{QGraphicsScene}{mouseMoveEvent}.
+Dzięki temu obsługa myszki może być rozszerzana przez wszystkie klasy dziedziczące po tej klasie.
+Dodatkowo funkcja ta dostarcza obiekt klasy \qtclass{QGraphicsSceneMouseEvent}, w którym znajdują się informacje o pozycji myszki jak i ostatniej pozycji myszki.
+
+\par
+Jeżeli jest wykryty ruch myszki z wciśniętym lewym przyciskiem myszy, to w zależności od stanu paska narzędzi, wywoływana jest odpowiednia akcja.
+Akcje są obsługiwane przez klasy \sokarclass{DicomScene} i \sokarclass{Monochrome{\scopedots}Scene}.
+Każda z nich obsługuje pewną pule stanów.
+Lista obsługiwanych stanów paska narzędzi:
+\begin{itemize}
+    \item \cppcode{Pan} --- stan przesuwania, obsługiwany przez \sokarclass{DicomScene}
+
+          Na transformacie przesuwania jest wywoływana jest funkcja przesunięcia \qtfunction{QTransform}{translate} z parametrami odpowiadającymi przesunięciu myszki.
+
+    \item \cppcode{Zoom} --- stan skalowania, obsługiwany przez \sokarclass{DicomScene}
+
+          Na transformacie skalowania jest wywoływana jest funkcja skalowania \qtfunction{QTransform}{scale} z parametrem \cppcode{scale} wyliczanym podanym wzorem:
+
+          \[scale=1\]
+          \[scale=scale-{\Delta}y*0.01\]
+          \[scale=scale-{\Delta}x*0.001\]
+
+          Sprawia to, że ruch pionowy jest bardzie czuły na zmianę niż ruch poziomy.
+          Teoretycznie jest możliwość implementacji odrębnego skalowania w dwóch osiach, jednakże jest to nie intuicyjne w wprowadza użytkownika w zakłopotanie.
+
+    \item \cppcode{Rotate} --- stan rotacji, obsługiwany przez \sokarclass{DicomScene}
+
+          Na transformacie rotacji jest wywoływana jest funkcja rotacji \qtfunction{QTransform}{rotate} z parametrem \cppcode{rotate} wyliczanym podanym wzorem:
+
+          \[rotate = 0\]
+          \[rotate = rotate + {\Delta}y * 0.5;\]
+          \[rotate = rotate + {\Delta}x * 0.1;\]
+
+          Sprawia to, że ruch pionowy jest bardzie czuły na zmianę niż ruch poziomy.
+
+    \item \cppcode{Windowing} --- stan okienkowania, obsługiwany przez \sokarclass{Monochrome{\scopedots}Scene}
+
+          Do obiektu okienka są wysyłane zmiany poprzez funkcje: \sokarfunction{Window}{mvVertical} z parametrem ${\Delta}y$ i \sokarfunction{Window}{mvHorizontal} z parametrem ${\Delta}x$
+          Następnie ponownie jest generowany obraz z uwzględnieniem zmiany okienka.
+
+\end{itemize}
