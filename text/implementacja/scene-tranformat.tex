@@ -1,8 +1,8 @@
 \label{sec:sokar-dicomscene-tranformat}
 
 \par
-Już wygenerowany obraz można wyświetlić bez większego problemu.
-Wyświetlanie odbywa \cppcode{pixmap}, obiektu klasy \qtclass{QPixmap}, odbywa się za pomocą obiektu \cppcode{pixmapItem}, obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
+Już wygenerowany obraz można wyświetlić na scenie bez większego problemu.
+Wyświetlanie \cppcode{pixmap}, obiektu klasy \qtclass{QPixmap}, odbywa się za pomocą obiektu \cppcode{pixmapItem}, obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
 Ta ostatnia klasa ma w sobie zaimplementowaną funkcjonalność pozwalającą na nałożenie transformaty na nią.
 Transformata to obiekt klasy \qtclass{QTransform}, który reprezentuje transformatę dwu wymiarowa na obiekt, praktycznie jest to macierz 3 na 3 reprezentująca przekształcenie w współrzędnych jednorodnych.
 \par

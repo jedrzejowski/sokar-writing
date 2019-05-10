@@ -69,7 +69,8 @@ Algorytm składa się z 3 części: wyznaczenie parametrów okna, przygotowanie 
 \par
 Okno z LUT jest implementowane przez \sokarclass{Monochrome}{WindowIntDynamic}.
 Okno bez LUT jest implementowane przez \sokarclass{Monochrome}{WindowIntDynamic}.
-Obie klasy dzidziczą po abstrakcyjnej klasie \sokarclass{Monochrome}{Window}m, która z kolei dziedziczy po \sokarclass{SceneIndicator}, dlatego od razu może wyświetlać obecne wartości okna.
+Obie klasy dziedziczą po abstrakcyjnej klasie \sokarclass{Monochrome}{Window}, która z kolei dziedziczy po \sokarclass{SceneIndicator}, dlatego od razu może wyświetlać obecne wartości okna.
+Decyzja o używanym oknie jest podejmowana podczas wczytywania obrazu przez klasę \sokarclass{Monochrome{\scopedots}Scene}
 \par
 UWAGA: Standard DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe. Dlatego założyłem, że takie obrazy nie istnieją.
 
@@ -117,16 +118,13 @@ Wyznaczam parametry prostej przechodzącej przez dwa punkty:
 Teraz algorytm się rozdwaja.
 Pobieranie wartości z okienka odbywa się za pomocą funkcji \sokarclass{Monochrome}{Window\zerospace::{\zerospace}getPixel()}.
 
-
 \subparagraph{Implementacja dynamiczna bez tablicy LUT}
 
 \par
-W tej wersji funkcja \sokarfunction{Monochrome{\scopedots}Windowget}{Pixel} wygląda następująco:
+W tej wersji funkcja \sokarfunction{Monochrome{\scopedots}Window}{getPixel} wygląda następująco:
 \par
 \begin{lstlisting}
 inline const Pixel &getPixel(quint64 value) override {
-    value += signedMove;
-
     if (value < x0) {
         return background;
     } else if (value > x1) {
@@ -137,16 +135,236 @@ inline const Pixel &getPixel(quint64 value) override {
 }
 \end{lstlisting}
 \par
-Widzimy tutaj, że funkcja najperw sprawdza czy zakres okienka został przekroczony, następnie wylicza wartość obrazu i pobiera kolor z palety.
+Widzimy tutaj, że funkcja najpierw sprawdza czy zakres okienka został przekroczony, następnie wylicza wartość obrazu i pobiera kolor z palety.
 \par
 UWAGA: ponieważ nie dysponuje rzeczywistym obrazem o pikselu danych 32-bitowym lub 64-bitowych, implementacja dynamiczna nie była testowana w warunkach rzeczywistych.
 
 \subparagraph{Implementacja statyczna z tablicą LUT}
+\par
+W wersji z LUT, na podczas tworzenia okienka jest alokowany wektor obiektów \sokarclass{Pixel} klasy \stdclass{vector}.
+Standard DICOM przewiduje, że woksele mogą mieć wartości ujemne, więc tablica powinna mieć możliwość posiadania takich wartości indeksów, ale C++ nie przewiduje takiej możliwości.
+Dlatego wprowadzono dwie zmienne pomocnicze \cppcode{maxValue} i \cppcode{signedMove}.
+\cppcode{maxValue} jest to maksymalna wartość jaką dane mogą przyjąć, jest ona równa $2^N$, gdzie $N$ to liczba bitów brana z \dicomtag{BitsStored}{0028}{0101}.
+A \cppcode{signedMove} to liczba przesunięcia liczb, przyjmuje wartość zero gdy dane wokseli są całkowite nieujemne lub wartość przeciwną do \cppcode{maxValue} gdy woksele mogą być ujemne.
+Długość wektora pikseli jest sumą \cppcode{maxValue} i \cppcode{signedMove}.
+A indeks woksela w wektorze ma wartość tego woksela zwiększoną o \cppcode{signedMove}.
+\par
+Wypełnienie wektora wartościami odbyta się poprzez iteracje po wszystkich możliwych wartościach, przeliczenie ich przez funkcje okna, a następnie wstawienie ich do wektora.
+W celu poprawy szybkości, zastosowano sprawdzanie czy wartości są w zakresie okna.
+Poniżej kod funkcji:
+\begin{lstlisting}
+bool genLUT() override {
+
+    if (WindowInt::genLUT()) {
+
+        /* Przeskalowanie wektora, gdy jest to wymagane */
+        if (arraySize != signedMove + maxValue) {
+            arraySize = signedMove + maxValue;
+            arrayVector.resize(arraySize);
+        }
+
+        /* Wyliczenie najmniejszej wartości */
+        qreal x = qreal(signedMove) * -1;
+
+        auto &background = isInversed() ? palette->getForeground() : palette->getBackground();
+        auto &foreground = isInversed() ? palette->getBackground() : palette->getForeground();
+
+        /* Iteracja */
+        pixelArray = &arrayVector[0];
+        for (int i = 0; i <= arraySize; i++) {
+
+            if (x < x0) {
+                *pixelArray = background;
+            } else if (x > x1) {
+                *pixelArray = foreground;
+            } else {
+                *pixelArray = palette->getPixel(a * x + b);
+            }
+
+            x++;
+            pixelArray++;
+        }
+
+        pixelArray = &arrayVector[0];
+
+        updateLastChange();
+
+        return true;
+    }
+    return false;
+}
+\end{lstlisting}
+
+\par
+Funkcja pobierania okienka prezentuje się następująco:
+\begin{lstlisting}
+inline const Pixel &getPixel(quint64 value) override {
+    return *(pixelArray + signedMove + value);
+}
+\end{lstlisting}
 
 \subparagraph{Iterowanie po obrazie}
+\par
+Po przygotowaniu okienka, należy funkcje okna przepuścić przez obraz właściwy.
+Do zokienkowania jednego piksela nie potrzeba innego piksela dlatego w celu przyspieszenia procesu okienkowania, iteracja po obrazie odbywa się w wielu wątkach.
+\par
+W C++ typy zmiennych muszą być zdefiniowane przed kompilacją, co jest pewnym problemem.
+Mając dwa typy okienek, każde odsługujące 4 typy liczb całkowitych, musiało by zostać zaimplementowanych 8 prawie identycznych funkcji.
+Dlatego podział ten został zaimplementowany za pomocą 4 funkcji z szablonami:
+\begin{itemize}
+    \item \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindowThread}
+
+          Jest funkcją jednego wątku który iteruje po obrazie.
+          Jego parametrami są zakresy podane w indeksach wokseli po któych ma iterować.
+          \cppcode{IntType} to jest typ zmiennej woksela obrazu.
+          \cppcode{WinClass} klasa okienka.
+          Nazewnictwo będzie kontynuowane w następnych punktach.
+          Kod funkcji:
+          \begin{lstlisting}
+template<typename IntType, typename WinClass>
+void Monochrome::Scene::genQPixmapOfTypeWidthWindowThread(quint64 from, quint64 to) {
+
+	auto buffer = &targetBuffer[from];
+	auto origin = (IntType *) &originBuffer[0];
+	auto windowPtr = (WinClass *) getCurrentWindow();
+
+	origin += from;
+
+	for (quint64 i = from; i < to; i++, origin++) {
+		*buffer++ = windowPtr->getPixel(*origin);
+	}
+}
+\end{lstlisting}
+
+    \item \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindow}
+
+          Jest funkcją która dzieli obraz na wątki, tworzy je i uruchamia.
+          Ilość wątków jest ustalana za pomocą funkcji \qtfunction{QThread}{idealThreadCount}.
+          Watki działają na zakresach o długości ilości wokseli podzielonej prze ilość wątków.
+          Kod funkcji:
+\begin{lstlisting}
+template<typename IntType, typename WinClass>
+void Monochrome::Scene::genQPixmapOfTypeWidthWindow() {
+
+    /* Tworzenie wektora wątków */
+    std::vector<std::thread> threads;
+
+    quint64 max = imgDimX * imgDimY;
+    quint64 step = max / QThread::idealThreadCount();
+
+    for (int i = 1; i < QThread::idealThreadCount(); i++) {
+        std::thread t(&Scene::genQPixmapOfTypeWidthWindowThread<IntType, WinClass>,
+                      this,
+                      i * step,
+                      std::min((i + 1) * step, max));
+
+        threads.push_back(std::move(t));
+    }
+
+    /* W celu zmniejszenia ilości wątków wątke obecny też zostanie wykorzystany */
+    genQPixmapOfTypeWidthWindowThread<IntType, WinClass>(0, step);
+
+    /* Czekanie na wszystkie wątki */
+    for (auto &t: threads) t.join();
+}
+\end{lstlisting}
+
+    \item \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfType}
+ 
+    Jest ot funkcja pomocnicza ustalająca obecne klasę obecnego okna aby móc wykonać funkcje \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindow}.
+    Kod funkcji:
+\begin{lstlisting}
+template<typename IntType>
+void Monochrome::Scene::genQPixmapOfType() {
+
+    switch (getCurrentWindow()->type()) {
+        case Window::IntDynamic:
+            genQPixmapOfTypeWidthWindow<IntType, WindowIntDynamic>();
+            break;
+
+        case Window::IntStatic:
+            genQPixmapOfTypeWidthWindow<IntType, WindowIntStatic>();
+            break;
+
+        default:
+            throw WrongScopeException(__FILE__, __LINE__);
+    }
+}
+\end{lstlisting}
+
+    \item \sokarfunction{Monochrome{\scopedots}Scene}{generatePixmap}
+    
+    Funkcja odświeża okienko i sprawdza czy odświeżenie obrazu jest konieczne, następnie sprawdza typ liczby woksela i uruchamia \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfType}.
+    Kod funkcji:
+\begin{lstlisting}
+bool Monochrome::Scene::generatePixmap() {
+
+    /* Odświeżamy okno i sprawdzamy czy odświeżenie obrazu jest konieczne */
+    getCurrentWindow()->genLUT();
+    if (lastPixmapChange >= getCurrentWindow()->getLastChange()) return false;
+
+    /* Sprawdzamy typ liczby woksela obraau */
+    switch (gdcmImage.GetPixelFormat()) {
+        case gdcm::PixelFormat::INT8:
+            genQPixmapOfType<qint8>();
+            break;
+        case gdcm::PixelFormat::UINT8:
+            genQPixmapOfType<quint8>();
+            break;
+        case gdcm::PixelFormat::INT16:
+            genQPixmapOfType<qint16>();
+            break;
+        case gdcm::PixelFormat::UINT16:
+            genQPixmapOfType<quint16>();
+            break;
+        case gdcm::PixelFormat::INT32:
+            genQPixmapOfType<qint32>();
+            break;
+        case gdcm::PixelFormat::UINT32:
+            genQPixmapOfType<quint32>();
+            break;
+        case gdcm::PixelFormat::INT64:
+            genQPixmapOfType<qint64>();
+            break;
+        case gdcm::PixelFormat::UINT64:
+            genQPixmapOfType<quint64>();
+            break;
+
+        default: /* W przypadku innych jest zwracany wyjątek */
+            throw Sokar::ImageTypeNotSupportedException();
+    }
+
+    pixmap.convertFromImage(qImage);
+    return true;
+}
+\end{lstlisting}
+\end{itemize}
 
 \paragraph{Palety}
 Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do kolorowania obrazu monochromatycznego.
 Paleta przerabia liczbę zmiennoprzecinkową od zera do jedynki na kolor RGB, zwracając \sokarclass{Pixel}.
-Palety są wczytywane z plików XML i można definiować własne palety z poza standardem.
+Paleta nie ma zdefiniowanej długości minimalne i maksymalnej.
 
+\par
+Palety są wczytywane z plików XML w czasie uruchamiania programu i można definiować własne palety z poza standardem.
+Przykładowy wygląd pliku palety HotIron:
+\begin{lstlisting}[language=XML]
+<palette display="Hot Iron" name="HOT_IRON">
+
+    <entry red="0" green="0" blue="0"/>
+    <entry red="2" green="0" blue="0"/>
+    <entry red="4" green="0" blue="0"/>
+
+    ...
+
+    <entry red="254" green="0" blue="0"/>
+    <entry red="255" green="0" blue="0"/>
+    <entry red="255" green="2" blue="0"/>
+
+    ...
+
+    <entry red="255" green="250" blue="248"/>
+    <entry red="255" green="252" blue="252"/>
+    <entry red="255" green="255" blue="255"/>
+</palette>
+\end{lstlisting}

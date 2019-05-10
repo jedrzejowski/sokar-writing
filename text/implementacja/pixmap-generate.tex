@@ -1,11 +1,11 @@
 
 Klasa \sokarclass{DicomScene} jest klasą abstrakcyjną i nie generuje obrazu, pozostawia do klasą dziedziczących po niej.
 
-\paragraph{Cykl generowania obrazu}
+\subsubsection{Cykl generowania obrazu}
 
 Klasa \sokarclass{DicomScene} dostarcza następujące obiekty do generowania obrazu:
 \begin{itemize}
-    \item \cppcode{processing}, obiekt klasy \qtclass{QMutex} muteks do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmienianie podczas jego generowania.
+    \item \cppcode{processing}, obiekt klasy \qtclass{QMutex}, muteks do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmienianie podczas jego generowania.
 
     \item \cppcode{imgDimX} zmienna typu \cppcode{uint}, oznacza szerokość obrazu w pikselach.
 

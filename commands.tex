@@ -17,6 +17,9 @@
 \newcommand{\qtclass}[1]{\textit{\lowercase{\href{\qtdocurl/#1.html}}{\qtprefix#1}}}
 \newcommand{\qtfunction}[2]{\textit{\lowercase{\href{\qtdocurl/#1.html\##2}}{\qtprefix#1\scopedots#2()}}}
 
+\def\stdprefix{std\scopedots}
+\newcommand{\stdclass}[1]{\stdprefix#1}
+
 \newcommand{\dicomvr}[1]{VR:#1}
 
 \def\dicomtagprefix{{\small$^\text{Dicom}_\text{Tag}$}}
