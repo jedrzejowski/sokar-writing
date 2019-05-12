@@ -68,15 +68,19 @@
 \def\dicomtagExplanations{
     \begin{infobox}[Znaczniki DICOM]
         \begin{zeroindent}
-            W dokumencie są wielokrotnie zawarte odniesienia do znaczników DICOM.
+            W dokumencie są wielokrotnie zawarte odniesienia do znaczników \DICOM.
             Dlatego aby zwiększyć czytelność pracy, została zastosowana konwencja poprzedzania znaczników przedrostkiem \dicomtagprefix i sufiksem składającym się z numeru grupy i elementu grupy zapisanych heksadecymalnie.
             Przykład poniżej:
 
             \begin{center}
-                \dicomtag{PatientName}{0010}{0010}
+                \dicomtag{PatientID}{0010}{0020}
             \end{center}
 
-            Dodatkowo w dokumencie PDF można kliknąć na nazwę klasy i użytkownik zostanie przekierowany do TU WYMYŚLIĆ DO CZEGO
+            Oznacza to, że jest to znacznik o słowie kluczowym \enquote{PatientID}, numerze grupy $10_{16}$ i numerze elementu $20_{16}$. 
+
+            Wyrażenie \enquote{informacja ta zawarta w znaczniku \dots} będzie oznaczało, że ta informacja znajduje się w elemencie danych o znaczniku.
+
+            Dodatkowo w dokumencie PDF można kliknąć na nazwę klasy i użytkownik zostanie przekierowany do strony \url{https://dicom.innolitics.com/ciods} poprzez wyszukiwarkę DuckDuckGo, na której znajduje się przeglądarka znaczników DICOM.
         \end{zeroindent}
     \end{infobox}
 }
