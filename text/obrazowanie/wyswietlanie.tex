@@ -2,18 +2,141 @@
 \par
 W celu przeglądania i porównywania należy posiadać jakieś narzędzie do wyświetlenia w sposób poprawny, najlepiej jednym i tym samym programem.
 \par
-Standard DICOM przewiduje sposób prezentacji danych administracyjnych i danych związanych z rejestracją badania, ajk wyświetlać obrazy radiologiczne i obrazy TK, obrazy scyntylacyjne, itd.
+Standard \DICOM przewiduje sposób prezentacji danych administracyjnych i danych związanych z rejestracją badania, ajk wyświetlać obrazy radiologiczne i obrazy TK, obrazy scyntylacyjne, itd.
 
 \subsection{Przeglądarki obrazów}
 
 Przeglądarki obrazów to programy należące do kategorii przeglądarki plików.
 Zwykłe przeglądarki obrazów takich jak jpg, png lub gif wyświetlają obraz w takiej postaci jakiej jest zapisany, oczywiście najpierw przeprowadzają dekompresje obrazu.
 W przypadku obrazów medycznych najczęściej nie mamy do czynienia z danymi reprezentującymi kolory w spektrum światła widzialnego.
-Przeglądarka obrazów DICOM musi wygenerować kolorowy obraz z danych na podstawie parametrów obrazu.
+Przeglądarka obrazów \DICOM musi wygenerować kolorowy obraz z danych na podstawie parametrów obrazu.
 
-\subsection{Funkcje przeglądarek obrazów}
+\subsection{Funkcje przeglądarki obrazów}
 
-Wyróżniono 26 kryteriów do porównywania przeglądarek w postaci „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcie, obrazowanie dwu i trój wymiarowego.
+\subsubsection{Obsługa wielu formatów danych}
+
+Standard \DICOM przewidział możliwość zapisania wielu typów danych w różnych formatach.
+Nie tylko obrazów, ale też nagrań nagrań audio i tekstów.
+Przeglądarka obrazów \DICOM może też mieć możliwość od zywania i wyświetlenia lub odsłuchania takich typów danych.
+
+\subsubsection{Podstawowe operacje na obrazie}
+
+\begin{itemize}
+    \item Skalowaniu lub powiększenie.
+          Możliwość powiększenia lub zmniejszenia wyświetlanego obrazu o pewny współczynnik skalujący.
+
+    \item Przesuwanie \fromEng{pan}.
+          Możliwość przesuwania obrazu o dowolny wektor.
+          Przydatne gdy powiększymy obraz do takiego stopnia, że nie będzie mieścił się na ekranie lub w okienku programu.
+
+    \item Lupa, skalowanie miejscowe
+          Możliwość miejscowego powiększenia obrazu.
+          Przykład użycia takiego narzędzia znajduje się na rysunku \ref{fig:wyswietlanie001}.
+
+          \begin{figure}[!htbp]
+              \centering
+              \includegraphics[width=\textwidth]{img/wyswietlanie001.png}
+              \caption{Przykład narzędzia Lupa w przeglądarce \href{https://www.softneta.com/products/meddream-dicom-viewer/}{MedDream DICOM Viewer}. Zdjęcie użyte za zgodą \href{https://www.softneta.com/}{Softneta UAB}.}
+              \label{fig:wyswietlanie001}
+          \end{figure}
+
+    \item Rotacja i odbicia lustrzane
+          Możliwość obrócenia obrazu o zadany kąt.
+          Oraz możliwość odbicia lustrzanego obrazu w dwóch osiach X i Y.
+
+\end{itemize}
+
+\subsubsection{Analiza parametrów w celu lepszej informacji}
+
+\begin{itemize}
+    \item Okienkowanie.
+          Termin odnosi się do używania funkcji okna cyfrowego w celu zamiany obrazu danych na obraz monochromatyczny możliwy do wyświetlenia.
+          Okienkowanie jest szczegółowo opisane w sekcji \ref{sec:sokar-dicomscene-monochrome} wraz z generowanie obrazu monochromatycznego.
+
+    \item Maski lub nakładki \fromEng{overlay}.
+          Możliwość nałożenia maski, elementu, który będzie przysłaniał fragment obrazu w celu lepszej wizualizacji bądź ukrycie mało wartościowych obiektów, np. tła.
+          Standard \DICOM umożliwia nałożenie wielu masek na jeden obraz.
+\end{itemize}
+
+\subsubsection{Obsługa wielu plików}
+
+\begin{itemize}
+
+    \item Obsługa DICOMDIR.
+          Możliwość wczytania pliku DICOMDIR i wyświetlenie struktury serii badań.
+          Plik DICOMDIR to wiele zindeksowanych plików zawierający ich zbiór elementów danych, bez obrazów.
+
+    \item Wczytanie wielu plików i ich połączenie w formie filmu.
+          Możliwość wczytania wielu plików z tej samej serii, ułożenia ich według pozycji geometrycznej i wyświetlenia ich jako film.
+          Czyli periodyczna podmiana obrazu na obraz następny w serii.
+
+    \item Wyświetlanie wielu obrazów jednocześnie.
+          Możliwość wyświetlenia obrazów w postaci kratki, w której każda komórka była by innym obrazem.
+
+          Przykład wyświetlenia wielu obrazów na raz w jednym oknie znajduje się na rysunku \ref{fig:dicomviewer001}
+
+          \begin{figure}[!htbp]
+              \centering
+              \includegraphics[width=\textwidth]{img/dicom-viewer-001.png}
+              \caption{Przykład wyświetlenia wielu obrazów na raz w jednym oknie w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}. Zdjęcie użyte za zgodą \href{https://www.santesoft.com/}{Santesoft}.}
+              \label{fig:dicomviewer001}
+          \end{figure}
+\end{itemize}
+
+\subsubsection{Generowanie obrazów woliumetrcznych}
+
+Jeżeli mamy do dyspozycji wiele obrazów tomograficznych o znanych parametrach to możemy wczytać je, posegregować a następnie wygenerować trój-wymiarowy obiekt a następnie wyświetlić go na ekranie komputera za pomocą trójwymiarowej grafiki komputerowej.
+
+Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/dicom-viewer-002.png}
+    \caption{Przykład generowania obrazów 3D z wielu obrazów tomograficznych w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
+    \label{fig:dicomviewer002}
+\end{figure}
+
+\subsubsection{Analiza i przetwarznie danych}
+
+\begin{itemize}
+    \item Histogram
+          Możliwość wygenerowania histogramu obrazu.
+
+          Histogram to wykres przedstawiający dystrybucje wartości numerycznych obrazu.
+
+    \item Mierzenie obrazu, wykonywanie pomiarów.
+          Możliwość określenia odległości pomiędzy dwoma punktami przez lekarza lub zmierzenia wielkości/pola zadanego kształtu.
+
+    \item Rekonstrukcja wielopłaszczyznowa.
+          Obrazy tomograficzne przedstawiają przekroje, jeżeli parametry wielkości woksela są dostępne to istnieje możliwość wygenerowania nowego obrazu który byłby obrazem ułożonym w poprzek.
+
+          Przykład generowania rekonstrukcja wielopłaszczyznowej jest pokazany na rysunku \ref{fig:dicomviewer003}
+
+          \begin{figure}[!htbp]
+              \centering
+              \includegraphics[width=\textwidth]{img/dicom-viewer-003.jpeg}
+              \caption{Przykład rekonstrukcji wielopłaszczyznowej w przeglądarce \href{https://athenadicomviewer.com/}{Athena DICOM Viewer}. Zdjęcie użyte za zgodą \href{https://medicalharbour.com/}{Medical Harbour}.}
+              \label{fig:dicomviewer003}
+          \end{figure}
+\end{itemize}
+
+\subsubsection{Edycja danych}
+
+\begin{itemize}
+    \item Dodawanie nowych obiektów.
+          Rysowania, dodawania figur geometrycznych lub tekstu przez lekarza i zapis tych informacji w pliku DICOM (lub nadpis).
+          Chodzi tu głównie o szkice i notatki tworzone podczas analizy obrazu przez personel medyczny.
+
+    \item Edycja Parametrów oraz anonimizacja danych.
+          Możliwość edycji parametrów w pliku \DICOM w różnych celach.
+          Najczęściej funkcja jest używana do usuwania danych osobowych pacjenta w celu późniejszej publikacji obrazu.
+
+\end{itemize}
+
+\subsection{Kryteria porównywania przeglądarek obrazów}
+
+Porównanie aplikacji posiadających tak wiele parametrów jak przeglądarki \DICOM jest nietrywialna.
+Dlatego wyróżniono 26 kryteriów do ich porównywania w postaci logicznej: „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcie, obrazowanie dwu i trój wymiarowego.
 Kryteria te w jasny sposób pozwalają na ocenę praktycznych aspektów użytkowania przeglądarki.
 
 \subsubsection{Platforma}
@@ -61,121 +184,3 @@ Użytkownik może wchodzić w interakcje z woluminem poprzez obracanie lub skalo
 Transfer Function(nie znam polskiej nazwy), służy do odwzorowania wartości szarości obrazów wokseli na wartości krycia typów tkanek (np. kości). Struktury obrazu pasujące do wzorców szarych wartości są podświetlone. Niewykorzystane szare wartości są wyświetlane jako
 przezroczyste. Specyficzne struktury stają się lepiej widoczne.
 Generowanie powierzchni, dzięki różnym algorytmom można generować powierzchnie w postaci wokselów. Reprezentacje powierzchni można również zastosować do poprawy wizualizacji niektórych struktur obrazu.
-
-\subsection{Funkcje przeglądarki obrazów}
-
-\subsubsection{Obsługa wielu formatów danych}
-
-Standard DICOM przewidział możliwość zapisania danych w różnych formatach.
-
-\subsubsection{Podstawowe operacje na obrazie}
-
-\begin{itemize}
-    \item Skalowaniu lub powiększenie.
-          Możliwość powiększenia lub zmniejszenia wyświetlanego obrazu o pewny współczynnik skalujący.
-
-    \item Przesuwanie(\fromEng{pan})
-          Możliwość przesuwania obrazu o dowolny wektor.
-          Przydatne gdy powiększymy obraz do takiego stopnia, że nie będzie mieścił się na ekranie lub w okienku programu.
-
-    \item Lupa, skalowanie miejscowe
-          Możliwość miejscowego powiększenia obrazu.
-          Przykład użycia takiego narzędzia znajduje się na rysunku \ref{fig:wyswietlanie001}.
-
-          \begin{figure}[!htbp]
-              \centering
-              \includegraphics[width=\textwidth]{img/wyswietlanie001.png}
-              \caption{Przykład narzędzia Lupa w przeglądarce \href{https://www.softneta.com/products/meddream-dicom-viewer/}{MedDream DICOM Viewer}. Zdjęcie użyte za zgodą \href{https://www.softneta.com/}{Softneta UAB}.}
-              \label{fig:wyswietlanie001}
-          \end{figure}
-
-    \item Rotacja i odbicia lustrzane
-          Możliwość obrócenia obrazu o zadany kąt.
-          Oraz możliwość odbicia lustrzanego obrazu w dwóch osiach X i Y.
-
-\end{itemize}
-
-\subsubsection{Analiza parametrów w celu lepszej informacji}
-
-\begin{itemize}
-    \item Okienkowanie.
-          Termin odnosi się do używania funkcji okna cyfrowego w celu zamiany obrazu danych na obraz monochromatyczny możliwy do wyświetlenia.
-          Okienkowanie jest szczegółowo opisane w sekcji \ref{sec:windowing}.
-
-    \item Maski lub nakładki(\fromEng{overlay}).
-          Możliwość nałożenia maski, elementu, który będzie przysłaniał fragment obrazu w celu lepszej wizualizacji bądź ukrycie mało wartościowych obiektów, np. tła.
-\end{itemize}
-
-\subsubsection{Obsługa wielu plików}
-
-\begin{itemize}
-
-    \item Obsługa DICOMDIR.
-          Możliwość wczytania pliku DICOMDIR i wyświetlenie struktury serii badań.
-
-    \item Wczytanie wielu plików i ich połączenie w formie filmu.
-          Możliwość wczytania wielu plików z tej samej serii, ułożenia ich według pozycji geometrycznej i wyświetlenia ich jako film.
-          Czyli periodyczna podmiana obrazu na obraz następny w serii.
-
-    \item Wyświetlanie wielu obrazów jednocześnie.
-          Możliwość wyświetlenia obrazów w postaci kratki, w której każda komórka była by innym obrazem.
-
-          Przykład wyświetlenia wielu obrazów na raz w jednym oknie znajduje się na rysunku \ref{fig:dicomviewer001}
-
-          \begin{figure}[!htbp]
-              \centering
-              \includegraphics[width=\textwidth]{img/dicom-viewer-001.png}
-              \caption{Przykład wyświetlenia wielu obrazów na raz w jednym oknie w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}. Zdjęcie użyte za zgodą \href{https://www.santesoft.com/}{Santesoft}.}
-              \label{fig:dicomviewer001}
-          \end{figure}
-\end{itemize}
-
-\subsubsection{Generowanie obrazów woliumetrcznych}
-
-Jeżeli mamy do dyspozycji wiele obrazów tomograficznych o znanych parametrach to możemy wczytać je, posegregować a następnie wygenerować trój-wymiarowy obiekt a następnie wyświetlić go na ekranie komputera za pomocą trójwymiarowej grafiki komputerowej.
-
-Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=\textwidth]{img/dicom-viewer-002.png}
-    \caption{Przykład generowania obrazów 3D z wielu obrazów tomograficznych w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
-    \label{fig:dicomviewer002}
-\end{figure}
-
-\subsubsection{Analiza i przetwarznie danych}
-
-\begin{itemize}
-    \item Histogram
-          Możliwość wygenerowania histogramu obrazu.
-
-          Histogram to wykres przedstawiający dystrybucje wartości numerycznych obrazu.
-
-    \item Mierzenie obrazu, wykonywanie pomiarów
-          Możliwość zmierzenia odległości pomiędzy dwoma punktami przez lekarza lub zmierzenia wielkości/pola zadanego kształtu.
-
-    \item Rekonstrukcja wielopłaszczyznowa.
-          Obrazy tomograficzne obrazują przekroje, jeżeli parametry wielkości woksela są dostępne to istnieje możliwość wygenerowania nowego obrazu który byłby obrazem ułożonym w poprzek.
-
-          Przykład generowania rekonstrukcja wielopłaszczyznowej jest pokazany na rysunku \ref{fig:dicomviewer003}
-
-          \begin{figure}[!htbp]
-              \centering
-              \includegraphics[width=\textwidth]{img/dicom-viewer-003.jpeg}
-              \caption{Przykład rekonstrukcji wielopłaszczyznowej w przeglądarce \href{https://athenadicomviewer.com/}{Athena DICOM Viewer}. Zdjęcie użyte za zgodą \href{https://medicalharbour.com/}{Medical Harbour}.}
-              \label{fig:dicomviewer003}
-          \end{figure}
-\end{itemize}
-
-\subsubsection{Edycja danych}
-
-\begin{itemize}
-    \item Dodawanie nowych obiektów.
-          Możliwość rysowania, dodawania figur geometrycznych lub tekstu przez lekarza i możliwość zapisu tych informacji w pliku DICOM.
-          Chodzi tu głównie o szkice i notatki tworzone podczas analizy obrazu przez personel medyczny.
-
-    \item Edycja Parametrów oraz anonimizacja danych.
-          Możliwość edycji parametrów w poliku DICOM w różnych celach.
-          Najczęściej funkcja jest używana do usuwania danych osobowych pacjenta w celu poźniejszej publikacji obrazu.
-
-\end{itemize}

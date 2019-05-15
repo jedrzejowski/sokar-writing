@@ -4,7 +4,8 @@ Abstrakcyjna klasa \sokarclass{DicomSceneSet} implementuje kolekcje scen.
 Jest to obiekt, który grupuje w jakiś sposób sceny a następnie tworzy obiekt \sokarclass{SceneSequence}, który jest rzeczywistą sekwencją scen, ułożoną w taki sposób, jaki obrazy powinny być wyświetlane.
 Są dwie implementacje zbioru scen: zbiór plików i zbiór ramek z jednego pliku
 
-\subsection{SceneSequence}
+\subsection{Sekwencja scen}
+\label{sec:sokar-scenesequence}
 
 \par
 Sekwencja scen implementuje strukturę danych informującą o przejściach pomiędzy scenami poprzez klasę \sokarclass{SceneSequence}.
@@ -26,16 +27,17 @@ Sekwencja ma wbudowane funkcje zapewniające przemieszczanie się:
 \end{itemize}
 Wszystkie powyższe funkcje są zarazem slotami dla sygnałów oraz emitują sygnał \sokarfunction{SceneSequence}{steped}.
 
-\subsection{DicomFrameSet}
+\subsection{Zbiór ramek DICOM}
+\label{sec:sokar-dicomframeset}
 
 \par
-Obiekt tej klasy jest tworzony z jednego wczytanego pliku DICOM.
+Zbiory ramek są implementowane przez \sokarclass{DicomFrameSet} i są tworzone z jednego wczytanego pliku DICOM.
 Klasa tworzy obiekt konwertera i pobiera ilość ramek w obrazie.
 Tworzy jeden buffor na wszystkie ramki obrazów, a następnie dzieli go na ilość ramek.
 Biblioteka GDCM nie daje dostępu do oryginalnego bufora, dlatego wymagany jest bufor pośredni.
 Następnie jest tworzonych tyle obiektów scen ile ramek.
 \par
-Kolejność sekwencja scen jest taka sama jak kolejność ramek.
+Kolejność sekwencji scen jest taka sama jak kolejność ramek.
 Natomiast czas wyświetlania ramki może być zapisany w różnych tagach.
 To w którym tagu został zapisany informuje element o znaczniku \dicomtag{FrameIncrementPointer}{0028}{0009}, zawiera on wskaźnik do elementu o zadanym znaczniku i w zależności od znacznika.
 Została zaimplementowana obsługa poniższy znaczników:
@@ -49,11 +51,22 @@ Została zaimplementowana obsługa poniższy znaczników:
 W przypadku braku znacznika lub gdy zostaje wskazany znacznik nieznany, czas trwania ramki wynosi $83.3$ milisekundy, co odpowiada 12 klatką na sekundę.
 
 
-\subsection{DicomFileSet}
+\subsection{Zbiór plików DICOM}
+\label{sec:sokar-dicomfileset}
 \par
-Obiekt tej klasy jest tworzony z wielu wczytanych plików DICOM.
-Klasa nie sprawdza czy pliki odstarczone są z tej samej serii, robi to \sokarclass{DicomTabs}, opisany w sekcji \ref{sec:sokar-dicomtabs}.
-Na początku pliki są sortowane na posdtawie liczby zawartej w elemencie o znaczniku.
+Zbiory plików są implementowane prze \sokarclass{DicomFileSet} i służą do przechowywania wielu wczytanych plików DICOM.
+Na początku pliki są sortowane na podstawie liczby zawartej w elemencie o znaczniku \dicomtag{TagInstanceNumber}{0020}{0x0013}.
 Dla każdego pliku jest tworzony obiekt \sokarclass{DicomFrameSet}.
 \par
 Sekwencja jest tworzona na połączenie sekwencji poszczególnych obrazów.
+
+\subsubsection{Segregowanie obrazów}
+\label{sec:sokar-dicomfileset-create}
+\par
+W przypadku kiedy mamy do czynienia z wieloma plikami, należy jest rozdzielić na serie i uporządkować w odpowiedniej kolejności.
+Unikalny identyfikator serii jest zawarty w elemencie danych znaczniku \dicomtag{TagSeriesInstanceUID}{0020}{000E}.
+Kolejności obrazów w serii to liczba zawarta w elemencie danych o znaczniku \dicomtag{TagInstanceNumber}{0020}{0x0013}.
+\par
+Segregacja odbywa się za pomocą funkcji \sokarfunction{DicomFileSet}{create}.
+Do funkcji jest przesyłany wektor z wczytanymi plikami DICOM, następnie dzieli ona pliki na zbiory zawierające zdjęcia tej samej serii, tworzy obiekty zbiorów plików DICOM, ostatecznie zwraca ona wektor z gotowymi obiektami zbiorów plików DICOM.
+Sortowanie plików DICOM według ich kolejności odbywa się za pomocą funkcji \stdclass{sort} wewnątrz konstruktora klasy \sokarclass{DicomFileSet}, który nie jest publiczny.

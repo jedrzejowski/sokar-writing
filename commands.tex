@@ -1,5 +1,7 @@
 \newcommand{\wiki}[1]{https://pl.wikipedia.org/wiki/Teksel}
 
+\newcommand{\DICOM}[0]{\mbox{DICOM}\xspace}
+
 \def\zerospace{\hspace{0px}}
 \def\scopedots{\zerospace::\zerospace}
 
@@ -23,7 +25,8 @@
 \newcommand{\dicomvr}[1]{VR:#1}
 
 \def\dicomtagprefix{{\small$^\text{Dicom}_\text{Tag}$}}
-\newcommand{\dicomtag}[3]{\dicomtagprefix #1 (0x#2, 0x#3)}
+\def\dicomtagurl#1{\url{https://duckduckgo.com/?q=!ducky+#1+site\3Adicom.innolitics.com}}
+\newcommand{\dicomtag}[3]{\href{https://duckduckgo.com/?q=!ducky+DICOM+Tag+#1+(#2,#3)+site\%3Adicom.innolitics.com}{\dicomtagprefix #1 (0x#2, 0x#3)}}
 
 \newenvironment{conditions}
 {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
@@ -31,7 +34,7 @@
 
 \def\quotett#1{\enquote{\texttt{#1}}}
 \def\cppcode#1{{\color{blue}\texttt{#1}}}
-\def\keyword#1{{\color{blue}\texttt{#1}}}
+\def\keyword#1{{\textbf{#1}}}
 \def\dataword#1{{\color{gray}\enquote{\texttt{#1}}}}
 
 % \renewcommand\paragraph{%
@@ -57,6 +60,7 @@
             frametitlebackgroundcolor=blue!10,
             backgroundcolor=blue!10,
             roundcorner=7pt,
+            nobreak=true
         ]}
         {\end{mdframed}}
 

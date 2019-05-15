@@ -7,7 +7,14 @@ Obsługuje również prośby o wczytanie nowych plików.
 \subsection{Sposoby uzyskania nowych plików}
 
 \par
-Prośba o otworzenie nowego pliku może przyjść z następujących źródeł: drzewa ze strukturą plików w systemie, obiektu
+Prośba o otworzenie nowego pliku może przyjść z następujących źródeł: obiektem drzewa ze strukturą plików w systemie (opisanego w \ref{sec:sokar-framechooser}), menu programu (opisanego w \ref{sec:sokar-window-menu}), lub z możliwości przeciągnięcie i upuszczenia.
+Z dwóch pierwszych można wczytać tylko po jednym pliku, natomiast z drugiego sposobu można wczytać zarówno jedne jak i wiele plików.
+Wysyłanie prośby odbywa się za pomocą czterech funkcji a dokładniej dwóch, przeciążonych dwa razy: \sokarfunction{DicomTabs}{addDicomFile} i \sokarfunction{DicomTabs}{addDicomFiles}.
+Każda z tych funkcji ma dwa przeciązęnia, jedno z parametrem ścieżki a drugie z wczytanym plikiem, dodatkowo funkcje te są slotami.
+
+\subsection{Wczytywanie plików}
 
 \par
-Jeżeli obiekt dosta
+Po dostarczeniu ścieżek do obiektu, pliki zostają wczytane za pomocą \gdcmclass{ImageReader}.
+W przypadku błędu proces wczytywania się kończy.
+Po wczytaniu wszystkich plików, zostaje utworzony obiekt zbiory ramek obrazu lub zbiór plików DICOM za pomocą funkcji \sokarfunction{DicomFileSet}{create}, opisanej w sekcji \ref{sec:sokar-dicomfileset-create}.

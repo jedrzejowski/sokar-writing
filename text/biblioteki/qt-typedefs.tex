@@ -1,11 +1,10 @@
 \par
 W różnych systemach operacyjnych są różne kompilatory i w śród tej różnorodności pojawia się problem dotyczący zmiennych fundamentalnych.
 Na przykład: Ile bitów ma zmienna \cppcode{int}?
-Udając się do oficjalnej dokumentacji C++, dostępnej pod adresem \url{https://pl.cppreference.com/w/cpp/language/types}, możemy dowiedzieć się, że \cppcode{int} ma minimum 16 bitów.
+Udając się do dokumentacji C++, dostępnej pod adresem \url{https://pl.cppreference.com/w/cpp/language/types}, możemy dowiedzieć się, że \cppcode{int} ma minimum 16 bitów.
 Natomiast w dokumentacji MSVC, kompilatora firmy Microsoft, znajdującej się pod adresem \url{https://docs.microsoft.com/pl-pl/cpp/cpp/int8-int16-int32-int64?view=vs-2019}, widnieje informacja z której wynika, żeby mieć pewność o długości liczby całkowitej należy użyć takich typów: \cppcode{\_\_int8}, \cppcode{\_\_int16}, \cppcode{\_\_int32}, \cppcode{\_\_int64}.
 \par
-Jest to problem, który biblioteka Qt rozwiązała.
-Wprowadziła dodatkowe typy literałów, które dostosowują się do systemu i kompilatora i zapewniają pewność podczas deklaracji, że dana zmienna będzie zakładanej długości.
+Jest to problem, który biblioteka Qt rozwiązała wprowadzając dodatkowe typy literałów, które dostosowują się do systemu i kompilatora i zapewniają pewność podczas deklaracji, że dana zmienna będzie zakładanej długości.
 Dodatkowe typy literałów są dostępne w nagłówku \cppcode{<QtGlobal>}, dokumentacja dostępna pod adresem \url{https://doc.qt.io/qt-5/qtglobal.html}.
 
 \par

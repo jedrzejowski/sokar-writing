@@ -1,0 +1,39 @@
+\label{sec:sokar-window}
+
+\par
+Główne okno programu jest implementowane przez \sokarclass{MainWindow}.
+Jest wywoływane od razu po uruchomieniu programu.
+\par
+Zawiera w sobie 4 elementy: menu, drzewo ze strukturą plików, obiekt z zakładkami \sokarclass{DicomTabs} i sugestie aby nie używać programu w celach medycznych w dolnej części okna.
+
+\subsection{Drzewo plików i zakładki}
+
+\par
+W lewej części okna znajduje się element listy, implementowany przez \sokarclass{FileTree}, zawiera on w sobie model drzewa plików systemu, który z koleji jest implementowany przez klasę \qtclass{QFileSystemModel}.
+Po wybraniu pliku, ścieżka jest przesyłana do obiektu z zakładkami.
+\par
+W środkowej części programu znajduje się obiekt z zakładkami, szczegółowo opisany w sekcji \ref{sec:sokar-dicomtabs}.
+
+\subsection{Menu programu}
+\label{sec:sokar-window-menu}
+
+\par
+W górnej części okna programu znajduje się menu, obiekt klasy \sokarclass{QMenuBar}.
+Struktura Menu programu:
+\begin{itemize}
+    \item File
+          \begin{itemize}
+              \item Open --- otwiera okienko wyboru plików, implementowane przez \qtfunction{QFileDialog}{getOpenFileName}, następnie wczytuje plik
+              \item Open Recent --- program zapisuje ostatnio wczytane pliki i może wczytać je ponownie z tego menu
+              \item Export as --- zapisanie obrazu w formacie JPEG, BMP, GIF lub PNG.
+                    Zapisywanie jest zaimplementowane przez funkcje \qtfunction{QImage}{save}, która umożliwia zapisanie obrazu do pliku.
+              \item Exit --- wyjście z aplikacji
+          \end{itemize}
+    \item Help
+          \begin{itemize}
+              \item About Qt --- otwiera okno informacji o bibliotece Qt.
+              Biblioteka Qt ma wbudowane takie okno w postaci \qtfunction{QMessageBox}{aboutQt}
+              \item About GDCM --- otwiera okno z informacjami o bibliotece GDCM, implementowane przez funkcje \sokarfunction{About}{GDCM}
+              \item About Sokar --- otwiera okno z informacjami o aplikacji, implementowane przez funkcje \sokarfunction{About}{Sokar}
+          \end{itemize}
+\end{itemize}
