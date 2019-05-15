@@ -29,15 +29,27 @@
 \zaklad{Zakład Elektroniki Jądrowej i Medycznej}
 \kierunekstudiow{Elektronika}
 
+% Ustawienie metadanych pdfu
+\makeatletter
+\hypersetup{
+    unicode=true,
+    pdfauthor={\@author},
+    pdftitle={\@title},
+    pdfsubject={Praca Inżynierska},
+    pdfkeywords={DICOM, DICOM viewer, C++, Qt, GDCM, programing},
+    pdfproducer={\@author},
+    pdfcreator={\@author}
+}
+\makeatother
 
 \opinie{%
-  \input{opiniaopiekuna.tex}
-  \newpage
-  \input{recenzja.tex}
+    \input{opiniaopiekuna.tex}
+    \newpage
+    \input{recenzja.tex}
 }
 
 \streszczenia{
-  \input{streszczenia.tex}
+    \input{streszczenia.tex}
 }
 
 \begin{document}

@@ -2,29 +2,27 @@
 \par
 Po analizie możliwości przeglądarek plików DICOM dostępnych na rynku postanowiłem zaimplementować następujące komponenty w mojej przeglądarce:
 \begin{itemize}
-      \item Przesuwanie \fromEng{pan}
+    \item Obsługa obrazów bez względu na ich modalność, ale z ograniczeniem do następujących interpretacji fotometrycznej:
 
-      \item Skalowaniu lub powiększenie
+          \begin{itemize}
+              \item \dataword{MONOCHROME1}
+              \item \dataword{MONOCHROME2}
+              \item \dataword{RGB}
+              \item \dataword{YBR}
+          \end{itemize}
 
-      \item Rotacja i odbicia lustrzane
+    \item Przesuwanie \fromEng{pan}
 
-      \item Okienkowanie i pseudokolorowanie
+    \item Skalowaniu lub powiększenie poprzez decymacje i interpolacje liniowe.
 
-      \item Obsługa następujących obrazów o interpretacji fotometrycznej:
+    \item Rotacja i odbicia lustrzane
 
-            \begin{itemize}
-                  \item \dataword{MONOCHROME1}
-                  \item \dataword{MONOCHROME2}
-                  \item \dataword{RGB}
-                  \item \dataword{YBR}
-            \end{itemize}
+    \item Okienkowanie i pseudokolorowanie, zarówno w skali szarości jak i z użyciem wielo kolorowych palet.
 
-      \item Wczytanie wielu plików i ich połączenie w formie filmu
+    \item Obsługa serii obrazów jako całości
+          \begin{itemize}
+              \item przegląd obrazów w serii
+              \item animacje
+              \item wspólne okna w skali barwnej
+          \end{itemize}
 \end{itemize}
-
-\par
-Najbardziej rozpoznawalne dwie przeglądarki Osirix i Horus, posiadają swoje nazwy od bogów egipskich.
-Odpowiednio od Ozyrysa, boga śmierci i Horusa, boga nieba.
-Dlatego postanowiłem nazwać swoja przeglądarkę w podobny sposób: Sokar.
-\par
-Sokar w mitologii egipskiej to bóstwo dokonujące przyjęcia i oczyszczenia zmarłego władcy oraz przenoszący go na swej barce do niebios, patron metalurgów, rzemieślników i tragarzy (nosicieli lektyk) oraz wszelkich przewoźników.
