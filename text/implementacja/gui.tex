@@ -1,5 +1,37 @@
 
 \par
-Po uruchomieniu programu użytkownikowi ukazuje się jedno okno (rysunek \ref{sec:gui-window}), które zawiera 3 elementy: menu (obiekt klasy \qtclass{QMenuBar}), drzewa plików (obiekt klasy \sokarclass{FileTree}), obiekt zakładek z obrazami (obiekt klasy \sokarclass{DicomTabs}).
+Po uruchomieniu programu użytkownikowi ukazuje się głowne okno, pokazane na rysuneku \ref{sec:gui-window}, implemntowane przez klasę \sokarclass{MainWindow}.
+Okno zawiera 3 elementy: menu (obiekt klasy \qtclass{QMenuBar}), drzewa plików (obiekt klasy \sokarclass{FileTree}), obiekt zakładek z obrazami (obiekt klasy \sokarclass{DicomTabs}).
 \par
-Użytkownik może otworzyć plik DICOM na trzy sposoby: z menu na górze, z drzewem ze strukturą pików i poprzez przeciągnięcie.
+Użytkownik może otworzyć plik \DICOM na trzy sposoby: z menu na górze, z drzewa ze strukturą pików i poprzez przeciągnięcie.
+\par
+Obiekt wewnątrz zakładek odpowiada za wyświetlanie wszystkich elementów umożliwiających interakcje użytkownika z obrazem, jest implementowany przez klasę \sokarclass{DicomView}.
+Jeden taki obiekt może posiadać wiele obrazów wyświetlanych w formie animacji.
+Obrazy są wyświetlane na scenie implementowanej przez \sokarclass{DicomScene}.
+Pod sceną znajduje się pasek filmu, za pomocą, którego użytkownik może zatrzymać lub wznowić animację.
+Na prawo od sceny znajdują sie ikony i wszystkimi ramkami filmu.
+Pasek filmu i ikony obrazów ukrywają się gdy jest wczytany tylko jeden obraz.
+
+\subsection*{Informacje na scenie z obrazem}
+
+Scena jest odpowiedzialna za wygenerowanie i wyświetlenie obrazu, ale również za 
+
+\subsection*{Pasek filmu}
+
+\subsection*{Struktura paska menu programu}
+\par
+\begin{itemize}
+    \item File
+          \begin{itemize}
+              \item Open --- otwiera okienko wyboru plików
+              \item Open Recent --- lista z ostatnio otworzonymi plikami
+              \item Export as --- zapisanie obrazu w formacie JPEG, BMP, GIF lub PNG.
+              \item Exit --- wyjście z aplikacji
+          \end{itemize}
+    \item Help
+          \begin{itemize}
+              \item About Qt --- otwiera okno informacji o bibliotece Qt.
+              \item About GDCM --- otwiera okno z informacjami o bibliotece GDCM
+              \item About Sokar --- otwiera okno z informacjami o aplikacji
+          \end{itemize}
+\end{itemize}
