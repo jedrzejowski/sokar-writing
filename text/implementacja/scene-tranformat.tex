@@ -1,9 +1,9 @@
 \label{sec:sokar-dicomscene-tranformat}
 
 \par
-Już wygenerowany obraz można wyświetlić na scenie bez większego problemu.
+Wygenerowany obraz można wyświetlić na scenie bez większego problemu.
 Wyświetlanie \cppcode{pixmap}, obiektu klasy \qtclass{QPixmap}, odbywa się za pomocą obiektu \cppcode{pixmapItem}, obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
-Ta ostatnia klasa ma w sobie zaimplementowaną funkcjonalność pozwalającą na nałożenie transformaty na nią.
+Ta ostatnia klasa ma w sobie zaimplementowaną funkcję pozwalającą na nałożenie przekształcenia na obraz.
 Transformata to obiekt klasy \qtclass{QTransform}, który reprezentuje transformatę dwu wymiarowa na obiekt, praktycznie jest to macierz 3 na 3 reprezentująca przekształcenie w współrzędnych jednorodnych.
 \par
 
@@ -27,14 +27,14 @@ QTransform DicomScene::getPixmapTransformation() {
 	return transform;
 }
 \end{lstlisting}
+\qtclass{QTransform} posiada operator mnożenie, dlatego można mnożyć obiekty tej klasy jak liczby.
 Realizuje on takie równanie:
 \[panTransform*rotateTransform*scaleTransform*centerTransform\]
-Funkcja ta jest wirtualna, co umożliwia innym klasą, które dziedziczą po niej dodanie nowych transformat.
 
-\subsubsection{Współżędne jednorodne}
+\subsubsection{Współrzędne jednorodne}
 
 Współrzędne jednorodne definiuje się jako sposób reprezentacji punktów n-wymiarowej przestrzeni rzutowej za pomocą układu $n+1$ współrzędnych.
-W bibliotece Qt jedną z implementacji współrzędny jednorodnych jest klasa \qtclass{QTransform}.
+W bibliotece Qt jedną z implementacji współrzędnych jednorodnych jest klasa \qtclass{QTransform}.
 Implementuje ona podstawowe zachowania macierzy 3 na 3 jak również wbudowane operacje takie jak: przesuwanie implementowane prze \qtfunction{QTransform}{translate}, obrót implementowany przez funkcje \qtfunction{QTransform}{rotate} i skalowanie implementowane przez \qtfunction{QTransform}{scale}.
 
 Przykład działania:

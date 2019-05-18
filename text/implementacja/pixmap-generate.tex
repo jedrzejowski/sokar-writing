@@ -1,5 +1,5 @@
 
-Klasa \sokarclass{DicomScene} jest klasą abstrakcyjną i nie generuje obrazu, pozostawia do klasą dziedziczących po niej.
+Klasa \sokarclass{DicomScene} jest klasą abstrakcyjną i nie generuje obrazu, pozostawia to klasą dziedziczących po niej.
 
 \subsubsection{Cykl generowania obrazu}
 
@@ -23,13 +23,15 @@ struct Pixel {
     quint8 blue = 0;   
 }\end{lstlisting}
 
+          \stdclass{vector}{container/vector} zapewnia ciągłość obiektów w pamięci, dlatego można potraktować ten obiekt jako tablice stukrur \sokarclass{Pixel}.
+
     \item \cppcode{originBuffer} wektor danych wypełniona danymi z jednej ramki o długośći iloczynu $imgDimX*imgDimY$ i ilości bajtów jednego piksela obrazu.
 
     \item \cppcode{qImage} obiekt obrazu klasy \qtclass{QImage}.
 
           \qtclass{QImage} można zrobić z istniejącego bufora, w tym przypadku jest to \cppcode{targetBuffer}.
           Format obrazu to \qtclass{QImage::Format\_RGB888}, czyli trzy bajty, każdy na jeden kanał.
-          Proszę zwrócić uwagę, że struktura \sokarclass{Pixel} odpowiada temu formatowi.
+          Proszę zwrócić uwagę, że tablica ze strukturą \sokarclass{Pixel} odpowiada temu formatowi.
           Według dokumentacji Qt obiekt ten po utworzeniu z istniejącego bufora powinien z niego dalej korzystać, dlatego zmiany \cppcode{targetBuffer} nie wymagają odświeżania \cppcode{qImage}.
 
     \item \cppcode{pixmap} obiekt obrazu do wyświetlania, klasy \qtclass{QPixmap}.
@@ -38,6 +40,7 @@ struct Pixel {
           Natomiast klasa \qtclass{QPixmap} to reprezentacja obrazu dostosowana do wyświetlania ekranie, która może być używana jako urządzenie do malowania w bibliotece Qt.
 
     \item \cppcode{iconPixmap} obiekt obrazu ikonu, klasy \qtclass{QPixmap}, docelowo powinien mieć 128 pikseli na 128 pikseli.
+          Interpolacja z obrazu medycznego jest zapewniana przez funkcje \qtfunction{QPixmap}{scaledToWidth}
 
 \end{itemize}
 
@@ -51,7 +54,7 @@ Funkcja wywołuje \sokarfunction{DicomScene}{generatePixmap} i odświeża \cppco
 
 Generowanie poszczególnych typów obrazów jest wyjaśnione poniżej.
 
-\subsubsection{Monochorme}
+\subsubsection{Obraz monochromatyczny}
 \input{text/implementacja/pixmap-monochrome.tex}
 
 \subsubsection{RGB}

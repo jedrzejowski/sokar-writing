@@ -16,7 +16,7 @@ Posiadają one część wspólną, co uniemożliwia wyświetlenie obrazu w stu p
 \paragraph*{Algorytm konwersji}
 
 Poniżej przedstawiono kod źródłowy funkcji zamiany kolory YBR na RGB.
-Proszę zwrócić uwagę na linie 12, 13 i 14, jest ma dokonywana pewna utrata danych.
+Proszę zwrócić uwagę na linie 12, 13 i 14, gdzie ma dokonywana pewna utrata danych.
 
 \begin{lstlisting}
 Sokar::Pixel ybr2Pixel(quint8 y, quint8 b, quint8 r) {
@@ -29,7 +29,7 @@ Sokar::Pixel ybr2Pixel(quint8 y, quint8 b, quint8 r) {
     green -= 255.0 / 224 * 1.402 * (r - 128) * (0.299 / 0.587);
     blue += 255.0 / 224 * 1.772 * (b - 128);
 
-
+    /* W tym miejscu jest dokonywana utrata danych */
     red = qBound(0.0, red, 255.0);
     green = qBound(0.0, green, 255.0);
     blue = qBound(0.0, blue, 255.0);

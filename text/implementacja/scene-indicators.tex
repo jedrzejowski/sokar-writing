@@ -1,5 +1,5 @@
 
-Informacje na obrazie są wyświetlane za pomocą obiektów, które dziedziczą po klasie \sokarclass{SceneIndicator}.
+Informacje na scenie są wyświetlane za pomocą obiektów, które dziedziczą po klasie \sokarclass{SceneIndicator}.
 Obiekty te mają dostęp do obiektu konwertera.
 Obiekty dziedziczące po \sokarclass{SceneIndicator} implementują róznież swoją pozycje na scenie i są wstanie ją zmieniać w raz ze zmianą wielkości sceny.
 
@@ -7,7 +7,7 @@ Obiekty dziedziczące po \sokarclass{SceneIndicator} implementują róznież swo
 Domyślnie obiekty wyświetlające informacje (tytuły punktów to nazwy klas):
 \subsubsection{\sokarclass{PatientDataIndicator}}
 
-Obiekt wyświetlający dane pacjenta, pojawia się od zawsze na obrazie w lewym górnym rogu i zawiera następujące linie:
+Obiekt wyświetlający dane pacjenta, pojawia się zawsze na scenie w lewym górnym rogu i zawiera następujące linie:
 \begin{itemize}
     \item Nazwa pacjenta oraz płeć
 
@@ -27,14 +27,14 @@ Obiekt wyświetlający dane pacjenta, pojawia się od zawsze na obrazie w lewym 
     \item Identyfikator pacjenta
 
           Unikalny identyfikator pacjenta z tagu \dicomtag{PatientID}{0010}{0020} wyświetlane w takiej formie jakiej jest zapisane, bez żadnej obróbki.
-          W praktyce najczęściej jest to numer z systemu używanego w danym szpitalu, rzadziej numer pesel.
+          W praktyce najczęściej jest to numer z systemu używanego w danym szpitalu, rzadziej numer PESEL.
 
           Przykład: \dataword{HIS/000000}.
 
     \item Data urodzenia oraz wiek pacjenta w trakcie badania
 
           Data urodzenia znajdująca się w \dicomtag{PatientBirthDate}{0010}{0030} i jest zamieniana na format \dataword{YYYY-MM-DD}.
-          Dodatkowo, jeżeli tag \dicomtag{PatientAge}{0010}{1010} jest obecny wyświetlany jest także wiek pacjenta w czasie badania.
+          Dodatkowo, jeżeli tag \dicomtag{PatientAge}{0010}{1010} jest obecny, wyświetlany jest także wiek pacjenta w czasie badania.
 
           Przykład: \dataword{born 1982-08-09, 28 years}.
 
@@ -63,7 +63,7 @@ Przykład pełnego teksu:
 
 \subsubsection{\sokarclass{HospitalDataIndicator}}
 
-Obiekt wyświetlający dane szpitala/instytucji, pojawia się od zawsze na obrazie w prawym górnym rogu i zawiera następujące linie:
+Obiekt wyświetlający dane szpitala/instytucji, pojawia się zawsze na scenie w prawym górnym rogu i zawiera następujące linie:
 \begin{itemize}
     \item Nazwa instytucji
 
@@ -78,27 +78,27 @@ Obiekt posiada cztery pola: lewe, górne, prawe i dolne.
 
 Każda z sześciu możliwych liter oznacza kierunek oraz zwrot w jakim jest ułożony pacjent:
 \begin{itemize}
-    \item \dataword{R} - right - część prawa pacjenta
-    \item \dataword{L} - left - część
-    \item \dataword{A} - anterior - przód pacjenta
-    \item \dataword{P} - posterior - tył pacjenta
-    \item \dataword{F} - feet - część dolna
-    \item \dataword{H} - head - część górna
+    \item \dataword{R} --- right --- część prawa pacjenta
+    \item \dataword{L} --- left --- część
+    \item \dataword{A} --- anterior --- przód pacjenta
+    \item \dataword{P} --- posterior --- tył pacjenta
+    \item \dataword{F} --- feet --- część dolna
+    \item \dataword{H} --- head --- część górna
 \end{itemize}
 
 Pary poszczególnych liter tworzą osie:
 \begin{itemize}
-    \item \quotett{x} - oś przechodząca od prawej do lewej strony pacjenta, \dataword{L} oznacza zwrot zgodny z osią, a \dataword{R} oznacza zwrot przeciwny
+    \item \quotett{x} --- oś przechodząca od prawej do lewej strony pacjenta, \dataword{L} oznacza zwrot zgodny z osią, a \dataword{R} oznacza zwrot przeciwny
 
-    \item \quotett{y} - oś przechodząca od przodu do tył pacjenta, \dataword{P} oznacza zwrot zgodny z osią, a \dataword{A} oznacza zwrot przeciwny
+    \item \quotett{y} --- oś przechodząca od przodu do tyłu pacjenta, \dataword{P} oznacza zwrot zgodny z osią, a \dataword{A} oznacza zwrot przeciwny
 
-    \item \quotett{z} -  - oś przechodząca od dołu do góry pacjenta, \dataword{H} oznacza zwrot zgodny z osią, a \dataword{F} oznacza zwrot przeciwny
+    \item \quotett{z} --- oś przechodząca od dołu do góry pacjenta, \dataword{H} oznacza zwrot zgodny z osią, a \dataword{F} oznacza zwrot przeciwny
 
 \end{itemize}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/imageorientationindicator-003.pdf}
+    \includegraphics[width=0.7\textwidth]{img/imageorientationindicator-003.pdf}
     \caption{Wizualizacja układu osi współrzędnych pacjenta. Zdjęcie własne.}
     \label{fig:imageorientationindicator2}
 \end{figure}
@@ -217,14 +217,14 @@ Wynika z tego, że obraz przedstawia pacjenta skierowanego twarzą do nas.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{img/imageorientationindicator-002.png}
+    \includegraphics[width=100mm]{img/imageorientationindicator-002.png}
     \caption{Przykładowy obraz medyczny (przekrój głowy MR) z oznaczeniem orientacji obrazu z apomocą liter A, P, R, L, F, H. Zdjęcie własne.}
     \label{fig:imageorientationindicator1}
 \end{figure}
 
 \subsubsection{\sokarclass{PixelSpacingIndicator}}
 
-Obiekt wyświetlający miarkę z podziałką informującą jakich rozmiarów jest obiekt na obrazie w rzeczywistości, pojawia się na dole i po prawie stronie sceny, gdy tag \dicomtag{PixelSpacing}{0028}{0030} jest obecny.
+Obiekt wyświetlający podziałkę informującą jakich rozmiarów jest obiekt na obrazie w rzeczywistości, pojawia się na dole i po prawie stronie sceny, gdy tag \dicomtag{PixelSpacing}{0028}{0030} jest obecny.
 Wygląd podziałki można zaobserwować na rysunku \ref{fig:imageorientationindicator1}.
 
 Podziałka dostosowuje swoją wielkość do obecnej sceny, jak i do innych elementów na scenie.

@@ -2,23 +2,23 @@
 
 Obraz monochromatyczny to obraz w odcieniach szarości, od białego do czarnego lub od czarnego do białego. Dane są zapisane w sposób ciągły wartość po wartości.
 
-\paragraph{Zamysł generowania obrazu}
+\paragraph{Pseudokolorowanie obrazu}
 
 Mamy obraz, którego piksele to n-bitowe liczby, na przykład 16 bitowa liczba całkowita.
 W takiej postaci wyświetlemoe obrazu na monitorze RGB lub nawet na profesjonalnym 10-bitowym jest niemożliwe.
 Należy taką liczbę przerobić na trzy liczby, reprezentujące 3 kanały RGB, czerwony, zielony i niebieski.
 Dlatego do wyświetlania obrazów monochromatycznych o dużym kontraście stosuję się twór zwany okienkiem.
-Jest to funkcja która mapuje n-bitwy obraz na 8-bitowy obraz w skali szarości.
+Jest to funkcja, która mapuje n-bitwy obraz na 8-bitowy obraz w skali szarości.
 8-bitów, ponieważ monitor RGB jest wstanie wyświetlić 256 odcieni szarości.
 
-\subparagraph{Wyznaczanie okiena}
-Przyjeło się, że okienko definiuje się dwoma liczbami: środkiem, oznaczanym jako $center$ i długością, oznaczaną jako $width$.
-Wyznaczamy zakres okienka $x_0$ i $x_1$ z środka okienka $center$ i długości $width$.
+\subparagraph{Zwiększanie kontrastu za pomocą \enquote{funckji okna}}
+Przyjeło się, że \enquote{okno} definiuje się dwoma liczbami: środkiem, oznaczanym jako $center$ i długością, oznaczaną jako $width$.
+Wyznaczamy zakres okienka $x_0$ i $x_1$ ze środka okienka $center$ i długości $width$.
 \[x_0 = center - width / 2\]
 \[x_1 = center + width / 2\]
 Wyznaczamy parametry $a$ i $b$, prostej przechodzącej przez dwa punkty $(x_0, y_0)$ i $(x_1, y,_1)$.
 Gdzie $y_0$ jest równe 0, a $y_1$ jest równe 255.
-Funkcja okienka wygląda następująco:
+Funkcja \enquote{okna} wygląda następująco:
 \[
     f(v)=
     \begin{cases}
@@ -30,8 +30,8 @@ Funkcja okienka wygląda następująco:
 
 gdzie $v$ to wartość piksela danych obrazu.
 
-Następnie przepuszczamy cały obraz przez funkcje okienka i otrzymujemy obraz w skali od $0$ do $255$.
-Taki odraz w skali od można już wyświetlić.
+Następnie iterujemy przez wszystkie woksele obrazu i używamy na nich funkcji \enquote{okna} i otrzymujemy obraz w skali od $0$ do $255$.
+Taki obraz w skali można już wyświetlić.
 Natomiast standard DICOM przewiduje, że obraz można jeszcze wyświetlić w wielokolorowej palecie barw.
 Przykład takiej palety HotIron w porównaniu do skali szarości można zobaczyć na rysunku .
 Taka paleta barw nie koniecznie musi mieć 256 odcieni, dlatego lepiej jest zrobić aby okienko, mapowało na liczbę od 0 do 1, a później paleta mapowała na kolor RGB.
@@ -142,7 +142,7 @@ UWAGA: ponieważ nie dysponuje rzeczywistym obrazem o pikselu danych 32-bitowym 
 
 \subparagraph{Implementacja statyczna z tablicą LUT}
 \par
-W wersji z LUT, na podczas tworzenia okienka jest alokowany wektor obiektów \sokarclass{Pixel} klasy \stdclass{vector}.
+W wersji z LUT, podczas tworzenia okienka jest alokowany wektor obiektów \sokarclass{Pixel} klasy \stdclass{vector}{container/vector}.
 Standard DICOM przewiduje, że woksele mogą mieć wartości ujemne, więc tablica powinna mieć możliwość posiadania takich wartości indeksów, ale C++ nie przewiduje takiej możliwości.
 Dlatego wprowadzono dwie zmienne pomocnicze \cppcode{maxValue} i \cppcode{signedMove}.
 \cppcode{maxValue} jest to maksymalna wartość jaką dane mogą przyjąć, jest ona równa $2^N$, gdzie $N$ to liczba bitów brana z \dicomtag{BitsStored}{0028}{0101}.
@@ -150,7 +150,7 @@ A \cppcode{signedMove} to liczba przesunięcia liczb, przyjmuje wartość zero g
 Długość wektora pikseli jest sumą \cppcode{maxValue} i \cppcode{signedMove}.
 A indeks woksela w wektorze ma wartość tego woksela zwiększoną o \cppcode{signedMove}.
 \par
-Wypełnienie wektora wartościami odbyta się poprzez iteracje po wszystkich możliwych wartościach, przeliczenie ich przez funkcje okna, a następnie wstawienie ich do wektora.
+Wypełnienie wektora wartościami odbywa się poprzez iteracje po wszystkich możliwych wartościach, przeliczenie ich przez funkcje okna, a następnie wstawienie ich do wektora.
 W celu poprawy szybkości, zastosowano sprawdzanie czy wartości są w zakresie okna.
 Poniżej kod funkcji:
 \begin{lstlisting}
@@ -197,7 +197,7 @@ bool genLUT() override {
 \end{lstlisting}
 
 \par
-Funkcja pobierania okienka prezentuje się następująco:
+Funkcja pobierania piksela z \enquote{okna} prezentuje się następująco:
 \begin{lstlisting}
 inline const Pixel &getPixel(quint64 value) override {
     return *(pixelArray + signedMove + value);
@@ -206,7 +206,7 @@ inline const Pixel &getPixel(quint64 value) override {
 
 \subparagraph{Iterowanie po obrazie}
 \par
-Po przygotowaniu okienka, należy funkcje okna przepuścić przez obraz właściwy.
+Po przygotowaniu okienka, należy przeiterować obraz przez funkcje \enquote{okna}.
 Do zokienkowania jednego piksela nie potrzeba innego piksela dlatego w celu przyspieszenia procesu okienkowania, iteracja po obrazie odbywa się w wielu wątkach.
 \par
 W C++ typy zmiennych muszą być zdefiniowane przed kompilacją, co jest pewnym problemem.
@@ -215,7 +215,7 @@ Dlatego podział ten został zaimplementowany za pomocą 4 funkcji z szablonami:
 \begin{itemize}
     \item \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindowThread}
 
-          Jest funkcją jednego wątku który iteruje po obrazie.
+          Jest funkcją jednego wątku, który iteruje po obrazie.
           Jego parametrami są zakresy podane w indeksach wokseli po któych ma iterować.
           \cppcode{IntType} to jest typ zmiennej woksela obrazu.
           \cppcode{WinClass} klasa okienka.
@@ -239,9 +239,9 @@ void Monochrome::Scene::genQPixmapOfTypeWidthWindowThread(quint64 from, quint64 
 
     \item \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindow}
 
-          Jest funkcją która dzieli obraz na wątki, tworzy je i uruchamia.
+          Jest funkcją, która dzieli obraz na wątki, tworzy je i uruchamia.
           Ilość wątków jest ustalana za pomocą funkcji \qtfunction{QThread}{idealThreadCount}.
-          Watki działają na zakresach o długości ilości wokseli podzielonej prze ilość wątków.
+          Wątki działają na zakresach o długości ilości wokseli podzielonej prze ilość wątków.
           Kod funkcji:
 \begin{lstlisting}
 template<typename IntType, typename WinClass>
@@ -342,12 +342,12 @@ bool Monochrome::Scene::generatePixmap() {
 \end{itemize}
 
 \paragraph{Palety}
-Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do kolorowania obrazu monochromatycznego.
+Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do pseudokolorwania brazu monochromatycznego.
 Paleta przerabia liczbę zmiennoprzecinkową od zera do jedynki na kolor RGB, zwracając \sokarclass{Pixel}.
 Paleta nie ma zdefiniowanej długości minimalne i maksymalnej.
 
 \par
-Palety są wczytywane z plików XML w czasie uruchamiania programu i można definiować własne palety z poza standardem.
+Palety są wczytywane z plików XML w czasie uruchamiania programu i można definiować własne palety nie będące częścią standardem.
 Przykładowy wygląd pliku palety HotIron:
 \begin{lstlisting}[language=XML]
 <palette display="Hot Iron" name="HOT_IRON">

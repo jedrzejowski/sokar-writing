@@ -1,14 +1,12 @@
 
 \par
-Każdy plik DICOM posiada zbiór elementów danych.
-Elementy danych posiadają zapisane dane, ale w sposób nie odpowiadający potrzebą programu.
+Każdy plik \DICOM posiada zbiór elementów danych.
+Zapisane elementy danych należy przekonwertować na obiekty danych odpowiedające potrzebą programu.
+Dlatego został zaimplementowany obiekt klasy \sokarclass{DataConverter} zajmujący się konwersją danych z pliku \DICOM na dane w formacie odpowiadającym programowi.
 
 \par
-Dlatego został zaimplementowany obiekt klasy \sokarclass{DataConverter} zajmujący się konwersją danych z pliku DICOM na dane w formacie odpowiadającym potrzebą oprogramowania.
-
-\par
-Obiekt konwertera jest tworzony na podstawie pliku DICOM i przy wywoływaniu konwersji należy podać tylko znacznik, który nas interesuje.
-Taki rozwiązanie pozwala na przesłanie do wszystkich obiektów, jednego względnie małego obiektu konwertera co ułatwia zarządzanie plikiem DICOM.
+Obiekt konwertera jest tworzony na podstawie pliku \DICOM i przy wywoływaniu konwersji należy podać tylko znacznik, który nas interesuje.
+Taki rozwiązanie pozwala na przesłanie do wszystkich obiektów, jednego względnie małego obiektu konwertera co ułatwia zarządzanie plikiem \DICOM.
 
 \par
 Klasa \sokarclass{DataConverter} posiada następujące funkcje:
@@ -56,8 +54,8 @@ Oprócz powyższych funkcji jest jeszcze kilka innych funkcji pobocznych oraz ki
 \par
 Kilka rzeczy które się tyczą wszystkich danych i konwersji:
 \begin{itemize}
-    \item większość VR jest to zapisane jako tekst, kodowanie i dekodowanie tekstu jest zapewniane przez bibliotekę, a konkretniej przez klasę \gdcmclass{StringFilter}
-    \item większość danych może mieć kilka wartości oddzielonych backslashem \quotett{\textbackslash}, dlatego konwerter dla VR w, których standard przewiduje wiele wartości, zawsze zwraca wektor z tymi wartościami
-    \item wszystkie dane są zapisane parzystą ilością bajtów, w przypadku tekstu dodaje się znak spacji na końcu danych, taka spacja jest pomijana w analizie danych
+    \item Większość VR jest to zapisane jako tekst, kodowanie i dekodowanie tekstu jest zapewniane przez bibliotekę.
+    \item Większość danych może mieć kilka wartości oddzielonych backslashem \quotett{\textbackslash}, dlatego konwerter dla VR w, których standard przewiduje wiele wartości, zawsze zwraca wektor z tymi wartościami.
+    \item Wszystkie dane są zapisane parzystą ilością bajtów, w przypadku tekstu dodaje się znak spacji na końcu danych, taka spacja jest pomijana w analizie danych.
 \end{itemize}
 
