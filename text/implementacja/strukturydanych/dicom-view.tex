@@ -1,6 +1,8 @@
 \label{sec:sokar-dicomview}
+\par
 Każda zakładka z obrazem lub obrazami jest implementowana przez klasę \sokarclass{DicomView}.
 
+\par
 Interfejs graficzny \sokarclass{DicomView} wyświetla następujące elementy:
 \begin{itemize}
     \item pasek narzędzi znajdujący się na górze - implementowany za pomocą klasy \sokarclass{DicomToolBar}, opisany w sekcji \ref{sec:sokar-dicomtoolbar}
@@ -9,12 +11,14 @@ Interfejs graficzny \sokarclass{DicomView} wyświetla następujące elementy:
     \item podgląd miniaturek obrazów w prawej części - implementowany za pomocą klasy \sokarclass{FrameChooser}, opisany w sekcji \ref{sec:sokar-framechooser}
 \end{itemize}
 
+\par
 Dodatkowo posiada obiekt \sokarclass{DicomSceneSet}, który jest zbiorem obrazów opisany w sekcji \ref{sec:sokar-scenesets}.
 \sokarclass{DicomView} łączy zdarzenia wysyłane przez wszystkie obiekty.
 
+\par
 Poniżej jest opisane zachowanie tych elementów:
 
-\subsection{Elementy interfejsu graficznego}
+\subsubsection{Elementy interfejsu graficznego}
 
 \begin{figure}[!htbp]
     \centering
@@ -23,14 +27,14 @@ Poniżej jest opisane zachowanie tych elementów:
     \label{fig:sokar-dicomview001}
 \end{figure}
 
-\subsubsection{\sokarclass{DicomToolBar}}
+\paragraph{\sokarclass{DicomToolBar}}
 \label{sec:sokar-dicomtoolbar}
 \input{text/implementacja/dicom-toolbar.tex}
 
-\subsubsection{\sokarclass{DicomGraphics}}
+\paragraph{\sokarclass{DicomGraphics}}
 \label{sec:sokar-dicomgraphics}
 
-\subsubsection{\sokarclass{MovieBar}}
+\paragraph{\sokarclass{MovieBar}}
 \label{sec:sokar-moviebar}
 
 \par
@@ -58,7 +62,7 @@ Jeżeli mamy załadowanych wile obrazów tego samego badania, to nie koniecznie 
 Dodatkowo ten tryb pozwala wprowadzić jednolite okienko dla wszystkich klatek po zmianie parametrów tego okienka na jednej klatce.
 Czwarty (15) i ostatni przycisk służy do użycia jednej macierzy transformaty na wszystkich klatkach.
 
-\paragraph*{Tryb filmowy}
+\subparagraph*{Tryb filmowy}
 
 \par
 Tryb filmowy można aktywować jedynie wtedy gdy w sekwencji scen jest więcej niż jedna scena.
@@ -68,7 +72,7 @@ Następnie obiekt ten jest wysyłany do wszystkich scen w sekwencji.
 Uruchamiany jest timer, obiekt klasy \qtclass{QTimer}, na czas równy czasu trwania sceny zapisanego w kroku przemnożonego przez liczbę z prządki.
 Po upływie timera, wstawiana jest nowa scena za pomocą sygnały \sokarfunction{MovieBar}{setStep}, a timer jest ustawiany nan nowo.
 
-\subsubsection{\sokarclass{FrameChooser}}
+\paragraph{\sokarclass{FrameChooser}}
 \label{sec:sokar-framechooser}
 
 Ten element to wybór scen za pomocą ikon, implementowany przez klasę \sokarclass{DicomView}.

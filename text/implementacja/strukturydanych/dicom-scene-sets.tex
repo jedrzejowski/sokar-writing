@@ -1,10 +1,10 @@
 \label{sec:sokar-scenesets}
 
 Abstrakcyjna klasa \sokarclass{DicomSceneSet} implementuje kolekcje scen za pomocą wektora \qtclass{QVector}.
-Jest to obiekt, który grupuje w jakiś sposób sceny a następnie tworzy obiekt \sokarclass{SceneSequence}, który jest rzeczywistą sekwencją scen, ułożoną w taki sposób, jaki obrazy powinny być wyświetlane.
-Są dwie implementacje zbioru scen: zbiór plików i zbiór ramek z jednego pliku
+Jest to obiekt, który przechowuje sceny i tworzy sekwencje scen, która jest rzeczywistym ułożeniem ramek obrazów.
+Są dwie implementacje kolekcji scen: kolekcja plików i kolekcja ramek z jednego pliku.
 
-\subsection{Sekwencja scen}
+\subsubsection{Sekwencja scen}
 \label{sec:sokar-scenesequence}
 
 \par
@@ -27,7 +27,7 @@ Sekwencja ma wbudowane funkcje zapewniające przesuwanie się po indeksie na wek
 \end{itemize}
 Wszystkie powyższe funkcje są zarazem slotami dla sygnałów oraz emitują sygnał \sokarfunction{SceneSequence}{steped}.
 
-\subsection{Zbiór ramek DICOM}
+\subsubsection{Kolekcja ramek DICOM}
 \label{sec:sokar-dicomframeset}
 
 \par
@@ -51,7 +51,7 @@ Została zaimplementowana obsługa poniższy znaczników:
 W przypadku braku znacznika lub gdy zostaje wskazany znacznik nieznany, czas trwania ramki wynosi $83.3$ milisekundy, co odpowiada 12 klatkom na sekundę.
 
 
-\subsection{Zbiór plików DICOM}
+\subsubsection{Kolekcja plików DICOM}
 \label{sec:sokar-dicomfileset}
 \par
 Zbiory plików są implementowane prze \sokarclass{DicomFileSet} i służą do przechowywania wielu wczytanych plików DICOM.
@@ -69,4 +69,4 @@ Kolejności obrazów w serii to liczba zawarta w elemencie danych o znaczniku \d
 \par
 Segregacja odbywa się za pomocą funkcji \sokarfunction{DicomFileSet}{create}.
 Do funkcji jest przesyłany wektor z wczytanymi plikami DICOM, następnie dzieli ona pliki na zbiory zawierające zdjęcia tej samej serii, tworzy obiekty zbiorów plików DICOM, ostatecznie zwraca ona wektor z gotowymi obiektami zbiorów plików DICOM.
-Sortowanie plików DICOM według ich kolejności odbywa się za pomocą funkcji \stdclass{sort} wewnątrz konstruktora klasy \sokarclass{DicomFileSet}, który nie jest publiczny.
+Sortowanie plików DICOM według ich kolejności odbywa się za pomocą funkcji \stdclass{sort}{algorithm/sort} wewnątrz konstruktora klasy \sokarclass{DicomFileSet}, który nie jest publiczny.

@@ -5,7 +5,7 @@ Wartości są ułożone w taki sposób.
 Ponieważ wartości te reprezentują kolory, są już w pewnym sensie są obrazem, ale nie można go wyświetlić, ponieważ komputery bazują na kolorach RGB.
 Dlatego odpowieni algorytm konwertuje kolor YBR na kolor RGB, iterując po wszystkich wartościach obrazu.
 
-\paragraph*{Konwersja koloru YBR na kolor RGB}
+\paragraph{Konwersja koloru YBR na kolor RGB}
 
 YBR albo YCbCr to model przestrzeni kolorów do przechowywania obrazów i wideo.
 Wykorzystuje do tego trzy typy danych: Y – składową luminancji, B lub Cb – składową różnicową chrominancji Y-B, stanowiącą różnicę między luminancją a niebieskim, oraz R lub Cr – składową chrominancji Y-R, stanowiącą różnicę między luminancją a czerwonym.
@@ -13,7 +13,7 @@ Kolor zielony jest uzyskiwany na podstawie tych trzech wartości.
 YBR nie pokrywa w całości RGB, tak jak RGB nie pokrywa YBR.
 Posiadają one część wspólną, co uniemożliwia wyświetlenie obrazu w stu procentach bez zniekształceń.
 
-\paragraph*{Algorytm konwersji}
+\paragraph{Algorytm konwersji}
 
 Poniżej przedstawiono kod źródłowy funkcji zamiany kolory YBR na RGB.
 Proszę zwrócić uwagę na linie 12, 13 i 14, gdzie ma dokonywana pewna utrata danych.
