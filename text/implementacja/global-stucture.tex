@@ -1,18 +1,16 @@
 
+\par
 W tej sekcji jest wyjaśniona ogólna struktura programu, z pominięciem dokładnych opisów poszczególnych elementów, co znajduje się w następnych sekcjach.
+\par
+Obiekt okna, klasy \sokarclass{MainWindow} posiada 3 elementy: menu (klasy \qtclass{QMenuBar}), drzewa plików (klasy \sokarclass{FileTree}), obiekt zakładek (klasy \sokarclass{DicomTabs}).
+Zakładki obiektu zakładek są implementowane prze klasę \sokarclass{DicomView}.
+Obiekt zakładki posiada abstrakcyjną kolekcje scen, implementowaną przez \sokarclass{DicomSceneSet}.
+Kolekcja scen posiada sceny, obiekty klasy \sokarclass{DicomScene}, które wyświetlają obraz wraz z informacjami.
+Ogólny diagram klas znajduje się na rysunku \ref{fig:uml-global-sturcture}.
 
-JA TO JESZCZE ROZWINE
-\par
-Cały program zawiera się w jednym oknie, które zawiera 3 elementy: menu (obiekt klasy \qtclass{QMenuBar}), drzewa plików (obiekt klasy \sokarclass{FileTree}), obiekt zakładek z obrazami (obiekt klasy \sokarclass{DicomTabs}).
-Menu oraz drzewo plików wysyła sygnały do obiektu zakładek, dodatkowo obiekt ten może wysłać sygnał sam do siebie jeżeli dostanie nowe pliki opuszczone przez użytkownika.
-\par
-\sokarclass{DicomTabs} jest to klasa wyświetlająca obrazu w zakładkach za pośrednictwem \sokarclass{DicomView}.
-Obiekt zakładek, gdy dostanie sygnał, aby wczytać nowe pliki to wczytuje te pliki, sprawdza ich poprawność, grupuje je odpowiednio, tworząc odpowiednie obiekty klasy dziedziczącej po \sokarclass{DicomSceneSet}, a następnie tworzy jeden lub wiele obiektów klasy \sokarclass{DicomView}.
-\par
-\sokarclass{DicomSceneSet} jest abstrakcyjną klasą, która przechowuje obraz lub obrazy w zbiorze odpowiadającej ich realnemu położeniu.
-\par
-\sokarclass{DicomView} jest obiektem wyświetlającym obraz lub obrazy za pośrednictwem klas dziedziczących po \sokarclass{DicomScene}.
-Nie implementuje on ułożenia obrazów względem siebie a jedynie tworzy warunki do wyświetlenia sekwencji.
-\par
-\sokarclass{DicomScene} jest to klasa generują i wyświetlająca jedną ramkę obrazu.
-
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/uml/global-sturcture.png}
+    \caption{Diagram klas UML globalnej struktury programu.}
+    \label{fig:uml-global-sturcture}
+\end{figure}

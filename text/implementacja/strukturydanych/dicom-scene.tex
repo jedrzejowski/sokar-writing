@@ -1,0 +1,60 @@
+\label{sec:sokar-dicomscene}
+
+Jest to obiekt jednej ramki obrazu i jest odpowiedzialna za pośrednie wygenerowanie obrazu oraz jego wyświetlenie na ekranie.
+Implementowany jest przez klasę \sokarclass{DicomScene}, dziedzicząca po \sokarclass{Scene}, natomiast \sokarclass{Scene} dziedziczy po \qtclass{QGraphicsScene}.
+Diagram klas UML znajduje się na rysunku \ref{uml:sokar-dicomscene}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/uml/dicom-scene.png}
+    \caption{Diagram klas UML dziedziczenia klasy \sokarclass{DicomScene}.}
+    \label{uml:sokar-dicomscene}
+\end{figure}
+
+\subsubsection{Wyświetlanie sceny}
+\par
+Qt zapewnia własny silnik graficzny, który pozwala na łatwą wizualizację przedmiotów, z obsługą obrotu i powiększania.
+Silnik ten jest implementowany w postaci scen za pomocą \qtclass{QGraphicsScene}.
+Natomiast klasa \qtclass{QGraphicsView} dostarcza element interfejsu graficznego, który jest miejscem do wyświetlania scen.
+\par
+Na scenie mogą być wyświetlana obiekty dziedziczące po \qtclass{QGraphicsItem}.
+Obiekty te mogą być dodawane, usuwane i przesuwane ze sceny w czasie rzeczywistym.
+Dodatkowo można  na tym obiektach używać transformat we współrzędnych jednorodnych, szerzej opisanych w sekcji \ref{sec:sokar-dicomscene-tranformat}.
+Przykłady obiektów używanych w scenie \sokarclass{DicomScene}:
+\begin{itemize}
+    \item \qtclass{QGraphicsTextItem} --- element wyświetlający tekst, obsługuje on możliwość wyświetlania podstawowych znaczników HTML
+    \item \qtclass{QGraphicsLineItem} --- element wyświetlający prostą linie z punktu $A$ do $B$
+    \item \qtclass{QGraphicsPixmapItem} --- element wyświetlający obrazy graficzne, obiety klasy \qtclass{QPixmap}
+    \item \qtclass{QGraphicsItemGroup} --- element grupujący wiele elementów, pozwala na łatwą implementacje bardziej złożonych struktur
+\end{itemize}
+
+\subsubsection{Informacje wyświetlane na scenie}
+\input{text/implementacja/strukturydanych/dicom-scene-indicators.tex}
+
+\subsubsection{Generowanie obrazów z danych}
+
+Klasa \sokarclass{DicomScene} jest klasą abstrakcyjną i nie generuje obrazu, pozostawia to klasą dziedziczących po niej.
+Dokładna analiza cyklu generowania obrazów jest opisana w sekcji \ref{sec:algorithm-pixmap-generate}.
+
+\subsubsection{Transformaty obrazu}
+
+\par
+Wygenerowany obraz można wyświetlić na scenie bez większego problemu.
+Wyświetlanie \cppcode{pixmap}, obiektu klasy \qtclass{QPixmap}, odbywa się za pomocą obiektu \cppcode{pixmapItem}, obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
+Ta ostatnia klasa ma w sobie zaimplementowaną funkcję pozwalającą na nałożenie przekształcenia na obraz.
+Transformata to obiekt klasy \qtclass{QTransform}, który reprezentuje transformatę dwu wymiarowa na obiekt, praktycznie jest to macierz 3 na 3 reprezentująca przekształcenie we współrzędnych jednorodnych.
+
+Zostało zdefiniowanych 4 transformat, które działają na obiekt obrazu wyświetlany na scenie:
+\begin{itemize}
+    \item \cppcode{centerTransform} --- transformata wyśrodkowująca, zadanie tego przekształcenia jest przeniesienie obrazu na środek sceny
+    \item \cppcode{panTransform} --- transformata przesunięcia
+    \item \cppcode{scaleTransform} --- transformata skali
+    \item \cppcode{rotateTransform} --- transformata rotacji
+\end{itemize}
+
+\par
+Transformaty, podczas interakcji z użytkownikiem, mogą ulegać zmianom na dwa sposoby.
+Pierwszym sposobem jest odebranie sygnału od przycisków z paska zadań, szerzej opisanego w sekcji \ref{sec:sokar-dicomtoolbar}, znajdującego się nad sceną.
+Drugi sposób to przechwycenie ruchów myszki gdy wciśnięty jest lewy przycisk myszy.
+\par
+Pełny algorytm tworzenia transformat i ich zmian poprzez interakcje z użytkownikiem, znajduje się w sekcji \ref{sec:algorithm-pixmap-transformat}.
