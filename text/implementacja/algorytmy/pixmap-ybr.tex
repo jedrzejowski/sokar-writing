@@ -1,22 +1,22 @@
-Skórt YBR odpowiada skrótowi YCbCr.
-Wartości są ułożone w taki sposób.
-\[Y1, B1, R1, Y2, B2, R2, Y3, B3, R3, Y4, B4, R4,  ...\]
+\label{sec:algorithm-pixmap-ybr}
 
-Ponieważ wartości te reprezentują kolory, są już w pewnym sensie są obrazem, ale nie można go wyświetlić, ponieważ komputery bazują na kolorach RGB.
-Dlatego odpowieni algorytm konwertuje kolor YBR na kolor RGB, iterując po wszystkich wartościach obrazu.
-
-\paragraph{Konwersja koloru YBR na kolor RGB}
-
+\par
 YBR albo YCbCr to model przestrzeni kolorów do przechowywania obrazów i wideo.
 Wykorzystuje do tego trzy typy danych: Y – składową luminancji, B lub Cb – składową różnicową chrominancji Y-B, stanowiącą różnicę między luminancją a niebieskim, oraz R lub Cr – składową chrominancji Y-R, stanowiącą różnicę między luminancją a czerwonym.
 Kolor zielony jest uzyskiwany na podstawie tych trzech wartości.
 YBR nie pokrywa w całości RGB, tak jak RGB nie pokrywa YBR.
 Posiadają one część wspólną, co uniemożliwia wyświetlenie obrazu w stu procentach bez zniekształceń.
 
-\paragraph{Algorytm konwersji}
+\par
+Wartości w pliku DICOM są ułożone w taki sposób.
+\[Y1, B1, R1, Y2, B2, R2, Y3, B3, R3, Y4, B4, R4,  ...\]
 
+\par
+Ponieważ wartości te reprezentują kolory, są już w pewnym sensie są obrazem, ale nie można go wyświetlić na monitorze RGB.
+Dlatego należy przekonwertować kolor YBR na kolor RGB, iterując po wszystkich wartościach obrazu.
+
+\par
 Poniżej przedstawiono kod źródłowy funkcji zamiany kolory YBR na RGB.
-Proszę zwrócić uwagę na linie 12, 13 i 14, gdzie ma dokonywana pewna utrata danych.
 
 \begin{lstlisting}
 Sokar::Pixel ybr2Pixel(quint8 y, quint8 b, quint8 r) {

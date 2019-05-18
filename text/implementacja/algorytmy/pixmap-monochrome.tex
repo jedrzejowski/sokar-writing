@@ -1,8 +1,8 @@
-\label{sec:sokar-dicomscene-monochrome}
+\label{sec:algorithm-pixmap-monochrome}
 
 Obraz monochromatyczny to obraz w odcieniach szarości, od białego do czarnego lub od czarnego do białego. Dane są zapisane w sposób ciągły wartość po wartości.
 
-\paragraph{Pseudokolorowanie obrazu}
+\subsubsection{Pseudokolorowanie obrazu}
 
 Mamy obraz, którego piksele to n-bitowe liczby, na przykład 16 bitowa liczba całkowita.
 W takiej postaci wyświetlemoe obrazu na monitorze RGB lub nawet na profesjonalnym 10-bitowym jest niemożliwe.
@@ -11,7 +11,7 @@ Dlatego do wyświetlania obrazów monochromatycznych o dużym kontraście stosuj
 Jest to funkcja, która mapuje n-bitwy obraz na 8-bitowy obraz w skali szarości.
 8-bitów, ponieważ monitor RGB jest wstanie wyświetlić 256 odcieni szarości.
 
-\subparagraph{Zwiększanie kontrastu za pomocą \enquote{funckji okna}}
+\paragraph*{Zwiększanie kontrastu za pomocą \enquote{funckji okna}}
 Przyjeło się, że \enquote{okno} definiuje się dwoma liczbami: środkiem, oznaczanym jako $center$ i długością, oznaczaną jako $width$.
 Wyznaczamy zakres okienka $x_0$ i $x_1$ ze środka okienka $center$ i długości $width$.
 \[x_0 = center - width / 2\]
@@ -53,9 +53,9 @@ Teraz iterujemy po wszystkich możliwych wartościach wartośćiach obrazu i wyk
 \end{itemize}
 
 
-\paragraph{Implementacja algorytmu}
+\subsubsection{Implementacja algorytmu}
 
-\subparagraph{Opis}
+\paragraph{Opis}
 \par
 Implementacja powyżej przedstawionego algorytmu w sposób dosłowny byłaby mało optymalna dla maszyny i wymagała by wielu pobocznych tablic oraz względnie dużej ilości mnożenia.
 Trzeba też zauważyć, że do wyliczenie jakiegoś piksela nie potrzeba liczyć, żadnego innego piksela, co skutkuje, że każdy piksel można wyliczyć oddzielnie.
@@ -75,7 +75,7 @@ Decyzja o używanym oknie jest podejmowana podczas wczytywania obrazu przez klas
 \par
 UWAGA: Standard DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe. Dlatego założyłem, że takie obrazy nie istnieją.
 
-\subparagraph{Wyznaczenie parametrów okna}
+\paragraph{Wyznaczenie parametrów okna}
 \par
 Najpierw wyznaczam okienko, które zmienia wartości obrazu na skale od zera do jeden:
 \[x_0 = center - width / 2\]
@@ -119,7 +119,7 @@ Wyznaczam parametry prostej przechodzącej przez dwa punkty:
 Teraz algorytm się rozdwaja.
 Pobieranie wartości z okienka odbywa się za pomocą funkcji \sokarclass{Monochrome}{Window\zerospace::{\zerospace}getPixel()}.
 
-\subparagraph{Implementacja dynamiczna bez tablicy LUT}
+\paragraph{Implementacja dynamiczna bez tablicy LUT}
 
 \par
 W tej wersji funkcja \sokarfunction{Monochrome{\scopedots}Window}{getPixel} wygląda następująco:
@@ -140,7 +140,7 @@ Widzimy tutaj, że funkcja najpierw sprawdza czy zakres okienka został przekroc
 \par
 UWAGA: ponieważ nie dysponuje rzeczywistym obrazem o pikselu danych 32-bitowym lub 64-bitowych, implementacja dynamiczna nie była testowana w warunkach rzeczywistych.
 
-\subparagraph{Implementacja statyczna z tablicą LUT}
+\paragraph{Implementacja statyczna z tablicą LUT}
 \par
 W wersji z LUT, podczas tworzenia okienka jest alokowany wektor obiektów \sokarclass{Pixel} klasy \stdclass{vector}{container/vector}.
 Standard DICOM przewiduje, że woksele mogą mieć wartości ujemne, więc tablica powinna mieć możliwość posiadania takich wartości indeksów, ale C++ nie przewiduje takiej możliwości.
@@ -204,7 +204,7 @@ inline const Pixel &getPixel(quint64 value) override {
 }
 \end{lstlisting}
 
-\subparagraph{Iterowanie po obrazie}
+\paragraph{Iterowanie po obrazie}
 \par
 Po przygotowaniu okienka, należy przeiterować obraz przez funkcje \enquote{okna}.
 Do zokienkowania jednego piksela nie potrzeba innego piksela dlatego w celu przyspieszenia procesu okienkowania, iteracja po obrazie odbywa się w wielu wątkach.
@@ -341,7 +341,7 @@ bool Monochrome::Scene::generatePixmap() {
 \end{lstlisting}
 \end{itemize}
 
-\paragraph{Palety}
+\subsubsection{Palety}
 Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do pseudokolorwania brazu monochromatycznego.
 Paleta przerabia liczbę zmiennoprzecinkową od zera do jedynki na kolor RGB, zwracając \sokarclass{Pixel}.
 Paleta nie ma zdefiniowanej długości minimalne i maksymalnej.

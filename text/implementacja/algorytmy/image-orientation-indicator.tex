@@ -1,6 +1,15 @@
 \label{sec:algorithm-imageorientationindicator}
 
-Pary poszczególnych liter tworzą osie:
+W obrazie \DICOM jest pośrednio zapisana informacja o ułożeniu obrazu względem pacjenta.
+Celem algorytmu jest określenie jaką pozycje przyjmuje pacjent w stosunku do sceny, tak aby można było wyświetlić ta pozycje na scenie.
+
+\subsubsection{Format zapisu informacji o orientacji obrazu}
+
+\par
+Informacje o orientacji oraz pozycji względem pacjenta znajdują się w odpowiednio w tagach \dicomtag{ImageOrientation}{0020}{0037} i \dicomtag{ImagePosition}{0020}{0032}.
+
+\par
+Standard \DICOM zdefiniował ułożenie osi we współrzędnych kartezjańskich następująco:
 \begin{itemize}
     \item \quotett{x} --- oś przechodząca od prawej do lewej strony pacjenta, \dataword{L} oznacza zwrot zgodny z osią, a \dataword{R} oznacza zwrot przeciwny
 
@@ -13,13 +22,12 @@ Pary poszczególnych liter tworzą osie:
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{img/imageorientationindicator-003.pdf}
-    \caption{Wizualizacja układu osi współrzędnych pacjenta. Zdjęcie własne.}
+    \caption{Wizualizacja układu osi współrzędnych kartezjańskich pacjenta. Zdjęcie własne.}
     \label{fig:imageorientationindicator2}
 \end{figure}
 
-Informacje o orientacji oraz pozycji względem pacjenta znajdują się w odpowiednio w tagach \dicomtag{ImageOrientation}{0020}{0037} i \dicomtag{ImagePosition}{0020}{0032}.
+\par
 Wartość \dicomtag{ImageOrientation}{0020}{0037} składa się z sześciu liczb, opowiednio oznaczanych dalej X\textsubscript{x}, X\textsubscript{y}, X\textsubscript{z}, Y\textsubscript{x}, Y\textsubscript{y}, Y\textsubscript{z}.
-
 Standard DICOM definiuje, że te dane mają być z interpretowane w następujący sposób:
 \[
     \begin{bmatrix}
@@ -43,7 +51,7 @@ Standard DICOM definiuje, że te dane mają być z interpretowane w następując
 \]
 gdzie:
 \begin{itemize}
-    \item $P_{xyz}$ --- koordynaty woksela (i,j) w macierzy obrazu wyrażone w milimetrach
+    \item $P_{xyz}$ --- koordynaty woksela (i,j) w współrzędnych obrazu wyrażone w milimetrach
     \item $S_{xyz}$ --- trzy wartości z elementu ze znacznikiem \dicomtag{ImagePosition}{0020}{0032}. Oznacza punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar.
     \item $X_{xyz}$ --- trzy pierwsze wartości z \dicomtag{ImageOrientation}{0020}{0037}
     \item $Y_{xyz}$ --- trzy ostatnie wartości z \dicomtag{ImageOrientation}{0020}{0037}
@@ -55,7 +63,11 @@ Praktycznie rzecz biorąc, pierwsza macierz to wektor reprezentujący pozycję p
 Druga jest to transformata.
 Trzecia to pozycja na obrazie.
 
-Interesuje nas wyznaczenie pozycji sześciu (punktów) na płaszczyźnie obrazu, o następujących współrzędnych, dalej używanych pod nazwą $PatientPosition$:
+\subsubsection{Wyznaczanie pozycji pacjenta}
+
+Interesuje nas wyznaczenie pozycji sześciu (punktów) na płaszczyźnie obrazu.
+Załóżmy, że pacjent znajduje się w środku układu współżędnych i jest nieskończenie mały.
+Możemy więc zdefiniować sześć punktów o następujących współrzędnych, dalej używanych pod nazwą $PatientPosition$, które będą odpowiadały stroną pacjenta:
 \begin{itemize}
     \item \quotett{R} - $[-1, 0, 0, 1]$
     \item \quotett{L} - $[+1, 0, 0, 1]$
@@ -64,10 +76,13 @@ Interesuje nas wyznaczenie pozycji sześciu (punktów) na płaszczyźnie obrazu,
     \item \quotett{F} - $[0, 0, -1, 1]$
     \item \quotett{H} - $[0, 0, +1, 1]$
 \end{itemize}
+Punkty $PatientPosition$ odpowiadają punktom $P_{xyz}$ z równania ze standardu \DICOM.
 
+\par
 UWAGA: Wszystkie obliczenia odbywają się w współrzędnych jednorodnych.
 
-Wykonuje takie przekształcenie:
+\par
+Na równaniu z poprzedniego punktu wykonuje takie przekształcenie:
 \[PatientPosition = imgMatrix * ScenePosition\]
 \[imgMatrix^{-1} * PatientPosition = imgMatrix^{-1} * imgMatrix * ScenePosition\]
 \[imgMatrix^{-1} * PatientPosition = ScenePosition\]
@@ -78,7 +93,7 @@ gdzie:
     \item $ScenePosition$ --- pozycja na obrazie, która naz interesuje
     \item $PatientPosition$ --- któryś z punktów względem pacjenta.
 \end{itemize}
-
+\par
 Wygląd macierzy $imgMatrix$:
 \[
     \begin{bmatrix}
@@ -93,12 +108,15 @@ Po pierwsze PikselSpacing został pominięty, a konkretniej nadałem mu wartoś�
 Po drugie pozycja z \dicomtag{ImagePosition}{0020}{0032} została zrównana do punktu zerowego, dzięki temu, wynik też będzie względem punktu zero.
 Wyznaczenie macierzy $imgMatrix$ jest jednorazowe.
 
+\par
 Po wyznaczeniu sześciu punktów $ScenePosition$, po jednej dla każdego punktu względem pacjenta są zapisywane. $ScenePosition$ odpowiada pozycji punktów na obrazie w pozycji startowej.
 
+\par
 Na scenie, której jest wyświetlany obraz, użytkownik, może obracać obraz o dowolny kąt, według własnego uznania.
 Te przekształcenia, są realizowane za pomocą macierzy rotacji, dalej znana jako $rotateTransform$.
 Macierz $rotateTransform$ jest przesyłana do naszego obiektu \sokarclass{ImageOrientationIndicator} za każdym razem kiedy zostanie zmieniona.
 
+\par
 Ostateczne wyznaczenie pozycji punktów pacjent na obrazie odbywa sie przez przemnożenie lewostronne $rotateTransform$ i $ScenePosition$.
 \[rotateTransform * ScenePosition\]
 Wyznaczane jest w ten sposób pozycja sześciu punktów pacjenta na płaszczyźnie sceny wyświetlanej.
@@ -113,6 +131,7 @@ Następnie do czterech pól wyświetlających zostają wstawione następujące t
     \item dolne pole: tytuł części 7, tytuł części 6 i tytuł części 5
 \end{itemize}
 
+\par
 Przykład:\\
 Punkt \quotett{H}, czyli punkt reprezentujący kierunek głowy, został przypisany do części 1 i odpowiednio \quotett{L} do części 7, \quotett{R} do części 3 i \quotett{F} do części 5.
 Punkty \quotett{A} i \quotett{P} zostały pominięte ponieważ znalazły się na środku.
@@ -120,11 +139,12 @@ Do lewego pola wstawiany jest tekst \quotett{HL}, do górnego \quotett{HR}, do p
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth]{img/imageorientationindicator-004.png}
+    \includegraphics[width=0.5\textwidth]{img/imageorientationindicator-004.pdf}
     \caption{Podział płaszczyzny sceny. Wyróżniono osiem części. Zdjęcie własne.} 
     \label{fig:imageorientationindicator4}
 \end{figure}
 
+\par
 Przykład można zobaczyć na rysunku \ref{fig:imageorientationindicator1}.
 Na obrazie widzimy, że lewa strona pacjenta znajduje się po prawej stronie obrazu, prawa strona pacjenta po lewej, góra pacjenta na górnej części obrazu.
 Wynika z tego, że obraz przedstawia pacjenta skierowanego twarzą do nas.
@@ -135,11 +155,3 @@ Wynika z tego, że obraz przedstawia pacjenta skierowanego twarzą do nas.
     \caption{Przykładowy obraz medyczny (przekrój głowy MR) z oznaczeniem orientacji obrazu z apomocą liter A, P, R, L, F, H. Zdjęcie własne.}
     \label{fig:imageorientationindicator1}
 \end{figure}
-
-\subsubsection{\sokarclass{PixelSpacingIndicator}}
-
-Obiekt wyświetlający podziałkę informującą jakich rozmiarów jest obiekt na obrazie w rzeczywistości, pojawia się na dole i po prawie stronie sceny, gdy tag \dicomtag{PixelSpacing}{0028}{0030} jest obecny.
-Wygląd podziałki można zaobserwować na rysunku \ref{fig:imageorientationindicator1}.
-
-Podziałka dostosowuje swoją wielkość do obecnej sceny, jak i do innych elementów na scenie.
-Wartości wyświetlane biorą pod uwagę transformatę skali i rotacji obrazu.

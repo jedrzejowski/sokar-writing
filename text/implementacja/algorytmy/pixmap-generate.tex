@@ -1,8 +1,4 @@
-
-
-Klasa \sokarclass{DicomScene} jest klasą abstrakcyjną i nie generuje obrazu, pozostawia do klasą dziedziczących po niej.
-
-\subsubsection{Cykl generowania obrazu}
+\label{sec:algorithm-pixmap-generate}
 
 Klasa \sokarclass{DicomScene} dostarcza następujące obiekty do generowania obrazu:
 \begin{itemize}
@@ -45,7 +41,7 @@ struct Pixel {
 Generowanie obrazu jest robione przez czysto wirtualną funkcje \sokarfunction{DicomScene}{generatePixmap}.
 Po wywołaniu funkcji obiekt \cppcode{targetBuffer} powinien zawierać obraz wygenerowany z obecnymi parametrami.
 Funkcja zwraca również wartość logiczną, który informuje nas czy \cppcode{targetBuffer} rzeczywiście został zmieniony.
-Następnie z obiekt \cppcode{pixmap} jest odświeżany na bazie \cppcode{qImage}.
+Następnie obiekt \cppcode{pixmap} jest na nowo generowany na bazie \cppcode{qImage}.
 
 Całe odświeżanie obrazu jest implementowane w funkcji \sokarfunction{DicomScene}{reloadPixmap}.
 Funkcja wywołuje \sokarfunction{DicomScene}{generatePixmap} i odświeża \cppcode{pixmapItem} kiedy zajdzie taka potrzeba
@@ -53,10 +49,13 @@ Funkcja wywołuje \sokarfunction{DicomScene}{generatePixmap} i odświeża \cppco
 Generowanie poszczególnych typów obrazów jest wyjaśnione poniżej.
 
 
-\paragraph{Obraz monochromatyczny}
+\subsubsection{Obraz monochromatyczny}
+\par
 Obraz monochromatyczny to obraz w odcieniach szarości, od białego do czarnego lub od czarnego do białego.
+Generowanie takiego obrazu odbyta się poprzez pseudokolorowanie.
+Cały proces jest wyjaśniony w sekcji \ref{sec:algorithm-pixmap-monochrome}.
 
-\paragraph{RGB}
+\subsubsection{RGB}
 Obrazów zapisanych w RGB nie trzeba w żaden sposób obrabiać, dane już są prawie gotowe do wyświetlenia, należy je tylko odpowiednio posortować, tak jak wymaga biblioteka QT.
 Sposób posortowania wartości w pilku określa \dicomtag{PlanarConfiguration}{0x0028}{0006}. Może o przyjąć dwie następujące wartośći:
 
@@ -76,4 +75,5 @@ gdzie:
 Wartości obrazu są przepisywane do bufora dla biblioteki QT.
 
 
-\paragraph{YBR}
+\subsubsection{YBR}
+\input{text/implementacja/algorytmy/pixmap-ybr.tex}
