@@ -34,7 +34,7 @@ Składa się z czterem elementów:
 
 \begin{itemize}
 
-    \item \keyword{Tag} - to unikalny identyfikator, dalej zwany znacznikiem, jest złożony z dwóch liczb: numer grupy (\cppcode{uint16}) i numer elementu (\cppcode{uint16}) grupy.
+    \item \keyword{Tag} --- to unikalny identyfikator, dalej zwany znacznikiem, jest złożony z dwóch liczb: numer grupy (\cppcode{uint16}) i numer elementu (\cppcode{uint16}) grupy.
           Informuje o tym co dany rekord w sobie zawiera.
           W jednym zbiorze elementów nie mogą się pojawić dwa elementy posiadających ten sam znacznik.
 
@@ -46,12 +46,12 @@ Składa się z czterem elementów:
 
           Dokładne omówienie \keyword{VR}-ów znajduje się w dalszej części sekcji.
 
-    \item \keyword{Value Length}, w skrócie \keyword{VL} - 32-bitowa lub 16-bitowa liczba nieoznaczona, która informuje o długości pola danych (\keyword{Value Field}).
+    \item \keyword{Value Length}, w skrócie \keyword{VL} --- 32-bitowa lub 16-bitowa liczba nieoznaczona, która informuje o długości pola danych (\keyword{Value Field}).
 
           Wartość \keyword{VL} zwykle jest liczbą parzystą.
           Standard DICOM zakłada, że wszystkie dane powinny być dopełniane do parzystej liczby bajtów.
 
-    \item \keyword{Value Field} (opcjonalne) - pole z parametrem o długości VL.
+    \item \keyword{Value Field} (opcjonalne) --- pole z parametrem o długości VL.
 
 \end{itemize}
 
@@ -75,17 +75,17 @@ Taki podział umożliwia zapisywane ogromnej liczby informacji ustandaryzowanej 
 Obecna odsłona DICOM definiuje znaczenie ponad 4000 publicznych znaczników oraz określa jakie VR powinny mieć.
 Oto kilka przykładów:
 \begin{itemize}
-    \item \dicomtag{PatientName}{0010}{0010} - nazwa pacjenta, tag który zawsze musi się pojawić, może być pusty w przypadku kiedy pacjent jest bezimienny
-    \item \dicomtag{PatientID}{0010}{0020} - id pacjenta, unikalny identyfikator pacjenta, najczęściej jest to numer HIS(Hospital Information System)
-    \item \dicomtag{PatientBirthDate}{0010}{0030} - data urodzenia pacjenta
-    \item \dicomtag{PatientSex}{0010}{0040} - płeć pacjenta
-    \item \dicomtag{PatientAge}{0010}{1010} - wiek pacjenta w czasie badania
-    \item \dicomtag{StudyDescription}{0008}{1030} - opis badania, pole wypełniane przez technika lub lekarza
-    \item \dicomtag{SeriesDescription}{0008}{103E} - ops serii, pole wypełniane przez technika lub lekarza
-    \item \dicomtag{SeriesInstanceUID}{0020}{000E} - unikalny numer serii, jest nadawany każdemu badaniu
-    \item \dicomtag{InstanceNumber}{0020}{0013} - numer instancji ramki, używany w przypadku kiedy z jednego badania zostało utworzonych kilka plików DICOM
-    \item \dicomtag{Modality}{0008}{0060} - modalność określająca rodzaj techniki diagnostycznej
-    \item \dicomtag{StudyDate}{0008}{0020} - data wykonania badania
+    \item \dicomtag{PatientName}{0010}{0010} --- nazwa pacjenta, tag który zawsze musi się pojawić, może być pusty w przypadku kiedy pacjent jest bezimienny
+    \item \dicomtag{PatientID}{0010}{0020} --- id pacjenta, unikalny identyfikator pacjenta, najczęściej jest to numer HIS(Hospital Information System)
+    \item \dicomtag{PatientBirthDate}{0010}{0030} --- data urodzenia pacjenta
+    \item \dicomtag{PatientSex}{0010}{0040} --- płeć pacjenta
+    \item \dicomtag{PatientAge}{0010}{1010} --- wiek pacjenta w czasie badania
+    \item \dicomtag{StudyDescription}{0008}{1030} --- opis badania, pole wypełniane przez technika lub lekarza
+    \item \dicomtag{SeriesDescription}{0008}{103E} --- ops serii, pole wypełniane przez technika lub lekarza
+    \item \dicomtag{SeriesInstanceUID}{0020}{000E} --- unikalny numer serii, jest nadawany każdemu badaniu
+    \item \dicomtag{InstanceNumber}{0020}{0013} --- numer instancji ramki, używany w przypadku kiedy z jednego badania zostało utworzonych kilka plików DICOM
+    \item \dicomtag{Modality}{0008}{0060} --- modalność określająca rodzaj techniki diagnostycznej
+    \item \dicomtag{StudyDate}{0008}{0020} --- data wykonania badania
 \end{itemize}
 
 
