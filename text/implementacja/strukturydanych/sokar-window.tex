@@ -6,7 +6,7 @@ Jest wywoływane od razu po uruchomieniu programu.
 \par
 Zawiera w sobie 4 elementy: menu, drzewo ze strukturą plików, obiekt z zakładkami \sokarclass{DicomTabs} i sugestie aby nie używać programu w celach medycznych w dolnej części okna.
 
-\subsubsection{Drzewo plików i zakładki}
+\subsubsection{Drzewo katalogów i zakładki}
 
 \par
 W lewej części okna znajduje się element listy, implementowany przez \sokarclass{FileTree}, zawiera on w sobie model drzewa plików systemu, który z koleji jest implementowany przez klasę \qtclass{QFileSystemModel}.
@@ -32,7 +32,7 @@ Struktura Menu programu:
     \item Help
           \begin{itemize}
               \item About Qt --- otwiera okno informacji o bibliotece Qt.
-              Biblioteka Qt ma wbudowane takie okno w postaci \qtfunction{QMessageBox}{aboutQt}
+                    Biblioteka Qt ma wbudowane takie okno w postaci \qtfunction{QMessageBox}{aboutQt}
               \item About GDCM --- otwiera okno z informacjami o bibliotece GDCM, implementowane przez funkcje \sokarfunction{About}{GDCM}
               \item About Sokar --- otwiera okno z informacjami o aplikacji, implementowane przez funkcje \sokarfunction{About}{Sokar}
           \end{itemize}

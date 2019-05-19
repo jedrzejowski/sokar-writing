@@ -1,8 +1,16 @@
 \label{sec:sokar-scenesets}
 
-Abstrakcyjna klasa \sokarclass{DicomSceneSet} implementuje kolekcje scen za pomocą wektora \qtclass{QVector}.
+Abstrakcyjna klasa \sokarclass{DicomSceneSet} implementuje wektor scen za pomocą klasy \qtclass{QVector}.
 Jest to obiekt, który przechowuje sceny i tworzy sekwencje scen, która jest rzeczywistym ułożeniem ramek obrazów.
 Są dwie implementacje kolekcji scen: kolekcja plików i kolekcja ramek z jednego pliku.
+Diagram klas UML znajduje się na rysunku \ref{uml:sokar-scene-sets}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/uml/sokar-scene-sets.png}
+    \caption{Diagram klas UML dziedziczenia klasy \sokarclass{DicomScene}.}
+    \label{uml:sokar-scene-sets}
+\end{figure}
 
 \subsubsection{Sekwencja scen}
 \label{sec:sokar-scenesequence}
@@ -39,14 +47,14 @@ Następnie jest tworzonych tyle obiektów scen ile jest ramek.
 \par
 Kolejność sekwencji scen jest taka sama jak kolejność ramek.
 Natomiast czas wyświetlania ramki może być zapisany w różnych znacznikach.
-To w którym tagu został zapisany informuje element o znaczniku \dicomtag{FrameIncrementPointer}{0028}{0009}, zawiera on wskaźnik do elementu o zadanym znaczniku i w zależności od znacznika.
+To w którym tagu został zapisany informuje element o znaczniku \dicomtag{Frame Increment Pointer}{0028}{0009}, zawiera on wskaźnik do elementu o zadanym znaczniku i w zależności od znacznika.
 Została zaimplementowana obsługa poniższy znaczników:
 \begin{itemize}
-    \item \dicomtag{FrameTime}{0018}{1063} --- element z tym znacznikiem zawiera czas trwania jednej ramki w milisekundach, każdemu krokowi jest przypisywana ta wartość trwania
+    \item \dicomtag{Frame Time}{0018}{1063} --- element z tym znacznikiem zawiera czas trwania jednej ramki w milisekundach, każdemu krokowi jest przypisywana ta wartość trwania
 
-    \item \dicomtag{FrameTimeVector}{0018}{1065} --- zawiera tablice z przyrostami czasu w milisekundach między n-tą ramką a poprzednią klatką. Pierwsza ramka ma zawsze przyrost czasu równy 0.
+    \item \dicomtag{Frame Time Vector}{0018}{1065} --- zawiera tablice z przyrostami czasu w milisekundach między n-tą ramką a poprzednią klatką. Pierwsza ramka ma zawsze przyrost czasu równy 0.
     
-    \item \dicomtag{CineRate}{0018}{0040} --- zawiera ilość klatek wyświetlanych na sekunda, każdemu krokowi jest przypisywana wartość odwrotna do tej
+    \item \dicomtag{Cine Rate}{0018}{0040} --- zawiera ilość klatek wyświetlanych na sekunda, każdemu krokowi jest przypisywana wartość odwrotna do tej
 \end{itemize}
 W przypadku braku znacznika lub gdy zostaje wskazany znacznik nieznany, czas trwania ramki wynosi $83.3$ milisekundy, co odpowiada 12 klatkom na sekundę.
 
@@ -55,7 +63,7 @@ W przypadku braku znacznika lub gdy zostaje wskazany znacznik nieznany, czas trw
 \label{sec:sokar-dicomfileset}
 \par
 Zbiory plików są implementowane prze \sokarclass{DicomFileSet} i służą do przechowywania wielu wczytanych plików DICOM.
-Na początku pliki są sortowane na podstawie liczby zawartej w elemencie o znaczniku \dicomtag{TagInstanceNumber}{0020}{0x0013}.
+Na początku pliki są sortowane na podstawie liczby zawartej w elemencie o znaczniku \dicomtag{Instance Number}{0020}{0x0013}.
 Dla każdego pliku jest tworzony obiekt \sokarclass{DicomFrameSet}.
 \par
 Sekwencja jest tworzona na połączenie sekwencji poszczególnych obrazów.

@@ -12,13 +12,7 @@ Interfejs graficzny \sokarclass{DicomView} wyświetla następujące elementy:
 \end{itemize}
 
 \par
-Dodatkowo posiada obiekt \sokarclass{DicomSceneSet}, który jest zbiorem obrazów opisany w sekcji \ref{sec:sokar-scenesets}.
-\sokarclass{DicomView} łączy zdarzenia wysyłane przez wszystkie obiekty.
-
-\par
-Poniżej jest opisane zachowanie tych elementów:
-
-\subsubsection{Elementy interfejsu graficznego}
+Dodatkowo posiada obiekt kolekcji scen, który jest zbiorem obrazów opisany w sekcji \ref{sec:sokar-scenesets}.
 
 \begin{figure}[!htbp]
     \centering
@@ -27,19 +21,18 @@ Poniżej jest opisane zachowanie tych elementów:
     \label{fig:sokar-dicomview001}
 \end{figure}
 
-\paragraph{\sokarclass{DicomToolBar}}
-\label{sec:sokar-dicomtoolbar}
+\subsubsection{Pasek narzędzi}
 \input{text/implementacja/dicom-toolbar.tex}
 
-\paragraph{\sokarclass{DicomGraphics}}
+\subsubsection{\sokarclass{DicomGraphics}}
 \label{sec:sokar-dicomgraphics}
 
-\paragraph{\sokarclass{MovieBar}}
+\subsubsection{Pasek filmu}
 \label{sec:sokar-moviebar}
 
 \par
-Jest paskiem filmu w dolnej części \sokarclass{DicomView}.
-Element graficzny ma dostęp do sekwencji scen i ukrywa swoją obecność przed użytkownikiem, kiedy w sekwencji jest tylko jedna scena.
+Pasek filmu znajduje się w dolnej części zakładki i jest implementowany prze klasę \sokarclass{MovieBar},.
+Ma dostęp do sekwencji scen i ukrywa swoją obecność przed użytkownikiem, kiedy w sekwencji jest tylko jedna scena.
 
 \par
 Pasek jest podzielony na trzy części: trzy przyciski znajdujące się po lewej, pasek pokazujący postępu sekwencji na środku i prządka z trzema przyciskami po prawej.
@@ -62,7 +55,7 @@ Jeżeli mamy załadowanych wile obrazów tego samego badania, to nie koniecznie 
 Dodatkowo ten tryb pozwala wprowadzić jednolite okienko dla wszystkich klatek po zmianie parametrów tego okienka na jednej klatce.
 Czwarty (15) i ostatni przycisk służy do użycia jednej macierzy transformaty na wszystkich klatkach.
 
-\subparagraph*{Tryb filmowy}
+\paragraph*{Tryb filmowy}
 
 \par
 Tryb filmowy można aktywować jedynie wtedy gdy w sekwencji scen jest więcej niż jedna scena.
@@ -72,7 +65,7 @@ Następnie obiekt ten jest wysyłany do wszystkich scen w sekwencji.
 Uruchamiany jest timer, obiekt klasy \qtclass{QTimer}, na czas równy czasu trwania sceny zapisanego w kroku przemnożonego przez liczbę z prządki.
 Po upływie timera, wstawiana jest nowa scena za pomocą sygnały \sokarfunction{MovieBar}{setStep}, a timer jest ustawiany nan nowo.
 
-\paragraph{\sokarclass{FrameChooser}}
+\subsubsection{\sokarclass{FrameChooser}}
 \label{sec:sokar-framechooser}
 
 Ten element to wybór scen za pomocą ikon, implementowany przez klasę \sokarclass{DicomView}.

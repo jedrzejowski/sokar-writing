@@ -1,13 +1,13 @@
 \label{sec:sokar-dicomtabs}
 
 \par
-Obiekt zakładek, implementowany za pomocą klasy \sokarclass{DicomTabs}, odpowiada za wyświetlanie wielu obiektów klasy \sokarclass{DicomView} w jednym obiekcie interfejsu w formie zakładek.
-Obsługuje również prośby o wczytanie nowych plików.
+Obiekt zakładek, implementowany za pomocą klasy \sokarclass{DicomTabs}, odpowiada za wyświetlanie wielu obiektów zakładek w jednym obiekcie interfejsu.
+Obsługuje również wczytanie nowych plików.
 
 \subsubsection{Sposoby uzyskania nowych plików}
 
 \par
-Prośba o otworzenie nowego pliku może przyjść z następujących źródeł: obiektem drzewa ze strukturą plików w systemie (opisanego w \ref{sec:sokar-framechooser}), menu programu (opisanego w \ref{sec:sokar-window-menu}), lub z możliwości przeciągnięcie i upuszczenia.
+Otworzenie nowego pliku może odbyć się z następujących źródeł: obiektu drzewa ze strukturą plików w systemie (opisanego w \ref{sec:sokar-framechooser}), menu programu (opisanego w \ref{sec:sokar-window-menu}), lub poprzez przeciągnięcie i upuszczenia.
 Z dwóch pierwszych można wczytać tylko po jednym pliku, natomiast z drugiego sposobu można wczytać zarówno jedne jak i wiele plików.
 Wysyłanie prośby odbywa się za pomocą czterech funkcji a dokładniej dwóch, przeciążonych dwa razy: \sokarfunction{DicomTabs}{addDicomFile} i \sokarfunction{DicomTabs}{addDicomFiles}.
 Każda z tych funkcji ma dwa przeciązęnia, jedno z parametrem ścieżki a drugie z wczytanym plikiem, dodatkowo funkcje te są slotami.
@@ -17,4 +17,4 @@ Każda z tych funkcji ma dwa przeciązęnia, jedno z parametrem ścieżki a drug
 \par
 Po dostarczeniu ścieżek do obiektu, pliki zostają wczytane za pomocą \gdcmclass{ImageReader}.
 W przypadku błędu proces wczytywania się kończy.
-Po wczytaniu wszystkich plików, zostaje utworzony obiekt zbiory ramek obrazu lub zbiór plików \DICOM za pomocą funkcji \sokarfunction{DicomFileSet}{create}, opisanej w sekcji \ref{sec:sokar-dicomfileset-create}.
+Po wczytaniu wszystkich plików, zostaje utworzony obiekt kolekcji ramek obrazu lub kolekcji plików \DICOM za pomocą funkcji \sokarfunction{DicomFileSet}{create}, opisanej w sekcji \ref{sec:sokar-dicomfileset-create}.

@@ -1,6 +1,6 @@
-
+\label{sec:sokar-dicomtoolbar}
 \par
-Jest to pasek narzędzi znajdujący się na górze, dziedziczy po klasy \qtclass{QToolBar}.
+Pasek narzędzi znajdujący się na górze, implementowany przez klasę \sokarclass{DicomToolBar}, dziedziczącą po klasy \qtclass{QToolBar}.
 Posiada on zespół ikonek z rozwijalnymi menu kontekstowymi.
 
 \par
@@ -13,6 +13,10 @@ Drugi oznacza akcje, sygnał akcji, która powinna być wykonana na przez scenę
 Ikony na pasku:
 \begin{itemize}
     \item Okienkowanie (1)
+
+          Stan: \cppcode{Windowing}.
+          Oznacza, że horyzontalny ruch myszki powinien zmieniać szerokość okna, a wertykalny środek okna.
+          Przycisk jest aktywny tylko wtedy gdy na obecna scena posiada obraz monochromatyczny.
 
     \item Przesuwanie (2)
 
@@ -112,5 +116,5 @@ Ikony na pasku:
           Akcja: \cppcode{OpenDataSet}.
 
           Kliknięcie tego przycisku wyśle prośbę o otworzenie okna ze zbiorem elementów danych pliku obrazu, który jest obecnie wyświetlany na scenie.
-          
+
 \end{itemize}
