@@ -19,7 +19,7 @@ Natomiast klasa \qtclass{QGraphicsView} dostarcza element interfejsu graficznego
 \par
 Na scenie mogą być wyświetlana obiekty dziedziczące po \qtclass{QGraphicsItem}.
 Obiekty te mogą być dodawane, usuwane i przesuwane ze sceny w czasie rzeczywistym.
-Dodatkowo można  na tym obiektach używać transformat we współrzędnych jednorodnych, szerzej opisanych w sekcji \ref{sec:sokar-dicomscene-tranformat}.
+Dodatkowo można na tych obiektach używać przekształceń macierzowych we współrzędnych jednorodnych, szerzej opisanych w sekcji \ref{sec:algorithm-pixmap-tranformat}.
 Przykłady obiektów używanych w scenie \sokarclass{DicomScene}:
 \begin{itemize}
     \item \qtclass{QGraphicsTextItem} --- element wyświetlający tekst, obsługuje on możliwość wyświetlania podstawowych znaczników HTML
@@ -27,6 +27,31 @@ Przykłady obiektów używanych w scenie \sokarclass{DicomScene}:
     \item \qtclass{QGraphicsPixmapItem} --- element wyświetlający obrazy graficzne, obiety klasy \qtclass{QPixmap}
     \item \qtclass{QGraphicsItemGroup} --- element grupujący wiele elementów, pozwala na łatwą implementacje bardziej złożonych struktur
 \end{itemize}
+\par
+Silnik graficzny Qt został rozszerzony o dodatkowe możliwości, ułożone w warstwy.
+Pierwszą warstwą jest biblioteka Qt (\qtclass{QGraphicsScene}).
+Drugą jest to scena z elementami, które same są w stanie się przemieszczać po scenie (\sokarclass{Scene}).
+Trzeci warstwa to scena z obrazem \DICOM (\sokarclass{DicomScene}).
+\par
+W pierwszej warstwie elementy graficzne zostały zaimplementowane za pomocą klasy \sokarclass{SceneIndicator}, dziedziczącej po \qtclass{QGraphicsItemGroup}.
+Sceny zostały zaimplementowane za pomocą klasy \sokarclass{Scene}, dziedziczącej po \qtclass{QGraphicsScene}.
+A kontrolka graficzna została zaimplementowana za pomocą klasy \sokarclass{DicomGraphics}, dziedziczącej po \qtclass{QGraphicsView}. 
+\par
+W Qt sceny wyświetlające elementy nie wiedzą jakiej wielości jest kontrolka graficzna, która je wyświetla, dodatkowo nie wiedzą czy są wyświetlane czy nie.
+Obiekty klasy \sokarclass{DicomGraphics}, informują sceny, a wielkości kontrolki i o zmianach wielkości.
+Dodatkowo obiekty \sokarclass{SceneIndicator}, też dostają informacje o zmianach wielkości scen i są wstanie sane zmieniać swoją pozycje na scenie poprzez wirtualną funkcje  \sokarfunction{SceneIndicator}{reposition}.
+\par
+W trzeciej warstwie została dodana klasa \sokarclass{DicomScene} dziedzicząca po \sokarclass{Scene}.
+\par
+Diagram klas UML znajduje się na rysunku \ref{uml:sokar-scene-layers}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/uml/dicom-scene-layers.png}
+    \caption{Diagram klas UML dziedziczenia klasy \sokarclass{DicomScene}.}
+    \label{uml:sokar-scene-layers}
+\end{figure}
+
 
 \subsubsection{Informacje wyświetlane na scenie}
 \input{text/implementacja/strukturydanych/dicom-scene-indicators.tex}
@@ -36,24 +61,24 @@ Przykłady obiektów używanych w scenie \sokarclass{DicomScene}:
 Klasa \sokarclass{DicomScene} jest klasą abstrakcyjną i nie generuje obrazu, pozostawia to klasą dziedziczących po niej.
 Dokładna analiza cyklu generowania obrazów jest opisana w sekcji \ref{sec:algorithm-pixmap-generate}.
 
-\subsubsection{Transformaty obrazu}
+\subsubsection{Przekształcenia macierzowe obrazu}
 
 \par
 Wygenerowany obraz można wyświetlić na scenie bez większego problemu.
-Wyświetlanie \cppcode{pixmap}, obiektu klasy \qtclass{QPixmap}, odbywa się za pomocą obiektu \cppcode{pixmapItem}, obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
-Ta ostatnia klasa ma w sobie zaimplementowaną funkcję pozwalającą na nałożenie przekształcenia na obraz.
-Transformata to obiekt klasy \qtclass{QTransform}, który reprezentuje transformatę dwu wymiarowa na obiekt, praktycznie jest to macierz 3 na 3 reprezentująca przekształcenie we współrzędnych jednorodnych.
+Wyświetlanie obrazu na scenie odbywa sie za pomocą obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
+Ta ostatnia klasa ma w sobie zaimplementowaną funkcję pozwalającą na nałożenie przekształcenia macierzowego na obraz.
+W Qt, przekształcenia macierzowe jest implementowane za pomocą klasy \qtclass{QTransform}, która jest macierzą 3 na 3
 
-Zostało zdefiniowanych 4 transformat, które działają na obiekt obrazu wyświetlany na scenie:
+Zostało zdefiniowanych 4 macierze, które działają na obiekt obrazu wyświetlanego na scenie:
 \begin{itemize}
-    \item \cppcode{centerTransform} --- transformata wyśrodkowująca, zadanie tego przekształcenia jest przeniesienie obrazu na środek sceny
-    \item \cppcode{panTransform} --- transformata przesunięcia
-    \item \cppcode{scaleTransform} --- transformata skali
-    \item \cppcode{rotateTransform} --- transformata rotacji
+    \item \cppcode{centerTransform} --- macierz wyśrodkowująca, zadanie tego przekształcenia jest przeniesienie obrazu na środek sceny
+    \item \cppcode{panTransform} --- macierz przesunięcia
+    \item \cppcode{scaleTransform} --- macierz skali
+    \item \cppcode{rotateTransform} --- macierz rotacji
 \end{itemize}
 
 \par
-Transformaty, podczas interakcji z użytkownikiem, mogą ulegać zmianom na dwa sposoby.
+Macierze, podczas interakcji z użytkownikiem, mogą ulegać zmianom na dwa sposoby.
 Pierwszym sposobem jest odebranie sygnału od przycisków z paska zadań, szerzej opisanego w sekcji \ref{sec:sokar-dicomtoolbar}, znajdującego się nad sceną.
 Drugi sposób to przechwycenie ruchów myszki gdy wciśnięty jest lewy przycisk myszy.
 \par

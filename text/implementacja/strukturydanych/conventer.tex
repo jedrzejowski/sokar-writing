@@ -6,47 +6,47 @@ Dlatego został zaimplementowany obiekt klasy \sokarclass{DataConverter} zajmuj�
 
 \par
 Obiekt konwertera jest tworzony na podstawie pliku \DICOM i przy wywoływaniu konwersji należy podać tylko znacznik, który nas interesuje.
-Taki rozwiązanie pozwala na przesłanie do wszystkich obiektów, jednego względnie małego obiektu konwertera co ułatwia zarządzanie plikiem \DICOM.
+Taki rozwiązanie pozwala na przesłanie do wszystkich obiektów, jednego względnie małego obiektu konwertera co ułatwia zarządzanie dostępem do pliku \DICOM.
 
 \par
-Klasa \sokarclass{DataConverter} posiada następujące funkcje:
+Klasa \sokarclass{DataConverter} posiada następujące funkcje, pozwalające na konwertowanie danych:
 \begin{itemize}
-    \item \cppcode{QString toString(const gdcm::Tag \&tag);}
+    \item \sokarfunction{DataConverter}{toString}
 
-          Funkcja konwertuje element na obiekt tekstu.
+          Funkcja konwertuje element na obiekt tekstu \qtclass{QString}.
 
-    \item \cppcode{gdcm::Tag toAttributeTag(const gdcm::Tag \&tag);}
+    \item \sokarfunction{DataConverter}{toAttributeTag}
 
-          Funkcja konwertuje element o znaczniku typu \dicomvr{AT} na obiekt znacznika.
+          Funkcja konwertuje element o znaczniku typu \dicomvr{AT} na obiekt znacznika \gdcmclass{Tag}.
 
-    \item \cppcode{QString toAgeString(const gdcm::Tag \&tag);}
+    \item \sokarfunction{DataConverter}{toAgeString}
 
-          Funkcja konwertuje element o znaczniku typu \dicomvr{AS} na tekst w postaci czytelnej, np: „18 weeks” lub „3 years”, oraz jest wrażliwy na obecny język aplikacji.
+          Funkcja konwertuje element o znaczniku typu \dicomvr{AS} na tekst w postaci czytelnej, np: „18 weeks” lub „3 years”.
 
-    \item \cppcode{QDate toDate(const gdcm::Tag \&tag);}
+    \item \sokarfunction{DataConverter}{toDate}
 
           Funkcja konwertuje element o znacznik typu \dicomvr{DA} na obiekt klasy \qtclass{QDate}, który ma w sobie wbudowaną konwersję na tekst zależny od ustawień językowych aplikacji.
 
-    \item \cppcode{QVector<qreal> toDecimalString(const gdcm::Tag \&tag);}
+    \item \sokarfunction{DataConverter}{toDecimalString}
 
           Funkcja konwertuje element o znacznik typu \dicomvr{DS} na obiekt wektora posiadającego liczby rzeczywiste.
           \cppcode{qreal} jest aliasem do typu zmiennoprzecinkowego, na systemach 64-bitowy jest to \cppcode{double}.
 
-    \item \cppcode{qint32 toIntegerString(const gdcm::Tag \&tag);}
+    \item \sokarfunction{DataConverter}{toIntegerString}
 
-          Funkcja konwertuje element o znacznik typu \dicomvr{IS} na obiekt 32-bitowa liczbę całkowitą.
+          Funkcja konwertuje element o znacznik typu \dicomvr{IS} na 32-bitową liczbę całkowitą (\cppcode{qint32}).
 
-    \item \cppcode{QString toPersonName(const gdcm::Tag \&tag);}
+    \item \sokarfunction{DataConverter}{toPersonName}
 
           Funkcja konwertuje element o znacznik typu \dicomvr{PN} na obiekt tekst zawierający imię w formie pisanej.
 
-    \item \cppcode{qint16 toShort(const gdcm::Tag \&tag);}
+    \item \sokarfunction{DataConverter}{toShort}
 
-          Funkcja konwertuje element o znacznik typu \dicomvr{SS} na obiekt 16-bitowa liczbę całkowitą ze znakiem.
+          Funkcja konwertuje element o znacznik typu \dicomvr{SS} na 16-bitowa liczbę całkowitą ze znakiem (\cppcode{qint16}).
 
-    \item \cppcode{quint16 toUShort(const gdcm::Tag \&tag);}
+    \item \sokarfunction{DataConverter}{toUShort}
 
-          Funkcja konwertuje element o znacznik typu \dicomvr{US} na obiekt 16-bitowa liczbę całkowitą bez znaku.
+          Funkcja konwertuje element o znacznik typu \dicomvr{US} na 16-bitowa liczbę całkowitą bez znaku (\cppcode{quint16}).
 
 \end{itemize}
 Oprócz powyższych funkcji jest jeszcze kilka innych funkcji pobocznych oraz kilka aliasów.

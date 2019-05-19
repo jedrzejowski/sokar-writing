@@ -1,12 +1,21 @@
 
-Informacje na scenie są wyświetlane za pomocą obiektów, które dziedziczą po klasie \sokarclass{SceneIndicator}.
-Obiekty te mają dostęp do obiektu konwertera.
-Obiekty dziedziczące po \sokarclass{SceneIndicator} implementują róznież swoją pozycje na scenie i są wstanie ją zmieniać w raz ze zmianą wielkości sceny.
+\par
+Wszystkie elementy wyświetlające dane z pliku \DICOM dziedziczą po klasie \sokarclass{SceneIndicator}.
+Diagram klas UML znajduje się na rysunku \ref{uml:sokar-scene-indicators}.
 
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/uml/dicom-scene-indicators.png}
+    \caption{Diagram klas UML dziedziczenia klasy \sokarclass{DicomScene}.}
+    \label{uml:sokar-scene-indicators}
+\end{figure}
+
+\par
 Domyślnie obiekty wyświetlające informacje (tytuły punktów to nazwy klas):
-\paragraph{\sokarclass{PatientDataIndicator}}
+\paragraph{Dane pacjenta}
 
-Obiekt wyświetlający dane pacjenta, pojawia się zawsze na scenie w lewym górnym rogu i zawiera następujące linie:
+Są implementowane przez \sokarclass{PatientDataIndicator}.
+Pojawia się zawsze na scenie w lewym górnym rogu i zawiera następujące linie:
 \begin{itemize}
     \item Nazwa pacjenta oraz płeć
 
@@ -60,9 +69,10 @@ Przykład pełnego teksu:
     AP
 }
 
-\paragraph{\sokarclass{HospitalDataIndicator}}
+\paragraph{Dane jednostki organizacyjnej}
 
-Obiekt wyświetlający dane szpitala/instytucji, pojawia się zawsze na scenie w prawym górnym rogu i zawiera następujące linie:
+Są implementowane przez \sokarclass{HospitalDataIndicator}.
+Pojawia się zawsze na scenie w prawym górnym rogu i zawiera następujące linie:
 \begin{itemize}
     \item Nazwa instytucji
 
@@ -70,9 +80,10 @@ Obiekt wyświetlający dane szpitala/instytucji, pojawia się zawsze na scenie w
 
 \end{itemize}
 
-\paragraph{\sokarclass{ImageOrientationIndicator}}
+\paragraph{Orientacja obrazu}
 
 \par
+Jest implementowana przez \sokarclass{ImageOrientationIndicator}.
 Obiekt wyświetlający cztery litery oznaczające orientacje obrazu w stosunku do pacjenta.
 Obiekt posiada cztery pola: lewe, górne, prawe i dolne.
 
@@ -90,16 +101,18 @@ Każda z sześciu możliwych liter oznacza kierunek oraz zwrot w jakim jest uło
 \par
 Pełeny opis implementacji algorytmu wyznaczania stron znajduje się w sekcji \label{sec:algorithm-imageorientationindicator}.
 
-\paragraph{\sokarclass{PixelSpacingIndicator}}
+\paragraph{Podziałka}
 
-Obiekt wyświetlający miarkę z podziałką informującą jakich rozmiarów jest obiekt na obrazie w rzeczywistości, pojawia się na dole i po prawie stronie sceny, gdy tag \dicomtag{PixelSpacing}{0028}{0030} jest obecny.
+Jest implementowana przez \sokarclass{PixelSpacingIndicator}.
+Obiekt wyświetlający podziałkę informującą jakich rzeczywistych rozmiarów jest obiekt na obrazie, pojawia się na dole i po prawie stronie sceny, gdy znacznik \dicomtag{PixelSpacing}{0028}{0030} jest obecny.
 Wygląd podziałki można zaobserwować na rysunku \ref{fig:imageorientationindicator1}.
 
 Podziałka dostosowuje swoją wielkość do obecnej sceny, jak i do innych elementów na scenie.
 Wartości wyświetlane biorą pod uwagę transformatę skali i rotacji obrazu.
 
-\paragraph{\sokarclass{ModalityIndicator}}
+\paragraph{Dodatkowe informacje o modalności}
 
+Są implementowane przez \sokarclass{ModalityIndicator}.
 Obiekt wyświetla informacje o akwizycji obrazu.
 Dane różnią się w zależności od modalności obrazu.
 Domyślnie zawierają następujące linie:
