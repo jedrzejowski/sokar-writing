@@ -4,45 +4,48 @@
 
 \par
 Każdy obraz cyfrowy jest matrycą pikseli o ustalonych rozmiarach.
-W przypdku standardu \DICOM, obrazy są matrycami wokseli, posiadającymi wysokość (zapisaną w \dicomtag{Rows}{0028}{0010}) oraz szerokość (zapisaną w \dicomtag{Columns}{0028}{0011}).
-Do poprawnej interpretacji znaczenia macierzy służy znacznik \dicomtag{PhotometricInterpretation}{0028}{0004}, informujący o fotometrycznym znaczeniu wokseli.
+W przypadku standardu \DICOM obrazy są matrycami wokseli, posiadającymi wysokość (zapisaną w \dicomtag{Rows}{0028}{0010}) oraz szerokość (zapisaną w \dicomtag{Columns}{0028}{0011}).
+Do poprawnej interpretacji znaczenia macierzy służy znacznik \dicomtag{Photometric Interpretation}{0028}{0004}, informujący o fotometrycznym znaczeniu wokseli.
 Standard DICOM definiuje następujące wartości tego tagu (wraz z wyjaśnieniem):
 \begin{itemize}
-    \item \dataword{MONOCHROME1} i \dataword{MONOCHROME2} --- wartość woksela to odwzorowuje skale monochromatyczną, odpowiednio od jasnego do ciemnego i od ciemnego do jasnego.
+    \item \dataword{MONOCHROME1} i \dataword{MONOCHROME2} --- ta wartość woksela odwzorowuje skale monochromatyczną, odpowiednio od jasnego do ciemnego i od ciemnego do jasnego.
 
-    \item \dataword{PALETTE COLOR} --- wartość woksela jest używana jako indeks w każdej z tabel wyszukiwania kolorów palety czerwonej, niebieskiej i zielonej.
+    \item \dataword{PALETTE COLOR} --- ta wartość woksela jest używana jako indeks w każdej z tabel wyszukiwania kolorów palety czerwonej, niebieskiej i zielonej.
           Palety mają swoje własne tagi.
           Wartość raczej rzadka i nie spotykana.
 
-    \item \dataword{RGB} --- oznacza, że woksel trzy-kanałowym pikselem RGB (kanały: czerwony, zielony i niebieski).
+    \item \dataword{RGB} --- oznacza, że woksel jest trzy-kanałowym pikselem RGB (kanały: czerwony, zielony i niebieski).
 
     \item \dataword{HSV} \fromEng{Hue Saturation Value} --- woksel reprezentuje piksel w modelu przestrzeni barw zaproponowany w 1978 roku przez Alveya Raya Smitha.
           Model ten nawiązuje do sposobu w jakim widzi oko człowieka.
           Wartość wycofana.
 
-    \item \dataword{ARGB} --- wartość woksela to piksel RGB z dodatkowym kanałem przezroczystości.
+    \item \dataword{ARGB} --- ta wartość woksela to piksel RGB z dodatkowym kanałem przezroczystości.
           Wartość wycofana.
 
-    \item \dataword{CMYK} --- woksel to piksel w modelu czterech podstawowych kolorów farb drukarskich stosowanych powszechnie w druku wielobarwnym w poligrafii: cyjan, magenta, żółty, czarny.
+    \item \dataword{CMYK} --- ten woksel to piksel w modelu czterech podstawowych kolorów farb drukarskich stosowanych powszechnie w druku wielobarwnym w poligrafii: cyjan, magenta, żółty, czarny.
           Wartość wycofana.
 
-    \item \dataword{YBR\_FULL} --- woksel to piksel w modelu przestrzeni barw nazwanej YCbCr.
+    \item \dataword{YBR\_FULL} --- ten woksel to piksel w modelu przestrzeni barw nazwanej YCbCr.
 
           Dodatkowo standard zdefiniował pochodne tej wartości: \dataword{YBR\_FULL\_422}, \dataword{YBR\_PARTIAL\_422}, \dataword{YBR\_PARTIAL\_420}, \dataword{YBR\_ICT}, \dataword{YBR\_RCT}, ale wszystkie są już wycofane.
 \end{itemize}
 
+\dicomRetired
+
 \par
-Kwantyzacja obrazu, czyli informacja mówiąca o tym ile poziomów jest na obrazie jest zapisana w czterech znacznikach:
+Kwantyzacja obrazu, czyli informacja mówiąca o tym ile poziomów na obrazie jest zapisanych w czterech znacznikach:
 \begin{itemize}
-    \item \dicomtag{BitsAllocated}{0028}{0100} --- informuje na jak wiele bitów zostało zaalokowancyh do zapisany jedego piksela
-    \item \dicomtag{BitsStored}{0028}{0101} --- informuje jak wiele bitów z zaalokowanych posiada wartość piksela
-    \item \dicomtag{HighBit}{0028}{0102} --- informuje gdzie znajduje się najstarszy bit
-    \item \dicomtag{PixelRepresentation}{0028}{0103} --- informuje czy poziomu są ze znakiem czy bez
+    \item \dicomtag{Bits Allocated}{0028}{0100} --- informuje na jak wiele bitów zostało zaalokowancyh do zapisania jednego piksela
+    \item \dicomtag{Bits Stored}{0028}{0101} --- informuje jak wiele bitów z zaalokowanych posiada wartość piksela
+    \item \dicomtag{High Bit}{0028}{0102} --- informuje gdzie znajduje się najstarszy bit
+    \item \dicomtag{Pixel Representation}{0028}{0103} --- informuje czy poziomy są ze znakiem czy bez
 \end{itemize}
 
 \par
-Obraz DICOM również zawiera w sobie informacje o próbkowaniu, ale z uwagi, że próbkowanie wygląda inaczej w każdej technice, dlatego standard posada oddzielne tagi informujące o próbkowania dla każdej techniki.
-Próbkowanie poszczególnych technik opisałem w sekcji \ref{sec:basic-imaging-technics}, przytaczanie tagów dla każdej techniki jest bezcelowe.
+Obraz \DICOM również zawiera w sobie informacje o próbkowaniu.
+Z uwagi na to, że próbkowanie wygląda inaczej w każdej technice, standard posiada oddzielne tagi informujące o próbkowaniu dla każdej techniki.
+Próbkowanie poszczególnych technik opisałem w sekcji \ref{sec:basic-imaging-technics}.
 
 % \subsection{Wartość diagnostyczna obrazu}
 
@@ -71,7 +74,7 @@ Próbkowanie poszczególnych technik opisałem w sekcji \ref{sec:basic-imaging-t
 
 \subsection{Kontrast}
 
-Jedną z wielu definicji kontrastu jest kontrast Michelson wyrażony wzorem:
+Jedną z wielu definicji kontrastu jest kontrast Michelsona wyrażony wzorem:
 \[\frac{I_{max}-I_{min}}{I_{max}+I_{min}}\]
 gdzie $I_{max}$ i $I_{min}$ to najwyższa i najniższa wartość luminancji.
 
@@ -88,13 +91,15 @@ W radiografii rozdzielczość określa się zazwyczaj jako liczbę równoległyc
 
 \par
 Rozdzielczość przestrzenna jest zależna od kontrastu obrazu.
-Jednakże ta zależność jest troche inna dla każdej techniki.
+Zależność ta jest inna dla każdej techniki.
 
 \subsubsection*{Czasowa}
 
-Każdy pomiar wymaga pewnego czasu pobierania danych, ale w nie których przypadkach interesuje nas zmiana w czasie.
-Rozdzielczość czasowa pojawia się w obrazach dynamicznych kiedy mamy pomiar w czasie i ustalone markery czasowe.
-Jest definiowana jako odległość w czasie od dwóch klatek obrazowania.
+Każdy pomiar wymaga pewnego czasu pobierania danych.
+W nie których przypadkach ważna jest również zmiany zachodzące w organizmie w czasie wykonywania badania.
+Rozdzielczość czasowa, jest istotna w obrazach dynamicznych, np. angioMR.
+Kiedy mamy pomiar dokonywany w określonym czasie i ustalone są markery czasowe.
+Rozdzielczość czasowa jest definiowana jako odległość w czasie od dwóch klatek obrazowania.
 
 \subsection{Stosunek sygnału do szumu (SNR)}
 
@@ -104,11 +109,11 @@ Stosunek sygnału ma decydujący wpływ na widoczności obiektów, kontrast oraz
 \subsection{Poziom artefaktów}
 
 Artefakty to zjawiska fałszujące obraz poprzez tworzenie nie istniejących struktur w obrazie.
-Jest to problemem występujący w różnych technikach obrazowania.
-Najbardziej widocznymi artefaktami są warkocz komety i odbicie zwierciadlane w obrazach USG.
+Jest to problem występujący w różnych technikach obrazowania.
+Najbardziej znanymi artefaktami są np. w badaniu USG tak zwany warkocz komety w przypadku obiektów o wysokiej różnicy impedancji w stosunku do otoczenia.
 
 \subsection{Poziom zniekształceń przestrzennych}
 
-Zniekształcenia przestrzenne powstają w wyniku geometrycznego ułożenia i kształtu obiektu badanego i aparat pomiarowego.
-Przykładem takiego zniekształcenia mogą być różne powiększenia obiektów zależne od głębokości ich ułożenia w USG, zmiana pozycji pacjenta(przez ruchy klatki piersiowej w czasie badania), czy deformacja obrazu spowodowana zmianami rozkładu pola magnetycznego przez metalowe obiekty w znajdujące się w tym samym pomieszczeniu, co MRI.
+Zniekształcenia przestrzenne powstają w wyniku geometrycznego ułożenia i kształtu obiektu badanego oraz aparatu pomiarowego.
+Przykładem takiego zniekształcenia mogą być różne powiększenia obiektów zależne od głębokości ich ułożenia w USG, zmiana pozycji pacjenta(przez ruchy klatki piersiowej w czasie badania), czy deformacja obrazu spowodowana zmianami rozkładu pola magnetycznego przez metalowe obiekty w znajdujące się w tym samym pomieszczeniu w przypadku badań MRI.
 

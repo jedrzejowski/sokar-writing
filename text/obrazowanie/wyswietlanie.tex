@@ -1,13 +1,13 @@
 
 \par
-W celu przeglądania i porównywania należy posiadać jakieś narzędzie do wyświetlenia w sposób poprawny, najlepiej jednym i tym samym programem.
+W celu przeglądania i porównywania należy posiadać narzędzie do wyświetlenia w sposób poprawny, najlepiej jednym i tym samym programem.
 \par
-Standard \DICOM przewiduje sposób prezentacji danych administracyjnych i danych związanych z rejestracją badania, ajk wyświetlać obrazy radiologiczne i obrazy TK, obrazy scyntylacyjne, itd.
+Standard \DICOM pozwala na odczytanie badania i wyświetlanie go w postaci obrazów radiologicznych, scyntygraficznych, itd.
 
 \subsection{Przeglądarki obrazów}
 
 Przeglądarki obrazów to programy należące do kategorii przeglądarki plików.
-Zwykłe przeglądarki obrazów takich jak jpg, png lub gif wyświetlają obraz w takiej postaci jakiej jest zapisany, oczywiście najpierw przeprowadzają dekompresje obrazu.
+Zwykłe przeglądarki obrazów takich jak jpg, png lub gif wyświetlają obraz w takiej postaci jakiej jest zapisany, najpierw przeprowadzając dekompresję tego obrazu.
 W przypadku obrazów medycznych najczęściej nie mamy do czynienia z danymi reprezentującymi kolory w spektrum światła widzialnego.
 Przeglądarka obrazów \DICOM musi wygenerować kolorowy obraz z danych na podstawie parametrów obrazu.
 
@@ -15,22 +15,19 @@ Przeglądarka obrazów \DICOM musi wygenerować kolorowy obraz z danych na podst
 
 \subsubsection{Obsługa wielu formatów danych}
 
-Standard \DICOM przewidział możliwość zapisania wielu typów danych w różnych formatach.
-Nie tylko obrazów, ale też nagrań nagrań audio i tekstów.
-Przeglądarka obrazów \DICOM może też mieć możliwość od zywania i wyświetlenia lub odsłuchania takich typów danych.
+Standard \DICOM przewidział możliwość zapisania wielu typów danych w różnych formatach, nie tylko obrazów, ale też nagrań nagrań audio i tekstów.
+Przeglądarka obrazów \DICOM może mieć możliwość od czytania, wyświetlenia lub odsłuchania danych.
 
 \subsubsection{Podstawowe operacje na obrazie}
 
 \begin{itemize}
-    \item Skalowaniu lub powiększenie.
-          Możliwość powiększenia lub zmniejszenia wyświetlanego obrazu o pewny współczynnik skalujący.
+    \item Skalowanie lub powiększenie, czyli możliwość powiększenia lub zmniejszenia wyświetlanego obrazu o pewny współczynnik skalujący.
 
-    \item Przesuwanie \fromEng{pan}.
-          Możliwość przesuwania obrazu o dowolny wektor.
-          Przydatne gdy powiększymy obraz do takiego stopnia, że nie będzie mieścił się na ekranie lub w okienku programu.
+    \item Przesuwanie \fromEng{pan}, czyli możliwość przesuwania obrazu o dowolny wektor.
+          Jest to przydatne, gdy powiększymy obraz do takiego stopnia, że nie będzie mieścił się na ekranie lub w okienku programu.
 
-    \item Lupa, skalowanie miejscowe
-          Możliwość miejscowego powiększenia obrazu.
+    \item Lupa, skalowanie miejscowe.
+          Jest to możliwość miejscowego powiększenia obrazu.
           Przykład użycia takiego narzędzia znajduje się na rysunku \ref{fig:wyswietlanie001}.
 
           \begin{figure}[!htbp]
@@ -40,9 +37,7 @@ Przeglądarka obrazów \DICOM może też mieć możliwość od zywania i wyświe
               \label{fig:wyswietlanie001}
           \end{figure}
 
-    \item Rotacja i odbicia lustrzane
-          Możliwość obrócenia obrazu o zadany kąt.
-          Oraz możliwość odbicia lustrzanego obrazu w dwóch osiach X i Y.
+    \item Rotacja i odbicia lustrzane, czyli możliwość obrócenia obrazu o zadany kąt oraz możliwość uzyskania odbicia lustrzanego obrazu w dwóch osiach X i Y.
 
 \end{itemize}
 
@@ -51,10 +46,10 @@ Przeglądarka obrazów \DICOM może też mieć możliwość od zywania i wyświe
 \begin{itemize}
     \item Okienkowanie.
           Termin odnosi się do używania funkcji okna cyfrowego w celu zamiany obrazu danych na obraz monochromatyczny możliwy do wyświetlenia.
-          Okienkowanie jest szczegółowo opisane w sekcji \ref{sec:sokar-dicomscene-monochrome} wraz z generowanie obrazu monochromatycznego.
+          Okienkowanie jest szczegółowo opisane w sekcji \ref{sec:algorithm-pixmap-monochrome} wraz z generowaniem obrazu monochromatycznego.
 
     \item Maski lub nakładki \fromEng{overlay}.
-          Możliwość nałożenia maski, elementu, który będzie przysłaniał fragment obrazu w celu lepszej wizualizacji bądź ukrycie mało wartościowych obiektów, np. tła.
+          Jest możliwość nałożenia maski, elementu, który będzie przysłaniał fragment obrazu w celu lepszej wizualizacji bądź ukrycie mało wartościowych obiektów, np. tła.
           Standard \DICOM umożliwia nałożenie wielu masek na jeden obraz.
 \end{itemize}
 
@@ -63,15 +58,14 @@ Przeglądarka obrazów \DICOM może też mieć możliwość od zywania i wyświe
 \begin{itemize}
 
     \item Obsługa DICOMDIR.
-          Możliwość wczytania pliku DICOMDIR i wyświetlenie struktury serii badań.
+          Jest to możliwość wczytania pliku DICOMDIR i wyświetlenie struktury serii badań.
           Plik DICOMDIR to wiele zindeksowanych plików zawierający ich zbiór elementów danych, bez obrazów.
 
-    \item Wczytanie wielu plików i ich połączenie w formie filmu.
-          Możliwość wczytania wielu plików z tej samej serii, ułożenia ich według pozycji geometrycznej i wyświetlenia ich jako film.
-          Czyli periodyczna podmiana obrazu na obraz następny w serii.
+    \item Wczytanie wielu plików i ich połączenie w formie filmu, czyli możliwość wczytania wielu plików z tej samej serii, ułożenia ich według pozycji geometrycznej i wyświetlenia ich jako film.
+          Innymi słowy jest periodyczna podmiana obrazu na obraz następny w serii.
 
     \item Wyświetlanie wielu obrazów jednocześnie.
-          Możliwość wyświetlenia obrazów w postaci kratki, w której każda komórka była by innym obrazem.
+          Jest to możliwość wyświetlenia kilku obrazów w postaci tabelki, w której każda komórka była by innym obrazem.
 
           Przykład wyświetlenia wielu obrazów na raz w jednym oknie znajduje się na rysunku \ref{fig:dicomviewer001}
 
@@ -85,7 +79,7 @@ Przeglądarka obrazów \DICOM może też mieć możliwość od zywania i wyświe
 
 \subsubsection{Generowanie obrazów woliumetrcznych}
 
-Jeżeli mamy do dyspozycji wiele obrazów tomograficznych o znanych parametrach to możemy wczytać je, posegregować a następnie wygenerować trój-wymiarowy obiekt a następnie wyświetlić go na ekranie komputera za pomocą trójwymiarowej grafiki komputerowej.
+Jeżeli mamy do dyspozycji wiele obrazów tomograficznych o znanych parametrach to możemy wczytać je, posegregować a następnie wygenerować trójwymiarowy obiekt, który wyświetlany jest ekranie komputera za pomocą trójwymiarowej grafiki komputerowej.
 
 Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
 
@@ -99,18 +93,18 @@ Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
 \subsubsection{Analiza i przetwarznie danych}
 
 \begin{itemize}
-    \item Histogram
-          Możliwość wygenerowania histogramu obrazu.
+    \item Histogram, czyi możliwość wygenerowania histogramu obrazu.
 
           Histogram to wykres przedstawiający dystrybucje wartości numerycznych obrazu.
 
     \item Mierzenie obrazu, wykonywanie pomiarów.
-          Możliwość określenia odległości pomiędzy dwoma punktami przez lekarza lub zmierzenia wielkości/pola zadanego kształtu.
+          Pozwala na określenie odległości pomiędzy dwoma punktami przez lekarza lub zmierzenie wielkości/pola zadanego kształtu.
 
     \item Rekonstrukcja wielopłaszczyznowa.
-          Obrazy tomograficzne przedstawiają przekroje, jeżeli parametry wielkości woksela są dostępne to istnieje możliwość wygenerowania nowego obrazu który byłby obrazem ułożonym w poprzek.
+          Obrazy tomograficzne przedstawiają przekroje.
+          Jeżeli parametry wielkości woksela są dostępne to istnieje możliwość wygenerowania nowego obrazu, który byłby przekrojem poprzecznym.
 
-          Przykład generowania rekonstrukcja wielopłaszczyznowej jest pokazany na rysunku \ref{fig:dicomviewer003}
+          Przykład generowania rekonstrukcji wielopłaszczyznowej jest pokazany na rysunku \ref{fig:dicomviewer003}
 
           \begin{figure}[!htbp]
               \centering
@@ -124,27 +118,27 @@ Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
 
 \begin{itemize}
     \item Dodawanie nowych obiektów.
-          Rysowania, dodawania figur geometrycznych lub tekstu przez lekarza i zapis tych informacji w pliku DICOM (lub nadpis).
+          Pozwala na rysowanie, dodawanie figur geometrycznych lub tekstu przez lekarza i zapis tych informacji w pliku \DICOM (lub nadpis).
           Chodzi tu głównie o szkice i notatki tworzone podczas analizy obrazu przez personel medyczny.
 
-    \item Edycja Parametrów oraz anonimizacja danych.
-          Możliwość edycji parametrów w pliku \DICOM w różnych celach.
-          Najczęściej funkcja jest używana do usuwania danych osobowych pacjenta w celu późniejszej publikacji obrazu.
+    \item Edycja parametrów oraz anonimizacja danych.
+          Jest to możliwość edycji parametrów w pliku \DICOM w różnych celach.
+          Funkcja jest używana do usuwania danych osobowych pacjenta w celu późniejszej publikacji obrazu.
 
 \end{itemize}
 
 \subsection{Kryteria porównywania przeglądarek obrazów}
 
-Porównanie aplikacji posiadających tak wiele parametrów jak przeglądarki \DICOM jest nietrywialna.
-Dlatego wyróżniono 26 kryteriów do ich porównywania w postaci logicznej: „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcie, obrazowanie dwu i trój wymiarowego.
+Porównanie aplikacji posiadających tak wiele parametrów jak przeglądarki \DICOM jest bardzo skomplikowanym procesem.
+Dlatego wyróżniono 26 kryteriów do ich porównywania w postaci logicznej: „tak” lub „nie”, podzielonych na 5 grup, platformy, interfejsu, wsparcia, obrazowania dwu i trójwymiarowego.
 Kryteria te w jasny sposób pozwalają na ocenę praktycznych aspektów użytkowania przeglądarki.
 
 \subsubsection{Platforma}
 
-Samodzielność, aplikacje samodzielne są zaprojektowane tak, aby nie wymagały żadnego dodatkowego sprzętu fizycznego bądź infrastruktury do poprawnego działania(np. systemu Windows oraz serwisów przez niego dostarczanych).
-Rozwiązania sieciowe, określają czy aplikacja jest usługą sieciową i można z przeglądarki korzystać jak ze strony WWW.
-Wieloplatformowość, możliwość uruchomienia ich na różnych systemach operacyjnych Linux/MacOS/Windows
-Rozwiązania mobilne, możliwość używania na urządzeniach mobilnych takich jak telefon.
+Grupa platforma zawiera kryterium samodzielności.
+Aplikacje samodzielne są zaprojektowane tak, aby nie wymagały żadnego dodatkowego sprzętu fizycznego bądź infrastruktury do poprawnego działania.
+Rozwiązania sieciowe określają czy aplikacja jest usługą sieciową i czy można z aplikacji korzystać jak ze strony WWW.
+Aplikacje są wieloplatformowe, czyli mają możliwość uruchomienia ich na różnych systemach operacyjnych Linux/MacOS/Windows oraz możliwość używania ich na urządzeniach mobilnych takich jak telefon.
 
 \subsubsection{Interfejs}
 
@@ -153,8 +147,7 @@ Podstawowe interfejsy sieciowe to: C-STORE SCP DICOM C-STORE, C-STORE SCU, Query
 
 \subsubsection{Wsparcie techniczne}
 
-Dokumentacja, dostępność pisemnej dokumentacji oprogramowania (np. podręczniki lub strony internetowej).
-Wsparcie przez pocztę internetową, możliwość porozumienia się z twórcą lub opiekunem oprogramowania.
+Aplikacja powinna mieć dostępną pisemną dokumentację oprogramowania (np. podręczniki lub strony internetowej), wsparcie przez pocztę internetową, możliwość porozumienia się z twórcą lub opiekunem oprogramowania.
 Forum, możliwość pytania się społeczności o opinie i ich wymiana.
 Wiki, strona internetowa w formacie Wikipedii dostępna dla użytkownika.
 
