@@ -2,7 +2,7 @@
 
 int main() {
 
-    /* Tworzymy obiekt czytacza i wczytujemy plik */
+    /* Tworzymy obiekt czytającego i wczytujemy plik */
     gdcm::ImageReader ir;
     ir.SetFileName("/path/to/file");
     if (!ir.Read()) {
@@ -35,7 +35,7 @@ int main() {
     if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
         std::cout << "Jest to obraz monochromatyczny typu drugiego\n";
 
-    /* Oczywiście dalej można pobrać plik i zbiór elementów */
+    /* Dalej można pobrać plik i zbiór elementów */
 
     const gdcm::File &file = ir.GetFile();
     const gdcm::DataSet &dataset = ir.GetDataSet();

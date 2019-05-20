@@ -1,12 +1,12 @@
 
 \par
 Każdy plik \DICOM posiada zbiór elementów danych.
-Zapisane elementy danych należy przekonwertować na obiekty danych odpowiedające potrzebą programu.
+Zapisane elementy danych należy przekonwertować na obiekty danych odpowiadające potrzebom programu.
 Dlatego został zaimplementowany obiekt klasy \sokarclass{DataConverter} zajmujący się konwersją danych z pliku \DICOM na dane w formacie odpowiadającym programowi.
 
 \par
 Obiekt konwertera jest tworzony na podstawie pliku \DICOM i przy wywoływaniu konwersji należy podać tylko znacznik, który nas interesuje.
-Taki rozwiązanie pozwala na przesłanie do wszystkich obiektów, jednego względnie małego obiektu konwertera co ułatwia zarządzanie dostępem do pliku \DICOM.
+Takie rozwiązanie pozwala na przesłanie do wszystkich obiektów jednego względnie małego obiektu konwertera, co ułatwia zarządzanie dostępem do pliku \DICOM.
 
 \par
 Klasa \sokarclass{DataConverter} posiada następujące funkcje, pozwalające na konwertowanie danych:

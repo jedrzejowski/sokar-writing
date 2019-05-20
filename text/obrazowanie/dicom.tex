@@ -93,14 +93,14 @@ Oto kilka przykładów:
 \subsubsection{Reprezentacja wartości}
 \label{sec:dicom-vr}
 
-\keyword{VR} to reprezentacja wartości, informuje w jakim formacie jest zapisany parametr obrazu.
+\keyword{VR} to reprezentacja wartości, który informuje w jakim formacie jest zapisany parametr obrazu.
 Składa się z dwóch bajtów.
 
 Przykładowe VR:
 \begin{itemize}
     \item AS --- Age String --- wiek lub długość życia
 
-          Długość danych zawsze wynosi 4 bajty.
+          Długość danych to zawsze wynosi 4 bajty.
           Pierwsze trzy bajty to liczba całkowita zapisana za pomocą tekstu.
           Czwarty bajt to znaku określający jednostkę czasu.
           Standard definiuje cztery możliwe jednostki czasu: \dataword{D} jako dzień, \dataword{W} jako tydzień, \dataword{M} jako miesiąc, oraz \dataword{Y} jako jeden rok.
@@ -109,12 +109,12 @@ Przykładowe VR:
 
     \item AT --- Attribute Tag --- inny znacznik
 
-          Długość danych to zawsze 32 bity, są to dwie 16 bitowe liczby.
-          Odpowiednio grupa i element grupy.
+          Długość danych to zawsze 32 bity, są to dwie 16 bitowe liczby, odpowiednio grupa i element grupy.
           Ten VR jest używany kiedy wskazujemy na inny znacznik.
-          Wartość nie jest nigdy pokazywana użytkownikowi, a jedynie używana w interpretacji przez inne algorytmu do analizy obrazu.
+          Wartość nie jest nigdy pokazywana użytkownikowi, a jedynie używana w interpretacji przez inne algorytmy do analizy obrazu.
 
-          Przykład: znacznik \dicomtag{FrameIncrementPointer}{0028}{0009} jest używany kiedy w pliku jest zapisana sekwencja kilku obrazów, wskazuje on na inny znacznik zawierający informacje, w jaki sposób ta sekwencja ma być wyświetlona.
+          Przykład: znacznik \dicomtag{FrameIncrementPointer}{0028}{0009} jest używany kiedy w pliku jest zapisana sekwencja kilku obrazów.
+          Wskazuje on na inny znacznik zawierający informacje, w jaki sposób ta sekwencja ma być wyświetlona.
 
     \item DA --- Date --- data lub dzień
 
@@ -123,9 +123,9 @@ Przykładowe VR:
 
           Przykład: \dataword{19800716} oznacza 16 lipca 1980
 
-          UWAGA: Standard \enquote{ACR-NEMA Standard 300}, czyli poprzednik DICOM definiował date w sposób \dataword{YYYY.MM.DD}, według standardu DICOM, taki zapis jest nie poprawny, ale zdarzają się stare obrazy z takimi datami i \sokarclass{DataConverter} obsługuje taki format.
+          UWAGA: Standard \enquote{ACR-NEMA Standard 300}, czyli poprzednik \DICOM definiował datę w sposób \dataword{YYYY.MM.DD}, według standardu DICOM, taki zapis jest nie poprawny, ale zdarzają się stare obrazy z takimi datami i \sokarclass{DataConverter} obsługuje taki format.
 
-    \item DS --- Decimal String --- liczba zmiennoprzecinkowa lub ciąg kilku liczb zmienno przecinkowych zapisanych za pomocą tekstu w notacji wykładniczej
+    \item DS --- Decimal String --- liczba zmiennoprzecinkowa lub ciąg kilku liczb zmiennoprzecinkowych zapisanych za pomocą tekstu w notacji wykładniczej
 
           Długość jednej liczby powinna maksymalne wynosić 16 bajtów.
           Dostępne znaki to \dataword{0}-\dataword{9}, \dataword{+}, \dataword{-}, \dataword{E}, \dataword{e}, \dataword{.}.
@@ -143,7 +143,7 @@ Przykładowe VR:
 
     \item PN --- Person Name --- nazwa osoby
 
-          Jako, że pacjenta, bądź obiekt badany można nazwać w sposób dowolny i odbiegający od polskiego standardu nazewnictwa, standard DICOM nie przewiduje rozdzielenia poszczególnych składowych nazwy na oznaczone fragmenty.
+          Ponieważ pacjenta, bądź obiekt badany można nazwać w sposób dowolny i odbiegający od polskiego standardu nazewnictwa, standard DICOM nie przewiduje rozdzielenia poszczególnych składowych nazwy na oznaczone fragmenty.
           \enquote{Person Name} dzieli nazwę na podane fragmenty, rozdzielony znakiem \dataword{\^{}} (94 znak kodu ASCII):
           \begin{itemize}
               \item family name complex --- nazwisko, np. Smolik
@@ -169,6 +169,6 @@ Przykładowe VR:
 \subsection{DICOMDIR}
 
 W przypadku większych instytucji pojawia się problem indeksowania plików i ich przeszukiwania.
-Wyszukanie konkretnego badania lub pliku w folderze, w którym znajduje się kilkaset plików poprzez wczytanie pliku i jego odczyt nie jest rozwiązaniem optymalnym.
+Wyszukanie konkretnego badania lub pliku w folderze, w którym znajduje się kilkaset plików poprzez wczytanie każdego pliku do pamięci i analiza jego danych nie jest rozwiązaniem optymalnym.
 Dlatego standard DICOM definiuje również pliki typu DICOMDIR, który jest plikiem indeksującym pliki DICOM w folderze.
 Pozwala to na efektywne przeglądanie wielu serii badań bez wczytywania plików badań.

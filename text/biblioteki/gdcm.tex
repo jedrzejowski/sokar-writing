@@ -3,33 +3,34 @@
 \subsection{Uzasadnienie wyboru}
 
 \par
-Znalezienie dobrej biblioteki do obsługi jest niebywale trudne, ponieważ jest ich bardzo dużo, a ich liczba wciąż rośnie.
-Powstał nawet portal internetowy do ich indeksowania o nazwie \enquote{I DO IMAGING}, dostępny pod adresem \url{https://idoimaging.com/programs}.
-Biblioteka, której szukałem powinna:
+Znalezienie dobrej biblioteki do obsługi jest trudne, ponieważ jest ich bardzo dużo, a ich liczba wciąż rośnie.
+Powstał portal internetowy do ich indeksowania o nazwie \enquote{I DO IMAGING}, dostępny pod adresem \url{https://idoimaging.com/programs}.
+\par
+Biblioteka, której poszukiwano w tej pracy powinna:
 \begin{itemize}
     \item współpracować z językiem C++
-    \item mieć licencje pozwalającą jej używać w potrzebnym mi zakresie
+    \item mieć licencję pozwalającą jej używać w potrzebnym zakresie
     \item darmowa, najlepiej otwarto źródłowa
     \item aktywnie rozwijana --- znaczna większość bibliotek charakteryzowała się tym, że była porzucona i ostatnia zmiana była wprowadzona x lat temu, a proces jej rozwoju trwał od 2 do 5 miesięcy
     \item dostępna na Linux'a, MacOS i Microsoft Windows
 \end{itemize}
-Ostateczna decyzja padła na bibliotekę o nazwie Grassroots DICOM (GDCM), dostępną pod adresem \url{http://gdcm.sourceforge.net/}.
+Ostatecznie podjęto decyzję o wyborze biblioteki o nazwie Grassroots DICOM (GDCM), dostępną pod adresem \url{http://gdcm.sourceforge.net/}.
 
 \subsection{Opis}
 
 \par
 Przetłumaczony opis biblioteki z oficjalnej strony prezentuje się następująco:
 Grassroots DICOM (GDCM) to implementacja standardu DICOM zaprojektowanego jako open source, dzięki czemu naukowcy mogą uzyskać bezpośredni dostęp do danych klinicznych.
-GDCM zawiera definicję formatu pliku i protokół komunikacji sieciowej, z których oba powinny zostać rozszerzone w celu zapewnienia pełnego zestawu narzędzi dla badacza lub małego dostawcy obrazowania medycznego w celu połączenia z istniejącą bazą danych medycznych.
+GDCM zawiera definicję formatu pliku i protokół komunikacji sieciowej, z których oba powinny zostać rozszerzone dla zapewnienia pełnego zestawu narzędzi badaczowi lub małemu dostawcy obrazowania medycznego w celu połączenia z istniejącą bazą danych medycznych.
 
 \par
-GDCM jest biblioteką posiadającą możliwość wczytywania, edycji i zpaisu plików w formacie DICOM.
-Obsługuje wiele kodowań obrazów jak i protokoły sieciowe.
+GDCM jest biblioteką posiadającą możliwość wczytywania, edycji i zapisu plików w formacie DICOM.
+Obsługuje ona wiele kodowań obrazów jak i protokoły sieciowe.
 Jest w całości napisana w C++, a do kompilacji używa CMake.
-Dzięki temu w całym programie jest używany język C++ wraz z CMake, co ułatwia zarządzaniem procesem kompilacji do jednego pliku.
+Dzięki temu w całym programie jest używany język C++ wraz z CMake, co ułatwia zarządzanie procesem kompilacji do jednego pliku.
 
 \par
-Główną zaletą biblioteki, jest dobra dokumentacja wraz z przykładami jej użycia, które okazały się kluczowe przy wyborze.
+Główną zaletą biblioteki jest dobra dokumentacja wraz z przykładami jej użycia, które okazały się kluczowe przy wyborze.
 Biblioteka została napisana w sposób obiektowy z usprawnieniami zawartymi w C++, takimi jak referencje i obiekty stałe, co ułatwia jej używanie.
 
 \subsection{Licencja}

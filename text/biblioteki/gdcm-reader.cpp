@@ -2,7 +2,7 @@
 
 int main() {
 
-    /* Tworzymy obiekt czytacza i wczytujemy plik */
+    /* Tworzymy obiekt czytającego i wczytujemy plik */
     gdcm::Reader reader;
     reader.SetFileName("/path/to/file");
     if (!reader.Read()) {
@@ -32,7 +32,7 @@ int main() {
 
     
     if (dataset->FindDataElement(TagWindowCenter)){
-        /* Pobieramy element ze zbiory danych */
+        /* Pobieramy element ze zbioru danych */
         const DataElement& ele = dataset->GetDataElement(tag);
         /* Pobieramy 16-bitowego inta */
         quint16 center = ele.GetByteValue()->GetPointer();
