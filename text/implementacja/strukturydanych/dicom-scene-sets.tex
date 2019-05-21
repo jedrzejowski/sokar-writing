@@ -17,19 +17,21 @@ Diagram klas UML znajduje się na rysunku \ref{uml:sokar-scene-sets}.
 
 \par
 Sekwencja scen implementuje strukturę danych informującą o przejściach pomiędzy scenami poprzez klasę \sokarclass{SceneSequence}.
-Sekwencja to wektor zawierającą kroki z dodatkowymi informacjami o stanie sekwencji.
-Indeksem w którym obecnie znajduje się sekwencja.
-Kierunkiem sekwencji, sekwencja może iść w stronę początku lub kocań.
-Rodzajem przemiatania, jest to wartość logiczna informująca w jaki sposób ma zachować się gdy sekwencja dojdzie do końca, lub początku.
+Sekwencja to wektor zawierający kroki z dodatkowymi informacjami o stanie sekwencji:
+\begin{itemize}
+    \item indeks, w którym obecnie znajduje się sekwencja
+    \item kierunek sekwencji --- sekwencja może iść w stronę początku lub końca
+    \item rodzaj przemiatania --- wartość logiczna informująca w jaki sposób ma zachować się, gdy sekwencja dojdzie do końca, lub początku
+\end{itemize}
 Po dojściu do końca sekwencja skoczy do pierwszego elementu lub może zmienić kierunek i zacząć iść do tyłu.
 
 \par
-Kroki, implementowane, przez klasą \sokarclass{Step}, zawierają następujące informacje: wskaźnik do sceny oraz czas trwania sceny.
+Kroki implementowane przez klasę \sokarclass{Step} zawierają następujące informacje: wskaźnik do sceny oraz czas trwania sceny.
 
 \par
 Sekwencja ma wbudowane funkcje zapewniające przesuwanie się po indeksie na wektorze:
 \begin{itemize}
-    \item \sokarfunction{SceneSequence}{stepForward} --- krok do przodu, zwiększa indeks tym samym wykonuje krok w stronę końca sekwencji
+    \item \sokarfunction{SceneSequence}{stepForward} --- krok do przodu, zwiększa indeks tym samym wykonując krok w stronę końca sekwencji
     \item \sokarfunction{SceneSequence}{stepBackward} --- krok do tyłu, zmniejsza indeks tym samym wykonując krok w stronę początku sekwencji
     \item \sokarfunction{SceneSequence}{step} --- wykonuje krok w tył lub przód w zależności od kierunku sekwencji
 \end{itemize}
@@ -47,14 +49,16 @@ Następnie jest tworzonych tyle obiektów scen ile jest ramek.
 \par
 Kolejność sekwencji scen jest taka sama jak kolejność ramek.
 Natomiast czas wyświetlania ramki może być zapisany w różnych znacznikach.
-To w którym tagu został zapisany informuje element o znaczniku \dicomtag{Frame Increment Pointer}{0028}{0009}, zawiera on wskaźnik do elementu o zadanym znaczniku i w zależności od znacznika.
-Została zaimplementowana obsługa poniższy znaczników:
+To, w którym znaczniku został zapisany, informuje element o znaczniku \dicomtag{Frame Increment Pointer}{0028}{0009}.
+Zawiera on wskaźnik do elementu o zadanym znaczniku.
+\par
+Została zaimplementowana obsługa poniższych znaczników:
 \begin{itemize}
     \item \dicomtag{Frame Time}{0018}{1063} --- element z tym znacznikiem zawiera czas trwania jednej ramki w milisekundach, każdemu krokowi jest przypisywana ta wartość trwania
 
     \item \dicomtag{Frame Time Vector}{0018}{1065} --- zawiera tablice z przyrostami czasu w milisekundach między n-tą ramką a poprzednią klatką. Pierwsza ramka ma zawsze przyrost czasu równy 0.
     
-    \item \dicomtag{Cine Rate}{0018}{0040} --- zawiera ilość klatek wyświetlanych na sekunda, każdemu krokowi jest przypisywana wartość odwrotna do tej
+    \item \dicomtag{Cine Rate}{0018}{0040} --- zawiera ilość klatek wyświetlanych na sekundę, każdemu krokowi jest przypisywana wartość do niej odwrotna.
 \end{itemize}
 W przypadku braku znacznika lub gdy zostaje wskazany znacznik nieznany, czas trwania ramki wynosi $83.3$ milisekundy, co odpowiada 12 klatkom na sekundę.
 
@@ -62,18 +66,18 @@ W przypadku braku znacznika lub gdy zostaje wskazany znacznik nieznany, czas trw
 \subsubsection{Kolekcja plików DICOM}
 \label{sec:sokar-dicomfileset}
 \par
-Zbiory plików są implementowane prze \sokarclass{DicomFileSet} i służą do przechowywania wielu wczytanych plików DICOM.
+Zbiory plików są implementowane przez \sokarclass{DicomFileSet} i służą do przechowywania wielu wczytanych plików DICOM.
 Na początku pliki są sortowane na podstawie liczby zawartej w elemencie o znaczniku \dicomtag{Instance Number}{0020}{0x0013}.
 Dla każdego pliku jest tworzony obiekt \sokarclass{DicomFrameSet}.
 \par
-Sekwencja jest tworzona na połączenie sekwencji poszczególnych obrazów.
+Sekwencja jest tworzona poprzez połączenie sekwencji poszczególnych obrazów.
 
 \subsubsection{Segregowanie obrazów}
 \label{sec:sokar-dicomfileset-create}
 \par
 W przypadku kiedy mamy do czynienia z wieloma plikami, należy jest rozdzielić na serie i uporządkować w odpowiedniej kolejności.
-Unikalny identyfikator serii jest zawarty w elemencie danych znaczniku \dicomtag{TagSeriesInstanceUID}{0020}{000E}.
-Kolejności obrazów w serii to liczba zawarta w elemencie danych o znaczniku \dicomtag{TagInstanceNumber}{0020}{0x0013}.
+Unikalny identyfikator serii jest zawarty w elemencie danych znaczniku \dicomtag{Series Instance UID}{0020}{000E}.
+Kolejności obrazów w serii to liczba zawarta w elemencie danych o znaczniku \dicomtag{Instance Number}{0020}{0x0013}.
 \par
 Segregacja odbywa się za pomocą funkcji \sokarfunction{DicomFileSet}{create}.
 Do funkcji jest przesyłany wektor z wczytanymi plikami DICOM, następnie dzieli ona pliki na zbiory zawierające zdjęcia tej samej serii, tworzy obiekty zbiorów plików DICOM, ostatecznie zwraca ona wektor z gotowymi obiektami zbiorów plików DICOM.

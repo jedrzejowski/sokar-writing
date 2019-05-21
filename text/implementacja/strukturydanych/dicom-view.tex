@@ -22,7 +22,7 @@ Dodatkowo posiada obiekt kolekcji scen, który jest zbiorem obrazów opisany w s
 \end{figure}
 
 \subsubsection{Pasek narzędzi}
-\input{text/implementacja/dicom-toolbar.tex}
+\input{text/implementacja/strukturydanych/dicom-toolbar.tex}
 
 \subsubsection{\sokarclass{DicomGraphics}}
 \label{sec:sokar-dicomgraphics}
@@ -31,11 +31,11 @@ Dodatkowo posiada obiekt kolekcji scen, który jest zbiorem obrazów opisany w s
 \label{sec:sokar-moviebar}
 
 \par
-Pasek filmu znajduje się w dolnej części zakładki i jest implementowany prze klasę \sokarclass{MovieBar},.
+Pasek filmu znajduje się w dolnej części zakładki i jest implementowany prze klasę \sokarclass{MovieBar}.
 Ma dostęp do sekwencji scen i ukrywa swoją obecność przed użytkownikiem, kiedy w sekwencji jest tylko jedna scena.
 
 \par
-Pasek jest podzielony na trzy części: trzy przyciski znajdujące się po lewej, pasek pokazujący postępu sekwencji na środku i prządka z trzema przyciskami po prawej.
+Pasek jest podzielony na trzy części: trzy przyciski znajdujące się po lewej, pasek pokazujący postęp sekwencji na środku i prządka z trzema przyciskami po prawej.
 
 \par
 Trzy lewe przyciski odpowiadają za poruszanie się po sekwencji.
@@ -43,27 +43,27 @@ Wciśniecie pierwszego przycisku (z indeksem 8 na rysunku \ref{fig:sokar-dicomvi
 Wciśniecie drugiego przycisku (9) powoduje włączenie lub wyłączenie upływu sekwencji.
 Wciśniecie trzeciego przycisku (10) powoduje zatrzymanie upływu sekwencji i wysłanie sygnału \sokarfunction{SceneSequence}{stepForward} do sekwencji.
 \par
-Pasek (11) pokazujący postępu sekwencji jest obiektem klasy \qtclass{QSlider}.
+Pasek (11) pokazujący postęp sekwencji jest obiektem klasy \qtclass{QSlider}.
 Odświeżanie paska jest wrażliwe na sygnał \sokarfunction{SceneSequence}{steped} of sekwencji.
 \par
-Elementy po prawej stronie definiuje parametry trybu filmowego.
-Prządka (12), element do wprowadzania liczby zmiennoprzecinkowej klasy \qtclass{QDoubleSpinBox}.
-Im większa wartość liczby tym klatki filmu są dłużej wyświetlane.
+Elementy po prawej stronie definiują parametry trybu filmowego.
+Prządka (12) jest elementem do wprowadzania liczby zmiennoprzecinkowej klasy \qtclass{QDoubleSpinBox}.
+Im większa wartość liczby, tym klatki filmu są dłużej wyświetlane.
 Drugi (13) przycisk pozwala zmienić sposób przemiatania.
 Trzeci (14) przycisk wymusza tryb jednego okna dla wszystkich klatek filmu.
-Jeżeli mamy załadowanych wile obrazów tego samego badania, to nie koniecznie muszą mieć to samo okno.
+Jeżeli mamy załadowanych wiele obrazów tego samego badania, to nie koniecznie muszą mieć to samo okno.
 Dodatkowo ten tryb pozwala wprowadzić jednolite okienko dla wszystkich klatek po zmianie parametrów tego okienka na jednej klatce.
 Czwarty (15) i ostatni przycisk służy do użycia jednej macierzy transformaty na wszystkich klatkach.
 
 \paragraph*{Tryb filmowy}
 
 \par
-Tryb filmowy można aktywować jedynie wtedy gdy w sekwencji scen jest więcej niż jedna scena.
+Tryb filmowy można aktywować jedynie wtedy, gdy w sekwencji scen jest więcej niż jedna scena.
 Włączenie trybu filmowego polega na stworzeniu obiektu klasy \sokarclass{MovieMode}.
-Obiekt ten zapisuje wskaźnik go obecnie wyświetlanej sceny, to czy powinno być użyte to samo okno, oraz to czy powinna być używana ta sama transformata.
+Obiekt ten zapisuje wskaźnik do obecnie wyświetlanej sceny, a także czy powinno być użyte to samo okno, oraz czy powinna być używana ta sama macierz przekształcenia.
 Następnie obiekt ten jest wysyłany do wszystkich scen w sekwencji.
-Uruchamiany jest timer, obiekt klasy \qtclass{QTimer}, na czas równy czasu trwania sceny zapisanego w kroku przemnożonego przez liczbę z prządki.
-Po upływie timera, wstawiana jest nowa scena za pomocą sygnały \sokarfunction{MovieBar}{setStep}, a timer jest ustawiany nan nowo.
+Uruchamiany jest timer, czyli obiekt klasy \qtclass{QTimer}, na czas równy czasu trwania sceny zapisanego w kroku przemnożonego przez liczbę z prządki.
+Po upływie timera, wstawiana jest nowa scena za pomocą sygnału \sokarfunction{MovieBar}{setStep}, a timer jest ustawiany na nowo.
 
 \subsubsection{\sokarclass{FrameChooser}}
 \label{sec:sokar-framechooser}

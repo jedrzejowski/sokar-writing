@@ -12,49 +12,48 @@ Diagram klas UML znajduje się na rysunku \ref{uml:sokar-scene-indicators}.
 
 \par
 Domyślnie obiekty wyświetlające informacje (tytuły punktów to nazwy klas):
+
 \paragraph{Dane pacjenta}
 
-Są implementowane przez \sokarclass{PatientDataIndicator}.
-Pojawia się zawsze na scenie w lewym górnym rogu i zawiera następujące linie:
+Dane pacjenta są implementowane przez \sokarclass{PatientDataIndicator} i pojawiają się zawsze na scenie w lewym górnym rogu.
+Zawierają następujące linie:
 \begin{itemize}
     \item Nazwa pacjenta oraz płeć
 
-          Nazwa pacjenta znajduje się w \dicomtag{PatientName}{0010}{0010} o \dicomvr{PN}.
+          Nazwa pacjenta znajduje się w \dicomtag{Patient Name}{0010}{0010} o \dicomvr{PN}.
 
-          Płeć, zapisana jest w \dicomtag{PatientSex}{0010}{0040} i może mieć następujące wartości:
+          Płeć, zapisana jest w \dicomtag{Patient Sex}{0010}{0040} i może mieć następujące wartości:
           \begin{itemize}
               \item \dataword{M } --- oznacza mężczyznę, wyświetlana jako O
               \item \dataword{F } --- oznacza kobietę, wyświetlana jako O
               \item \dataword{O } --- oznacza inną płeć i nie jest wyświetlana
           \end{itemize}
 
-          W przypadku określenia inne płci niż jest w standardzie bądź braku tagu płeć nie będzie widoczna.
-
           Przykład: \dataword{Adam Jędrzejowski O}.
 
     \item Identyfikator pacjenta
 
-          Unikalny identyfikator pacjenta z tagu \dicomtag{PatientID}{0010}{0020} wyświetlane w takiej formie jakiej jest zapisane, bez żadnej obróbki.
+          Unikalny identyfikator pacjenta ze znacznika \dicomtag{Patient ID}{0010}{0020} wyświetlany jest w takiej formie, w jakiej jest zapisany.
           W praktyce najczęściej jest to numer z systemu używanego w danym szpitalu, rzadziej numer PESEL.
 
           Przykład: \dataword{HIS/000000}.
 
     \item Data urodzenia oraz wiek pacjenta w trakcie badania
 
-          Data urodzenia znajdująca się w \dicomtag{PatientBirthDate}{0010}{0030} i jest zamieniana na format \dataword{YYYY-MM-DD}.
+          Data urodzenia znajdująca się w \dicomtag{Patient Birth Date}{0010}{0030} i jest zamieniana na format \dataword{YYYY-MM-DD}.
           Dodatkowo, jeżeli tag \dicomtag{PatientAge}{0010}{1010} jest obecny, wyświetlany jest także wiek pacjenta w czasie badania.
 
           Przykład: \dataword{born 1982-08-09, 28 years}.
 
-    \item Opis wykonany przez instytucję opis lub klasyfikację badania (komponentu)
+    \item Opis wykonany przez instytucję lub klasyfikację badania (komponentu)
 
-          Tekst brany z \dicomtag{StudyDescription}{0008}{1030} i wyświetlany bez żadnej obróbki.
+          Tekst brany z \dicomtag{Study Description}{0008}{1030} i wyświetlany bez ingerencji.
 
           UWAGA: Ta wartość jest wpisywana przez technika, operatora lub lekarza wykonującego badanie, więc wartość ta może być nie przewidywalna.
 
     \item Opis serii
 
-          Tekst brany z \dicomtag{SeriesDescription}{0008}{103E} i wyświetlany bez żadnej obróbki.
+          Tekst brany z \dicomtag{Series Description}{0008}{103E} i wyświetlany bez ingerencji.
 
           UWAGA: Ta wartość jest wpisywana przez technika, operatora lub lekarza wykonującego badanie, więc wartość ta może być nie przewidywalna.
 \end{itemize}
@@ -76,15 +75,26 @@ Pojawia się zawsze na scenie w prawym górnym rogu i zawiera następujące lini
 \begin{itemize}
     \item Nazwa instytucji
 
-          Tekst brany z \dicomtag{InstitutionalDepartmentName}{0008}{1040} i wyświetlany bez żadnej obróbki.
+          Tekst jest obierany z \dicomtag{Institutional Department Name}{0008}{1040} i wyświetlany bez ingerencji.
 
+    \item Producent wyposażenia wraz z modelem urządzenia
+
+          Tekst jest obierany z \dicomtag{Manufacturer}{0008}{0070} i \dicomtag{Manufacturer Model Name}{0008}{1070}, oddzielony spacją i wyświetlany bez ingerencji.
+
+    \item Nazwisko lekarza wykonującego badanie
+
+          Tekst jest obierany z \dicomtag{Referring Physician Name}{0008}{0090} i wyświetlany bez ingerencji.
+
+    \item Nazwisko operatora wspierającego badanie
+
+          Tekst jest obierany z \dicomtag{Operators Name}{0008}{1070} i wyświetlany bez ingerencji.
 \end{itemize}
 
 \paragraph{Orientacja obrazu}
 
 \par
 Jest implementowana przez \sokarclass{ImageOrientationIndicator}.
-Obiekt wyświetlający cztery litery oznaczające orientacje obrazu w stosunku do pacjenta.
+Obiekt wyświetla cztery litery oznaczające orientację obrazu w stosunku do pacjenta.
 Obiekt posiada cztery pola: lewe, górne, prawe i dolne.
 
 \par
@@ -104,7 +114,8 @@ Pełeny opis implementacji algorytmu wyznaczania stron znajduje się w sekcji \l
 \paragraph{Podziałka}
 
 Jest implementowana przez \sokarclass{PixelSpacingIndicator}.
-Obiekt wyświetlający podziałkę informującą jakich rzeczywistych rozmiarów jest obiekt na obrazie, pojawia się na dole i po prawie stronie sceny, gdy znacznik \dicomtag{PixelSpacing}{0028}{0030} jest obecny.
+Obiekt wyświetla podziałkę informującą o rzeczywistych rozmiarach obiektu na obrazie.
+Pojawia się na dole i po prawej stronie sceny, gdy znacznik \dicomtag{PixelSpacing}{0028}{0030} jest obecny.
 Wygląd podziałki można zaobserwować na rysunku \ref{fig:imageorientationindicator1}.
 
 Podziałka dostosowuje swoją wielkość do obecnej sceny, jak i do innych elementów na scenie.

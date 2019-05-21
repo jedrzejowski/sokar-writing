@@ -52,10 +52,11 @@ Klasa \sokarclass{DataConverter} posiada następujące funkcje, pozwalające na 
 Oprócz powyższych funkcji jest jeszcze kilka innych funkcji pobocznych oraz kilka aliasów.
 
 \par
-Kilka rzeczy które się tyczą wszystkich danych i konwersji:
+Ogólne zasady konwersji, które się tyczą wszystkich danych:
 \begin{itemize}
-    \item Większość VR jest to zapisane jako tekst, kodowanie i dekodowanie tekstu jest zapewniane przez bibliotekę.
-    \item Większość danych może mieć kilka wartości oddzielonych backslashem \quotett{\textbackslash}, dlatego konwerter dla VR w, których standard przewiduje wiele wartości, zawsze zwraca wektor z tymi wartościami.
-    \item Wszystkie dane są zapisane parzystą ilością bajtów, w przypadku tekstu dodaje się znak spacji na końcu danych, taka spacja jest pomijana w analizie danych.
+    \item Większość VR jest to zapisanych jako tekst, kodowanie i dekodowanie tekstu jest zapewniane przez bibliotekę.
+    \item Większość danych może mieć kilka wartości oddzielonych backslashem \quotett{\textbackslash}, dlatego konwerter dla VR, w których standard przewiduje wiele wartości, zawsze zwraca wektor z tymi wartościami.
+    \item Wszystkie dane są zapisane parzystą ilością bajtów, w przypadku tekstu dodaje się znak spacji na końcu danych.
+          Taka spacja jest pomijana w analizie danych.
 \end{itemize}
 
