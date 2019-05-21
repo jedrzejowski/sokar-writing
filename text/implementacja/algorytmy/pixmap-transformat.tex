@@ -1,7 +1,7 @@
 \label{sec:algorithm-pixmap-transformat}
 
 \par
-Wygenerowany obraz można wyświetlić na scenie bez większego problemu.
+Wygenerowany obraz jest wyświetlany na scenie.
 Wyświetlanie \cppcode{pixmap}, obiektu klasy \qtclass{QPixmap}, odbywa się za pomocą obiektu \cppcode{pixmapItem}, obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
 Ta ostatnia klasa ma w sobie zaimplementowaną funkcję pozwalającą na nałożenie przekształcenia na obraz.
 Transformata to obiekt klasy \qtclass{QTransform}, który reprezentuje transformatę dwu wymiarowa na obiekt, praktycznie jest to macierz 3 na 3 reprezentująca przekształcenie w współrzędnych jednorodnych.

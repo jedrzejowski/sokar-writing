@@ -12,7 +12,7 @@ Jest to funkcja, która mapuje n-bitwy obraz na 8-bitowy obraz w skali szarości
 8-bitów, ponieważ monitor RGB jest wstanie wyświetlić 256 odcieni szarości.
 
 \paragraph*{Zwiększanie kontrastu za pomocą \enquote{funckji okna}}
-Przyjeło się, że \enquote{okno} definiuje się dwoma liczbami: środkiem, oznaczanym jako $center$ i długością, oznaczaną jako $width$.
+Jest przyjęte, że \enquote{okno} definiuje się dwoma liczbami: środkiem, oznaczanym jako $center$ i długością, oznaczaną jako $width$.
 Wyznaczamy zakres okienka $x_0$ i $x_1$ ze środka okienka $center$ i długości $width$.
 \[x_0 = center - width / 2\]
 \[x_1 = center + width / 2\]
@@ -34,7 +34,7 @@ Następnie iterujemy przez wszystkie woksele obrazu i używamy na nich funkcji \
 Taki obraz w skali można już wyświetlić.
 Natomiast standard DICOM przewiduje, że obraz można jeszcze wyświetlić w wielokolorowej palecie barw.
 Przykład takiej palety HotIron w porównaniu do skali szarości można zobaczyć na rysunku .
-Taka paleta barw nie koniecznie musi mieć 256 odcieni, dlatego lepiej jest zrobić aby okienko, mapowało na liczbę od 0 do 1, a później paleta mapowała na kolor RGB.
+Taka paleta barw nie koniecznie musi mieć 256 odcieni, dlatego lepiej jest zrobić aby \enquote{okno}, mapowało na liczbę od 0 do 1, a później paleta mapowała na kolor RGB.
 
 \begin{figure}[!htbp]
     \centering
@@ -57,23 +57,24 @@ Teraz iterujemy po wszystkich możliwych wartościach wartośćiach obrazu i wyk
 
 \paragraph{Opis}
 \par
-Implementacja powyżej przedstawionego algorytmu w sposób dosłowny byłaby mało optymalna dla maszyny i wymagała by wielu pobocznych tablic oraz względnie dużej ilości mnożenia.
-Trzeba też zauważyć, że do wyliczenie jakiegoś piksela nie potrzeba liczyć, żadnego innego piksela, co skutkuje, że każdy piksel można wyliczyć oddzielnie.
-Dlatego najlepiej było by współbieżnie przelecieć po całym obrazie i zamienić dane na piksele.
-Ale do zamiany dane na piksel, musimy mnożyć i dzielić liczby zmiennoprzecinkowe, a to do najszybszych nie należy.
-Dlatego dobrym pomysłem jest zrobienie mniejszej tablicy typu LookUpTable, wypełnienie jej wszystkimi możliwymi wartościami obrazu, a następnie przerobić obraz z tablicą LUT.
-Ale ponieważ tablica LUT posiada wszystkie możliwe kombinacje wartości, jej rozmiar można wyznaczyć wzorem: $2^N*3$, gdzie N to liczba bitów liczby.
-Standard DICOM definiuje, że liczby mogą mieć $8$, $12$, $16$, $32$ i $64$ bity, jednakże, $12$ bitowe i tak się zapisuje w postaci 16-bitowych w pamięci RAM.
-Dlatego możliwe wartości wielkości tablicy LUT to w przybliżeniu: $768$ bajtów, $196$ kilobajtów, $12,5$ gigabajtów i $56$ eksabajta($55*10^{6}$ terabajtów).
-Alokowanie dwóch największych wartości może być lekko problematyczne, dlatego zrobiłem dwie implementacje algorytmu: z tablicą LUT(dla 8 i 16 bitowych obrazów i bez tablicy LUT(dla 32 i 64 bitowych obrazów).
-Algorytm składa się z 3 części: wyznaczenie parametrów okna, przygotowanie okna (tylko gdy jest tablica LUT), wielowątkowa iteracja po obrazie.
+Z uwagi na konieczność osiągnięcia dużej szybkości wyświetlania obrazu, warto jest taksować wartości funkcji f.
+Wartości tej funkcji należy przeliczyć, gdy zmienione zostaną parametry tak zwanego \enquote{okna}.
+Indeks koloru wyznaczany jest wtedy poprzez pobieranie wartości z tabeli o indeksie równym wartości równym wartości numerycznej w obrazie.
+Unikamy w ten sposób wielokrotnego wyznaczania wartości funkcji, która wymaga sprawdzenia warunku, czy dana wartość mieści się w wybranym przedziale wartości, w tan zwanym oknie, co jest bardzo kosztowne obliczeniowo.
+Dlatego dobrym pomysłem jest stworzenie mniejszej tablicy typu LookUpTable, wypełnienie jej wszystkimi możliwymi wartościami obrazu, a następnie przerobienie obrazu z tablicą LUT.
+Ponieważ tablica LUT posiada wszystkie możliwe kombinacje wartości, jej rozmiar można wyznaczyć wzorem: $2^N*3$, gdzie $N$ to liczba bitów liczby.
+Standard \DICOM definiuje, że liczby mogą mieć $8$, $12$, $16$, $32$ i $64$ bity, jednakże, $12$ bitowe i tak się zapisuje w postaci 16-bitowych w pamięci RAM.
+Dlatego możliwe wartości wielkości tablicy LUT to w przybliżeniu: $768$ bajtów, $196$ kilobajtów, $12,5$ gigabajtów i $56$ eksabajta ($55*10^{6}$ terabajtów).
+Alokowanie dwóch największych wartości może być lekko problematyczne, dlatego w pracy wykonano dwie implementacje algorytmu: z tablicą LUT (dla 8 i 16 bitowych obrazów i bez tablicy LUT (dla 32 i 64 bitowych obrazów).
+Algorytm składa się z 3 części: wyznaczenie parametrów \enquote{okna}, przygotowanie \enquote{okna} (tylko gdy jest tablica LUT), wielowątkowa iteracja po obrazie.
 \par
-Okno z LUT jest implementowane przez \sokarclass{Monochrome}{WindowIntDynamic}.
-Okno bez LUT jest implementowane przez \sokarclass{Monochrome}{WindowIntDynamic}.
-Obie klasy dziedziczą po abstrakcyjnej klasie \sokarclass{Monochrome}{Window}, która z kolei dziedziczy po \sokarclass{SceneIndicator}, dlatego od razu może wyświetlać obecne wartości okna.
-Decyzja o używanym oknie jest podejmowana podczas wczytywania obrazu przez klasę \sokarclass{Monochrome{\scopedots}Scene}
+Okno z LUT jest implementowane przez \sokarclass{Monochrome{\scopedots}WindowIntStatic}.
+Okno bez LUT jest implementowane przez \sokarclass{Monochrome{\scopedots}WindowIntDynamic}.
+Obie klasy dziedziczą po abstrakcyjnej klasie \sokarclass{Monochrome}{Window}, która z kolei dziedziczy po \sokarclass{SceneIndicator}, dlatego od razu może wyświetlać obecne wartości \enquote{okna}.
+Decyzja o używanym \enquote{oknie} jest podejmowana podczas wczytywania obrazu przez klasę \sokarclass{Monochrome{\scopedots}Scene}
 \par
-UWAGA: Standard DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe. Dlatego założyłem, że takie obrazy nie będą obsługiwane.
+UWAGA: Standard DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe.
+Dlatego w pracy założono, że takie obrazy nie będą obsługiwane.
 
 \paragraph{Wyznaczenie parametrów okna}
 \par
@@ -111,7 +112,7 @@ więc:
 \[x_1 /= rescaleSlope\]
 
 Posiadamy, teraz dwa punkty okienka odnoszące się do wartośći obrazu.
-Wyznaczam parametry prostej przechodzącej przez dwa punkty:
+Wyznaczono parametry prostej przechodzącej przez dwa punkty:
 \[a = (y_1 - y_0) / (x_1 - x_0)\]
 \[b = y_1 - a * x_1\]
 
@@ -138,7 +139,7 @@ inline const Pixel &getPixel(quint64 value) override {
 \par
 Widzimy tutaj, że funkcja najpierw sprawdza czy zakres okienka został przekroczony, następnie wylicza wartość obrazu i pobiera kolor z palety.
 \par
-UWAGA: ponieważ nie dysponuje rzeczywistym obrazem o pikselu danych 32-bitowym lub 64-bitowych, implementacja dynamiczna nie była testowana w warunkach rzeczywistych.
+UWAGA: ponieważ nie istnieją rzeczywiste obrazy o wokselu 32-bitowym lub 64-bitowym, implementacja dynamiczna nie była testowana w warunkach rzeczywistych.
 
 \paragraph{Implementacja statyczna z tablicą LUT}
 \par
@@ -146,12 +147,12 @@ W wersji z LUT, podczas tworzenia okienka jest alokowany wektor obiektów \sokar
 Standard DICOM przewiduje, że woksele mogą mieć wartości ujemne, więc tablica powinna mieć możliwość posiadania takich wartości indeksów, ale C++ nie przewiduje takiej możliwości.
 Dlatego wprowadzono dwie zmienne pomocnicze \cppcode{maxValue} i \cppcode{signedMove}.
 \cppcode{maxValue} jest to maksymalna wartość jaką dane mogą przyjąć, jest ona równa $2^N$, gdzie $N$ to liczba bitów brana z \dicomtag{BitsStored}{0028}{0101}.
-A \cppcode{signedMove} to liczba przesunięcia liczb, przyjmuje wartość zero gdy dane wokseli są całkowite nieujemne lub wartość przeciwną do \cppcode{maxValue} gdy woksele mogą być ujemne.
+A \cppcode{signedMove} to liczba przesunięcia liczb, przyjmuje wartość zero, gdy dane wokseli są całkowite nieujemne lub wartość przeciwną do \cppcode{maxValue}, gdy woksele są być ujemne.
 Długość wektora pikseli jest sumą \cppcode{maxValue} i \cppcode{signedMove}.
 A indeks woksela w wektorze ma wartość tego woksela zwiększoną o \cppcode{signedMove}.
 \par
-Wypełnienie wektora wartościami odbywa się poprzez iteracje po wszystkich możliwych wartościach, przeliczenie ich przez funkcje okna, a następnie wstawienie ich do wektora.
-W celu poprawy szybkości, zastosowano sprawdzanie czy wartości są w zakresie okna.
+Wypełnienie wektora wartościami odbywa się poprzez iteracje po wszystkich możliwych wartościach, przeliczenie ich przez funkcje \enquote{okna}, a następnie wstawienie ich do wektora.
+W celu poprawy szybkości, zastosowano sprawdzanie czy wartości są w zakresie \enquote{okna}.
 Poniżej kod funkcji:
 \begin{lstlisting}
 bool genLUT() override {
@@ -206,10 +207,10 @@ inline const Pixel &getPixel(quint64 value) override {
 
 \paragraph{Iterowanie po obrazie}
 \par
-Po przygotowaniu okienka, należy przeiterować obraz przez funkcje \enquote{okna}.
+Po wygenerowania obraz, należy przeiterować go przez funkcje \enquote{okna}.
 Do zokienkowania jednego piksela nie potrzeba innego piksela dlatego w celu przyspieszenia procesu okienkowania, iteracja po obrazie odbywa się w wielu wątkach.
 \par
-W C++ typy zmiennych muszą być zdefiniowane przed kompilacją, co jest pewnym problemem.
+W C++ typy zmiennych muszą być zdefiniowane przed kompilacją, co jest bardzo problematyczne.
 Mając dwa typy okienek, każde odsługujące 4 typy liczb całkowitych, musiało by zostać zaimplementowanych 8 prawie identycznych funkcji.
 Dlatego podział ten został zaimplementowany za pomocą 4 funkcji z szablonami:
 \begin{itemize}
@@ -240,9 +241,9 @@ void Monochrome::Scene::genQPixmapOfTypeWidthWindowThread(quint64 from, quint64 
 
     \item \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindow}
 
-          Jest funkcją, która dzieli obraz na wątki, tworzy je i uruchamia.
+          Jest to funkcja, która dzieli obraz na wątki, tworzy je i uruchamia.
           Ilość wątków jest ustalana za pomocą funkcji \qtfunction{QThread}{idealThreadCount}.
-          Wątki działają na zakresach o długości ilości wokseli podzielonej prze ilość wątków.
+          Wątki działają na zakresach o długości ilości wokseli podzielonej przez ilość wątków.
           Kod funkcji:
           \begin{lstlisting}
 template<typename IntType, typename WinClass>
@@ -263,7 +264,7 @@ void Monochrome::Scene::genQPixmapOfTypeWidthWindow() {
         threads.push_back(std::move(t));
     }
 
-    /* W celu zmniejszenia ilości wątków wątke obecny też zostanie wykorzystany */
+    /* W celu zmniejszenia ilości wątków, wątek obecny też zostanie wykorzystany */
     genQPixmapOfTypeWidthWindowThread<IntType, WinClass>(0, step);
 
     /* Czekanie na wszystkie wątki */
@@ -273,7 +274,7 @@ void Monochrome::Scene::genQPixmapOfTypeWidthWindow() {
 
     \item \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfType}
 
-          Jest ot funkcja pomocnicza ustalająca obecne klasę obecnego okna aby móc wykonać funkcje \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindow}.
+          Jest to funkcja pomocnicza ustalająca obecną klasę obecnego \enquote{okna}, aby móc wykonać funkcje \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindow}.
           Kod funkcji:
           \begin{lstlisting}
 template<typename IntType>
@@ -296,7 +297,7 @@ void Monochrome::Scene::genQPixmapOfType() {
 
     \item \sokarfunction{Monochrome{\scopedots}Scene}{generatePixmap}
 
-          Funkcja odświeża okienko i sprawdza czy odświeżenie obrazu jest konieczne, następnie sprawdza typ liczby woksela i uruchamia \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfType}.
+          Funkcja odświeża okienko i sprawdza, czy odświeżenie obrazu jest konieczne, następnie sprawdza typ liczby woksela i uruchamia \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfType}.
           Kod funkcji:
           \begin{lstlisting}
 bool Monochrome::Scene::generatePixmap() {
@@ -305,7 +306,7 @@ bool Monochrome::Scene::generatePixmap() {
     getCurrentWindow()->genLUT();
     if (lastPixmapChange >= getCurrentWindow()->getLastChange()) return false;
 
-    /* Sprawdzamy typ liczby woksela obraau */
+    /* Sprawdzamy typ liczby woksela obrazu */
     switch (gdcmImage.GetPixelFormat()) {
         case gdcm::PixelFormat::INT8:
             genQPixmapOfType<qint8>();
@@ -345,7 +346,7 @@ bool Monochrome::Scene::generatePixmap() {
 \subsubsection{Palety}
 Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do pseudokolorwania obrazu.
 Paleta przerabia liczbę zmiennoprzecinkową od zera do jedynki na kolor RGB, zwracając \sokarclass{Pixel}.
-Paleta nie ma zdefiniowanej długości minimalne i maksymalnej.
+Paleta nie ma zdefiniowanej długości minimalnej i maksymalnej.
 
 \par
 Palety są wczytywane z plików XML w czasie uruchamiania programu i można definiować własne palety nie będące częścią standardu.

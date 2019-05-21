@@ -4,13 +4,13 @@
 Główne okno programu jest implementowane przez \sokarclass{MainWindow}.
 Jest wywoływane od razu po uruchomieniu programu.
 \par
-Zawiera w sobie 4 elementy: menu, drzewo ze strukturą plików, obiekt z zakładkami i sugestie, aby nie używać programu w celach medycznych w dolnej części okna.
+Zawiera w sobie 4 elementy: menu, drzewo ze strukturą plików, obiekt z zakładkami oraz w dolnej części okna sugestie, aby nie używać programu w celach medycznych.
 
 \subsubsection{Drzewo katalogów i zakładki}
 
 \par
 W lewej części okna znajduje się element listy, implementowany przez \sokarclass{FileTree}, zawiera on w sobie model drzewa plików systemu, który z kolei jest implementowany przez klasę \qtclass{QFileSystemModel}.
-Po wybraniu pliku, ścieżka jest przesyłana do obiektu z zakładkami.
+Po wybraniu pliku ścieżka jest przesyłana do obiektu z zakładkami.
 \par
 W środkowej części programu znajduje się obiekt z zakładkami, szczegółowo opisany w sekcji \ref{sec:sokar-dicomtabs}.
 

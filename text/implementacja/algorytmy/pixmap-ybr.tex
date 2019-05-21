@@ -5,14 +5,14 @@ YBR albo YC\textsubscript{b}C\textsubscript{r} to model przestrzeni kolorów do 
 Wykorzystuje do tego trzy typy danych: Y – składową luminancji, B lub Cb – składową różnicową chrominancji Y-B, stanowiącą różnicę między luminancją a niebieskim, oraz R lub Cr – składową chrominancji Y-R, stanowiącą różnicę między luminancją a czerwonym.
 Kolor zielony jest uzyskiwany na podstawie tych trzech wartości.
 YBR nie pokrywa w całości RGB, tak jak RGB nie pokrywa YBR.
-Posiadają one część wspólną, co uniemożliwia wyświetlenie obrazu w stu procentach bez zniekształceń.
+Posiadają one część wspólną, a część która nie jest wspólna ulega zniekształceniu.
 
 \par
 Wartości w pliku DICOM są ułożone w taki sposób.
-\[Y1, B1, R1, Y2, B2, R2, Y3, B3, R3, Y4, B4, R4,  ...\]
+\[Y_1, B_1, R_1, Y_2, B_2, R_2, Y_3, B_3, R_3, Y_4, B_4, R_4,  ...\]
 
 \par
-Ponieważ wartości te reprezentują kolory, są już w pewnym sensie są obrazem, ale nie można go wyświetlić na monitorze RGB.
+Ponieważ wartości te reprezentują kolory, są już formą obrazu, ale nie można jeszcze wyświetlić na monitorze RGB.
 Dlatego należy przekonwertować kolor YBR na kolor RGB, iterując po wszystkich wartościach obrazu.
 
 \par

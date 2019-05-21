@@ -2,7 +2,7 @@
 
 Klasa \sokarclass{DicomScene} dostarcza następujące obiekty do generowania obrazu:
 \begin{itemize}
-    \item \cppcode{processing}, obiekt klasy \qtclass{QMutex}, muteks do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmienianie podczas jego generowania.
+    \item \cppcode{processing}, obiekt klasy \qtclass{QMutex}, muteks do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmieniane podczas jego generowania.
 
     \item \cppcode{imgDimX} zmienna typu \cppcode{uint}, oznacza szerokość obrazu w pikselach.
 
@@ -60,9 +60,10 @@ Generowanie takiego obrazu odbyta się poprzez pseudokolorowanie.
 Cały proces jest wyjaśniony w sekcji \ref{sec:algorithm-pixmap-monochrome}.
 
 \subsubsection{RGB}
-Obrazów zapisanych w RGB nie trzeba w żaden sposób obrabiać, dane już są prawie gotowe do wyświetlenia, należy je tylko odpowiednio posortować, jeżeli zachodzi taka potrzeba.
-Sposób posortowania wartości w pliku określa \dicomtag{PlanarConfiguration}{0x0028}{0006}.
-Może o przyjąć dwie następujące wartości:
+Obrazów zapisanych w RGB nie trzeba w żaden sposób obrabiać, dane już są prawie gotowe do wyświetlenia.
+Należy je odpowiednio posortować, jeżeli zachodzi taka potrzeba.
+Sposób posortowania wartości w pliku określa znacznik \dicomtag{Planar Configuration}{0x0028}{0006}.
+Może on przyjąć dwie następujące wartości:
 
 \begin{itemize}
     \item 0 --- oznacza to, że wartości pikseli są ułożone w taki sposób
