@@ -12,20 +12,22 @@ Interfejs graficzny \sokarclass{DicomView} wyświetla następujące elementy:
 \end{itemize}
 
 \par
-Dodatkowo posiada obiekt kolekcji scen, który jest zbiorem obrazów opisany w sekcji \ref{sec:sokar-scenesets}.
+Dodatkowo posiada obiekt kolekcji scen opisaną w sekcji \ref{sec:sokar-scenesets}.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{img/sokar-dicomview-001.png}
-    \caption{Wygląd DicomView wraz z numeracją elementów interfejsu. Zdjęcie własne.}
+    \caption{Wygląd zakładki wraz z numeracją elementów interfejsu. Zdjęcie własne.}
     \label{fig:sokar-dicomview001}
 \end{figure}
 
 \subsubsection{Pasek narzędzi}
 \input{text/implementacja/strukturydanych/dicom-toolbar.tex}
 
-\subsubsection{\sokarclass{DicomGraphics}}
+\subsubsection{Miejsce na scene}
 \label{sec:sokar-dicomgraphics}
+\par
+Na środku znajduje kontrolka klasy \sokarclass{DicomGraphics}, dziedziczącej po \qtclass{QGraphicsView}, która służy do wyświetlania sceny.
 
 \subsubsection{Pasek filmu}
 \label{sec:sokar-moviebar}
@@ -65,9 +67,9 @@ Następnie obiekt ten jest wysyłany do wszystkich scen w sekwencji.
 Uruchamiany jest timer, czyli obiekt klasy \qtclass{QTimer}, na czas równy czasu trwania sceny zapisanego w kroku przemnożonego przez liczbę z prządki.
 Po upływie timera, wstawiana jest nowa scena za pomocą sygnału \sokarfunction{MovieBar}{setStep}, a timer jest ustawiany na nowo.
 
-\subsubsection{\sokarclass{FrameChooser}}
+\subsubsection{Podgląd miniaturek}
 \label{sec:sokar-framechooser}
 
-Ten element to wybór scen za pomocą ikon, implementowany przez klasę \sokarclass{DicomView}.
+Ten element to wybór scen za pomocą ikon, implementowany przez klasę \sokarclass{FrameChooser}.
 Element, podobnie jak pasek filmu ma dostęp do sekwencji scen i ukrywa swoją obecność przed użytkownikiem, kiedy w sekwencji jest tylko jedna scena.
 Po wciśnięciu ikony jest zmieniana scena.
