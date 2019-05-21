@@ -6,7 +6,7 @@ Celem algorytmu jest określenie jaką pozycje przyjmuje pacjent w stosunku do s
 \subsubsection{Format zapisu informacji o orientacji obrazu}
 
 \par
-Informacje o orientacji oraz pozycji względem pacjenta znajdują się w odpowiednio w tagach \dicomtag{ImageOrientation}{0020}{0037} i \dicomtag{ImagePosition}{0020}{0032}.
+Informacje o orientacji oraz pozycji względem pacjenta znajdują się w odpowiednio w tagach \dicomtag{Image Orientation}{0020}{0037} i \dicomtag{Image Position}{0020}{0032}.
 
 \par
 Standard \DICOM zdefiniował ułożenie osi we współrzędnych kartezjańskich następująco:
@@ -27,7 +27,7 @@ Standard \DICOM zdefiniował ułożenie osi we współrzędnych kartezjańskich 
 \end{figure}
 
 \par
-Wartość \dicomtag{ImageOrientation}{0020}{0037} składa się z sześciu liczb, opowiednio oznaczanych dalej X\textsubscript{x}, X\textsubscript{y}, X\textsubscript{z}, Y\textsubscript{x}, Y\textsubscript{y}, Y\textsubscript{z}.
+Wartość \dicomtag{Image Orientation}{0020}{0037} składa się z sześciu liczb, opowiednio oznaczanych dalej X\textsubscript{x}, X\textsubscript{y}, X\textsubscript{z}, Y\textsubscript{x}, Y\textsubscript{y}, Y\textsubscript{z}.
 Standard DICOM definiuje, że te dane mają być z interpretowane w następujący sposób:
 \[
     \begin{bmatrix}
@@ -52,9 +52,9 @@ Standard DICOM definiuje, że te dane mają być z interpretowane w następując
 gdzie:
 \begin{itemize}
     \item $P_{xyz}$ --- koordynaty woksela (i,j) w współrzędnych obrazu wyrażone w milimetrach
-    \item $S_{xyz}$ --- trzy wartości z elementu ze znacznikiem \dicomtag{ImagePosition}{0020}{0032}. Oznacza punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar.
-    \item $X_{xyz}$ --- trzy pierwsze wartości z \dicomtag{ImageOrientation}{0020}{0037}
-    \item $Y_{xyz}$ --- trzy ostatnie wartości z \dicomtag{ImageOrientation}{0020}{0037}
+    \item $S_{xyz}$ --- trzy wartości z elementu ze znacznikiem \dicomtag{Image Position}{0020}{0032}. Oznacza punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar.
+    \item $X_{xyz}$ --- trzy pierwsze wartości z \dicomtag{Image Orientation}{0020}{0037}
+    \item $Y_{xyz}$ --- trzy ostatnie wartości z \dicomtag{Image Orientation}{0020}{0037}
     \item $i$ i $j$ --- oznaczają współrzędne na macierzy obrazu, odpowiednio kolumnę i wiersz. Zero oznacza początek.
     \item $\Delta_i$ i $\Delta_j$ --- rzeczywista wielkość piksela obrazu wyrażoną w milimetrach, w algorytmie wyznaczania strony pacjenta ta wartość, może wynosić 1, ponieważ odpowiada za skale
 \end{itemize}
@@ -105,7 +105,7 @@ Wygląd macierzy $imgMatrix$:
 \]
 Powyższa macierz różni się od macierzy definiowanej w standardzie.
 Po pierwsze PikselSpacing został pominięty, a konkretniej nadałem mu wartość 1.
-Po drugie pozycja z \dicomtag{ImagePosition}{0020}{0032} została zrównana do punktu zerowego, dzięki temu, wynik też będzie względem punktu zero.
+Po drugie pozycja z \dicomtag{Image Position}{0020}{0032} została zrównana do punktu zerowego, dzięki temu, wynik też będzie względem punktu zero.
 Wyznaczenie macierzy $imgMatrix$ jest jednorazowe.
 
 \par

@@ -39,7 +39,7 @@ Taka paleta barw nie koniecznie musi mieć 256 odcieni, dlatego lepiej jest zrob
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{img/monochrome-001.png}
-    \caption{Paleta HotIron w porównaniu do palety w skali szarości. Zdjęcie ze standardu DICOM dostępne pod adresem \url{http://dicom.nema.org/medical/dicom/2019a/output/chtml/part06/chapter_B.html}.}
+    \caption{Paleta HotIron (po prawej) w porównaniu do palety w skali szarości (po lewej). Zdjęcie ze standardu DICOM dostępne pod adresem \url{http://dicom.nema.org/medical/dicom/2019a/output/chtml/part06/chapter_B.html}.}
     \label{fig:monochrome1}
 \end{figure}
 
@@ -73,7 +73,7 @@ Okno bez LUT jest implementowane przez \sokarclass{Monochrome}{WindowIntDynamic}
 Obie klasy dziedziczą po abstrakcyjnej klasie \sokarclass{Monochrome}{Window}, która z kolei dziedziczy po \sokarclass{SceneIndicator}, dlatego od razu może wyświetlać obecne wartości okna.
 Decyzja o używanym oknie jest podejmowana podczas wczytywania obrazu przez klasę \sokarclass{Monochrome{\scopedots}Scene}
 \par
-UWAGA: Standard DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe. Dlatego założyłem, że takie obrazy nie istnieją.
+UWAGA: Standard DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe. Dlatego założyłem, że takie obrazy nie będą obsługiwane.
 
 \paragraph{Wyznaczenie parametrów okna}
 \par
@@ -197,7 +197,7 @@ bool genLUT() override {
 \end{lstlisting}
 
 \par
-Funkcja pobierania piksela z \enquote{okna} prezentuje się następująco:
+Funkcja zmiany wartości obrazu na kolor prezentuje się następująco:
 \begin{lstlisting}
 inline const Pixel &getPixel(quint64 value) override {
     return *(pixelArray + signedMove + value);
@@ -225,15 +225,16 @@ Dlatego podział ten został zaimplementowany za pomocą 4 funkcji z szablonami:
 template<typename IntType, typename WinClass>
 void Monochrome::Scene::genQPixmapOfTypeWidthWindowThread(quint64 from, quint64 to) {
 
-	auto buffer = &targetBuffer[from];
-	auto origin = (IntType *) &originBuffer[0];
-	auto windowPtr = (WinClass *) getCurrentWindow();
+    auto buffer = &targetBuffer[from];
+    auto origin = (IntType *) &originBuffer[0];
+    auto windowPtr = (WinClass *) getCurrentWindow();
 
-	origin += from;
+    origin += from;
 
-	for (quint64 i = from; i < to; i++, origin++) {
-		*buffer++ = windowPtr->getPixel(*origin);
-	}
+    for (quint64 i = from; i < to; i++, origin++) {
+        /* W tym miejscu jest dokonywana zamiana liczby na kolor */
+        *buffer++ = windowPtr->getPixel(*origin);
+    }
 }
 \end{lstlisting}
 
@@ -243,7 +244,7 @@ void Monochrome::Scene::genQPixmapOfTypeWidthWindowThread(quint64 from, quint64 
           Ilość wątków jest ustalana za pomocą funkcji \qtfunction{QThread}{idealThreadCount}.
           Wątki działają na zakresach o długości ilości wokseli podzielonej prze ilość wątków.
           Kod funkcji:
-\begin{lstlisting}
+          \begin{lstlisting}
 template<typename IntType, typename WinClass>
 void Monochrome::Scene::genQPixmapOfTypeWidthWindow() {
 
@@ -271,10 +272,10 @@ void Monochrome::Scene::genQPixmapOfTypeWidthWindow() {
 \end{lstlisting}
 
     \item \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfType}
- 
-    Jest ot funkcja pomocnicza ustalająca obecne klasę obecnego okna aby móc wykonać funkcje \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindow}.
-    Kod funkcji:
-\begin{lstlisting}
+
+          Jest ot funkcja pomocnicza ustalająca obecne klasę obecnego okna aby móc wykonać funkcje \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindow}.
+          Kod funkcji:
+          \begin{lstlisting}
 template<typename IntType>
 void Monochrome::Scene::genQPixmapOfType() {
 
@@ -294,10 +295,10 @@ void Monochrome::Scene::genQPixmapOfType() {
 \end{lstlisting}
 
     \item \sokarfunction{Monochrome{\scopedots}Scene}{generatePixmap}
-    
-    Funkcja odświeża okienko i sprawdza czy odświeżenie obrazu jest konieczne, następnie sprawdza typ liczby woksela i uruchamia \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfType}.
-    Kod funkcji:
-\begin{lstlisting}
+
+          Funkcja odświeża okienko i sprawdza czy odświeżenie obrazu jest konieczne, następnie sprawdza typ liczby woksela i uruchamia \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfType}.
+          Kod funkcji:
+          \begin{lstlisting}
 bool Monochrome::Scene::generatePixmap() {
 
     /* Odświeżamy okno i sprawdzamy czy odświeżenie obrazu jest konieczne */
@@ -342,12 +343,12 @@ bool Monochrome::Scene::generatePixmap() {
 \end{itemize}
 
 \subsubsection{Palety}
-Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do pseudokolorwania brazu monochromatycznego.
+Klasa \sokarclass{Palette} reprezentuje palety kolorów używanych do pseudokolorwania obrazu.
 Paleta przerabia liczbę zmiennoprzecinkową od zera do jedynki na kolor RGB, zwracając \sokarclass{Pixel}.
 Paleta nie ma zdefiniowanej długości minimalne i maksymalnej.
 
 \par
-Palety są wczytywane z plików XML w czasie uruchamiania programu i można definiować własne palety nie będące częścią standardem.
+Palety są wczytywane z plików XML w czasie uruchamiania programu i można definiować własne palety nie będące częścią standardu.
 Przykładowy wygląd pliku palety HotIron:
 \begin{lstlisting}[language=XML]
 <palette display="Hot Iron" name="HOT_IRON">
