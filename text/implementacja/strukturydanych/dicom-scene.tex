@@ -66,7 +66,7 @@ Dokładna analiza cyklu generowania obrazów jest opisana w sekcji \ref{sec:algo
 \par
 Wyświetlanie obrazu na scenie odbywa sie za pomocą obiektu klasy \qtclass{QGraphicsPixmapItem}, który dziedziczy po \qtclass{QGraphicsItem}.
 Ta ostatnia klasa ma w sobie zaimplementowaną funkcję pozwalającą na nałożenie przekształcenia macierzowego na obraz.
-W Qt, przekształcenia macierzowe są implementowane za pomocą klasy \qtclass{QTransform}, która jest macierzą 3 na 3.
+W Qt przekształcenia macierzowe są implementowane za pomocą klasy \qtclass{QTransform}, która jest macierzą 3 na 3.
 
 Zostały zdefiniowane 4 macierze, które działają na obiekt obrazu wyświetlanego na scenie:
 \begin{itemize}
@@ -81,4 +81,4 @@ Podczas interakcji z użytkownikiem macierze mogą ulegać zmianom na dwa sposob
 Pierwszym sposobem jest odebranie sygnału od przycisków z paska zadań, szerzej opisanego w sekcji \ref{sec:sokar-dicomtoolbar}, znajdującego się nad sceną.
 Drugi sposób to przechwycenie ruchów myszki, gdy wciśnięty jest lewy przycisk myszy.
 \par
-Pełny algorytm tworzenia transformat i ich zmian poprzez interakcje z użytkownikiem, znajduje się w sekcji \ref{sec:algorithm-pixmap-transformat}.
+Pełny algorytm tworzenia macierzy i ich zmian poprzez interakcje z użytkownikiem, znajduje się w sekcji \ref{sec:algorithm-pixmap-transformat}.

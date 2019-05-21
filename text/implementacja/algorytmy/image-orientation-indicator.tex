@@ -1,7 +1,7 @@
 \label{sec:algorithm-imageorientationindicator}
 
 W obrazie \DICOM jest pośrednio zapisana informacja o ułożeniu obrazu względem pacjenta.
-Celem algorytmu jest określenie jaką pozycje przyjmuje pacjent w stosunku do sceny, tak aby można było wyświetlić ta pozycje na scenie.
+Celem algorytmu jest określenie jaką pozycję przyjmuje pacjent w stosunku do sceny tak, aby można było wyświetlić tą pozycję na scenie.
 
 \subsubsection{Format zapisu informacji o orientacji obrazu}
 
@@ -28,7 +28,7 @@ Standard \DICOM zdefiniował ułożenie osi we współrzędnych kartezjańskich 
 
 \par
 Wartość \dicomtag{Image Orientation}{0020}{0037} składa się z sześciu liczb, opowiednio oznaczanych dalej X\textsubscript{x}, X\textsubscript{y}, X\textsubscript{z}, Y\textsubscript{x}, Y\textsubscript{y}, Y\textsubscript{z}.
-Standard DICOM definiuje, że te dane mają być z interpretowane w następujący sposób:
+Standard \DICOM definiuje następujący sposób interpretowania danych:
 \[
     \begin{bmatrix}
         P_x \\ P_y \\ P_z \\ 1
@@ -51,35 +51,34 @@ Standard DICOM definiuje, że te dane mają być z interpretowane w następując
 \]
 gdzie:
 \begin{itemize}
-    \item $P_{xyz}$ --- koordynaty woksela (i,j) w współrzędnych obrazu wyrażone w milimetrach
-    \item $S_{xyz}$ --- trzy wartości z elementu ze znacznikiem \dicomtag{Image Position}{0020}{0032}. Oznacza punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar.
-    \item $X_{xyz}$ --- trzy pierwsze wartości z \dicomtag{Image Orientation}{0020}{0037}
-    \item $Y_{xyz}$ --- trzy ostatnie wartości z \dicomtag{Image Orientation}{0020}{0037}
+    \item $P_{xyz}$ --- koordynaty woksela (i,j) we współrzędnych obrazu wyrażone w milimetrach
+    \item $S_{xyz}$ --- trzy wartości z elementu ze znacznikiem \dicomtag{Image Position}{0020}{0032}. Oznacza on punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar.
+    \item $X_{xyz}$ --- trzy pierwsze wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037}
+    \item $Y_{xyz}$ --- trzy ostatnie wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037}
     \item $i$ i $j$ --- oznaczają współrzędne na macierzy obrazu, odpowiednio kolumnę i wiersz. Zero oznacza początek.
-    \item $\Delta_i$ i $\Delta_j$ --- rzeczywista wielkość piksela obrazu wyrażoną w milimetrach, w algorytmie wyznaczania strony pacjenta ta wartość, może wynosić 1, ponieważ odpowiada za skale
+    \item $\Delta_i$ i $\Delta_j$ --- rzeczywista wielkość piksela obrazu wyrażona w milimetrach.
+          W algorytmie wyznaczania strony pacjenta ta wartość może wynosić 1, ponieważ odpowiada za skale.
 \end{itemize}
 
-Praktycznie rzecz biorąc, pierwsza macierz to wektor reprezentujący pozycję pacjenta.
-Druga jest to transformata.
-Trzecia to pozycja na obrazie.
+Praktycznie rzecz biorąc, pierwsza macierz to wektor reprezentujący pozycję pacjenta, druga jest to przekształcenie macierzowe we współrzędnych jednorodnych, trzecia to pozycja na obrazie.
 
 \subsubsection{Wyznaczanie pozycji pacjenta}
 
 Interesuje nas wyznaczenie pozycji sześciu (punktów) na płaszczyźnie obrazu.
-Załóżmy, że pacjent znajduje się w środku układu współżędnych i jest nieskończenie mały.
-Możemy więc zdefiniować sześć punktów o następujących współrzędnych, dalej używanych pod nazwą $PatientPosition$, które będą odpowiadały stroną pacjenta:
+Załóżmy, że pacjent znajduje się w środku układu współrzędnych i jest nieskończenie mały.
+Możemy więc zdefiniować sześć punktów o następujących współrzędnych, dalej używanych pod nazwą $PatientPosition$, które będą odpowiadały stronom pacjenta:
 \begin{itemize}
-    \item \quotett{R} --- $[-1, 0, 0, 1]$
-    \item \quotett{L} --- $[+1, 0, 0, 1]$
-    \item \quotett{A} --- $[0, -1, 0, 1]$
-    \item \quotett{P} --- $[0, +1, 0, 1]$
-    \item \quotett{F} --- $[0, 0, -1, 1]$
-    \item \quotett{H} --- $[0, 0, +1, 1]$
+    \item \dataword{R} --- $[-1, 0, 0, 1]$
+    \item \dataword{L} --- $[+1, 0, 0, 1]$
+    \item \dataword{A} --- $[0, -1, 0, 1]$
+    \item \dataword{P} --- $[0, +1, 0, 1]$
+    \item \dataword{F} --- $[0, 0, -1, 1]$
+    \item \dataword{H} --- $[0, 0, +1, 1]$
 \end{itemize}
 Punkty $PatientPosition$ odpowiadają punktom $P_{xyz}$ z równania ze standardu \DICOM.
 
 \par
-UWAGA: Wszystkie obliczenia odbywają się w współrzędnych jednorodnych.
+UWAGA: Wszystkie obliczenia odbywają się we współrzędnych jednorodnych.
 
 \par
 Na równaniu z poprzedniego punktu wykonuje takie przekształcenie:
@@ -89,9 +88,9 @@ Na równaniu z poprzedniego punktu wykonuje takie przekształcenie:
 \[ScenePosition = imgMatrix^{-1} * PatientPosition\]
 gdzie:
 \begin{itemize}
-    \item $imgMatrix$ --- macierz przekształcenia obrazu, o której będzie dalej
-    \item $ScenePosition$ --- pozycja na obrazie, która naz interesuje
-    \item $PatientPosition$ --- któryś z punktów względem pacjenta.
+    \item $imgMatrix$ --- macierz przekształcenia obrazu, o której będzie później opisana
+    \item $ScenePosition$ --- pozycja na obrazie, która nas interesuje
+    \item $PatientPosition$ --- jeden z punktów względem pacjenta.
 \end{itemize}
 \par
 Wygląd macierzy $imgMatrix$:
@@ -104,23 +103,25 @@ Wygląd macierzy $imgMatrix$:
     \end{bmatrix}
 \]
 Powyższa macierz różni się od macierzy definiowanej w standardzie.
-Po pierwsze PikselSpacing został pominięty, a konkretniej nadałem mu wartość 1.
-Po drugie pozycja z \dicomtag{Image Position}{0020}{0032} została zrównana do punktu zerowego, dzięki temu, wynik też będzie względem punktu zero.
+Po pierwsze wartości z \dicomtag{Pixel Spacing}{0028}{0030} zostały pominięte, a nadano im wartość 1.
+Po drugie - pozycja z \dicomtag{Image Position}{0020}{0032} została zrównana do punktu zerowego, dzięki temu, wynik też będzie względem punktu zero.
 Wyznaczenie macierzy $imgMatrix$ jest jednorazowe.
 
 \par
-Po wyznaczeniu sześciu punktów $ScenePosition$, po jednej dla każdego punktu względem pacjenta są zapisywane. $ScenePosition$ odpowiada pozycji punktów na obrazie w pozycji startowej.
+Po wyznaczeniu sześciu punktów $ScenePosition$, po jednej dla każdego punktu $PatientPosition$ są one zapisywane.
+$ScenePosition$ odpowiada pozycji punktów na obrazie w pozycji startowej.
 
 \par
-Na scenie, której jest wyświetlany obraz, użytkownik, może obracać obraz o dowolny kąt, według własnego uznania.
-Te przekształcenia, są realizowane za pomocą macierzy rotacji, dalej znana jako $rotateTransform$.
-Macierz $rotateTransform$ jest przesyłana do naszego obiektu \sokarclass{ImageOrientationIndicator} za każdym razem kiedy zostanie zmieniona.
+Na scenie, której jest wyświetlany obraz, użytkownik może obracać obraz o dowolny kąt, według własnego uznania.
+Te przekształcenia są realizowane za pomocą macierzy rotacji, dalej zwaną jako $rotateTransform$.
+Macierz $rotateTransform$ jest przesyłana do naszego obiektu \sokarclass{ImageOrientationIndicator} za każdym razem, kiedy zostanie zmieniona.
 
 \par
-Ostateczne wyznaczenie pozycji punktów pacjent na obrazie odbywa sie przez przemnożenie lewostronne $rotateTransform$ i $ScenePosition$.
+Ostateczne wyznaczenie pozycji punktów pacjenta na obrazie odbywa się przez przemnożenie lewostronne $rotateTransform$ i $ScenePosition$.
 \[rotateTransform * ScenePosition\]
-Wyznaczane jest w ten sposób pozycja sześciu punktów pacjenta na płaszczyźnie sceny wyświetlanej.
-Następnie określane jest na, której z ośmiu części płaszczyzny jest umieszczony dany punkt, podział płaszczyzny jest widoczny na rysunku \ref{fig:imageorientationindicator4}.
+Wyznaczana jest w ten sposób pozycja sześciu punktów pacjenta na płaszczyźnie sceny wyświetlanej.
+Następnie określany jest na której z ośmiu części płaszczyzny jest umieszczony dany punkt.
+Podział płaszczyzny jest widoczny na rysunku \ref{fig:imageorientationindicator4}.
 Tej płaszczyźnie nadawany jest tytuł w postaci litery, która oznacza stronę pacjenta.
 Jeżeli punkt znajduje się w centrum, na przecięciu osi, to oznacza, że punkt znajduje się za lub przed ekranem, więc jest pomijany.
 Następnie do czterech pól wyświetlających zostają wstawione następujące teksty:
@@ -133,9 +134,9 @@ Następnie do czterech pól wyświetlających zostają wstawione następujące t
 
 \par
 Przykład:\\
-Punkt \quotett{H}, czyli punkt reprezentujący kierunek głowy, został przypisany do części 1 i odpowiednio \quotett{L} do części 7, \quotett{R} do części 3 i \quotett{F} do części 5.
-Punkty \quotett{A} i \quotett{P} zostały pominięte ponieważ znalazły się na środku.
-Do lewego pola wstawiany jest tekst \quotett{HL}, do górnego \quotett{HR}, do prawego \quotett{RF} i do dolnego \quotett{LF}.
+Punkt \dataword{H}, czyli punkt reprezentujący kierunek głowy, został przypisany do części 1 i odpowiednio \dataword{L} do części 7, \dataword{R} do części 3 i \dataword{F} do części 5.
+Punkty \dataword{A} i \dataword{P}, zostały pominięte ponieważ znalazły się na środku.
+Do lewego pola wstawiany jest tekst \dataword{HL}, do górnego \dataword{HR}, do prawego \dataword{RF} i do dolnego \dataword{LF}.
 
 \begin{figure}[!htbp]
     \centering
