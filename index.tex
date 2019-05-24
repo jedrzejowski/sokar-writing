@@ -9,10 +9,6 @@
 \inputencoding{utf8}
 \input{utf8-symbols}
 
-\def\oprawa{1.05cm}
-\addtolength{\oddsidemargin}{\oprawa}
-\addtolength{\evensidemargin}{-\oprawa}
-
 \title{Wieloplatformowa przeglądarka obrazów DICOM w C++}
 
 \author{Adam Jędrzejowski}
@@ -29,6 +25,8 @@
 \zaklad{Zakład Elektroniki Jądrowej i Medycznej}
 \kierunekstudiow{Elektronika}
 
+\def\keywords{DICOM; DICOM viewer; C++; Qt; GDCM; programing}
+
 % Ustawienie metadanych pdfu
 \makeatletter
 \hypersetup{
@@ -36,7 +34,7 @@
     pdfauthor={\@author},
     pdftitle={\@title},
     pdfsubject={Praca Inżynierska},
-    pdfkeywords={DICOM, DICOM viewer, C++, Qt, GDCM, programing},
+    pdfkeywords={\keywords},
     pdfproducer={\@author},
     pdfcreator={\@author}
 }
@@ -57,5 +55,7 @@
 \maketitle
 
 \input{text/text.tex}
+
+\listoffigures
 
 \end{document}

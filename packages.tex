@@ -7,14 +7,29 @@
 \usepackage[autostyle]{csquotes} % cudzysłowy
 \usepackage{xcolor} % kolorowanie tekstu
 \usepackage[pdftex]{hyperref}
-\usepackage{listings} % kolorowanie składni
 \usepackage{array}
 \usepackage[polish]{babel}
 \usepackage{graphicx}
 \usepackage{amsmath}
-\usepackage{indentfirst}% wcięcia przed akapitami
-\usepackage{xspace}%spacja po komendzie
+\usepackage{indentfirst} % wcięcia przed akapitami
+\usepackage{xspace} % spacja po komendzie
 \usepackage{url}
+\usepackage{titling} % dla \thetitle
+
+
+% Marginesy
+\usepackage[margin=25mm]{geometry}
+\addtolength{\oddsidemargin}{5mm}
+\addtolength{\evensidemargin}{-5mm}
+
+
+% Naprzemienne
+\usepackage{titleps}
+\renewpagestyle{plain}{%
+\sethead{}{}{}
+\setfoot[\thepage][][]{}{}{\thepage}
+}%
+\pagestyle{plain}
 
 
 % Dobry tutorial do ramek https://shearnrylan.wordpress.com/2015/01/02/latex-information-boxes/
@@ -22,11 +37,15 @@
 
 \usepackage{prmag2017}
 
-\usepackage{todonotes}
-
 % Ustawienie głębokości numerowania
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{5}
+% \setcounter{secnumdepth}{3}
+% \setcounter{tocdepth}{3}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pakiet do kolorowania składni
+
+\usepackage{listings}
 
 %https://www.overleaf.com/learn/latex/Code_listing
 \lstdefinestyle{cppstyle}{
@@ -60,7 +79,9 @@
 
 \lstset{style=cppstyle}
 
-% Enter po tytule patagrafu
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Entery po tytule paragrafie
+
 % https://latex.org/forum/viewtopic.php?t=1383
 \makeatletter
 \renewcommand\paragraph{%
