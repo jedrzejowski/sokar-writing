@@ -2,4 +2,15 @@
     "editor.wordWrap": "on",
     "editor.renderWhitespace": "all",
     "editor.tabSize": 4,
+    "files.exclude": {
+        "*.aux": true,
+        "*.out": true,
+        "*.lof": true,
+        "*.pyg": true,
+        "*.synctex.gz": true,
+        "*.synctex(busy)": true,
+        "*.toc": true,
+        "*.fls": true,
+        "*.fdb_latexmk": true,
+    },
 }

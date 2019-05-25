@@ -1,10 +1,15 @@
 \par
-Celem pracy było napisanie aplikacji do obsługi obrazów \DICOM w C++ z możliwością kompilacji na wiele platform.
+Celem pracy inżynierskiej było napisanie aplikacji do obsługi obrazów \DICOM w C++ z możliwością kompilacji na wiele platform.
 Cel udało się osiągnąć.
-Wieloplatformowość uzyskano poprzez użycie bibliotek dostępnych na różnych platformach: Qt i GDCM, które również zostały napisane w C++.
-Aplikacja działa w ten sam sposób na wszystkich testowanych platformach: Linux, MacOS i Windows.
+Zniesienie ograniczeń wirtualizacji kodu rozwiązano użyciem C++ jako język programowania.
+Zastosowano biblioteki dostępne na różnych platformach: Qt i GDCM, które również zostały napisane w C++, dzięki czemu uzyskano jednolity program napisany w jednym języku.
 Zapewniono jednolity sposób kompilacji na platformach przy użyciu narzędzia CMake.
-Zaplanowano i dodano obsługę podstawowych operacji na obrazie ułatwiających jego oglądanie i ocenienie.
+Dzięki czemu aplikacja działa w ten sam sposób na wszystkich testowanych platformach: Linux, MacOS i Windows.
+Jednolity wygląda aplikacji zapewniła biblioteka Qt, dzięki czemu interfejs aplikacji jest prawie taki sam na każdym systemie.
+\par
+Zaplanowano i dodano obsługę podstawowych operacji na obrazie ułatwiających jego oglądanie i ocenienie, takich jak: przenoszenie; skalowanie; obrót.
+Zaimplementowano kolorowe pseudokolorowanie obrazów monochromatycznych z możliwością dodawania nowych palet.
+Wprowadzono obsługę serii obrazów jako całości, włączając w to przegląd obrazów w serii, animacje, wspólne okna w skali barwnej oraz wspólne przekształceniami macierzowymi
 \par
 Napotkano problem z biblioteką GDCM w postaci braku możliwości używania plików binarnych dostarczonych przez twórców.
 Te pliki binarne zostały skompilowane za pomocą innego kompilatora niż pliki binarne Qt.

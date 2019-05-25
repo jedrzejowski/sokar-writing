@@ -37,11 +37,11 @@ Sekwencja ma wbudowane funkcje zapewniające przesuwanie się po indeksie na wek
 \end{itemize}
 Wszystkie powyższe funkcje są zarazem slotami dla sygnałów oraz emitują sygnał \sokarfunction{SceneSequence}{steped}.
 
-\subsubsection{Kolekcja ramek DICOM}
+\subsubsection{Kolekcja ramek \DICOM}
 \label{sec:sokar-dicomframeset}
 
 \par
-Zbiory ramek są implementowane przez \sokarclass{DicomFrameSet} i są tworzone z jednego wczytanego pliku DICOM.
+Zbiory ramek są implementowane przez \sokarclass{DicomFrameSet} i są tworzone z jednego wczytanego pliku \DICOM.
 Klasa tworzy obiekt konwertera i pobiera liczbę ramek w obrazie.
 Tworzy jeden buffor na wszystkie ramki obrazów, a następnie dzieli go na ilość ramek.
 Biblioteka GDCM nie daje dostępu do oryginalnego bufora, dlatego wymagany jest bufor pośredni.
@@ -63,10 +63,10 @@ Została zaimplementowana obsługa poniższych znaczników:
 W przypadku braku znacznika lub gdy zostaje wskazany znacznik nieznany, czas trwania ramki wynosi $83.3$ milisekundy, co odpowiada 12 klatkom na sekundę.
 
 
-\subsubsection{Kolekcja plików DICOM}
+\subsubsection{Kolekcja plików \DICOM}
 \label{sec:sokar-dicomfileset}
 \par
-Zbiory plików są implementowane przez \sokarclass{DicomFileSet} i służą do przechowywania wielu wczytanych plików DICOM.
+Zbiory plików są implementowane przez \sokarclass{DicomFileSet} i służą do przechowywania wielu wczytanych plików \DICOM.
 Na początku pliki są sortowane na podstawie liczby zawartej w elemencie o znaczniku \dicomtag{Instance Number}{0020}{0x0013}.
 Dla każdego pliku jest tworzony obiekt \sokarclass{DicomFrameSet}.
 \par
@@ -80,5 +80,5 @@ Unikalny identyfikator serii jest zawarty w elemencie danych znaczniku \dicomtag
 Kolejności obrazów w serii to liczba zawarta w elemencie danych o znaczniku \dicomtag{Instance Number}{0020}{0x0013}.
 \par
 Segregacja odbywa się za pomocą funkcji \sokarfunction{DicomFileSet}{create}.
-Do funkcji jest przesyłany wektor z wczytanymi plikami DICOM, następnie dzieli ona pliki na zbiory zawierające zdjęcia tej samej serii, tworzy obiekty zbiorów plików DICOM, ostatecznie zwraca ona wektor z gotowymi obiektami zbiorów plików DICOM.
-Sortowanie plików DICOM według ich kolejności odbywa się za pomocą funkcji \stdclass{sort}{algorithm/sort} wewnątrz konstruktora klasy \sokarclass{DicomFileSet}, który nie jest publiczny.
+Do funkcji jest przesyłany wektor z wczytanymi plikami \DICOM, następnie dzieli ona pliki na zbiory zawierające zdjęcia tej samej serii, tworzy obiekty zbiorów plików \DICOM, ostatecznie zwraca ona wektor z gotowymi obiektami zbiorów plików \DICOM.
+Sortowanie plików \DICOM według ich kolejności odbywa się za pomocą funkcji \stdclass{sort}{algorithm/sort} wewnątrz konstruktora klasy \sokarclass{DicomFileSet}, który nie jest publiczny.

@@ -6,22 +6,22 @@ Przykładami najbardziej popularnych typów badań obrazowych są: ultrasonograf
 Wymienione techniki są szerzej opisane w sekcji \ref{sec:basic-imaging-technics}.
 \par
 Zarejestrowane obrazy mogą być zapisywane w formacie zdefiniowanym przez producenta.
-Najczęściej istnieje możliwość zapisu danych w formacie DICOM (Digital Imaging and Communication in Medicine). 
+Najczęściej istnieje możliwość zapisu danych w formacie \DICOM (Digital Imaging and Communication in Medicine). 
 Obok obrazów w pliku danych zapisywane są wszystkie parametry badania takie jak warunki akwizycji, nastawy urządzenia, pozycja pacjenta w urządzeniu pomiarowym, model i producent urządzenia oraz unikalny identyfikator urządzenia.
 Zapisywane są dane administracyjne pacjenta pozwalające na jego jednoznaczną identyfikację, także jego płeć, datę urodzenia, wiek podczas badania i inne dane ważne z medycznego punktu widzenia.
 Zapis zawiera także datę badania, osobę zlecającą badanie, osobę i jednostkę wykonującą badanie.
-Zapis danych w standardowym formacie DICOM umożliwia przekazywanie danych pomiędzy różnymi systemami komputerowaymi takimi jak systemy bazodanowe czy systemy wizualizacji i analizy badań obrazowych.
-Standard DICOM został opracowany przez dwie niekomercyjne organizacje American College of Radiology (ACR) i National Electrical Manufacturers Association (NEMA) i opublikowany w swojej ostatecznej wersji w 1993.
+Zapis danych w standardowym formacie \DICOM umożliwia przekazywanie danych pomiędzy różnymi systemami komputerowaymi takimi jak systemy bazodanowe czy systemy wizualizacji i analizy badań obrazowych.
+Standard \DICOM został opracowany przez dwie niekomercyjne organizacje American College of Radiology (ACR) i National Electrical Manufacturers Association (NEMA) i opublikowany w swojej ostatecznej wersji w 1993.
 W obecnym czasie jest to wiodący standard zapisu w obrazowaniu medycznym.
-Oprócz formatu zapisu danych obrazowych w plikach cyfrowych standard DICOM definiuje również protokół komunikacji sieciowej pomiędzy urządzeniami.
+Oprócz formatu zapisu danych obrazowych w plikach cyfrowych standard \DICOM definiuje również protokół komunikacji sieciowej pomiędzy urządzeniami.
 Wykonanie pomiarów w danej technice obrazowej to pierwszy etap procesu obrazowania diagnostycznego. Drugim etapem jest wizualizacja danych obrazowych i parametrów badania w sposób przyjęty w medycynie.
 Umożliwia to przeprowadzenie prawidłowej analizy badania przez personel medyczny celem identyfikacji patologii i postawieniu diagnozy.
-Podstawowe parametry wyświetlania obrazu są ujęte w standardzie DICOM, co powoduje, że po wczytaniu parametrów badania z pliku i ich przetworzeniu znany jest sposób prezentacji danych obrazowych zawartych w pliku.
+Podstawowe parametry wyświetlania obrazu są ujęte w standardzie \DICOM, co powoduje, że po wczytaniu parametrów badania z pliku i ich przetworzeniu znany jest sposób prezentacji danych obrazowych zawartych w pliku.
 Głównym aspektem tego procesu jest tak zwane pseudokolorowanie danych numerycznych. 
 %rozpędówka o przetwarzaniu
 \par
 Rozwój obrazowych technik diagnostycznych w medycynie oraz zwiększona dostępność aparatury spowodowały, że badania obrazowe są coraz bardziej powszechne. Badania obrazowe pomagają lekarzom w diagnostyce i terapii w codziennej praktyce lekarskiej.
-Przekazywanie badań obrazowych pomiędzy lekarzami różnych specjalności zostały rozwiązane poprzez rozwój standardu DICOM, który przewiduje wymianę danych zarówno poprzez komunikację klient-serwer urządzeń medycznych jak i wymianę plików cyfrowych. 
+Przekazywanie badań obrazowych pomiędzy lekarzami różnych specjalności zostały rozwiązane poprzez rozwój standardu \DICOM, który przewiduje wymianę danych zarówno poprzez komunikację klient-serwer urządzeń medycznych jak i wymianę plików cyfrowych. 
 Istnieje wiele narzędzi, komercyjnych i otwarto-źródłowych, do wizualizacji i analizy obrazów medycznych.
 Najczęściej jest to oprogramowanie dedykowane na jedną platformę systemową (system operacyjny).  
 Innym rozwiązaniem jest zastosowanie środowiska, które pozwala na uruchomienie programu na wielu platformach. Takim środowiskiem jest Java firmy Oracle, która umożliwia uruchamianie programów napisanych w języku Java i skompilowanych do \enquote{kodu bajtowego} na dowolnej platformie, na której działa maszyna wirtualna Javy. Jednakże takie rozwiązanie sprawia, że nie jesteśmy w stanie osiągnąć pełnego potencjału obliczeniowego maszyny przez pewien dodatkowy poziom wirtualizacji.
@@ -34,4 +34,4 @@ Biblioteka Qt jest wielo-platformowym zestawem narzędzi rozwijania oprogramowan
 Zapewnia ona nie tylko obsługę interfejsu użytkownika ale równie bogatą bibliotekę programowania aplikacji.
 Dodatkową zaletą wyboru biblioteki Qt w kontekście obrazowania medycznego jest to, że posiada ona certyfikaty zgodności z normą IEC 62304:2015 ułatwiający wprowadzanie przeglądarki obrazów na rynek Unii Europejskiej jako wyrobu medycznego klasy I z funkcją pomiarową, klasy II lub III.  
 \par
-W opracowanym kodzie przeglądarki obrazów do obsługi plików w formacie DICOMO wykorzystano bibliotekę Grassroots (Grassroots DICOM library --- GDCM).
+W opracowanym kodzie przeglądarki obrazów do obsługi plików w formacie \DICOM wykorzystano bibliotekę Grassroots (Grassroots DICOM library --- GDCM).

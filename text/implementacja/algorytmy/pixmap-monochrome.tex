@@ -73,7 +73,7 @@ Okno bez LUT jest implementowane przez \sokarclass{Monochrome{\scopedots}WindowI
 Obie klasy dziedziczą po abstrakcyjnej klasie \sokarclass{Monochrome}{Window}, która z kolei dziedziczy po \sokarclass{SceneIndicator}, dlatego od razu może wyświetlać obecne wartości \enquote{okna}.
 Decyzja o używanym \enquote{oknie} jest podejmowana podczas wczytywania obrazu przez klasę \sokarclass{Monochrome{\scopedots}Scene}
 \par
-UWAGA: Standard DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe.
+UWAGA: Standard \DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe.
 Dlatego w pracy założono, że takie obrazy nie będą obsługiwane.
 
 \paragraph{Wyznaczenie parametrów okna}
@@ -93,7 +93,7 @@ gdzie:
 Przeglądarka pozwala na inwersje okienka.
 Dlatego kiedy użytkownik zażyczy sobie inwersji, zmienne $y0$ i $y1$ zamienią się wartoścami.
 
-Standard DICOM przewiduje, że wszystkie dane powinny być wyskalowane, za pomocą wzoru.
+Standard \DICOM przewiduje, że wszystkie dane powinny być wyskalowane, za pomocą wzoru.
 \[OutputUnits = m*SV + b\]
 gdzie:
 \begin{itemize}
@@ -144,7 +144,7 @@ UWAGA: ponieważ nie istnieją rzeczywiste obrazy o wokselu 32-bitowym lub 64-bi
 \paragraph{Implementacja statyczna z tablicą LUT}
 \par
 W wersji z LUT, podczas tworzenia okienka jest alokowany wektor obiektów \sokarclass{Pixel} klasy \stdclass{vector}{container/vector}.
-Standard DICOM przewiduje, że woksele mogą mieć wartości ujemne, więc tablica powinna mieć możliwość posiadania takich wartości indeksów, ale C++ nie przewiduje takiej możliwości.
+Standard \DICOM przewiduje, że woksele mogą mieć wartości ujemne, więc tablica powinna mieć możliwość posiadania takich wartości indeksów, ale C++ nie przewiduje takiej możliwości.
 Dlatego wprowadzono dwie zmienne pomocnicze \cppcode{maxValue} i \cppcode{signedMove}.
 \cppcode{maxValue} jest to maksymalna wartość jaką dane mogą przyjąć, jest ona równa $2^N$, gdzie $N$ to liczba bitów brana z \dicomtag{BitsStored}{0028}{0101}.
 A \cppcode{signedMove} to liczba przesunięcia liczb, przyjmuje wartość zero, gdy dane wokseli są całkowite nieujemne lub wartość przeciwną do \cppcode{maxValue}, gdy woksele są być ujemne.
