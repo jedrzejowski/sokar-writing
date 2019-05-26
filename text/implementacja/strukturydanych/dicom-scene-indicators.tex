@@ -24,8 +24,8 @@ Zawierają następujące linie:
 
           Płeć, zapisana jest w \dicomtag{Patient Sex}{0010}{0040} i może mieć następujące wartości:
           \begin{itemize}
-              \item \dataword{M } --- oznacza mężczyznę, wyświetlana jako O
-              \item \dataword{F } --- oznacza kobietę, wyświetlana jako O
+              \item \dataword{M } --- oznacza mężczyznę, wyświetlana jako znak \utfMaleSign
+              \item \dataword{F } --- oznacza kobietę, wyświetlana jako znak \utfFemaleSign
               \item \dataword{O } --- oznacza inną płeć i nie jest wyświetlana
           \end{itemize}
 
@@ -60,13 +60,15 @@ Zawierają następujące linie:
 
 Przykład pełnego teksu:
 
-\texttt{\\
-    \textbf{Adam Jędrzejowski} O\\
-    HIS/123456\\
-    born 1996-07-16, 19 years\\
-    Kregoslup ledzwiowy a-p + boczne\\
-    AP
-}
+\begin{center}
+    \begin{tabular}{l}
+        \textbf{Adam Jędrzejowski} \utfMaleSign \\
+        HIS/123456                              \\
+        born 1996-07-16, 19 years               \\
+        Kregoslup ledzwiowy a-p + boczne        \\
+        AP
+    \end{tabular}
+\end{center}
 
 \paragraph{Dane jednostki organizacyjnej}
 
@@ -100,12 +102,12 @@ Obiekt posiada cztery pola: lewe, górne, prawe i dolne.
 \par
 Każda z sześciu możliwych liter oznacza kierunek oraz zwrot w jakim jest ułożony pacjent:
 \begin{itemize}
-    \item \dataword{R} --- right --- część prawa pacjenta
-    \item \dataword{L} --- left --- część
-    \item \dataword{A} --- anterior --- przód pacjenta
-    \item \dataword{P} --- posterior --- tył pacjenta
-    \item \dataword{F} --- feet --- część dolna
-    \item \dataword{H} --- head --- część górna
+    \item \enquote{R} --- right --- część prawa pacjenta
+    \item \enquote{L} --- left --- część
+    \item \enquote{A} --- anterior --- przód pacjenta
+    \item \enquote{P} --- posterior --- tył pacjenta
+    \item \enquote{F} --- feet --- część dolna
+    \item \enquote{H} --- head --- część górna
 \end{itemize}
 
 \par
