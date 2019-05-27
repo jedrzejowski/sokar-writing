@@ -1,12 +1,84 @@
 
 \section{Narzędzia potrzebne do kompilacji}
 
+\par
+Do kompilacji wystarczą podstawowe narzędzia budowania dostosowane do systemu operacyjnego.
+
+\begin{itemize}
+    \item Windows --- Visual Studio w wersji 2017 lub nowszej
+    \item Linux --- pakiety zawierające następujące komendy: make; cmake (w wersji 3.10 lub nowszej), g++ (w wersji 8 lub nowszej)
+    sudo apt-get install build-essential libgl1-mesa-dev
+sudo pacman -Syu qt5-base
+    \item MacOS --- to samo co w Linuxie, program Xcode instaluje wszystkie potrzebne komendy
+\end{itemize}
+
+Kod źródłowy został skompilowany za pomocą powyższych narządzi.
+Ale w kodzie programu nie występują, żadne elementy odbiegające od standardu C++17, więc nie powinno być problemów z użyciem niższych wersji wspierających standard C++17
+
 \section{Biblioteki potrzebne do kompilacji}
 
-\section{Przegotowanie katalogów}
+Do kompilacji są potrzebne biblioteki Qt i GDCM.
 
-\section{Utworzenie plików budowania}
 
-\section{Uruchomienie kompilacji}
+\subsection{Instalacja Qt}
+
+Program był testowany na wersji 5.12.
+
+\subsubsection*{Linux}
+
+Nie istnieje dystrybucja Linuxa, w której repozytoriach nie było by biblioteki Qt.
+Dlatego instalacja Qt sprowadza się pobrania jej z repozytoriów za pomocą menadżera pakietów.
+\par
+Komendy pozwalające zainstalować bibliotekę Qt na wybranych dystrybucjach:\\
+Ubuntu: \texttt{sudo apt-get install qt5-default}\\
+ArchLinux: \texttt{sudo pacman -Syu qt5-base}
+
+\subsubsection*{Windows i MacOS}
+
+\par
+W celu instalacji Qt należy udać się na oficjalną stronę biblioteki Qt.
+W prawym gónym rogu kliknąć zielony przycisk \enquote{Download. Try. Buy.}.
+Na dole kolumny zatytułowanej \enquote{Open Source} kliknąć zielony przycisk \enquote{Go open source}.
+Zostanie automatycznie pobrany plik instalacyjny.
+Po pobraniu należy go otworzyć i postępować zgodnie z instalacją.
+\par
+W pewnym momencie użytkownik może zostać poproszony o dane kontaktowe.
+Nie jest to wymagane i można kliknąć przycisk \enquote{Skip}.
+\par
+Następnie należy wybrać komponenty do zainstalowania.
+W przypadku Windowsa należy zainstalować wersje \enquote{Qt 5.12.X MSVC 2017 64 bit}.
+Z kolei na MacOS należy zainstalować \enquote{Qt 5.12.X clang\_x64}.
+Należy odhaczyć wszystkie inne opcje, nie są one wymagane do kompilacji programu.
+
+\subsection{Pobranie kodu źródłowego GDCM}
+
+W przypadku biblioteki GDCM, należy udać się na stronę \url{https://github.com/malaterre/GDCM/releases/tag/v2.8.9}.
+UWAGA: program był testowany na wersji 2.8.9, wersja 3.0.0 wyszła po skończeniu pisania kodu i nie była testowana.
+Na stronie należy pobrać plik \enquote{Source code (zip)}, a następnie go rozpakować.
+
+\subsection{Pobranie kodu źródłowego Sokar}
+
+Kod źródłowy aplikacji można pobrać repozytorium git znajdującego się pod adresem \url{https://gl.ire.pw.edu.pl/ajedrzejowski/sokar-app} lub z nośnika danych dołączonego do pracy.
+
+\section{Przygotowanie katalogów}
+
+Należy utworzyć folder w którym będą znajdowały się wszystkie foldery z plikami, dalej ten folder będzie nazywany \enquote{/path/}.
+Kod źródłowy GDCM umieść w katalogu \enquote{/path/gdcm/}.
+Kod źródłowy Sokar umieść w katalogu \enquote{/path/sokar-app/}.
+Utwórz również foldery \enquote{/path/gdcm-bin/} i \enquote{/path/sokar-app-bin/}.
+
+\section{Kompilacja GDCM}
+
+Uruchom CMake z menu programów lub za pomocą \enquote{cmake-gui}.
+W polu \enquote{Where is the source code:} wpisz \enquote{/path/gdcm/}.
+W polu \enquote{Where to build the binnaries:} wpisz \enquote{/path/gdcm-bin/}.
+Kliknij \enquote{Configure}.
+\begin{itemize}
+    \item Windows
+    \item Linux i MacOS
+\end{itemize}
+Odznacz wszystkie wartość za wyjątkiem \enquote{GDCM\_BUILD\_SHARED\_LIBS}.
+
+\section{Kompilacja Sokar}
 
 \section{Przeniesienie plików do jednego folderu}
