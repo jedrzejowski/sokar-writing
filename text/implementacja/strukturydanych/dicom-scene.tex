@@ -1,6 +1,6 @@
 \label{sec:sokar-dicomscene}
 
-Scena jest to obiektem jednej ramki obrazu i jest odpowiedzialna za pośrednie wygenerowanie obrazu oraz jego wyświetlenie na ekranie.
+Scena jest obiektem jednej ramki obrazu i jest odpowiedzialna za pośrednie wygenerowanie obrazu oraz jego wyświetlenie na ekranie.
 Implementowana jest ona przez klasę \sokarclass{DicomScene}, dziedzicząca po \sokarclass{Scene}, natomiast \sokarclass{Scene} dziedziczy po \qtclass{QGraphicsScene}.
 Diagram klas UML znajduje się na rysunku \ref{uml:sokar-dicomscene}
 
@@ -23,7 +23,7 @@ Dodatkowo można na tych obiektach używać przekształceń macierzowych we wsp�
 Przykłady obiektów używanych w scenie \sokarclass{DicomScene}:
 \begin{itemize}
     \item \qtclass{QGraphicsTextItem} --- element wyświetlający tekst, obsługuje on możliwość wyświetlania podstawowych znaczników HTML
-    \item \qtclass{QGraphicsLineItem} --- element wyświetlający prostą linie z punktu $A$ do $B$
+    \item \qtclass{QGraphicsLineItem} --- element wyświetlający prostą linię z punktu $A$ do $B$
     \item \qtclass{QGraphicsPixmapItem} --- element wyświetlający obrazy graficzne, obiekty klasy \qtclass{QPixmap}
     \item \qtclass{QGraphicsItemGroup} --- element grupujący wiele elementów, pozwala na łatwą implementację bardziej złożonych struktur
 \end{itemize}

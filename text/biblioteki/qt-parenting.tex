@@ -2,7 +2,7 @@
 \par
 W C++ jednym z największych problemów jest wyciek pamięci, który pojawia się wtedy, gdy zaalokujemy na stercie obiekt za pomocą operatora \cppcode{new} i nie usuniemy go gdy ten będzie niepotrzebny.
 \par
-\qtclass{QObject} zakłada, że obiekty mogą mięć jednego rodzica, a rodzic może mieć wiele dzieci.
+\qtclass{QObject} zakłada, że obiekty mogą mieć jednego rodzica, a rodzic może mieć wiele dzieci.
 Rodzica można przypisać podczas tworzenia obiektu oraz zmieniać go dowolnie w trackie działania programu.
 Przypisanie rodzica dziecku oznacza to, że gdy wywołamy destruktor rodzica, ten wywoła destruktory dzieci i w ten sposób całe drzewo obiektów zostanie zniszczone.
 \par

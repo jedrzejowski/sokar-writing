@@ -41,18 +41,18 @@ Pasek jest podzielony na trzy części: trzy przyciski znajdujące się po lewej
 
 \par
 Trzy lewe przyciski odpowiadają za poruszanie się po sekwencji.
-Wciśniecie pierwszego przycisku (z indeksem 8 na rysunku \ref{fig:sokar-dicomview001}) powoduje zatrzymanie upływu sekwencji i wysłanie sygnału \sokarfunction{SceneSequence}{stepBackward} do sekwencji.
-Wciśniecie drugiego przycisku (9) powoduje włączenie lub wyłączenie upływu sekwencji.
-Wciśniecie trzeciego przycisku (10) powoduje zatrzymanie upływu sekwencji i wysłanie sygnału \sokarfunction{SceneSequence}{stepForward} do sekwencji.
+Wciśnięcie pierwszego przycisku (z indeksem 8 na rysunku \ref{fig:sokar-dicomview001}) powoduje zatrzymanie upływu sekwencji i wysłanie sygnału \sokarfunction{SceneSequence}{stepBackward} do sekwencji.
+Wciśnięcie drugiego przycisku (9) powoduje włączenie lub wyłączenie upływu sekwencji.
+Wciśnięcie trzeciego przycisku (10) powoduje zatrzymanie upływu sekwencji i wysłanie sygnału \sokarfunction{SceneSequence}{stepForward} do sekwencji.
 \par
 Pasek (11) pokazujący postęp sekwencji jest obiektem klasy \qtclass{QSlider}.
-Odświeżanie paska jest wrażliwe na sygnał \sokarfunction{SceneSequence}{steped} of sekwencji.
+Odświeżanie paska jest wrażliwe na sygnał \sokarfunction{SceneSequence}{steped} od sekwencji.
 \par
 Elementy po prawej stronie definiują parametry trybu filmowego.
 Prządka (12) jest elementem do wprowadzania liczby zmiennoprzecinkowej klasy \qtclass{QDoubleSpinBox}.
 Im większa wartość liczby, tym klatki filmu są dłużej wyświetlane.
 Drugi (13) przycisk pozwala zmienić sposób przemiatania.
-Trzeci (14) przycisk wymusza tryb jednego okna dla wszystkich klatek filmu.
+Trzeci (14) przycisk wymusza tryb jednego okienkowania dla wszystkich klatek filmu.%TOASK
 Jeżeli mamy załadowanych wiele obrazów tego samego badania, to nie koniecznie muszą mieć to samo okno.
 Dodatkowo ten tryb pozwala wprowadzić jednolite okienko dla wszystkich klatek po zmianie parametrów tego okienka na jednej klatce.
 Czwarty (15) i ostatni przycisk służy do użycia jednej macierzy transformaty na wszystkich klatkach.

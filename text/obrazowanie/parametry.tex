@@ -28,13 +28,13 @@ Standard \DICOM definiuje następujące wartości tego tagu (wraz z wyjaśnienie
 
     \item \dataword{YBR\_FULL} --- ten woksel to piksel w modelu przestrzeni barw nazwanej YC\textsubscript{b}C\textsubscript{r}.
 
-          Dodatkowo standard zdefiniował pochodne tej wartości: \dataword{YBR\_FULL\_422}, \dataword{YBR\_PARTIAL\_422}, \dataword{YBR\_PARTIAL\_420}, \dataword{YBR\_ICT}, \dataword{YBR\_RCT}, ale wszystkie są już wycofane.
+          Dodatkowo standard zdefiniował pochodne tej wartości: \dataword{YBR\_RCT}, \dataword{YBR\_FULL\_422}, \dataword{YBR\_PARTIAL\_422}, \dataword{YBR\_PARTIAL\_420}, \dataword{YBR\_ICT}, ale wszystkie są już wycofane.
 \end{itemize}
 
 \dicomRetired
 
 \par
-Kwantyzacja obrazu, czyli informacja mówiąca o tym ile poziomów na obrazie jest zapisanych w czterech znacznikach:
+Kwantyzacja obrazu, czyli liczba poziomów obrazu, jest zapisana na czterech znacznikach:
 \begin{itemize}
     \item \dicomtag{Bits Allocated}{0028}{0100} --- informuje na jak wiele bitów zostało zaalokowanych do zapisania jednego piksela
     \item \dicomtag{Bits Stored}{0028}{0101} --- informuje jak wiele bitów z zaalokowanych posiada wartość piksela

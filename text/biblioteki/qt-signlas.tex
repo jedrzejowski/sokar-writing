@@ -1,11 +1,14 @@
 
 \par
 System sygnałów i slotów jest implementacją programowania zdarzeniowego.
-W odróżnieniu od sygnałów pojawiających się w C, sygnały w Qt są wstanie przenosić argumenty definiowane przez programistę.
-Sygnały i sloty są implementowane przez funkcje definiowane w deklaracji klasy.
+Sygnał jest źródłem zdarzenia, a slot jest odbiornikiem zdarzenia.
 Sygnał obiektu jest łączony do slotu obiektu dynamicznie w czasie działania programu.
 Do jednego sygnału można podłączyć wiele slotów, jak i do jednego slotu można wprowadzić wiele sygnałów.
-Taka implementacja umożliwia to tworzenie programowania zdarzeniowego.
+Gdy zdarzenie zostanie wyemitowane, to wszystkie sloty podłączone do sygnału zostaną powiadomione.
+Sygnały i sloty są implementowane przez funkcje definiowane w deklaracji klasy.
+System sygnałów Qt nie ma nic wspólnego w sygnałach pojawiających się w C, takich jak \enquote{SIGTERM}.
+Dodatkowo sygnały w Qt są wstanie przenosić argumenty definiowane przez programistę.
+Taka implementacja umożliwia programowanie zdarzeniowe.
 
 \par
 Przykład użycia sygnałów do propagacji zdarzenia.

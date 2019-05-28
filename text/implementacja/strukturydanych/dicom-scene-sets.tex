@@ -76,7 +76,7 @@ Sekwencja jest tworzona poprzez połączenie sekwencji poszczególnych obrazów.
 \label{sec:sokar-dicomfileset-create}
 \par
 W przypadku kiedy mamy do czynienia z wieloma plikami, należy jest rozdzielić na serie i uporządkować w odpowiedniej kolejności.
-Unikalny identyfikator serii jest zawarty w elemencie danych znaczniku \dicomtag{Series Instance UID}{0020}{000E}.
+Unikalny identyfikator serii jest zawarty w elemencie danych o znaczniku \dicomtag{Series Instance UID}{0020}{000E}.
 Kolejności obrazów w serii to liczba zawarta w elemencie danych o znaczniku \dicomtag{Instance Number}{0020}{0x0013}.
 \par
 Segregacja odbywa się za pomocą funkcji \sokarfunction{DicomFileSet}{create}.
