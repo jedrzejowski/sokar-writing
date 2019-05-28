@@ -33,7 +33,7 @@ Przeglądarka obrazów \DICOM może mieć możliwość od czytania, wyświetleni
           \begin{figure}[!htbp]
               \centering
               \includegraphics[width=\textwidth]{img/wyswietlanie001.png}
-              \caption{Przykład narzędzia Lupa w przeglądarce \href{https://www.softneta.com/products/meddream-dicom-viewer/}{MedDream DICOM Viewer}. Zdjęcie użyte za zgodą \href{https://www.softneta.com/}{Softneta UAB}.}
+              \caption{Narzędzie Lupa w przeglądarce \href{https://www.softneta.com/products/meddream-dicom-viewer/}{MedDream DICOM Viewer}. Zdjęcie użyte za zgodą \href{https://www.softneta.com/}{Softneta UAB}.}
               \label{fig:wyswietlanie001}
           \end{figure}
 
@@ -48,8 +48,8 @@ Przeglądarka obrazów \DICOM może mieć możliwość od czytania, wyświetleni
           Termin odnosi się do używania funkcji okna cyfrowego w celu zamiany obrazu danych na obraz monochromatyczny możliwy do wyświetlenia.
           Okienkowanie jest szczegółowo opisane w sekcji \ref{sec:algorithm-pixmap-monochrome} wraz z generowaniem obrazu monochromatycznego.
 
-    \item Maski lub nakładki \fromEng{overlay}.
-          Jest możliwość nałożenia maski, elementu, który będzie przysłaniał fragment obrazu w celu lepszej wizualizacji bądź ukrycie mało wartościowych obiektów, np. tła.
+    \item Maski \fromEng{overlay}.
+          Jest to możliwość nałożenia maski, elementu, który będzie przysłaniał fragment obrazu w celu lepszej wizualizacji bądź ukrycie mało wartościowych obiektów, np. tła.
           Standard \DICOM umożliwia nałożenie wielu masek na jeden obraz.
 \end{itemize}
 
@@ -86,18 +86,18 @@ Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{img/dicom-viewer-002.png}
-    \caption{Przykład generowania obrazów 3D z wielu obrazów tomograficznych w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
+    \caption{Generowanie obrazów 3D z wielu obrazów tomograficznych w przeglądarce \href{https://www.santesoft.com/win/sante-dicom-viewer-3d-pro/sante-dicom-viewer-3d-pro.html}{Sante DICOM Viewer 3D Pro}}
     \label{fig:dicomviewer002}
 \end{figure}
 
 \subsubsection{Analiza i przetwarznie danych}
 
 \begin{itemize}
-    \item Histogram, czyi możliwość wygenerowania histogramu obrazu.
+    \item Histogram, czyli możliwość wygenerowania histogramu obrazu.
 
           Histogram to wykres przedstawiający dystrybucje wartości numerycznych obrazu.
 
-    \item Mierzenie obrazu, wykonywanie pomiarów.
+    \item Mierzenie i wykonywanie pomiarów.
           Pozwala na określenie odległości pomiędzy dwoma punktami przez lekarza lub zmierzenie wielkości/pola zadanego kształtu.
 
     \item Rekonstrukcja wielopłaszczyznowa.
@@ -109,7 +109,7 @@ Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
           \begin{figure}[!htbp]
               \centering
               \includegraphics[width=\textwidth]{img/dicom-viewer-003.jpeg}
-              \caption{Przykład rekonstrukcji wielopłaszczyznowej w przeglądarce \href{https://athenadicomviewer.com/}{Athena DICOM Viewer}. Zdjęcie użyte za zgodą \href{https://medicalharbour.com/}{Medical Harbour}.}
+              \caption{Rekonstrukcji wielopłaszczyznowej w przeglądarce \href{https://athenadicomviewer.com/}{Athena DICOM Viewer}. Zdjęcie użyte za zgodą \href{https://medicalharbour.com/}{Medical Harbour}.}
               \label{fig:dicomviewer003}
           \end{figure}
 \end{itemize}
@@ -118,7 +118,7 @@ Przykład takiego obrazu znajduje się na rysunku \ref{fig:dicomviewer002}.
 
 \begin{itemize}
     \item Dodawanie nowych obiektów.
-          Pozwala na rysowanie, dodawanie figur geometrycznych lub tekstu przez lekarza i zapis tych informacji w pliku \DICOM (lub nadpis).
+          Pozwala na rysowanie, dodawanie figur geometrycznych lub tekstu przez lekarza i zapis tych informacji w pliku \DICOM.
           Chodzi tu głównie o szkice i notatki tworzone podczas analizy obrazu przez personel medyczny.
 
     \item Edycja parametrów oraz anonimizacja danych.
@@ -151,20 +151,20 @@ Aplikacja powinna mieć dostępną pisemną dokumentację oprogramowania (np. po
 Forum, możliwość pytania się społeczności o opinie i ich wymiana.
 Wiki, strona internetowa w formacie Wikipedii dostępna dla użytkownika.
 
-\subsubsection{Obrazowanie dwu-wymiarowe}
+\subsubsection{Obrazowanie dwuwymiarowe}
 
 Przewijanie(\fromEng{scroll}), proces wyświetlania obrazów, można poprawić dzięki zmniejszeniu interakcji z klawiaturą oraz myszką. Można to osiągnąć na przykład, oferując możliwość przejścia do następnego lub poprzedniego obrazu przez przesunięcie kółkiem myszy lub używając przycisków góra/dół na klawiaturze.
 Metadane, przeglądania powinna obejmować analizowanie i wyświetlanie metadanych obiektów DICOM, powinna obejmować wyświetlanie rozdzielczości obrazu, badanie (np. identyfikator podmiotu) oraz znaczniki DICOM specyficzne dla dostawcy (np. specjalne ustawienie urządzenia rejestrującego).
 Warstwa informacyjna, najważniejsze informacje powinny powinny być wizualizowane w oknie wyświetlacza jako nakładka na obraz.
 Na przykład aktualna pozycja lub nazwa podmiotu wykonującego badanie.
-Okienkowanie (okna cyfrowe), sposób zamiany danych na skale szarości, okienkowanie jest opisane w sekcji \ref{sec:windowing}.
-Pseudo-kolorowanie obrazu, tabele (LUT, \fromEng{LookUpTable}) odwzorowujące szare wartości obrazu na pseudo-kolory, poprawiaja one czytelność obrazu.
-Histogram, histogramy wizualizują wystąpienia i rozkład wartości kolorów na obrazach, pozwalają opisywać istotne cechy obrazu
+Okienkowanie to sposób zamiany danych na skale szarości, okienkowanie jest opisane w sekcji \ref{sec:algorithm-pixmap-monochrome}.
+Pseudo-kolorowanie obrazu, tabele (LUT, \fromEng{LookUpTable}) odwzorowujące szare wartości obrazu na pseudo-kolory.
+Histogram wizualizuje wystąpienia i rozkład wartości kolorów na obrazach, pozwalają opisywać istotne cechy obrazu
 Wymiarowanie, możliwości rysowania bądź zaznaczania linii lub innych kształtów do analizy i wyznaczania odległości w jednostkach długości na obrazie.
 Jest to możliwe gdyż nagłówki pliku DICOM zawierają parametry sprzętowe urządzenia (np. ilość pikseli na centymetr).
 Adnotacje(opisy), które były wytworzone przez personel medyczny powinny być zapisywane w odpowiedni sposób w pliku.
 
-\subsubsection{Obrazowanie trój-wymiarowe}
+\subsubsection{Obrazowanie trójwymiarowe}
 
 Rekonstrukcja wtórna, zwykle dane dotyczące objętości medycznej są gromadzone wzdłuż jednej osi ciała (np. poprzecznej).
 W wielu przypadkach ważne jest przeglądanie danych w innych kierunkach (np. strzałkowych lub czołowych), aby poprawić wizualizację niektórych struktur.

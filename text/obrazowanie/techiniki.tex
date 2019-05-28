@@ -14,9 +14,10 @@ Podstawowe techniki obrazowania medycznego to:
           Detektory z konwersją bezpośrednią, w których kwanty X konwertowane są na elektrony w grubej warstwie odpowiednio dobranego półprzewodnika (np. selenu).
           Detektory z konwersją pośrednią, w których kwanty X konwertowane są w scyntylatorze na fotony światła widzialnego, które z kolei rejestrowane są przez fotodiody krzemowe.
 
-          W radiografii obrazowana jest ilość promieniowania X przenikającego przez badany obiekt.
-          Piksel w obrazie jest uzyskiwany przez zliczanie ilości rozbłysków i reprezentuje współczynnik przenikania promieniowania X, dlatego zdjęcie jest negatywem i w takiej formie zdjęcie jest analizowane przez lekarza.
-          Wielkość obrazu zależy od matrycy wliczającej rozbłyski.
+          W radiografii rejestrowane jest natężenie promieniowania X przenikającego przez badany obiekt.
+          % TOASK jak reprezentuje
+          Piksel w obrazie jest uzyskiwany przez zliczanie liczby rozbłysków i reprezentuje współczynnik promieniowania X, dlatego zdjęcie jest negatywem i w takiej formie zdjęcie jest analizowane przez lekarza.
+          Wielkość obrazu zależy od matrycy.
           Kontrast zależy od położenia obiektu między źródłem a detektorem (położenie optymalne), od napięcia anodowego, filtracji, grubości okładek wzmacniających.
           Rozdzielczość zależy od rozdzielczości detektora, rozmiaru ogniska lampy, położenia obiektu względem detektora a lampą i wielkości obiektu.
           Miarą rozdzielczości jest liczba rozróżnialnych linii na jednostkę długości.
@@ -28,9 +29,10 @@ Podstawowe techniki obrazowania medycznego to:
           Akwizycja w tomografii komputerowej jest podobna do badania RTG, ale w CT wykonujemy wiele pomiarów w różnych pozycjach względem obiektu badanego i pod różnym kątem.
           W tomografii komputerowej podobnie jak w radiografii wykorzystuje się promieniowanie X do pomiaru projekcji (stąd inna nazwa tomografia rentgenowska).
           W wybranej płaszczyźnie dokonuje się pomiarów projekcji po liniach biegnących pod różnym kątem i w różnych odległościach od badanego obiektu.
-          Przekrój obiektu jest rekonstruowany numerycznie na podstawie zmierzonych projekcji wstecznej.
+          Przekrój obiektu jest rekonstruowany numerycznie na podstawie zmierzonych projekcji.
 
-          Obrazowany jest współczynnik przenikalności promieniowania X przez obiekt.
+          % TOASK
+          Obrazowany jest współczynnik natężenia promieniowania X przez obiekt.
           Wielkość obrazu może być różna i jest zależna od ustawień tomografu, najczęściej jest to 512 na 512 wokseli.
           Piksel obrazu jest uzyskiwany podczas rekonstrukcji obrazu i reprezentuje przenikalność promieniowania X.
           Kontrast i rozdzielczość zależy od tych samych parametrów co w klasycznej radiografii.
@@ -55,11 +57,12 @@ Podstawowe techniki obrazowania medycznego to:
           Zbieranie danych odbywa się przez cyklicznie wysyłanie i odbieranie fali ultradźwiękowej pod różnymi kątami.
           Z każdego cyklu jest tworzona jedna linia, obraz jest tworzony z wielu lini, które następnie są układane pod różnymi kątami, odpowiadającym ich rzeczywistemu ułożeniu na głowicy.
           Wielkość obrazu jest zależna od algorytmu rekonstrukcji i jest z góry ustawiona przez producenta aparatu.
-          Piksel w obrazie nie przedstawia żadnej wartości fizycznej, różnice pomiędzy pikselami definiują umowną różnicę gęstości zależną od aparatu.
-          Kontrast zależy od częstotliwości fali, głębokości badanego obiektu, ilości piezoelektryków w głowicy, obrazowanej struktury.
+          % TOASK
+          Różnice pomiędzy pikselami definiują umowną różnicę gęstości zależną od aparatu.
+          Kontrast zależy od częstotliwości fali, głębokości badanego obiektu, liczby piezoelektryków w głowicy, obrazowanej struktury.
           Rozdzielczość zależy od czasu trwania impulsu zaburzenia oraz od szerokości wiązki ultradźwiękowej (powierzchnia czynna przetworników).
 
-          W standardzie \DICOM obraz ultrasonograficzny jest oznaczana jako \enquote{US}.
+          W standardzie \DICOM obraz ultrasonograficzny jest oznaczano jako \enquote{US}.
           Obrazy dopplerowskie \enquote{Color flow Doppler(CD)} i \enquote{Duplex Doppler(DD)} były kiedyś w standardzie, ale zdecydowano się je wycofać.
 
     \item Scyntygrafia
@@ -100,8 +103,8 @@ Podstawowe techniki obrazowania medycznego to:
 
 Istnieją badania łączące w sobie różne techniki, takie jak:
 \begin{itemize}
-    \item PET-CT, PET/CT --- połączenie PET z wielorzędowym tomografem komputerowym
-    \item PET-MRI, PET/MRI --- połączenie PET z rezonansem magnetycznym
+    \item PET-CT --- połączenie PET z wielorzędowym tomografem komputerowym
+    \item PET-MRI --- połączenie PET z rezonansem magnetycznym
 \end{itemize}
 
 Standard \DICOM nazywa techniki obrazowania modalnościami \fromEng{modality}.

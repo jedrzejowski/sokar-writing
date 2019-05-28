@@ -36,7 +36,7 @@ Standard \DICOM definiuje następujące wartości tego tagu (wraz z wyjaśnienie
 \par
 Kwantyzacja obrazu, czyli informacja mówiąca o tym ile poziomów na obrazie jest zapisanych w czterech znacznikach:
 \begin{itemize}
-    \item \dicomtag{Bits Allocated}{0028}{0100} --- informuje na jak wiele bitów zostało zaalokowancyh do zapisania jednego piksela
+    \item \dicomtag{Bits Allocated}{0028}{0100} --- informuje na jak wiele bitów zostało zaalokowanych do zapisania jednego piksela
     \item \dicomtag{Bits Stored}{0028}{0101} --- informuje jak wiele bitów z zaalokowanych posiada wartość piksela
     \item \dicomtag{High Bit}{0028}{0102} --- informuje gdzie znajduje się najstarszy bit
     \item \dicomtag{Pixel Representation}{0028}{0103} --- informuje czy poziomy są ze znakiem czy bez
@@ -44,7 +44,7 @@ Kwantyzacja obrazu, czyli informacja mówiąca o tym ile poziomów na obrazie je
 
 \par
 Obraz \DICOM również zawiera w sobie informacje o próbkowaniu.
-Z uwagi na to, że próbkowanie wygląda inaczej w każdej technice, standard posiada oddzielne tagi informujące o próbkowaniu dla każdej techniki.
+Z uwagi na to, że próbkowanie wygląda inaczej w każdej technice, standard posiada odpowiedni zestaw znaczników dla każdej techniki.
 Próbkowanie poszczególnych technik opisałem w sekcji \ref{sec:basic-imaging-technics}.
 
 % \subsection{Wartość diagnostyczna obrazu}
@@ -104,11 +104,11 @@ Rozdzielczość czasowa jest definiowana jako odległość w czasie od dwóch kl
 \subsection{Stosunek sygnału do szumu (SNR)}
 
 Rodzaj i poziom szumu zależy od techniki obrazowania.
-Stosunek sygnału ma decydujący wpływ na widoczności obiektów, kontrast oraz percepcję szczegółów w obrazie.
+Stosunek sygnału do szumu ma decydujący wpływ na widoczności obiektów, kontrast oraz percepcję szczegółów w obrazie.
 
 \subsection{Poziom artefaktów}
 
-Artefakty to zjawiska fałszujące obraz poprzez tworzenie nie istniejących struktur w obrazie.
+Artefakty to zjawiska fałszujące obraz poprzez tworzenie struktur w obrazie, nie istniejących w rzeczywistości.
 Jest to problem występujący w różnych technikach obrazowania.
 Najbardziej znanymi artefaktami są np. w badaniu USG tak zwany warkocz komety w przypadku obiektów o wysokiej różnicy impedancji w stosunku do otoczenia.
 
