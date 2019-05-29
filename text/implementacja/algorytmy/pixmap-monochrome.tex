@@ -11,7 +11,7 @@ Dlatego do wyświetlania obrazów monochromatycznych o dużym kontraście stosuj
 Jest to funkcja, która mapuje n-bitwy obraz na 8-bitowy obraz w skali szarości.
 8-bitów, ponieważ monitor RGB jest wstanie wyświetlić 256 odcieni szarości.
 
-\paragraph*{Zwiększanie kontrastu za pomocą \enquote{funckji okna}}
+\paragraph*{Zwiększanie kontrastu za pomocą \enquote{funkcji okna}}
 Jest przyjęte, że \enquote{okno} definiuje się dwoma liczbami: środkiem, oznaczanym jako $center$ i długością, oznaczaną jako $width$.
 Wyznaczamy zakres okienka $x_0$ i $x_1$ ze środka okienka $center$ i długości $width$.
 \[x_0 = center - width / 2\]
@@ -31,41 +31,51 @@ Funkcja \enquote{okna} wygląda następująco:
 gdzie $v$ to wartość piksela danych obrazu.
 
 Następnie iterujemy przez wszystkie woksele obrazu i używamy na nich funkcji \enquote{okna} i otrzymujemy obraz w skali od $0$ do $255$.
-Taki obraz w skali można już wyświetlić.
-Natomiast standard DICOM przewiduje, że obraz można jeszcze wyświetlić w wielokolorowej palecie barw.
+Obraz w 256 poziomach jest możliwy do wyświetlenia na obrazie RGB.
+Natomiast standard \DICOM przewiduje, że obraz można jeszcze wyświetlić w wielokolorowej palecie barw.
 Przykład takiej palety HotIron w porównaniu do skali szarości można zobaczyć na rysunku .
 Taka paleta barw nie koniecznie musi mieć 256 odcieni, dlatego lepiej jest zrobić aby \enquote{okno}, mapowało na liczbę od 0 do 1, a później paleta mapowała na kolor RGB.
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.7\textwidth]{img/monochrome-001.png}
-    \caption{Paleta HotIron (po prawej) w porównaniu do palety w skali szarości (po lewej). Zdjęcie ze standardu DICOM dostępne pod adresem \url{http://dicom.nema.org/medical/dicom/2019a/output/chtml/part06/chapter_B.html}.}
-    \label{fig:monochrome1}
-\end{figure}
 
-Teraz iterujemy po wszystkich możliwych wartościach wartośćiach obrazu i wykonujemy takie operacje.
+
+Teraz iterujemy po wszystkich możliwych wartościach wartościach obrazu i wykonujemy takie operacje.
 \begin{itemize}
     \item wyznaczenie wartości okienka.
           \[y = a * x + b\]
-    \item y zostaje obcięcie do 1.0 lub 0.0 jeżeli wyjdzie poza zakres od 1.0 do 0.0
-    \item pobranie z palety piksel odpowiadający wartości
-    \item wsadzenie piksela do tablicy, tak aby najmniejsza wartości obrazu miała indeks 0 a największy ostani
+    \item $y$ zostaje obcięte do $1.0$ lub $0.0$ jeżeli wyjdzie poza zakres od $1.0$ do $0.0$
+    \item pobranie z palety pikselu odpowiadającego wartości
+    \item wpisanie piksela do tablicy, tak aby najmniejsza wartości obrazu miała indeks $0$ a największy ostatni
 \end{itemize}
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/monochrome-002.png}
+    \caption{Porównanie jednego obrazu w trzech różnych \enquote{funkcji okna}.}
+    \label{fig:algorithm-pixmap-monochrome-multiwindow}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/monochrome-003.png}
+    \caption{Paleta Hot Iron (na środku) i Hot Metal Blue (po prawej) w porównaniu do palety w skali szarości (po lewej). Zdjęcie własne.}
+    \label{fig:algorithm-pixmap-monochrome-palette}
+\end{figure}
 
 
 \subsubsection{Implementacja algorytmu}
 
 \paragraph{Opis}
 \par
-Z uwagi na konieczność osiągnięcia dużej szybkości wyświetlania obrazu, warto jest taksować wartości funkcji f.
+Z uwagi na konieczność osiągnięcia dużej szybkości wyświetlania obrazu, warto jest szacować wartości funkcji f.
 Wartości tej funkcji należy przeliczyć, gdy zmienione zostaną parametry tak zwanego \enquote{okna}.
-Indeks koloru wyznaczany jest wtedy poprzez pobieranie wartości z tabeli o indeksie równym wartości równym wartości numerycznej w obrazie.
-Unikamy w ten sposób wielokrotnego wyznaczania wartości funkcji, która wymaga sprawdzenia warunku, czy dana wartość mieści się w wybranym przedziale wartości, w tan zwanym oknie, co jest bardzo kosztowne obliczeniowo.
+Indeks koloru wyznaczany jest wtedy poprzez pobieranie wartości z tabeli o indeksie równym wartości numerycznej w obrazie.
+Unikamy w ten sposób wielokrotnego wyznaczania wartości funkcji, która wymaga sprawdzenia warunku, czy dana wartość mieści się w wybranym przedziale wartości, w tak zwanym \enquote{oknie}, co jest bardzo kosztowne obliczeniowo.
 Dlatego dobrym pomysłem jest stworzenie mniejszej tablicy typu LookUpTable, wypełnienie jej wszystkimi możliwymi wartościami obrazu, a następnie przerobienie obrazu z tablicą LUT.
 Ponieważ tablica LUT posiada wszystkie możliwe kombinacje wartości, jej rozmiar można wyznaczyć wzorem: $2^N*3$, gdzie $N$ to liczba bitów liczby.
 Standard \DICOM definiuje, że liczby mogą mieć $8$, $12$, $16$, $32$ i $64$ bity, jednakże, $12$ bitowe i tak się zapisuje w postaci 16-bitowych w pamięci RAM.
 Dlatego możliwe wartości wielkości tablicy LUT to w przybliżeniu: $768$ bajtów, $196$ kilobajtów, $12,5$ gigabajtów i $56$ eksabajta ($55*10^{6}$ terabajtów).
-Alokowanie dwóch największych wartości może być lekko problematyczne, dlatego w pracy wykonano dwie implementacje algorytmu: z tablicą LUT (dla 8 i 16 bitowych obrazów i bez tablicy LUT (dla 32 i 64 bitowych obrazów).
+Alokowanie dwóch największych wartości może być niemożliwe, dlatego w pracy wykonano dwie implementacje algorytmu: z tablicą LUT (dla 8 i 16 bitowych obrazów i bez tablicy LUT (dla 32 i 64 bitowych obrazów).
 Algorytm składa się z 3 części: wyznaczenie parametrów \enquote{okna}, przygotowanie \enquote{okna} (tylko gdy jest tablica LUT), wielowątkowa iteracja po obrazie.
 \par
 Okno z LUT jest implementowane przez \sokarclass{Monochrome{\scopedots}WindowIntStatic}.
@@ -88,7 +98,7 @@ gdzie:
     \item $center$ --- środek okienka
     \item $width$ --- szerokość okienka
     \item $x0$ i $y0$ --- współrzędne pierwszego punktu
-    \item $x1$ i $y1$ --- współrzędne drugego punktu
+    \item $x1$ i $y1$ --- współrzędne drugiego punktu
 \end{itemize}
 Przeglądarka pozwala na inwersje okienka.
 Dlatego kiedy użytkownik zażyczy sobie inwersji, zmienne $y0$ i $y1$ zamienią się wartoścami.
@@ -99,11 +109,11 @@ gdzie:
 \begin{itemize}
     \item $m$ --- wartość z \dicomtag{RescaleSlope}{0028}{1053}
     \item $b$ --- wartość z \dicomtag{RescaleIntercept}{0028}{1052}
-    \item $SV$ --- stored values --- warość pixela z pliku
+    \item $SV$ --- stored values --- wartość woksela z pliku
     \item $OutputUnits$ --- wartość wynikowa
 \end{itemize}
 
-Wartości okienka odnoszą się do wartości już wyskalowanej, a ponieważ skalowanie całego obrazu jest czasochłonne, przeskalowaie okienka da taki sam efekt:
+Wartości okienka odnoszą się do wartości już wyskalowanej, a ponieważ skalowanie całego obrazu jest czasochłonne, przeskalowanie okienka da taki sam efekt:
 \[(OutputUnits - b ) / m = SV \]
 więc:
 \[x_0 -= rescaleIntercept\]
@@ -111,7 +121,7 @@ więc:
 \[x_0 /= rescaleSlope\]
 \[x_1 /= rescaleSlope\]
 
-Posiadamy, teraz dwa punkty okienka odnoszące się do wartośći obrazu.
+Posiadamy, teraz dwa punkty okienka odnoszące się do wartości obrazu.
 Wyznaczono parametry prostej przechodzącej przez dwa punkty:
 \[a = (y_1 - y_0) / (x_1 - x_0)\]
 \[b = y_1 - a * x_1\]
@@ -207,7 +217,7 @@ inline const Pixel &getPixel(quint64 value) override {
 
 \paragraph{Iterowanie po obrazie}
 \par
-Po wygenerowania obraz, należy przeiterować go przez funkcje \enquote{okna}.
+Po wygenerowania obrazu, należy przeiterować go przez funkcje \enquote{okna}.
 Do zokienkowania jednego piksela nie potrzeba innego piksela dlatego w celu przyspieszenia procesu okienkowania, iteracja po obrazie odbywa się w wielu wątkach.
 \par
 W C++ typy zmiennych muszą być zdefiniowane przed kompilacją, co jest bardzo problematyczne.

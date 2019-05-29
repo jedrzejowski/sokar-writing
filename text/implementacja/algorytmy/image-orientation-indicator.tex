@@ -68,12 +68,12 @@ Interesuje nas wyznaczenie pozycji sześciu (punktów) na płaszczyźnie obrazu.
 Załóżmy, że pacjent znajduje się w środku układu współrzędnych i jest nieskończenie mały.
 Możemy więc zdefiniować sześć punktów o następujących współrzędnych, dalej używanych pod nazwą $PatientPosition$, które będą odpowiadały stronom pacjenta:
 \begin{itemize}
-    \item \dataword{R} --- $[-1, 0, 0, 1]$
-    \item \dataword{L} --- $[+1, 0, 0, 1]$
-    \item \dataword{A} --- $[0, -1, 0, 1]$
-    \item \dataword{P} --- $[0, +1, 0, 1]$
-    \item \dataword{F} --- $[0, 0, -1, 1]$
-    \item \dataword{H} --- $[0, 0, +1, 1]$
+    \item \enquote{R} --- $[-1, 0, 0, 1]$
+    \item \enquote{L} --- $[+1, 0, 0, 1]$
+    \item \enquote{A} --- $[0, -1, 0, 1]$
+    \item \enquote{P} --- $[0, +1, 0, 1]$
+    \item \enquote{F} --- $[0, 0, -1, 1]$
+    \item \enquote{H} --- $[0, 0, +1, 1]$
 \end{itemize}
 Punkty $PatientPosition$ odpowiadają punktom $P_{xyz}$ z równania ze standardu \DICOM.
 
@@ -120,7 +120,7 @@ Macierz $rotateTransform$ jest przesyłana do naszego obiektu \sokarclass{ImageO
 Ostateczne wyznaczenie pozycji punktów pacjenta na obrazie odbywa się przez przemnożenie lewostronne $rotateTransform$ i $ScenePosition$.
 \[rotateTransform * ScenePosition\]
 Wyznaczana jest w ten sposób pozycja sześciu punktów pacjenta na płaszczyźnie sceny wyświetlanej.
-Następnie określany jest na której z ośmiu części płaszczyzny jest umieszczony dany punkt.
+Następnie określany jest, na której z ośmiu części płaszczyzny jest umieszczony dany punkt.
 Podział płaszczyzny jest widoczny na rysunku \ref{fig:imageorientationindicator4}.
 Tej płaszczyźnie nadawany jest tytuł w postaci litery, która oznacza stronę pacjenta.
 Jeżeli punkt znajduje się w centrum, na przecięciu osi, to oznacza, że punkt znajduje się za lub przed ekranem, więc jest pomijany.

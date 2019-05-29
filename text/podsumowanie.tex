@@ -1,7 +1,7 @@
 \par
 Celem pracy inżynierskiej było napisanie aplikacji do obsługi obrazów \DICOM w C++ z możliwością kompilacji na wiele platform.
 Cel udało się osiągnąć.
-Zniesienie ograniczeń wirtualizacji kodu rozwiązano użyciem C++ jako język programowania.
+Zniesienie ograniczeń wirtualizacji kodu rozwiązano językiem programowania C++.
 Zastosowano biblioteki dostępne na różnych platformach: Qt i GDCM, które również zostały napisane w C++, dzięki czemu uzyskano jednolity program napisany w jednym języku.
 Zapewniono jednolity sposób kompilacji na platformach przy użyciu narzędzia CMake.
 Dzięki czemu aplikacja działa w ten sam sposób na wszystkich testowanych platformach: Linux, MacOS i Windows.
@@ -14,5 +14,5 @@ Wprowadzono obsługę serii obrazów jako całości, włączając w to przegląd
 Napotkano problem z biblioteką GDCM w postaci braku możliwości używania plików binarnych dostarczonych przez twórców.
 Te pliki binarne zostały skompilowane za pomocą innego kompilatora niż pliki binarne Qt.
 Co sprawia, że typ \stdclass{string}{string/basic_string} z jedenej biblioteki nie jest kompatybilny z \stdclass{string}{string/basic_string} z drugiej biblioteki.
-Wynika to z użycia innych ABI w różnych kompilatorach.
+Wynika to z użycia innych interfejsów binarnych aplikacji \fromEng{application binary interface} w różnych kompilatorach.
 Problem można rozwiązać kompilując bibliotekę GDCM własnoręcznie.
