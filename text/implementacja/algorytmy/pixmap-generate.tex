@@ -2,7 +2,7 @@
 
 Klasa \sokarclass{DicomScene} dostarcza następujące obiekty do generowania obrazu:
 \begin{itemize}
-    \item \cppcode{processing}, obiekt klasy \qtclass{QMutex}, muteks do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmieniane podczas jego generowania.
+    \item \cppcode{processing}, obiekt klasy \qtclass{QMutex}, zamek do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmieniane podczas jego generowania.
 
     \item \cppcode{imgDimX} zmienna typu \cppcode{uint}, oznacza szerokość obrazu w pikselach.
 
@@ -24,11 +24,11 @@ struct Pixel {
         C++ od standardu C++03 przewiduje, że elementy znajdujące się w \stdclass{vector}{container/vector} są ułożone ciągiem, jeden za drugim.
         Dlatego odwołując się do wskaźnika pierwszego elementu w ten sposób \cppcode{\&targetBuffer[0]}, mogę potraktować to jako tablicę.
 
-    \item \cppcode{originBuffer} wektor danych wypełniona danymi z jednej ramki o długośći iloczynu $imgDimX*imgDimY$ i ilości bajtów jednego piksela obrazu.
+    \item \cppcode{originBuffer} wektor danych wypełniona danymi z jednej ramki o długości iloczynu $imgDimX*imgDimY$ i ilości bajtów jednego piksela obrazu.
 
     \item \cppcode{qImage} obiekt obrazu klasy \qtclass{QImage}.
 
-          \qtclass{QImage} można zrobić z istniejącego bufora, w tym przypadku jest to \cppcode{targetBuffer}.
+          \qtclass{QImage} można utworzyć z bufora, w tym przypadku jest to \cppcode{targetBuffer}.
           Format obrazu to \qtclass{QImage::Format\_RGB888}, czyli trzy bajty, każdy na jeden kanał.
           Proszę zwrócić uwagę, że struktura \sokarclass{Pixel} odpowiada temu formatowi.
           Według dokumentacji Qt obiekt ten po utworzeniu z istniejącego bufora powinien z niego dalej korzystać, dlatego zmiany \cppcode{targetBuffer} nie wymagają odświeżania \cppcode{qImage}.

@@ -143,7 +143,7 @@ Aplikacje są wieloplatformowe, czyli mają możliwość uruchomienia ich na ró
 \subsubsection{Interfejs}
 
 Przeglądarka powinna mieć możliwość komunikacji z interfejsami innych systemów.
-Podstawowe interfejsy sieciowe to: C-STORE SCP DICOM C-STORE, C-STORE SCU, Query-Retrieve, WADO, Parameter Transfer.
+Podstawowe interfejsy sieciowe to: C-STORE SCP \DICOM C-STORE, C-STORE SCU, Query-Retrieve, WADO, Parameter Transfer.
 
 \subsubsection{Wsparcie techniczne}
 
@@ -154,26 +154,26 @@ Wiki, strona internetowa w formacie Wikipedii dostępna dla użytkownika.
 \subsubsection{Obrazowanie dwuwymiarowe}
 
 Przewijanie\fromEng{scroll}, proces wyświetlania obrazów, można poprawić dzięki zmniejszeniu interakcji z klawiaturą oraz myszką. Można to osiągnąć na przykład, oferując możliwość przejścia do następnego lub poprzedniego obrazu przez przesunięcie kółkiem myszy lub używając przycisków góra/dół na klawiaturze.
-Metadane, przeglądania powinna obejmować analizowanie i wyświetlanie metadanych obiektów DICOM, powinna obejmować wyświetlanie rozdzielczości obrazu, badanie (np. identyfikator podmiotu) oraz znaczniki DICOM specyficzne dla dostawcy (np. specjalne ustawienie urządzenia rejestrującego).
+Metadane, przeglądania powinna obejmować analizowanie i wyświetlanie metadanych obiektów \DICOM, powinna obejmować wyświetlanie rozdzielczości obrazu, badanie (np. identyfikator podmiotu) oraz znaczniki \DICOM specyficzne dla dostawcy (np. specjalne ustawienie urządzenia rejestrującego).
 Warstwa informacyjna, najważniejsze informacje powinny powinny być wizualizowane w oknie wyświetlacza jako nakładka na obraz.
 Na przykład aktualna pozycja lub nazwa podmiotu wykonującego badanie.
 Okienkowanie to sposób zamiany danych na skale szarości, okienkowanie jest opisane w sekcji \ref{sec:algorithm-pixmap-monochrome}.
-Pseudo-kolorowanie obrazu, tabele (LUT, \fromEng{LookUpTable}) odwzorowujące szare wartości obrazu na pseudo-kolory.
+Pseudo-kolorowanie obrazu, tabele odwzorowujące szare wartości obrazu na pseudo-kolory.
 Histogram wizualizuje wystąpienia i rozkład wartości kolorów na obrazach, pozwalają opisywać istotne cechy obrazu
 Wymiarowanie, możliwości rysowania bądź zaznaczania linii lub innych kształtów do analizy i wyznaczania odległości w jednostkach długości na obrazie.
-Jest to możliwe gdyż nagłówki pliku DICOM zawierają parametry sprzętowe urządzenia (np. ilość pikseli na centymetr).
+Jest to możliwe gdyż nagłówki pliku \DICOM zawierają parametry sprzętowe urządzenia (np. ilość pikseli na centymetr).
 Adnotacje(opisy), które były wytworzone przez personel medyczny powinny być zapisywane w odpowiedni sposób w pliku.
 
 \subsubsection{Obrazowanie trójwymiarowe}
 
-Rekonstrukcja wtórna, zwykle dane dotyczące objętości medycznej są gromadzone wzdłuż jednej osi ciała (np. poprzecznej).
+Rekonstrukcja wielopłaszczyznowa, zwykle dane dotyczące objętości medycznej są gromadzone wzdłuż jednej osi ciała (np. poprzecznej).
 W wielu przypadkach ważne jest przeglądanie danych w innych kierunkach (np. strzałkowych lub czołowych), aby poprawić wizualizację niektórych struktur.
-W tym celu należy zapewnić funkcjonalność rekonstrukcji osi pomocniczej na podstawie kierunku pierwotnego.
-Plastry objętości kostki(\fromEng{Slice Cube Volume}), przekroje mogą być lepiej wyświetlane w określonej pozycji.
-Funkcjonalność kostki plasterka umożliwia niezależną regulację położenia różnych osi wycinków (np. poprzecznych, strzałkowych lub czołowych) w modelu objętościowym.
-Podczas tego przekroje są pokazane w osobnym oknie.
-Renderowanie objętościowe – dane obrazu 3D są bezpośrednio wizualizowane jako objętość.
-Użytkownik może wchodzić w interakcje z woluminem poprzez obracanie lub skalowanie.
-Transfer Function(nie znam polskiej nazwy), służy do odwzorowania wartości szarości obrazów wokseli na wartości krycia typów tkanek (np. kości). Struktury obrazu pasujące do wzorców szarych wartości są podświetlone. Niewykorzystane szare wartości są wyświetlane jako
-przezroczyste. Specyficzne struktury stają się lepiej widoczne.
+W tym celu należy zapewnić funkcje rekonstrukcji osi pomocniczej na podstawie kierunku pierwotnego.
+% Plastry objętości kostki \fromEng{Slice Cube Volume}, przekroje mogą być lepiej wyświetlane w określonej pozycji.
+% Funkcjonalność kostki plasterka umożliwia niezależną regulację położenia różnych osi wycinków (np. poprzecznych, strzałkowych lub czołowych) w modelu objętościowym.
+% Podczas tego przekroje są pokazane w osobnym oknie.
+Generowanie obrazów wolumetrycznych –- dane obrazu 3D są bezpośrednio wizualizowane jako objętość, z którą użytkownik może wchodzić w interakcje poprzez obracanie lub skalowanie.
+MTF \fromEng{Modulation Transfer Function} służąca do odwzorowania wartości szarości obrazów wokseli na wartości krycia typów tkanek (np. kości).
+Możliwość podświetlania struktur obrazu pasujących do wzorców wartości.
+Niewykorzystane szare wartości są wyświetlane jako przezroczyste, dzięki czemu specyficzne struktury stają się lepiej widoczne.
 Generowanie powierzchni, dzięki różnym algorytmom można generować powierzchnie w postaci wokselów. Reprezentacje powierzchni można również zastosować do poprawy wizualizacji niektórych struktur obrazu.

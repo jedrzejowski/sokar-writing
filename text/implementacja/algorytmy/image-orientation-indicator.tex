@@ -11,11 +11,11 @@ Informacje o orientacji oraz pozycji względem pacjenta znajdują się w odpowie
 \par
 Standard \DICOM zdefiniował ułożenie osi we współrzędnych kartezjańskich następująco:
 \begin{itemize}
-    \item \quotett{x} --- oś przechodząca od prawej do lewej strony pacjenta, \dataword{L} oznacza zwrot zgodny z osią, a \dataword{R} oznacza zwrot przeciwny
+    \item \quotett{x} --- oś przechodząca od prawej do lewej strony pacjenta, \enquote{L} oznacza zwrot zgodny z osią, a \enquote{R} oznacza zwrot przeciwny
 
-    \item \quotett{y} --- oś przechodząca od przodu do tyłu pacjenta, \dataword{P} oznacza zwrot zgodny z osią, a \dataword{A} oznacza zwrot przeciwny
+    \item \quotett{y} --- oś przechodząca od przodu do tyłu pacjenta, \enquote{P} oznacza zwrot zgodny z osią, a \enquote{A} oznacza zwrot przeciwny
 
-    \item \quotett{z} --- oś przechodząca od dołu do góry pacjenta, \dataword{H} oznacza zwrot zgodny z osią, a \dataword{F} oznacza zwrot przeciwny
+    \item \quotett{z} --- oś przechodząca od dołu do góry pacjenta, \enquote{H} oznacza zwrot zgodny z osią, a \enquote{F} oznacza zwrot przeciwny
 
 \end{itemize}
 
@@ -27,7 +27,7 @@ Standard \DICOM zdefiniował ułożenie osi we współrzędnych kartezjańskich 
 \end{figure}
 
 \par
-Wartość \dicomtag{Image Orientation}{0020}{0037} składa się z sześciu liczb, opowiednio oznaczanych dalej X\textsubscript{x}, X\textsubscript{y}, X\textsubscript{z}, Y\textsubscript{x}, Y\textsubscript{y}, Y\textsubscript{z}.
+Wartość \dicomtag{Image Orientation}{0020}{0037} składa się z sześciu liczb, odpowiednio oznaczanych dalej $X_x$, $X_y$, $X_z$, $Y_x$, $Y_y$, $Y_z$.
 Standard \DICOM definiuje następujący sposób interpretowania danych:
 \[
     \begin{bmatrix}
@@ -108,7 +108,7 @@ Po drugie - pozycja z \dicomtag{Image Position}{0020}{0032} została zrównana d
 Wyznaczenie macierzy $imgMatrix$ jest jednorazowe.
 
 \par
-Po wyznaczeniu sześciu punktów $ScenePosition$, po jednej dla każdego punktu $PatientPosition$ są one zapisywane.
+Po wyznaczeniu sześciu punktów $ScenePosition$, dla każdego punktu $PatientPosition$, są one zapisywane.
 $ScenePosition$ odpowiada pozycji punktów na obrazie w pozycji startowej.
 
 \par
@@ -153,6 +153,6 @@ Wynika z tego, że obraz przedstawia pacjenta skierowanego twarzą do nas.
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=100mm]{img/imageorientationindicator-002.png}
-    \caption{Przykładowy obraz medyczny (przekrój głowy MR) z oznaczeniem orientacji obrazu z apomocą liter A, P, R, L, F, H. Zdjęcie własne.}
+    \caption{Przykładowy obraz medyczny (przekrój głowy MR) z oznaczeniem orientacji obrazu za pomocą liter A, P, R, L, F, H. Zdjęcie własne.}
     \label{fig:imageorientationindicator1}
 \end{figure}

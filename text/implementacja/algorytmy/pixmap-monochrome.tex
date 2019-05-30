@@ -5,7 +5,7 @@ Obraz monochromatyczny to obraz w odcieniach szarości, od białego do czarnego 
 \subsubsection{Pseudokolorowanie obrazu}
 
 Mamy obraz, którego piksele to n-bitowe liczby, na przykład 16 bitowa liczba całkowita.
-W takiej postaci wyświetlemoe obrazu na monitorze RGB lub nawet na profesjonalnym 10-bitowym jest niemożliwe.
+W takiej postaci wyświetlenie obrazu na monitorze RGB lub nawet na profesjonalnym 10-bitowym jest niemożliwe.
 Należy taką liczbę przerobić na trzy liczby, reprezentujące 3 kanały RGB, czerwony, zielony i niebieski.
 Dlatego do wyświetlania obrazów monochromatycznych o dużym kontraście stosuję się twór zwany okienkiem.
 Jest to funkcja, która mapuje n-bitwy obraz na 8-bitowy obraz w skali szarości.
@@ -74,7 +74,7 @@ Unikamy w ten sposób wielokrotnego wyznaczania wartości funkcji, która wymaga
 Dlatego dobrym pomysłem jest stworzenie mniejszej tablicy typu LookUpTable, wypełnienie jej wszystkimi możliwymi wartościami obrazu, a następnie przerobienie obrazu z tablicą LUT.
 Ponieważ tablica LUT posiada wszystkie możliwe kombinacje wartości, jej rozmiar można wyznaczyć wzorem: $2^N*3$, gdzie $N$ to liczba bitów liczby.
 Standard \DICOM definiuje, że liczby mogą mieć $8$, $12$, $16$, $32$ i $64$ bity, jednakże, $12$ bitowe i tak się zapisuje w postaci 16-bitowych w pamięci RAM.
-Dlatego możliwe wartości wielkości tablicy LUT to w przybliżeniu: $768$ bajtów, $196$ kilobajtów, $12,5$ gigabajtów i $56$ eksabajta ($55*10^{6}$ terabajtów).
+Dlatego możliwe wartości wielkości tablicy LUT to w przybliżeniu: $768$ bajtów; $196$ kilobajtów; $12,5$ gigabajtów i $56$ eksabajta ($55*10^{6}$ terabajtów).
 Alokowanie dwóch największych wartości może być niemożliwe, dlatego w pracy wykonano dwie implementacje algorytmu: z tablicą LUT (dla 8 i 16 bitowych obrazów i bez tablicy LUT (dla 32 i 64 bitowych obrazów).
 Algorytm składa się z 3 części: wyznaczenie parametrów \enquote{okna}, przygotowanie \enquote{okna} (tylko gdy jest tablica LUT), wielowątkowa iteracja po obrazie.
 \par
