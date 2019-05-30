@@ -32,8 +32,8 @@ Dlatego jest zalecanym używanie tej wersji.
 
 Nie istnieje dystrybucja Linuxa, w której repozytoriach nie było by biblioteki Qt.
 Dlatego instalacja Qt sprowadza się pobrania jej z repozytoriów za pomocą menadżera pakietów.
-\par
-Komendy pozwalające zainstalować bibliotekę Qt na wybranych dystrybucjach:\\
+% \par
+% Komendy pozwalające zainstalować bibliotekę Qt na wybranych dystrybucjach:\\
 % Ubuntu: \texttt{sudo apt-get install qt5-default}\\
 % ArchLinux: \texttt{sudo pacman -Syu qt5-base}
 
@@ -50,9 +50,10 @@ W pewnym momencie użytkownik może zostać poproszony o dane kontaktowe.
 Nie jest to wymagane i można kliknąć przycisk \enquote{Skip}.
 \par
 Następnie należy wybrać komponenty do zainstalowania.
-W przypadku Windowsa należy zainstalować wersje \enquote{Qt 5.12.X MSVC 2017 64 bit}.
-Z kolei na MacOS należy zainstalować \enquote{Qt 5.12.X clang\_x64}.
-Należy odhaczyć wszystkie inne opcje, nie są one wymagane do kompilacji programu.
+W przypadku Windowsa należy zainstalować wersje \enquote{Qt 5.12.3 MSVC 2017 64-bit}.
+Z kolei na MacOS należy zainstalować \enquote{Qt 5.12.3 clang\_x64}.
+Można odhaczyć wszystkie inne opcje, nie są one wymagane do kompilacji programu.
+Dalej należy postępować zgodnie z instrukcjami pojawiającymi sie na ekranie.
 
 \subsection{Pobranie kodu źródłowego GDCM}
 
@@ -78,8 +79,8 @@ Uruchom CMake z menu programów lub za pomocą polecenia \enquote{cmake-gui}.
 W polu \enquote{Where is the source code:} wpisz \enquote{/path/gdcm/}.
 W polu \enquote{Where to build the binnaries:} wpisz \enquote{/path/gdcm-bin/}.
 Kliknij przycisk \enquote{Configure} znajdujący się w dolnej lewej części okna.
-W oknie zatytułowanym \enquote{CMakeSetup} wybierz opcje: \ifunix{\enquote{Unix Makefiles} i \enquote{Use default native compilers}}; \ifwindows{SPRAWDZIĆ}.
-Odznacz wszystkie wartość za wyjątkiem \enquote{GDCM\_BUILD\_SHARED\_LIBS}.
+W oknie zatytułowanym \enquote{CMakeSetup} wybierz opcje: \ifunix{\enquote{Unix Makefiles} i \enquote{Use default native compilers}}; \ifwindows{\enquote{Visual Studio 15 2017}, \enquote{x64} i \enquote{Use default native compilers}}.
+Zaznacz checkbox przy wartości \enquote{GDCM\_BUILD\_SHARED\_LIBS}.
 Kliknij przycisk \enquote{Finish}.
 Następnie kliknij przycisk \enquote{Generate}.
 
@@ -91,7 +92,7 @@ Uruchom CMake z menu programów lub za pomocą polecenia \enquote{cmake-gui}.
 W polu \enquote{Where is the source code:} wpisz \enquote{/path/sokar-app/}.
 W polu \enquote{Where to build the binnaries:} wpisz \enquote{/path/sokar-app-bin/}.
 Kliknij \enquote{Configure}.
-W oknie zatytułowanym \enquote{CMakeSetup} wybierz opcje: \ifunix{\enquote{Unix Makefiles} i \enquote{Use default native compilers}}; \ifwindows{SPRAWDZIĆ}.
+W oknie zatytułowanym \enquote{CMakeSetup} wybierz takie same opcje na w GDCM.
 Kliknij \enquote{Finish}.
 Ustaw parametr wartość \enquote{QtDir} na ścieżkę do skompilowanej biblioteki Qt.
 Następnie kliknij przycisk \enquote{Generate}.
