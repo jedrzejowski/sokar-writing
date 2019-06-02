@@ -1,14 +1,14 @@
 \label{sec:dicom}
 
 \par
-Standard \DICOM jest odpowiedzią społeczności radiologów, radiofarmaceutów, fizyków medycznych na potrzebę wymiany danych pomiędzy różnymi systemami komputerowymi, przeglądarek obrazów,  stacji do przetwarzania i analizowania obrazów medycznych.
+Standard \DICOM jest odpowiedzią społeczności radiologów, radiofarmaceutów, fizyków medycznych na potrzebę wymiany danych pomiędzy różnymi systemami komputerowymi, przeglądarek obrazów, stacji do przetwarzania i analizowania obrazów medycznych.
 
 \par
 Standard \DICOM wersji trzeciej to standard definiujący ujednolicony sposób zapisu i przekazywania danych medycznych reprezentujących lub związanych z obrazami diagnostycznymi w medycynie.
 Standard został wydany w 1993 przez dwie agencje ACR (American College of Radiology) i NEMA (National Electrical Manufactures Association).
 Wcześniejsze wersje nazywały się ACR/NEMA v1.0, wydana w 1983 roku i ACR/NEMA v2.0, wydana w 1990 roku, stąd wersja trzecia.
 Od wydania wersji trzeciej w 1993, standard jest wciąż rozwijany i uzupełniany o nowe elementy.
-W obecnej chwili standard DICOM definiuje 81 różnych typów badań.
+W obecnej chwili standard \DICOM definiuje 81 różnych typów badań.
 
 UWAGA: Za każdym razem kiedy jest odniesienie do obecnego standardu DICOM, w domyśle jest to odsłona numer 2019a.
 
@@ -16,7 +16,7 @@ UWAGA: Za każdym razem kiedy jest odniesienie do obecnego standardu DICOM, w do
 
 \par
 Plik w formacie \DICOM przypomina zbiór elementów danych z rekordami.
-Zbiór nazywa się \keyword{Data Set} i składa się z rekordów, które nazywają się \keyword{Data Element}.
+Zbiór nazywa się \enquote{Data Set} i składa się z rekordów, które nazywają się \enquote{Data Element}.
 Elementy danych są ułożone w postaci listy.
 Element danych może zawierać w sobie listę elementów danych.
 
@@ -29,12 +29,12 @@ Element danych może zawierać w sobie listę elementów danych.
 
 \subsubsection{Element danych}
 
-Element danych, zwany przez standard \DICOM \keyword{Data Element} jest rekordem, który przechowuje pojedynczą informacje o obiekcie.
+Element danych, zwany przez standard \DICOM \enquote{Data Element} jest rekordem, który przechowuje pojedynczą informację o obiekcie.
 Składa się z czterem elementów:
 
 \begin{itemize}
 
-    \item \keyword{Tag} --- to unikalny identyfikator, dalej zwany znacznikiem, jest złożony z dwóch liczb: numer grupy (\cppcode{uint16}) i numer elementu (\cppcode{uint16}) grupy.
+    \item \enquote{Tag} --- to unikalny identyfikator, dalej zwany znacznikiem, jest złożony z dwóch liczb: numer grupy (\cppcode{uint16}) i numer elementu (\cppcode{uint16}) grupy.
           Informuje o tym co dany rekord w sobie zawiera.
           W jednym zbiorze elementów nie mogą się pojawić dwa elementy posiadających ten sam znacznik.
 
@@ -42,16 +42,16 @@ Składa się z czterem elementów:
 
           Dokładne omówienie znaczników znajduje się w sekcji \ref{sec:dicom-tag}.
 
-    \item \keyword{Value Representation}, w skrócie \keyword{VR} – to dwa bajty w postaci tekstu, informujące o formacie w jakim parametr został zapisany.
+    \item \enquote{Value Representation}, w skrócie \enquote{VR} – to dwa bajty w postaci tekstu, informujące o formacie w jakim parametr został zapisany.
 
-          Dokładne omówienie \keyword{VR}-ów znajduje się w dalszej części sekcji.
+          Dokładne omówienie \enquote{VR}-ów znajduje się w dalszej części sekcji.
 
-    \item \keyword{Value Length}, w skrócie \keyword{VL} --- 32-bitowa lub 16-bitowa liczba nieoznaczona, która informuje o długości pola danych (\keyword{Value Field}).
+    \item \enquote{Value Length}, w skrócie \enquote{VL} --- 32-bitowa lub 16-bitowa liczba nieoznaczona, która informuje o długości pola danych (\enquote{Value Field}).
 
-          Wartość \keyword{VL} zwykle jest liczbą parzystą.
+          Wartość \enquote{VL} zwykle jest liczbą parzystą.
           Standard DICOM zakłada, że wszystkie dane powinny być dopełniane do parzystej liczby bajtów.
 
-    \item \keyword{Value Field} (opcjonalne) --- pole z parametrem o długości VL.
+    \item \enquote{Value Field} (opcjonalne) --- pole z parametrem o długości VL.
 
 \end{itemize}
 
@@ -59,7 +59,7 @@ Składa się z czterem elementów:
 \label{sec:dicom-tag}
 
 \par
-\keyword{Tag} to unikalny znacznik pozwalający określać czego dotyczą dane zapisane w elemencie danych.
+\enquote{Tag} to unikalny znacznik pozwalający określać czego dotyczą dane zapisane w elemencie danych.
 Znacznik jest złożony z dwóch liczb: numeru grupy i numeru elementu.
 Obie liczby to 16-bitowe liczby całkowite zapisywane w postaci  heksadecymalnej.
 
@@ -93,7 +93,7 @@ Oto kilka przykładów:
 \subsubsection{Reprezentacja wartości}
 \label{sec:dicom-vr}
 
-\keyword{VR} to reprezentacja wartości, który informuje w jakim formacie jest zapisany parametr obrazu.
+\enquote{VR} to reprezentacja wartości, który informuje w jakim formacie jest zapisany parametr obrazu.
 Składa się z dwóch bajtów.
 
 Przykładowe VR:
@@ -109,7 +109,7 @@ Przykładowe VR:
 
     \item AT --- Attribute Tag --- inny znacznik
 
-          Długość danych to zawsze 32 bity, są to dwie 16 bitowe liczby, odpowiednio grupa i element grupy.
+          Długość danych to zawsze 32 bity, są to dwie 16-bitowe liczby, odpowiednio grupa i element grupy.
           Ten VR jest używany kiedy wskazujemy na inny znacznik.
           Wartość nie jest nigdy pokazywana użytkownikowi, a jedynie używana w interpretacji przez inne algorytmy do analizy obrazu.
 
@@ -129,7 +129,7 @@ Przykładowe VR:
 
           Długość jednej liczby powinna maksymalne wynosić 16 bajtów.
           Dostępne znaki to \dataword{0}-\dataword{9}, \dataword{+}, \dataword{-}, \dataword{E}, \dataword{e}, \dataword{.}.
-          Biblioteka QT posiada wbudowany konwerter liczb zapisanych w formacie wykładniczym, dlatego mój konwerter dzieli tekst i konwertuje za pomocą QT.
+          Biblioteka QT posiada wbudowany konwerter liczb zapisanych w formacie wykładniczym.
 
           Przykład: \dataword{426\textbackslash468 } oznacza dwie liczby 426 i 468. Proszę zwrócić uwagę na spacje na końcu.
 
@@ -137,7 +137,7 @@ Przykładowe VR:
 
           Długość jednej liczby powinna maksymalne wynosić 12 bajtów.
           Dostępne znaki to \dataword{0}-\dataword{9}, \dataword{+}, \dataword{-}.
-          Biblioteka QT posiada wbudowany konwerter liczb całkowitych, dlatego mój konwerter używa konwertera z QT.
+          Biblioteka QT posiada wbudowany konwerter liczb całkowitych.
 
           Przykład: \dataword{426 }  oznacza liczbę 426.
 
@@ -152,14 +152,14 @@ Przykładowe VR:
               \item name prefix --- prefiks przed imieniem, np: mgr. inż.
               \item name suffix --- sufiks po imieniu, brak odpowiednika
           \end{itemize}
-          Długość jednego fragmenty powinna maksymalne wynosić 64 znaki.
+          Długość jednego fragmentu powinna maksymalne wynosić 64 znaki.
           W przypadku mniejszej ilości segmentów, mamy założyć, że są puste.
 
-          Przykład: \enquote{prof. dr. hab. inż. Waldemar Smolik pracownik ZEJIM} był by zapisany w sposób następujący: \dataword{Smolik\^{}Waldemar\^{}\^{}prof. dr. hab. inż.\^{}pracownik ZEJIM}
+          Przykład: \enquote{prof. dr. hab. inż. Jan Nowak pracownik ZEJIM} byłby zapisany w sposób następujący: \dataword{Nowak\^{}Jan\^{}\^{}prof. dr. hab. inż.\^{}pracownik ZEJIM}
 
-    \item SS --- Signed Short --- 16 bitowa liczba całkowita bez znaku
+    \item SS --- Signed Short --- 16-bitowa liczba całkowita bez znaku
 
-    \item US --- Unsigned Short --- 16 bitowa liczba całkowita ze znakiem
+    \item US --- Unsigned Short --- 16-bitowa liczba całkowita ze znakiem
 
     \item UT --- Unlimited Text --- tekst o nieograniczonej długości.
 

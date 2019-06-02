@@ -2,17 +2,16 @@
 
 Klasa \sokarclass{DicomScene} dostarcza następujące obiekty do generowania obrazu:
 \begin{itemize}
-    \item \cppcode{processing}, obiekt klasy \qtclass{QMutex}, zamek do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmieniane podczas jego generowania.
+    \item \cppcode{processing} --- obiekt klasy \qtclass{QMutex}, zamek do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmieniane podczas jego generowania.
 
-    \item \cppcode{imgDimX} zmienna typu \cppcode{uint}, oznacza szerokość obrazu w pikselach.
+    \item \cppcode{imgDimX} --- zmienna typu \cppcode{uint}, oznacza szerokość obrazu w pikselach.
 
-    \item \cppcode{imgDimY} zmienna typu \cppcode{uint}, oznacza wysokość obrazu w pikselach.
+    \item \cppcode{imgDimY} --- zmienna typu \cppcode{uint}, oznacza wysokość obrazu w pikselach.
 
-    \item \cppcode{targetBuffer} wektor docelowego obrazu RGB o długości $imgDimX*imgDimY$, typu \cppcode{std::vector<Pixel>}.
+    \item \cppcode{targetBuffer} --- wektor docelowego obrazu RGB o długości $imgDimX*imgDimY$, typu \cppcode{std::vector<Pixel>}.
 
           \sokarclass{Pixel} to struktura reprezentujące piksel.
           Nie jest to w żadnym wypadku obiekt, a jedynie twór ułatwiający zarządzanie kodem.
-
           \begin{lstlisting}
 struct Pixel {
     quint8 red = 0;   
@@ -22,29 +21,29 @@ struct Pixel {
 
         \par
         C++ od standardu C++03 przewiduje, że elementy znajdujące się w \stdclass{vector}{container/vector} są ułożone ciągiem, jeden za drugim.
-        Dlatego odwołując się do wskaźnika pierwszego elementu w ten sposób \cppcode{\&targetBuffer[0]}, mogę potraktować to jako tablicę.
+        Dlatego odwołując się do wskaźnika pierwszego elementu w ten sposób \cppcode{\&targetBuffer[0]}, można potraktować to jako tablicę.
 
-    \item \cppcode{originBuffer} wektor danych wypełniona danymi z jednej ramki o długości iloczynu $imgDimX*imgDimY$ i ilości bajtów jednego piksela obrazu.
+    \item \cppcode{originBuffer} --- wektor danych wypełniona danymi z jednej ramki o długości iloczynu $imgDimX*imgDimY$ i ilości bajtów jednego piksela obrazu.
 
-    \item \cppcode{qImage} obiekt obrazu klasy \qtclass{QImage}.
+    \item \cppcode{qImage} --- obiekt obrazu klasy \qtclass{QImage}.
 
           \qtclass{QImage} można utworzyć z bufora, w tym przypadku jest to \cppcode{targetBuffer}.
           Format obrazu to \qtclass{QImage::Format\_RGB888}, czyli trzy bajty, każdy na jeden kanał.
           Proszę zwrócić uwagę, że struktura \sokarclass{Pixel} odpowiada temu formatowi.
           Według dokumentacji Qt obiekt ten po utworzeniu z istniejącego bufora powinien z niego dalej korzystać, dlatego zmiany \cppcode{targetBuffer} nie wymagają odświeżania \cppcode{qImage}.
 
-    \item \cppcode{pixmap} obiekt obrazu do wyświetlania, klasy \qtclass{QPixmap}.
+    \item \cppcode{pixmap} --- obiekt obrazu do wyświetlania, klasy \qtclass{QPixmap}.
 
           Obiektów klasy \qtclass{QImage} nie da się wyświetlić, nie jest on przystosowany do wyświetlania.
           Natomiast klasa \qtclass{QPixmap} to reprezentacja obrazu dostosowana do wyświetlania ekranie, która może być używana jako urządzenie do malowania w bibliotece Qt.
 
-    \item \cppcode{iconPixmap} obiekt obrazu ikonu, klasy \qtclass{QPixmap}, docelowo powinien mieć 128 pikseli na 128 pikseli.
+    \item \cppcode{iconPixmap} --- obiekt obrazu ikonu, klasy \qtclass{QPixmap}, docelowo powinien mieć 128 pikseli na 128 pikseli.
 
 \end{itemize}
 
-Generowanie obrazu jest robione przez czysto wirtualną funkcje \sokarfunction{DicomScene}{generatePixmap}.
+Generowanie obrazu jest obsługiwane przez czysto wirtualną funkcję \sokarfunction{DicomScene}{generatePixmap}.
 Po wywołaniu funkcji obiekt \cppcode{targetBuffer} powinien zawierać obraz wygenerowany z obecnymi parametrami.
-Funkcja zwraca również wartość logiczną, który informuje nas czy \cppcode{targetBuffer} rzeczywiście został zmieniony.
+Funkcja zwraca również wartość logiczną, która informuje nas czy \cppcode{targetBuffer} rzeczywiście został zmieniony.
 Następnie obiekt \cppcode{pixmap} jest na nowo generowany na bazie \cppcode{qImage}.
 
 Całe odświeżanie obrazu jest implementowane w funkcji \sokarfunction{DicomScene}{reloadPixmap}.

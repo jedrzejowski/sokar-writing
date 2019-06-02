@@ -52,7 +52,7 @@ Elementy po prawej stronie definiują parametry trybu filmowego.
 Prządka (12) jest elementem do wprowadzania liczby zmiennoprzecinkowej klasy \qtclass{QDoubleSpinBox}.
 Im większa wartość liczby, tym klatki filmu są dłużej wyświetlane.
 Drugi (13) przycisk pozwala zmienić sposób przemiatania.
-Trzeci (14) przycisk wymusza tryb jednego okienkowania dla wszystkich klatek filmu.%TOASK
+Trzeci (14) przycisk wymusza tryb jednego okienkowania dla wszystkich klatek filmu.
 Jeżeli mamy załadowanych wiele obrazów tego samego badania, to nie koniecznie muszą mieć to samo okno.
 Dodatkowo ten tryb pozwala wprowadzić jednolite okienko dla wszystkich klatek po zmianie parametrów tego okienka na jednej klatce.
 Czwarty (15) i ostatni przycisk służy do użycia jednej macierzy transformaty na wszystkich klatkach.
@@ -64,12 +64,12 @@ Tryb filmowy można aktywować jedynie wtedy, gdy w sekwencji scen jest więcej 
 Włączenie trybu filmowego polega na stworzeniu obiektu klasy \sokarclass{MovieMode}.
 Obiekt ten zapisuje wskaźnik do obecnie wyświetlanej sceny, a także czy powinno być użyte to samo okno, oraz czy powinna być używana ta sama macierz przekształcenia.
 Następnie obiekt ten jest wysyłany do wszystkich scen w sekwencji.
-Uruchamiany jest timer, czyli obiekt klasy \qtclass{QTimer}, na czas równy czasu trwania sceny zapisanego w kroku przemnożonego przez liczbę z prządki.
+Uruchamiany jest timer, czyli obiekt klasy \qtclass{QTimer}, na czas równy czasowi trwania sceny zapisanego w kroku przemnożonego przez liczbę z prządki.
 Po upływie timera, wstawiana jest nowa scena za pomocą sygnału \sokarfunction{MovieBar}{setStep}, a timer jest ustawiany na nowo.
 
 \subsubsection{Podgląd miniaturek}
 \label{sec:sokar-framechooser}
 
 Ten element to wybór scen za pomocą ikon, implementowany przez klasę \sokarclass{FrameChooser}.
-Element, podobnie jak pasek filmu ma dostęp do sekwencji scen i ukrywa swoją obecność przed użytkownikiem, kiedy w sekwencji jest tylko jedna scena.
-Po wciśnięciu ikony jest zmieniana scena.
+Element, podobnie jak pasek filmu, ma dostęp do sekwencji scen i ukrywa swoją obecność przed użytkownikiem, kiedy w sekwencji jest tylko jedna scena.
+Po wciśnięciu ikony scena jest zmieniana.

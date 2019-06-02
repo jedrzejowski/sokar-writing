@@ -4,12 +4,12 @@ Obraz monochromatyczny to obraz w odcieniach szarości, od białego do czarnego 
 
 \subsubsection{Pseudokolorowanie obrazu}
 
-Mamy obraz, którego piksele to n-bitowe liczby, na przykład 16 bitowa liczba całkowita.
+Mamy obraz, którego piksele to n-bitowe liczby, na przykład 16-bitowa liczba całkowita.
 W takiej postaci wyświetlenie obrazu na monitorze RGB lub nawet na profesjonalnym 10-bitowym jest niemożliwe.
 Należy taką liczbę przerobić na trzy liczby, reprezentujące 3 kanały RGB, czerwony, zielony i niebieski.
-Dlatego do wyświetlania obrazów monochromatycznych o dużym kontraście stosuję się twór zwany okienkiem.
+Dlatego do wyświetlania obrazów monochromatycznych o dużym kontraście stosuje się twór zwany okienkiem.
 Jest to funkcja, która mapuje n-bitwy obraz na 8-bitowy obraz w skali szarości.
-8-bitów, ponieważ monitor RGB jest wstanie wyświetlić 256 odcieni szarości.
+Wykorzystuje się 8 bitów ponieważ monitor RGB jest wstanie wyświetlić 256 odcieni szarości.
 
 \paragraph*{Zwiększanie kontrastu za pomocą \enquote{funkcji okna}}
 Jest przyjęte, że \enquote{okno} definiuje się dwoma liczbami: środkiem, oznaczanym jako $center$ i długością, oznaczaną jako $width$.
@@ -30,28 +30,26 @@ Funkcja \enquote{okna} wygląda następująco:
 
 gdzie $v$ to wartość piksela danych obrazu.
 
-Następnie iterujemy przez wszystkie woksele obrazu i używamy na nich funkcji \enquote{okna} i otrzymujemy obraz w skali od $0$ do $255$.
+Następnie iterujemy przez wszystkie woksele obrazu, używamy na nich funkcji \enquote{okna} i otrzymujemy obraz w skali od $0$ do $255$.
 Obraz w 256 poziomach jest możliwy do wyświetlenia na obrazie RGB.
 Natomiast standard \DICOM przewiduje, że obraz można jeszcze wyświetlić w wielokolorowej palecie barw.
-Przykład takiej palety HotIron w porównaniu do skali szarości można zobaczyć na rysunku .
-Taka paleta barw nie koniecznie musi mieć 256 odcieni, dlatego lepiej jest zrobić aby \enquote{okno}, mapowało na liczbę od 0 do 1, a później paleta mapowała na kolor RGB.
-
-
-
-Teraz iterujemy po wszystkich możliwych wartościach wartościach obrazu i wykonujemy takie operacje.
+Przykład takiej palety Hot Iron w porównaniu do skali szarości można zobaczyć na rysunku \ref{fig:algorithm-pixmap-monochrome-palette}.
+Taka paleta barw nie koniecznie musi mieć 256 odcieni, dlatego lepiej jest wykonać \enquote{okno} tak, aby mapowało na liczbę od 0 do 1, a później paleta mapowała na kolor RGB.
+\par
+Teraz iterujemy po wszystkich możliwych wartościach obrazu i wykonujemy takie operacje:
 \begin{itemize}
-    \item wyznaczenie wartości okienka.
+    \item wyznaczenie wartości okienka
           \[y = a * x + b\]
     \item $y$ zostaje obcięte do $1.0$ lub $0.0$ jeżeli wyjdzie poza zakres od $1.0$ do $0.0$
     \item pobranie z palety pikselu odpowiadającego wartości
-    \item wpisanie piksela do tablicy, tak aby najmniejsza wartości obrazu miała indeks $0$ a największy ostatni
+    \item wpisanie piksela do tablicy, tak aby najmniejsza wartość obrazu miała indeks $0$ a największa ostatni
 \end{itemize}
 
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{img/monochrome-002.png}
-    \caption{Porównanie jednego obrazu w trzech różnych \enquote{funkcji okna}.}
+    \caption{Porównanie jednego obrazu w trzech różnych \enquote{oknach}.  Zdjęcie własne.}
     \label{fig:algorithm-pixmap-monochrome-multiwindow}
 \end{figure}
 
@@ -67,7 +65,7 @@ Teraz iterujemy po wszystkich możliwych wartościach wartościach obrazu i wyko
 
 \paragraph{Opis}
 \par
-Z uwagi na konieczność osiągnięcia dużej szybkości wyświetlania obrazu, warto jest szacować wartości funkcji f.
+Z uwagi na konieczność osiągnięcia dużej szybkości wyświetlania obrazu warto jest szacować wartości funkcji $f$.
 Wartości tej funkcji należy przeliczyć, gdy zmienione zostaną parametry tak zwanego \enquote{okna}.
 Indeks koloru wyznaczany jest wtedy poprzez pobieranie wartości z tabeli o indeksie równym wartości numerycznej w obrazie.
 Unikamy w ten sposób wielokrotnego wyznaczania wartości funkcji, która wymaga sprawdzenia warunku, czy dana wartość mieści się w wybranym przedziale wartości, w tak zwanym \enquote{oknie}, co jest bardzo kosztowne obliczeniowo.
@@ -75,7 +73,7 @@ Dlatego dobrym pomysłem jest stworzenie mniejszej tablicy typu LookUpTable, wyp
 Ponieważ tablica LUT posiada wszystkie możliwe kombinacje wartości, jej rozmiar można wyznaczyć wzorem: $2^N*3$, gdzie $N$ to liczba bitów liczby.
 Standard \DICOM definiuje, że liczby mogą mieć $8$, $12$, $16$, $32$ i $64$ bity, jednakże, $12$ bitowe i tak się zapisuje w postaci 16-bitowych w pamięci RAM.
 Dlatego możliwe wartości wielkości tablicy LUT to w przybliżeniu: $768$ bajtów; $196$ kilobajtów; $12,5$ gigabajtów i $56$ eksabajta ($55*10^{6}$ terabajtów).
-Alokowanie dwóch największych wartości może być niemożliwe, dlatego w pracy wykonano dwie implementacje algorytmu: z tablicą LUT (dla 8 i 16 bitowych obrazów i bez tablicy LUT (dla 32 i 64 bitowych obrazów).
+Alokowanie dwóch największych wartości może być niemożliwe, dlatego w pracy wykonano dwie implementacje algorytmu: z tablicą LUT (dla 8- i 16-bitowych obrazów i bez tablicy LUT (dla 32- i 64-bitowych obrazów).
 Algorytm składa się z 3 części: wyznaczenie parametrów \enquote{okna}, przygotowanie \enquote{okna} (tylko gdy jest tablica LUT), wielowątkowa iteracja po obrazie.
 \par
 Okno z LUT jest implementowane przez \sokarclass{Monochrome{\scopedots}WindowIntStatic}.
@@ -83,12 +81,12 @@ Okno bez LUT jest implementowane przez \sokarclass{Monochrome{\scopedots}WindowI
 Obie klasy dziedziczą po abstrakcyjnej klasie \sokarclass{Monochrome}{Window}, która z kolei dziedziczy po \sokarclass{SceneIndicator}, dlatego od razu może wyświetlać obecne wartości \enquote{okna}.
 Decyzja o używanym \enquote{oknie} jest podejmowana podczas wczytywania obrazu przez klasę \sokarclass{Monochrome{\scopedots}Scene}
 \par
-UWAGA: Standard \DICOM zakłada, że danymi mogą być liczby całkowite(\cppcode{int}) oraz zmiennoprzecinkowe(\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywały by takie obrazy, gdzie dane to liczby zmiennoprzecinkowe.
+UWAGA: Standard \DICOM zakłada, że danymi mogą być liczby całkowite (\cppcode{int}) oraz zmiennoprzecinkowe (\cppcode{float} lub \cppcode{double}), ale praktycznie, nie ma takich aparatów medycznych, które zapisywałyby takie obrazy, gdzie dane to liczby zmiennoprzecinkowe.
 Dlatego w pracy założono, że takie obrazy nie będą obsługiwane.
 
 \paragraph{Wyznaczenie parametrów okna}
 \par
-Najpierw wyznaczam okienko, które zmienia wartości obrazu na skale od zera do jeden:
+Najpierw wyznaczane jest  okienko, które zmienia wartości obrazu na skalę od zera do jeden:
 \[x_0 = center - width / 2\]
 \[x_1 = center + width / 2\]
 \[y_1 = 0.0\]
@@ -98,19 +96,19 @@ gdzie:
     \item $center$ --- środek okienka
     \item $width$ --- szerokość okienka
     \item $x0$ i $y0$ --- współrzędne pierwszego punktu
-    \item $x1$ i $y1$ --- współrzędne drugiego punktu
+    \item $x1$ i $y1$ --- współrzędne drugiego punktu.
 \end{itemize}
 Przeglądarka pozwala na inwersje okienka.
 Dlatego kiedy użytkownik zażyczy sobie inwersji, zmienne $y0$ i $y1$ zamienią się wartoścami.
 
-Standard \DICOM przewiduje, że wszystkie dane powinny być wyskalowane, za pomocą wzoru.
+Standard \DICOM przewiduje, że wszystkie dane powinny być wyskalowane za pomocą wzoru:
 \[OutputUnits = m*SV + b\]
 gdzie:
 \begin{itemize}
     \item $m$ --- wartość z \dicomtag{RescaleSlope}{0028}{1053}
     \item $b$ --- wartość z \dicomtag{RescaleIntercept}{0028}{1052}
     \item $SV$ --- stored values --- wartość woksela z pliku
-    \item $OutputUnits$ --- wartość wynikowa
+    \item $OutputUnits$ --- wartość wynikowa.
 \end{itemize}
 
 Wartości okienka odnoszą się do wartości już wyskalowanej, a ponieważ skalowanie całego obrazu jest czasochłonne, przeskalowanie okienka da taki sam efekt:
@@ -121,7 +119,7 @@ więc:
 \[x_0 /= rescaleSlope\]
 \[x_1 /= rescaleSlope\]
 
-Posiadamy, teraz dwa punkty okienka odnoszące się do wartości obrazu.
+Posiadamy teraz dwa punkty okienka odnoszące się do wartości obrazu.
 Wyznaczono parametry prostej przechodzącej przez dwa punkty:
 \[a = (y_1 - y_0) / (x_1 - x_0)\]
 \[b = y_1 - a * x_1\]
@@ -153,16 +151,16 @@ UWAGA: ponieważ nie istnieją rzeczywiste obrazy o wokselu 32-bitowym lub 64-bi
 
 \paragraph{Implementacja statyczna z tablicą LUT}
 \par
-W wersji z LUT, podczas tworzenia okienka jest alokowany wektor obiektów \sokarclass{Pixel} klasy \stdclass{vector}{container/vector}.
+W wersji z LUT, podczas tworzenia okienka alokowany jest wektor obiektów \sokarclass{Pixel} klasy \stdclass{vector}{container/vector}.
 Standard \DICOM przewiduje, że woksele mogą mieć wartości ujemne, więc tablica powinna mieć możliwość posiadania takich wartości indeksów, ale C++ nie przewiduje takiej możliwości.
 Dlatego wprowadzono dwie zmienne pomocnicze \cppcode{maxValue} i \cppcode{signedMove}.
-\cppcode{maxValue} jest to maksymalna wartość jaką dane mogą przyjąć, jest ona równa $2^N$, gdzie $N$ to liczba bitów brana z \dicomtag{BitsStored}{0028}{0101}.
-A \cppcode{signedMove} to liczba przesunięcia liczb, przyjmuje wartość zero, gdy dane wokseli są całkowite nieujemne lub wartość przeciwną do \cppcode{maxValue}, gdy woksele są być ujemne.
+Zmienna \cppcode{maxValue} jest to maksymalna wartość jaką dane mogą przyjąć, jest ona równa $2^N$, gdzie $N$ to liczba bitów brana z \dicomtag{BitsStored}{0028}{0101}.
+A \cppcode{signedMove} to liczba przesunięcia liczb, przyjmuje wartość zero, gdy dane wokseli są całkowite nieujemne lub wartość przeciwną do \cppcode{maxValue}, gdy woksele są ujemne.
 Długość wektora pikseli jest sumą \cppcode{maxValue} i \cppcode{signedMove}.
 A indeks woksela w wektorze ma wartość tego woksela zwiększoną o \cppcode{signedMove}.
 \par
 Wypełnienie wektora wartościami odbywa się poprzez iteracje po wszystkich możliwych wartościach, przeliczenie ich przez funkcje \enquote{okna}, a następnie wstawienie ich do wektora.
-W celu poprawy szybkości, zastosowano sprawdzanie czy wartości są w zakresie \enquote{okna}.
+W celu poprawy szybkości zastosowano sprawdzanie czy wartości są w zakresie \enquote{okna}.
 Poniżej kod funkcji:
 \begin{lstlisting}
 bool genLUT() override {
@@ -217,11 +215,11 @@ inline const Pixel &getPixel(quint64 value) override {
 
 \paragraph{Iterowanie po obrazie}
 \par
-Po wygenerowania obrazu, należy przeiterować go przez funkcje \enquote{okna}.
-Do zokienkowania jednego piksela nie potrzeba innego piksela dlatego w celu przyspieszenia procesu okienkowania, iteracja po obrazie odbywa się w wielu wątkach.
+Po wygenerowaniu obrazu należy przeiterować go przez funkcję \enquote{okna}.
+Do zokienkowania jednego piksela nie potrzeba innego piksela, dlatego w celu przyspieszenia procesu okienkowania iteracja po obrazie odbywa się w wielu wątkach.
 \par
 W C++ typy zmiennych muszą być zdefiniowane przed kompilacją, co jest bardzo problematyczne.
-Mając dwa typy okienek, każde odsługujące 4 typy liczb całkowitych, musiało by zostać zaimplementowanych 8 prawie identycznych funkcji.
+Mając dwa typy okienek, każde odsługujące 4 typy liczb całkowitych, musiałoby zostać zaimplementowanych 8 prawie identycznych funkcji.
 Dlatego podział ten został zaimplementowany za pomocą 4 funkcji z szablonami:
 \begin{itemize}
     \item \sokarfunction{Monochrome{\scopedots}Scene}{genQPixmapOfTypeWidthWindowThread}

@@ -4,7 +4,7 @@
 
 Współrzędne jednorodne definiuje się jako sposób reprezentacji punktów n-wymiarowej przestrzeni rzutowej za pomocą układu $n+1$ współrzędnych.
 W bibliotece Qt jedną z implementacji współrzędnych jednorodnych jest klasa \qtclass{QTransform}.
-Implementuje ona podstawowe zachowania macierzy 3 na 3, jak również wbudowane operacje takie jak: przesuwanie implementowane prze \qtfunction{QTransform}{translate}, obrót implementowany przez funkcje \qtfunction{QTransform}{rotate} i skalowanie implementowane przez \qtfunction{QTransform}{scale}.
+Implementuje ona podstawowe zachowania macierzy 3 na 3, jak również wbudowane operacje takie jak: przesuwanie implementowane prze \qtfunction{QTransform}{translate}, obrót implementowany przez funkcję \qtfunction{QTransform}{rotate} i skalowanie implementowane przez \qtfunction{QTransform}{scale}.
 
 Przykład działania:
 \begin{lstlisting}
@@ -21,17 +21,17 @@ Taką macierz można nałożyć na obiekty klasy \qtclass{QGraphicsPixmapItem}.
 \subsubsection{Interakcja z użytkownikiem}
 
 Trzy macierze (bez wyśrodkowującej) są zmieniane w trakcie interakcji z użytkownikiem.
-Są zmieniane w dwóch przypadkach: po odebraniu sygnału od paska zadań, obiektu klasy \sokarclass{DicomToolbar} lub podczas ruchu myszki, gdy wciśnięty jest prawy przycisk.
+Są zmieniane w dwóch przypadkach: po odebraniu sygnału od paska zadań, obiektu klasy \sokarclass{DicomToolbar} lub podczas ruchu myszki, gdy wciśnięty jest prawy przycisk myszy.
 
 \paragraph{Zmiany poprzez oderanie sygnału}
 
 \par
-Na pasku zadań, nad sceną, znajduje się szereg przycisków, które po wciśnięciu wysyłają sygnał do obecnej sceny poprzez obiekt klasy \sokarclass{DicomView}.
+Na pasku zadań, nad sceną znajduje się szereg przycisków, które po wciśnięciu wysyłają sygnał do obecnej sceny poprzez obiekt klasy \sokarclass{DicomView}.
 Sposób wysyłania sygnałów jest szerzej opisany w sekcji \ref{sec:sokar-dicomtoolbar}.
 
 \par
 Po otrzymaniu odpowiedniego sygnału jest wykonywana operacja na macierzy.
-Odbiór wszystkich sygnałów jest implementowany przez wirtualną funkcje \sokarfunction{DicomScene}{toolBarActionSlot}, która jest slotem.
+Odbiór wszystkich sygnałów jest implementowany przez wirtualną funkcję \sokarfunction{DicomScene}{toolBarActionSlot}, która jest slotem.
 
 \par
 Lista opisów reakcji na sygnały (stan zerowy macierzy, to stan w którym macierz nie wykonuje żadnych operacji):
@@ -59,9 +59,9 @@ Po jakiejkolwiek zmianie macierzy jest wywoływana funkcja \sokarfunction{DicomS
 \paragraph{Zmiany poprzez obsługę myszki}
 
 \par
-\qtclass{QGraphicsScene} dostarcza możliwość obsługi myszki poprzez wirtualną funkcje \qtfunction{QGraphicsScene}{mouseMoveEvent}.
+\qtclass{QGraphicsScene} dostarcza możliwość obsługi myszki poprzez wirtualną funkcję \qtfunction{QGraphicsScene}{mouseMoveEvent}.
 Dzięki temu obsługa myszki może być rozszerzana przez wszystkie klasy dziedziczące po tej klasie.
-Dodatkowo funkcja ta dostarcza obiekt klasy \qtclass{QGraphicsSceneMouseEvent}, w którym znajdują się informacje zarówno o obecnej pozycji myszki jak i poprzedniej pozycji myszki.
+Dodatkowo funkcja ta dostarcza obiekt klasy \qtclass{QGraphicsSceneMouseEvent}, w którym znajdują się informacje zarówno o obecnej jak i poprzedniej pozycji myszki.
 
 \par
 Jeżeli jest wykryty ruch myszki z wciśniętym lewym przyciskiem myszy, to w zależności od stanu paska narzędzi, wywoływana jest odpowiednia akcja.

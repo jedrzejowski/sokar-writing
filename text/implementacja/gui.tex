@@ -16,7 +16,7 @@ Użytkownik może otworzyć plik \DICOM na trzy sposoby: z menu na górze, z drz
 W dwóch pierwszych przypadkach użytkownik może otworzyć tylko jeden plik, a w trzecim jest możliwość wczytania wielu plików.
 
 \par
-Po wczytaniu pliki są wyświetlane w zakładach.
+Po wczytaniu pliki są wyświetlane w zakładkach.
 Kontener z zakładkami jest implementowany przez klasę \sokarclass{DicomTabs}.
 Przykład programu z wczytanymi kilkoma plikami, w tym jednym z animacją znajduje się na rysunku \ref{fig:sokar-gui-with-files}
 
@@ -32,15 +32,16 @@ Obiekt wewnątrz zakładek odpowiada za wyświetlanie wszystkich elementów umo�
 Jest on implementowany przez klasę \sokarclass{DicomView}.
 Jeden taki obiekt może posiadać wiele obrazów wyświetlanych w formie animacji.
 Obrazy są wyświetlane na scenie implementowanej przez \sokarclass{DicomScene}.
-Pod sceną znajduje się pasek filmu z pomocą, którego użytkownik może zatrzymać lub wznowić animację.
+Pod sceną znajduje się pasek filmu.
+Z jego pomocą użytkownik może zatrzymać lub wznowić animację.
 Na prawo od sceny znajdują się ikony i z wszystkimi ramkami filmu.
 Pasek filmu i ikony obrazów ukrywają się, gdy jest wczytany tylko jeden obraz.
 \par
 Scena to obiekt wyświetlający i generujący obraz na ekranie.
 Dodatkowo na scenie znajduję się pięć zestawów informacji z pliku \DICOM:
 \begin{itemize}
-    \item dane pacjenta w lewym górnym rogu
-    \item dane szpitala lub jednostki w której obraz został wykonany w prawym górnym rogu
+    \item dane pacjenta --- w lewym górnym rogu
+    \item dane szpitala lub jednostki w, której obraz został wykonany --- w prawym górnym rogu
     \item dane akwizycji obrazów w lewym dolnym rogu, mogących sie różnić dla każdej modalności
     \item podziałka informująca o rzeczywistym rozmiarze obiektu znajdującego się na obrazie znajdująca się w dolnej i prawej części obrazu
     \item cztery litery z sześciu (H, F, A, P, R, L) informujących o ułożeniu obrazu względem pacjenta
@@ -58,6 +59,6 @@ Przykładowa scena z obrazem monochromatycznym znajduje sie na rysunku \ref{fig:
 Możliwość wyświetlania animacji pojawia się wtedy, gdy w jednej zakładce będzie znajdowała się więcej niż jedna ramka obrazu.
 Można to osiągnąć wczytując wiele obrazów z tej samej serii lub wczytać obraz posiadający wiele ramek.
 Wówczas pod sceną pojawia się pasek, umożliwiający sterowanie animacją, a po prawej stronie obiekt z ikonami poszczególnych ramek obrazu.
-Dokładny opis przycisków i ich funkcji znajduje się w sekcji.
+Dokładny opis przycisków i ich funkcji znajduje się w sekcji \ref{sec:sokar-moviebar}.
 \par
 Pełna struktura menu programu znajdującego się na górze jest opisana w sekcji \ref{sec:sokar-window-menu}.

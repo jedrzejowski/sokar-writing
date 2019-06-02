@@ -94,7 +94,8 @@
 \def\@maketitle{\newpage
   {\fontfamily{phv}\selectfont
   
-  {\noindent\kern-1.2cm\includegraphics[width=16cm]{img/PWHead.png}
+  % {\noindent\kern-1.2cm\includegraphics[width=16cm]{img/PWHead.png}
+  {\noindent\includegraphics[width=16cm]{img/PWHead.png}
   \par}
   
     \vfill
@@ -104,7 +105,8 @@
  
    \vfill
 
- \noindent\kern-1.2cm\@ifundefined{@magisterska}{\includegraphics[width=16cm]{img/inzhead.png}}{\includegraphics[width=16cm]{img/mgrhead.png}}\par
+%  \noindent\kern-1.2cm\@ifundefined{@magisterska}{\includegraphics[width=16cm]{img/inzhead.png}}{\includegraphics[width=16cm]{img/mgrhead.png}}\par
+ \noindent\@ifundefined{@magisterska}{\includegraphics[width=16cm]{img/inzhead.png}}{\includegraphics[width=16cm]{img/mgrhead.png}}\par
 
 
  
@@ -154,24 +156,25 @@
 \centerline{\bf OŚWIADCZENIE}
 \bigskip
 
-Świadom\@ifundefined{@authorII}{\relax}{i} odpowiedzialności prawnej oświadczam\@ifundefined{@authorII}{\relax}{y}, że niniejsza praca dyplomowa \MakeLowercase{\@rodzajpracy}\ pt. 
-\@title:
-\begin{itemize}
-\item została napisana przez\@ifundefined{@authorII}{e mnie}{ nas} samodzielnie, 
-\item nie narusza niczyich praw autorskich,
-\item nie zawiera treści uzyskanych w sposób niezgodny z obowiązującymi przepisami.
-\end{itemize}
-Oświadczam\@ifundefined{@authorII}{\relax}{y}, że przedłożona do obrony praca dyplomowa nie była wcześniej podstawą postępowania związanego z uzyskaniem dyplomu lub tytułu zawodowego w uczelni wyższej.
-\@ifundefined{@authorII}{Jestem świadom}{Jesteśmy świadomi}, że praca zawiera również rezultaty stanowiące własności intelektualne Politechniki Warszawskiej, które nie mogą być udostępniane innym osobom 
-i instytucjom bez zgody Władz Wydziału Elektrycznego.
+Świadomy odpowiedzialności karnej za składanie fałszywych zeznań oświadczam, że niniejsza praca dyplomowa została napisana przeze mnie samodzielnie, pod opieką kierującego pracą dyplomową.
 
-Oświadczam\@ifundefined{@authorII}{\relax}{y} ponadto, że niniejsza wersja pracy jest identyczna z załączoną wersją elektroniczną.
+Jednocześnie oświadczam, że:
+\begin{itemize}
+    \item niniejsza praca dyplomowa nie narusza praw autorskich w rozumieniu ustawy z dnia 4 lutego 1994 roku o prawie autorskim i prawach pokrewnych (Dz.U. z 2006 r. Nr 90, poz. 631 z późn. zm.) oraz dóbr osobistych chronionych prawem cywilnym,
+    \item niniejsza praca dyplomowa nie zawiera danych i informacji, które uzyskałem w sposób niedozwolony,
+    \item niniejsza praca dyplomowa nie była wcześniej podstawą żadnej innej urzędowej procedury związanej z nadawaniem dyplomów lub tytułów zawodowych,
+    \item wszystkie informacje umieszczone w niniejszej pracy, uzyskane ze źródeł pisanych i elektronicznych, zostały udokumentowane w wykazie literatury odpowiednimi odnośnikami,
+    \item znam regulacje prawne Politechniki Warszawskiej w sprawie zarządzania prawami autorskimi i prawami pokrewnymi, prawami własności przemysłowej oraz zasadami komercjalizacji.
+\end{itemize}
+
+Oświadczam, że treść pracy dyplomowej w wersji drukowanej, treść pracy dyplomowej zawartej na nośniku elektronicznym (płycie kompaktowej) oraz treść pracy dyplomowej w module APD systemu USOS są identyczne.
 
 \vskip5mm
 {\raggedleft
 
 \noindent
-\@author ..................................\kern1cm\\
+..................................\kern1cm\\
+\@author \kern1.15cm
 
 \bigskip
 \@ifundefined{@authorII}{\relax}{\noindent\@authorII ..................................\kern1cm}

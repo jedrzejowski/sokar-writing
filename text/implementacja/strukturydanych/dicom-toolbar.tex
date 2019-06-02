@@ -1,6 +1,6 @@
 \label{sec:sokar-dicomtoolbar}
 \par
-Pasek narzędzi znajdujący się na górze, implementowany przez klasę \sokarclass{DicomToolBar}, dziedziczącą po klasy \qtclass{QToolBar}.
+Pasek narzędzi znajdujący się na górze, implementowany jest przez klasę \sokarclass{DicomToolBar}, dziedziczącą po klasy \qtclass{QToolBar}.
 Posiada on zespół ikonek z rozwijalnymi menu kontekstowymi.
 
 \par
@@ -8,28 +8,25 @@ Kliknięcie odpowiedniej ikony spowoduje wysłanie sygnału do obecnie wyświetl
 Są dwa sygnały możliwe do wysłania \sokarfunction{DicomToolBar}{stateToggleSignal} lub \sokarfunction{DicomToolBar}{actionTriggerSignal}.
 Pierwszy sygnał oznacza zmianę stanu paska, czyli sposób obsługi myszki i zawiera jeden argument: stan (typu \cppcode{enum}).
 Sygnał ten okazał się bezużyteczny i nie jest obecnie wykorzystywany przez scenę.
-Drugi oznacza akcję, która powinna być wykonana na przez scenę.
+Drugi oznacza akcję, która powinna być wykonana przez scenę.
 Zawiera dwa argumenty: typ akcji (typu \cppcode{enum}) i stan akcji (typu \cppcode{bool} z domyślną wartością \cppcode{false}).
 
 Ikony na pasku:
 \begin{itemize}
     \item Okienkowanie (1)
 
-          Stan: \cppcode{Windowing}.
-          Oznacza, że horyzontalny ruch myszki powinien zmieniać szerokość okna, a wertykalny środek okna.
+          Stan \cppcode{Windowing} oznacza, że horyzontalny ruch myszki powinien zmieniać szerokość okna, a wertykalny środek okna.
           Przycisk jest aktywny tylko wtedy, gdy obecna scena posiada obraz monochromatyczny.
 
     \item Przesuwanie (2)
 
-          Stan: \cppcode{Pan}.
-          Oznacza, że ruch myszki powinien przesuwać obraz na scenie w prawo, lewo, góra, dół, kiedy jest wciśnięty klawisz myszy.
+          Stan \cppcode{Pan} oznacza, że ruch myszki powinien przesuwać obraz na scenie w prawo, lewo, górę lub dół, kiedy jest wciśnięty lewy klawisz myszy.
 
           Rozwijalne menu zawiera tylko jedne element \enquote{Move To Center} wysyłający sygnał akcji z argumentem \cppcode{ClearPan}.
 
     \item Skalowanie (3)
 
-          Stan: \cppcode{Zoom}.
-          Oznacza, że ruch myszki powinien skalować obraz kiedy jest wciśnięty klawisz myszy.
+          Stan \cppcode{Zoom} oznacza, że ruch myszki powinien skalować obraz kiedy jest wciśnięty lewy klawisz myszy.
 
           Menu rozwijalne:
           \begin{itemize}
@@ -49,8 +46,7 @@ Ikony na pasku:
 
     \item Rotacja (4)
 
-          Stan: \cppcode{Rotate}.
-          Oznacza, że ruch myszki powinien obracać obrazem znajdującym się na scenie.
+          Stan \cppcode{Rotate} oznacza, że ruch myszki powinien obracać obrazem znajdującym się na scenie.
 
           Menu rozwijalne:
           \begin{itemize}
@@ -85,6 +81,7 @@ Ikony na pasku:
                     Po otrzymaniu sygnału obraz na scenie powinien wyczyścić transformatę obrotu.
 
           \end{itemize}
+          
     \item Informacje na obrazie (5)
 
           Ten element potrafi wyłączyć wyświetlanie niektórych elementów na scenie.

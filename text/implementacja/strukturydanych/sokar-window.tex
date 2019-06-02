@@ -4,15 +4,16 @@
 Główne okno programu jest implementowane przez \sokarclass{MainWindow}.
 Jest wywoływane od razu po uruchomieniu programu.
 \par
-Zawiera w sobie 4 elementy: menu; drzewo ze strukturą plików; obiekt z zakładkami oraz w dolnej części okna sugestie; aby nie używać programu w celach medycznych.
+Zawiera w sobie 4 elementy: menu, drzewo ze strukturą plików, obiekt z zakładkami oraz w dolnej części okna sugestie, aby nie używać programu w celach medycznych.
 
 \subsubsection{Drzewo katalogów i zakładki}
 
 \par
-W lewej części okna znajduje się element listy, implementowany przez \sokarclass{FileTree}, zawiera on w sobie model drzewa plików systemu, który z kolei jest implementowany przez klasę \qtclass{QFileSystemModel}.
+W lewej części okna znajduje się element listy implementowany przez \sokarclass{FileTree},
+Zawiera on w sobie model drzewa plików systemu, który z kolei jest implementowany przez klasę \qtclass{QFileSystemModel}.
 Po wybraniu pliku ścieżka jest przesyłana do obiektu z zakładkami.
 \par
-W środkowej części programu znajduje się obiekt z zakładkami, szczegółowo opisany w sekcji \ref{sec:sokar-dicomtabs}.
+W środkowej części programu znajduje się obiekt z zakładkami szczegółowo opisany w sekcji \ref{sec:sokar-dicomtabs}.
 
 \subsubsection{Menu programu}
 \label{sec:sokar-window-menu}
@@ -26,7 +27,7 @@ Struktura Menu programu:
               \item Open --- otwiera okienko wyboru plików, implementowane przez \qtfunction{QFileDialog}{getOpenFileName}, następnie wczytuje plik
               \item Open Recent --- program zapisuje ostatnio wczytane pliki i pozwala na ich ponowne wczytanie z tego menu
               \item Export as --- zapisanie obrazu w formacie JPEG, BMP, GIF lub PNG.
-                    Zapisywanie jest zaimplementowane przez funkcje \qtfunction{QImage}{save}, która umożliwia zapisanie obrazu do pliku.
+                    Zapisywanie jest zaimplementowane przez funkcję \qtfunction{QImage}{save}, która umożliwia zapisanie obrazu do pliku.
               \item Exit --- wyjście z aplikacji
           \end{itemize}
     \item Help

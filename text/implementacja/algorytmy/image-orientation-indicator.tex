@@ -64,7 +64,7 @@ Praktycznie rzecz biorąc, pierwsza macierz to wektor reprezentujący pozycję p
 
 \subsubsection{Wyznaczanie pozycji pacjenta}
 
-Interesuje nas wyznaczenie pozycji sześciu (punktów) na płaszczyźnie obrazu.
+Interesuje nas wyznaczenie pozycji sześciu punktów na płaszczyźnie obrazu.
 Załóżmy, że pacjent znajduje się w środku układu współrzędnych i jest nieskończenie mały.
 Możemy więc zdefiniować sześć punktów o następujących współrzędnych, dalej używanych pod nazwą $PatientPosition$, które będą odpowiadały stronom pacjenta:
 \begin{itemize}
@@ -108,11 +108,11 @@ Po drugie - pozycja z \dicomtag{Image Position}{0020}{0032} została zrównana d
 Wyznaczenie macierzy $imgMatrix$ jest jednorazowe.
 
 \par
-Po wyznaczeniu sześciu punktów $ScenePosition$, dla każdego punktu $PatientPosition$, są one zapisywane.
+Po wyznaczeniu sześciu punktów $ScenePosition$ dla każdego punktu $PatientPosition$, są one zapisywane.
 $ScenePosition$ odpowiada pozycji punktów na obrazie w pozycji startowej.
 
 \par
-Na scenie, której jest wyświetlany obraz, użytkownik może obracać obraz o dowolny kąt, według własnego uznania.
+Na scenie, na której jest wyświetlany obraz, użytkownik może obracać obraz o dowolny kąt, według własnego uznania.
 Te przekształcenia są realizowane za pomocą macierzy rotacji, dalej zwaną jako $rotateTransform$.
 Macierz $rotateTransform$ jest przesyłana do naszego obiektu \sokarclass{ImageOrientationIndicator} za każdym razem, kiedy zostanie zmieniona.
 

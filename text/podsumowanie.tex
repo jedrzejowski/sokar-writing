@@ -3,16 +3,15 @@ Celem pracy inżynierskiej było napisanie aplikacji do obsługi obrazów \DICOM
 Cel udało się osiągnąć.
 Zniesienie ograniczeń wirtualizacji kodu rozwiązano językiem programowania C++.
 Zastosowano biblioteki dostępne na różnych platformach: Qt i GDCM, które również zostały napisane w C++, dzięki czemu uzyskano jednolity program napisany w jednym języku.
-Zapewniono jednolity sposób kompilacji na platformach przy użyciu narzędzia CMake.
-Dzięki czemu aplikacja działa w ten sam sposób na wszystkich testowanych platformach: Linux, MacOS i Windows.
-Jednolity wygląda aplikacji zapewniła biblioteka Qt, dzięki czemu interfejs aplikacji jest prawie taki sam na każdym systemie.
+Zapewniono jednolity sposób kompilacji na platformach przy użyciu narzędzia CMake, dzięki czemu aplikacja działa w ten sam sposób na wszystkich testowanych platformach: Linux, MacOS i Windows.
+Jednolity wygląd aplikacji zapewniła biblioteka Qt, co sprawia, że interfejs aplikacji jest prawie taki sam na każdym systemie.
 \par
 Zaplanowano i dodano obsługę podstawowych operacji na obrazie ułatwiających jego oglądanie i ocenienie, takich jak: przenoszenie; skalowanie; obrót.
 Zaimplementowano kolorowe pseudokolorowanie obrazów monochromatycznych z możliwością dodawania nowych palet.
-Wprowadzono obsługę serii obrazów jako całości, włączając w to przegląd obrazów w serii, animacje, wspólne okna w skali barwnej oraz wspólne przekształceniami macierzowymi
+Wprowadzono obsługę serii obrazów jako całości, włączając w to przegląd obrazów w serii, animacje, wspólne okna w skali barwnej oraz wspólne przekształcenia macierzowe.
 \par
 Napotkano problem z biblioteką GDCM w postaci braku możliwości używania plików binarnych dostarczonych przez twórców.
 Te pliki binarne zostały skompilowane za pomocą innego kompilatora niż pliki binarne Qt.
-Co sprawia, że typ \stdclass{string}{string/basic_string} z jedenej biblioteki nie jest kompatybilny z \stdclass{string}{string/basic_string} z drugiej biblioteki.
+Spowodowało to, że typ \stdclass{string}{string/basic_string} z jedenej biblioteki nie jest kompatybilny z \stdclass{string}{string/basic_string} z drugiej biblioteki.
 Wynika to z użycia innych interfejsów binarnych aplikacji \fromEng{application binary interface} w różnych kompilatorach.
 Problem można rozwiązać kompilując bibliotekę GDCM własnoręcznie.

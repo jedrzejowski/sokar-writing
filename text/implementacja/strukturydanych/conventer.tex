@@ -43,21 +43,22 @@ Klasa \sokarclass{DataConverter} posiada następujące funkcje, pozwalające na 
 
     \item \sokarfunction{DataConverter}{toShort}
 
-          Funkcja konwertuje element o znacznik typu \dicomvr{SS} na 16-bitowa liczbę całkowitą ze znakiem (\cppcode{qint16}).
+          Funkcja konwertuje element o znacznik typu \dicomvr{SS} na 16-bitową liczbę całkowitą ze znakiem (\cppcode{qint16}).
 
     \item \sokarfunction{DataConverter}{toUShort}
 
-          Funkcja konwertuje element o znacznik typu \dicomvr{US} na 16-bitowa liczbę całkowitą bez znaku (\cppcode{quint16}).
+          Funkcja konwertuje element o znacznik typu \dicomvr{US} na 16-bitową liczbę całkowitą bez znaku (\cppcode{quint16}).
 
 \end{itemize}
 Oprócz powyższych funkcji jest jeszcze kilka innych funkcji pobocznych oraz kilka aliasów.
 
 \par
-Ogólne zasady konwersji, które się tyczą wszystkich danych:
+Ogólne zasady konwersji, które dotyczą wszystkich danych:
 \begin{itemize}
-    \item Większość VR jest to zapisanych jako tekst, kodowanie i dekodowanie tekstu jest zapewniane przez bibliotekę.
+    \item Większość VR jest zapisanych jako tekst, kodowanie i dekodowanie tekstu jest zapewniane przez bibliotekę.
     \item Większość danych może mieć kilka wartości oddzielonych backslashem \quotett{\textbackslash}, dlatego konwerter dla VR, w których standard przewiduje wiele wartości, zawsze zwraca wektor z tymi wartościami.
-    \item Wszystkie dane są zapisane parzystą ilością bajtów, w przypadku tekstu dodaje się znak spacji na końcu danych.
+    \item Wszystkie dane są zapisane parzystą ilością bajtów.
+          W przypadku tekstu dodaje się znak spacji na końcu danych.
           Taka spacja jest pomijana w analizie danych.
 \end{itemize}
 

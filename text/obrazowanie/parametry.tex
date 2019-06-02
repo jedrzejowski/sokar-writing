@@ -36,7 +36,7 @@ Standard \DICOM definiuje następujące wartości tego tagu (wraz z wyjaśnienie
 \par
 Kwantyzacja obrazu, czyli liczba poziomów obrazu, jest zapisana na czterech znacznikach:
 \begin{itemize}
-    \item \dicomtag{Bits Allocated}{0028}{0100} --- informuje na jak wiele bitów zostało zaalokowanych do zapisania jednego piksela
+    \item \dicomtag{Bits Allocated}{0028}{0100} --- informuje jak wiele bitów zostało zaalokowanych do zapisania jednego piksela
     \item \dicomtag{Bits Stored}{0028}{0101} --- informuje jak wiele bitów z zaalokowanych posiada wartość piksela
     \item \dicomtag{High Bit}{0028}{0102} --- informuje gdzie znajduje się najstarszy bit
     \item \dicomtag{Pixel Representation}{0028}{0103} --- informuje czy poziomy są ze znakiem czy bez
@@ -45,7 +45,7 @@ Kwantyzacja obrazu, czyli liczba poziomów obrazu, jest zapisana na czterech zna
 \par
 Obraz \DICOM również zawiera w sobie informacje o próbkowaniu.
 Z uwagi na to, że próbkowanie wygląda inaczej w każdej technice, standard posiada odpowiedni zestaw znaczników dla każdej techniki.
-Próbkowanie poszczególnych technik opisałem w sekcji \ref{sec:basic-imaging-technics}.
+Próbkowanie poszczególnych technik jest opisane w sekcji \ref{sec:basic-imaging-technics}.
 
 % \subsection{Wartość diagnostyczna obrazu}
 
@@ -83,8 +83,8 @@ gdzie $I_{max}$ i $I_{min}$ to najwyższa i najniższa wartość luminancji.
 \subsubsection*{Przestrzenna}
 
 \par
-Rozdzielczość przestrzenna obrazu to najmniejsza odległość między dwoma punktami obrazu, które można rozróżnić.
-Jest ona silnie związana z kontrastem obrazu za pomocą funkcji przenoszenia modulacji (MTF –-- Modulation Transfer Function).
+Rozdzielczość przestrzenna obrazu jest to najmniejsza odległość między dwoma punktami obrazu, które można rozróżnić.
+Jest ona silnie związana z kontrastem obrazu za pomocą funkcji przenoszenia modulacji (MTF –- Modulation Transfer Function).
 Jest to krzywa ukazująca degradację kontrastowości w miarę zwiększania częstotliwości przestrzennej okresowego wzorca.
 Funkcję MTF można wyznaczyć używając rozbieżnych tarcz rozdzielczości przestrzennej lub, w pewnych warunkach, przy pomocy norm wielopręcikowych.
 W radiografii rozdzielczość określa się zazwyczaj jako liczbę równoległych linii, czarnych i białych, które można rozróżnić ma 1 milimetrze obrazu (paralinie na milimetr).
@@ -96,10 +96,9 @@ Zależność ta jest inna dla każdej techniki.
 \subsubsection*{Czasowa}
 
 Każdy pomiar wymaga pewnego czasu pobierania danych.
-W nie których przypadkach ważna jest również zmiany zachodzące w organizmie w czasie wykonywania badania.
-Rozdzielczość czasowa, jest istotna w obrazach dynamicznych, np. angioMR.
-Kiedy mamy pomiar dokonywany w określonym czasie i ustalone są markery czasowe.
-Rozdzielczość czasowa jest definiowana jako odległość w czasie od dwóch klatek obrazowania.
+W niektórych przypadkach ważne są również zmiany zachodzące w organizmie w czasie wykonywania badania.
+Rozdzielczość czasowa jest istotna w obrazach dynamicznych, np. angioMR, kiedy mamy pomiar dokonywany w określonym czasie i ustalone są markery czasowe.
+Rozdzielczość czasowa definiowana jako odległość w czasie od dwóch klatek obrazowania.
 
 \subsection{Stosunek sygnału do szumu (SNR)}
 
@@ -108,12 +107,12 @@ Stosunek sygnału do szumu ma decydujący wpływ na widoczności obiektów, kont
 
 \subsection{Poziom artefaktów}
 
-Artefakty to zjawiska fałszujące obraz poprzez tworzenie struktur w obrazie, nie istniejących w rzeczywistości.
+Artefakty są zjawiska fałszujące obraz poprzez tworzenie struktur w obrazie, nieistniejących w rzeczywistości.
 Jest to problem występujący w różnych technikach obrazowania.
 Najbardziej znanymi artefaktami są np. w badaniu USG tak zwany warkocz komety w przypadku obiektów o wysokiej różnicy impedancji w stosunku do otoczenia.
 
 \subsection{Poziom zniekształceń przestrzennych}
 
 Zniekształcenia przestrzenne powstają w wyniku geometrycznego ułożenia i kształtu obiektu badanego oraz aparatu pomiarowego.
-Przykładem takiego zniekształcenia mogą być różne powiększenia obiektów zależne od głębokości ich ułożenia w USG, zmiana pozycji pacjenta(przez ruchy klatki piersiowej w czasie badania), czy deformacja obrazu spowodowana zmianami rozkładu pola magnetycznego przez metalowe obiekty w znajdujące się w tym samym pomieszczeniu w przypadku badań MRI.
+Przykładem takiego zniekształcenia mogą być różne powiększenia obiektów zależne od głębokości ich ułożenia w USG, zmiana pozycji pacjenta (przez ruchy klatki piersiowej w czasie badania), czy deformacja obrazu spowodowana zmianami rozkładu pola magnetycznego przez metalowe obiekty w znajdujące się w tym samym pomieszczeniu w przypadku badań MRI.
 

@@ -4,13 +4,13 @@
 \section{Narzędzia potrzebne do kompilacji}
 
 \par
-Do kompilacji wystarczą podstawowe narzędzia budowania dostosowane do systemu operacyjnego.
+Do kompilacji wystarczą podstawowe narzędzia budowania dostosowane do systemu operacyjnego:
 
 \begin{itemize}
     \item Windows --- Visual Studio w wersji 2017 lub nowszej
     \item Linux --- pakiety zawierające następujące komendy: make; cmake (w wersji 3.10 lub nowszej), g++ (w wersji 8 lub nowszej)
-    % sudo apt-get install build-essential libgl1-mesa-dev
-    % sudo pacman -Syu qt5-base
+          % sudo apt-get install build-essential libgl1-mesa-dev
+          % sudo pacman -Syu qt5-base
     \item MacOS --- Xcode w wersji 10 lub nowszej
 \end{itemize}
 
@@ -23,13 +23,12 @@ Do kompilacji są potrzebne biblioteki Qt i GDCM.
 
 \subsection{Instalacja Qt}
 
-Program był testowany na wersji $5.12$.
-Z tego powodu zalecanym jest używanie tej wersji.
+Program był testowany na wersji $5.12$, z tego powodu zalecanym jest używanie tej wersji.
 
 \subsubsection*{Linux}
 
 Biblioteka Qt jest dostępna w każdej standardowej dystrybucji Linuxa.
-Dlatego instalacja Qt sprowadza się pobrania z repozytoriów za pomocą menadżera pakietów.
+Dlatego instalacja Qt sprowadza się do pobrania z repozytoriów za pomocą menadżera pakietów.
 % \par
 % Komendy pozwalające zainstalować bibliotekę Qt na wybranych dystrybucjach:\\
 % Ubuntu: \texttt{sudo apt-get install qt5-default}\\
@@ -39,8 +38,8 @@ Dlatego instalacja Qt sprowadza się pobrania z repozytoriów za pomocą menadż
 
 \par
 W celu instalacji Qt należy udać się na oficjalną stronę biblioteki Qt.
-W prawym górnym rogu kliknąć zielony przycisk \enquote{Download. Try. Buy.}.
-Na dole kolumny zatytułowanej \enquote{Open Source} kliknąć zielony przycisk \enquote{Go open source}.
+W prawym górnym rogu powinno się kliknąć zielony przycisk \enquote{Download. Try. Buy.}.
+Na dole kolumny zatytułowanej \enquote{Open Source} należy kliknąć zielony przycisk \enquote{Go open source}.
 Zostanie automatycznie pobrany plik instalacyjny.
 Po pobraniu należy go otworzyć i postępować zgodnie z instalacją.
 \par
@@ -51,12 +50,11 @@ Następnie należy wybrać komponenty do zainstalowania.
 W przypadku Windowsa należy zainstalować wersje \enquote{Qt 5.12.3 MSVC 2017 64-bit}.
 Z kolei na MacOS należy zainstalować \enquote{Qt 5.12.3 clang\_x64}.
 Można odhaczyć wszystkie inne opcje, nie są one wymagane do kompilacji programu.
-Dalej należy postępować zgodnie z instrukcjami pojawiającymi sie na ekranie.
+Dalej należy postępować zgodnie z instrukcjami pojawiającymi się na ekranie.
 
 \subsection{Pobranie kodu źródłowego GDCM}
 
-Program był testowany na wersji $2.8.9$.
-Z tego powodu zalecanym jest używanie tej wersji.
+Program był testowany na wersji $2.8.9$, z tego powodu zalecanym jest używanie tej wersji.
 \par
 Należy udać się na stronę \url{https://github.com/malaterre/GDCM/releases/tag/v2.8.9} i pobrać plik \enquote{Source code (zip)}, a następnie go rozpakować.
 
@@ -66,42 +64,43 @@ Kod źródłowy aplikacji można pobrać repozytorium git znajdującego się pod
 
 \section{Przygotowanie katalogów}
 
-Należy utworzyć folder w którym będą znajdowały się wszystkie foldery z plikami, dalej ten folder będzie nazywany \enquote{/path/}.
-Kod źródłowy GDCM umieść w katalogu \quotett{/path/gdcm/}.
-Kod źródłowy Sokar umieść w katalogu \quotett{/path/sokar-app/}.
-Utwórz również foldery \quotett{/path/gdcm-bin/} i \quotett{/path/sokar-app-bin/}.
+Należy utworzyć folder, w którym będą znajdowały się wszystkie foldery z plikami, dalej ten folder będzie nazywany \quotett{/path/}.
+Kod źródłowy GDCM należy umieścić w katalogu \quotett{/path/gdcm/}.
+Kod źródłowy Sokar należy umieścić w katalogu \quotett{/path/sokar-app/}.
+Powinno się również utworzyć foldery \quotett{/path/gdcm-bin/} i \quotett{/path/sokar-app-bin/}.
 
 \section{Kompilacja GDCM}
 
-Uruchom CMake z menu programów lub za pomocą polecenia \quotett{cmake-gui}.
-W polu \enquote{Where is the source code:} wpisz \quotett{/path/gdcm/}.
-W polu \enquote{Where to build the binnaries:} wpisz \quotett{/path/gdcm-bin/}.
-Kliknij przycisk \enquote{Configure} znajdujący się w dolnej lewej części okna.
-W oknie zatytułowanym \enquote{CMakeSetup} wybierz opcje: \enquote{Unix Makefiles} i \enquote{Use default native compilers} dla Linuxa i MacOS; \enquote{Visual Studio 15 2017}, \enquote{x64} i \enquote{Use default native compilers} dla Windowsa.
-Zaznacz checkbox przy wartości \quotett{GDCM\_BUILD\_SHARED\_LIBS}.
-Kliknij przycisk \enquote{Finish}.
-Następnie kliknij przycisk \enquote{Generate}.
-\par
-W przypadku Linuxa i MacOS, uruchom \quotett{make} w folderze \quotett{/path/gdcm-bin/}.
-W przypadku Windowsa otwórz plik \quotett{/path/gdcm-bin/GDCM.sln} i kliknij przycisk \enquote{Lokalny debuger Windows}.
+Kompilacja zawiera polecenia, które należy wykonać w następującej kolejności:
+\begin{itemize}
+    \item uruchom CMake z menu programów lub za pomocą polecenia \quotett{cmake-gui}
+    \item w polu \enquote{Where is the source code:} wpisz \quotett{/path/gdcm/}
+    \item w polu \enquote{Where to build the binnaries:} wpisz \quotett{/path/gdcm-bin/}
+    \item kliknij przycisk \enquote{Configure} znajdujący się w dolnej lewej części okna.
+    \item w oknie zatytułowanym \enquote{CMakeSetup} wybierz opcje: \enquote{Unix Makefiles} i \enquote{Use default native compilers} dla Linuxa i MacOS; \enquote{Visual Studio 15 2017}, \enquote{x64} i \enquote{Use default native compilers} dla Windowsa
+    \item zaznacz checkbox przy wartości \quotett{GDCM\_BUILD\_SHARED\_LIBS}
+    \item kliknij przycisk \enquote{Finish}
+    \item następnie kliknij przycisk \enquote{Generate}.
+    \item w przypadku Linuxa i MacOS, uruchom \quotett{make} w folderze \quotett{/path/gdcm-bin/}, zaś w przypadku Windowsa otwórz plik \quotett{/path/gdcm-bin/GDCM.sln} i kliknij przycisk \enquote{Lokalny debuger Windows}.
+\end{itemize}
 
 \section{Kompilacja Sokar}
 
-\par
-Uruchom CMake z menu programów lub za pomocą polecenia \quotett{cmake-gui}.
-W polu \enquote{Where is the source code:} wpisz \quotett{/path/sokar-app/}.
-W polu \enquote{Where to build the binnaries:} wpisz \quotett{/path/sokar-app-bin/}.
-Kliknij \enquote{Configure}.
-W oknie zatytułowanym \enquote{CMakeSetup} wybierz takie same opcje na w GDCM.
-Kliknij \enquote{Finish}.
-Ustaw parametr wartość \enquote{QtDir} na ścieżkę do skompilowanej biblioteki Qt.
-Następnie kliknij przycisk \enquote{Generate}.
-\par
-W przypadku Linuxa i MacOS, uruchom \quotett{make} w folderze \quotett{/path/sokar-app-bin/}.
-W przypadku Windowsa otwórz plik \quotett{/path/gdcm-bin/Sokar.sln} i kliknij przycisk \enquote{Lokalny debuger Windows}.
+Kompilacja zawiera polecenia, które należy wykonać w następującej kolejności:
+\begin{itemize}
+    \item uruchom CMake z menu programów lub za pomocą polecenia \quotett{cmake-gui}
+    \item w polu \enquote{Where is the source code:} wpisz \quotett{/path/sokar-app/}
+    \item w polu \enquote{Where to build the binnaries:} wpisz \quotett{/path/sokar-app-bin/}
+    \item kliknij \enquote{Configure}
+    \item w oknie zatytułowanym \enquote{CMakeSetup} wybierz takie same opcje na w GDCM
+    \item kliknij \enquote{Finish}
+    \item ustaw parametr wartość \enquote{QtDir} na ścieżkę do skompilowanej biblioteki Qt
+    \item następnie kliknij przycisk \enquote{Generate}
+    \item w przypadku Linuxa i MacOS, uruchom \quotett{make} w folderze \quotett{/path/sokar-app-bin/}, zaś w przypadku Windowsa otwórz plik \quotett{/path/gdcm-bin/Sokar.sln} i kliknij przycisk \enquote{Lokalny debuger Windows}
+\end{itemize}
 
 \section{Uruchomienie}
 
-W przypadku Linuxa i MacOS, plik binary znajduje się \quotett{/path/sokar-app-bin/Sokar}.
-Można go uruchomić klikając lub z terminal za pomocą komendy \quotett{./Sokar}.
+W przypadku Linuxa i MacOS, plik binary znajduje się w katalogu \quotett{/path/sokar-app-bin/}.
+Można go uruchomić go klikając lub z terminala za pomocą komendy \quotett{./Sokar}.
 W przypadku Windows plik binarny znajduje się w folderze \quotett{/path/sokar-app-bin/Debug}.

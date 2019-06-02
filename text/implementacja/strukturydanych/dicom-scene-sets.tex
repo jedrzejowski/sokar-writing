@@ -31,8 +31,8 @@ Kroki implementowane przez klasę \sokarclass{Step} zawierają następujące inf
 \par
 Sekwencja ma wbudowane funkcje zapewniające przesuwanie się po indeksie na wektorze:
 \begin{itemize}
-    \item \sokarfunction{SceneSequence}{stepForward} --- krok do przodu, zwiększa indeks tym samym wykonując krok w stronę końca sekwencji
-    \item \sokarfunction{SceneSequence}{stepBackward} --- krok do tyłu, zmniejsza indeks tym samym wykonując krok w stronę początku sekwencji
+    \item \sokarfunction{SceneSequence}{stepForward} --- krok do przodu --- zwiększa indeks tym samym wykonując krok w stronę końca sekwencji
+    \item \sokarfunction{SceneSequence}{stepBackward} --- krok do tyłu --- zmniejsza indeks tym samym wykonując krok w stronę początku sekwencji
     \item \sokarfunction{SceneSequence}{step} --- wykonuje krok w tył lub przód w zależności od kierunku sekwencji
 \end{itemize}
 Wszystkie powyższe funkcje są zarazem slotami dla sygnałów oraz emitują sygnał \sokarfunction{SceneSequence}{steped}.
@@ -54,11 +54,14 @@ Zawiera on wskaźnik do elementu o zadanym znaczniku.
 \par
 Została zaimplementowana obsługa poniższych znaczników:
 \begin{itemize}
-    \item \dicomtag{Frame Time}{0018}{1063} --- element z tym znacznikiem zawiera czas trwania jednej ramki w milisekundach, każdemu krokowi jest przypisywana ta wartość trwania
+    \item \dicomtag{Frame Time}{0018}{1063} --- element z tym znacznikiem zawiera czas trwania jednej ramki w milisekundach.
+          Każdemu krokowi jest przypisywana ta wartość trwania
 
-    \item \dicomtag{Frame Time Vector}{0018}{1065} --- zawiera tablice z przyrostami czasu w milisekundach między n-tą ramką a poprzednią klatką. Pierwsza ramka ma zawsze przyrost czasu równy 0.
-    
-    \item \dicomtag{Cine Rate}{0018}{0040} --- zawiera ilość klatek wyświetlanych na sekundę, każdemu krokowi jest przypisywana wartość do niej odwrotna.
+    \item \dicomtag{Frame Time Vector}{0018}{1065} --- zawiera tablice z przyrostami czasu w milisekundach między n-tą ramką a poprzednią klatką.
+          Pierwsza ramka ma zawsze przyrost czasu równy 0.
+
+    \item \dicomtag{Cine Rate}{0018}{0040} --- zawiera ilość klatek wyświetlanych na sekundę.
+          Każdemu krokowi jest przypisywana wartość do niej odwrotna.
 \end{itemize}
 W przypadku braku znacznika lub gdy zostaje wskazany znacznik nieznany, czas trwania ramki wynosi $83.3$ milisekundy, co odpowiada 12 klatkom na sekundę.
 
@@ -67,7 +70,7 @@ W przypadku braku znacznika lub gdy zostaje wskazany znacznik nieznany, czas trw
 \label{sec:sokar-dicomfileset}
 \par
 Zbiory plików są implementowane przez \sokarclass{DicomFileSet} i służą do przechowywania wielu wczytanych plików \DICOM.
-Na początku pliki są sortowane na podstawie liczby zawartej w elemencie o znaczniku \dicomtag{Instance Number}{0020}{0x0013}.
+Na początku pliki są sortowane na podstawie liczby zawartej w elemencie o znaczniku \dicomtag{Instance Number}{0020}{0013}.
 Dla każdego pliku jest tworzony obiekt \sokarclass{DicomFrameSet}.
 \par
 Sekwencja jest tworzona poprzez połączenie sekwencji poszczególnych obrazów.
@@ -77,8 +80,9 @@ Sekwencja jest tworzona poprzez połączenie sekwencji poszczególnych obrazów.
 \par
 W przypadku kiedy mamy do czynienia z wieloma plikami, należy jest rozdzielić na serie i uporządkować w odpowiedniej kolejności.
 Unikalny identyfikator serii jest zawarty w elemencie danych o znaczniku \dicomtag{Series Instance UID}{0020}{000E}.
-Kolejności obrazów w serii to liczba zawarta w elemencie danych o znaczniku \dicomtag{Instance Number}{0020}{0x0013}.
+Kolejności obrazów w serii to liczba zawarta w elemencie danych o znaczniku \dicomtag{Instance Number}{0020}{0013}.
 \par
 Segregacja odbywa się za pomocą funkcji \sokarfunction{DicomFileSet}{create}.
-Do funkcji jest przesyłany wektor z wczytanymi plikami \DICOM, następnie dzieli ona pliki na zbiory zawierające zdjęcia tej samej serii, tworzy obiekty zbiorów plików \DICOM, ostatecznie zwraca ona wektor z gotowymi obiektami zbiorów plików \DICOM.
+Do funkcji jest przesyłany wektor z wczytanymi plikami \DICOM, następnie dzieli ona pliki na zbiory zawierające zdjęcia tej samej serii, tworzy obiekty zbiorów plików \DICOM.
+Ostatecznie zwraca ona wektor z gotowymi obiektami zbiorów plików \DICOM.
 Sortowanie plików \DICOM według ich kolejności odbywa się za pomocą funkcji \stdclass{sort}{algorithm/sort} wewnątrz konstruktora klasy \sokarclass{DicomFileSet}, który nie jest publiczny.

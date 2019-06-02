@@ -15,13 +15,13 @@ Przeglądarka obrazów \DICOM musi wygenerować kolorowy obraz z danych na podst
 
 \subsubsection{Obsługa wielu formatów danych}
 
-Standard \DICOM przewidział możliwość zapisania wielu typów danych w różnych formatach, nie tylko obrazów, ale też nagrań nagrań audio i tekstów.
-Przeglądarka obrazów \DICOM może mieć możliwość od czytania, wyświetlenia lub odsłuchania danych.
+W standardzie \DICOM przewidziano możliwość zapisania wielu typów danych w różnych formatach, nie tylko obrazów, ale też nagrań nagrań audio i tekstów.
+Przeglądarka obrazów \DICOM może mieć możliwość odczytania, wyświetlenia lub odsłuchania danych.
 
 \subsubsection{Podstawowe operacje na obrazie}
 
 \begin{itemize}
-    \item Skalowanie lub powiększenie, czyli możliwość powiększenia lub zmniejszenia wyświetlanego obrazu o pewny współczynnik skalujący.
+    \item Skalowanie lub powiększenie, czyli możliwość powiększenia lub zmniejszenia wyświetlanego obrazu o pewien współczynnik skalujący.
 
     \item Przesuwanie \fromEng{pan}, czyli możliwość przesuwania obrazu o dowolny wektor.
           Jest to przydatne, gdy powiększymy obraz do takiego stopnia, że nie będzie mieścił się na ekranie lub w okienku programu.
@@ -45,7 +45,7 @@ Przeglądarka obrazów \DICOM może mieć możliwość od czytania, wyświetleni
 
 \begin{itemize}
     \item Okienkowanie.
-          Termin odnosi się do używania funkcji okna cyfrowego w celu zamiany obrazu danych na obraz monochromatyczny możliwy do wyświetlenia.%TOASK
+          Termin odnosi się do używania funkcji okna cyfrowego w celu zamiany obrazu danych na obraz monochromatyczny możliwy do wyświetlenia. 
           Okienkowanie jest szczegółowo opisane w sekcji \ref{sec:algorithm-pixmap-monochrome} wraz z generowaniem obrazu monochromatycznego.
 
     \item Maski \fromEng{overlay}.
@@ -59,7 +59,7 @@ Przeglądarka obrazów \DICOM może mieć możliwość od czytania, wyświetleni
 
     \item Obsługa DICOMDIR.
           Jest to możliwość wczytania pliku DICOMDIR i wyświetlenie struktury serii badań.
-          Plik DICOMDIR to wiele zindeksowanych plików zawierający ich zbiór elementów danych, bez obrazów.
+          Plik DICOMDIR to wiele zindeksowanych plików zawierający zbiór elementów danych, bez obrazów.
 
     \item Wczytanie wielu plików i ich połączenie w formie filmu, czyli możliwość wczytania wielu plików z tej samej serii, ułożenia ich według pozycji geometrycznej i wyświetlenia ich jako film.
           Innymi słowy jest periodyczna podmiana obrazu na obraz następny w serii.
@@ -147,33 +147,29 @@ Podstawowe interfejsy sieciowe to: C-STORE SCP \DICOM C-STORE, C-STORE SCU, Quer
 
 \subsubsection{Wsparcie techniczne}
 
-Aplikacja powinna mieć dostępną pisemną dokumentację oprogramowania (np. podręczniki lub strony internetowej), wsparcie przez pocztę internetową, możliwość porozumienia się z twórcą lub opiekunem oprogramowania.
-Forum, możliwość pytania się społeczności o opinie i ich wymiana.
-Wiki, strona internetowa w formacie Wikipedii dostępna dla użytkownika.
+Aplikacja powinna mieć dostępną pisemną dokumentację oprogramowania (np. podręczniki lub strony internetowe), wsparcie przez pocztę internetową, możliwość porozumienia się z twórcą lub opiekunem oprogramowania, forum (możliwość pytania się społeczności o opinie i ich wymiana) oraz rodzaj wikipedii (strona internetowa w formacie Wikipedii dostępna dla użytkownika).
 
 \subsubsection{Obrazowanie dwuwymiarowe}
 
-Przewijanie\fromEng{scroll}, proces wyświetlania obrazów, można poprawić dzięki zmniejszeniu interakcji z klawiaturą oraz myszką. Można to osiągnąć na przykład, oferując możliwość przejścia do następnego lub poprzedniego obrazu przez przesunięcie kółkiem myszy lub używając przycisków góra/dół na klawiaturze.
-Metadane, przeglądania powinna obejmować analizowanie i wyświetlanie metadanych obiektów \DICOM, powinna obejmować wyświetlanie rozdzielczości obrazu, badanie (np. identyfikator podmiotu) oraz znaczniki \DICOM specyficzne dla dostawcy (np. specjalne ustawienie urządzenia rejestrującego).
-Warstwa informacyjna, najważniejsze informacje powinny powinny być wizualizowane w oknie wyświetlacza jako nakładka na obraz.
-Na przykład aktualna pozycja lub nazwa podmiotu wykonującego badanie.
-Okienkowanie to sposób zamiany danych na skale szarości, okienkowanie jest opisane w sekcji \ref{sec:algorithm-pixmap-monochrome}.
-Pseudo-kolorowanie obrazu, tabele odwzorowujące szare wartości obrazu na pseudo-kolory.
-Histogram wizualizuje wystąpienia i rozkład wartości kolorów na obrazach, pozwalają opisywać istotne cechy obrazu
-Wymiarowanie, możliwości rysowania bądź zaznaczania linii lub innych kształtów do analizy i wyznaczania odległości w jednostkach długości na obrazie.
-Jest to możliwe gdyż nagłówki pliku \DICOM zawierają parametry sprzętowe urządzenia (np. ilość pikseli na centymetr).
-Adnotacje(opisy), które były wytworzone przez personel medyczny powinny być zapisywane w odpowiedni sposób w pliku.
+Przewijanie \fromEng{scroll}, jako forma procesu wyświetlania obrazów, można poprawić dzięki zmniejszeniu interakcji z klawiaturą oraz myszką.
+Można to osiągnąć na przykład oferując możliwość przejścia do następnego lub poprzedniego obrazu przez przesunięcie kółkiem myszy lub używając przycisków góra/dół na klawiaturze.
+Wyświetlane elementy powinny obejmować analizowanie i wyświetlanie elementów danych \DICOM, wyświetlanie rozdzielczości obrazu, badanie (np. identyfikator podmiotu) oraz znaczniki \DICOM specyficzne dla dostawcy (np. specjalne ustawienie urządzenia rejestrującego).
+Najważniejsze informacje powinny być wizualizowane w oknie wyświetlacza jako nakładka na obraz, np. aktualna pozycja lub nazwa podmiotu wykonującego badanie.
+Okienkowanie jest to sposób zamiany danych na skale szarości, okienkowanie jest opisane w sekcji \ref{sec:algorithm-pixmap-monochrome}.
+Pseudokolorowanie są to tabele odwzorowujące szare wartości obrazu na pseudo-kolory.
+Histogram wizualizuje wystąpienia i rozkład wartości kolorów na obrazach, pozwalają opisywać istotne cechy obrazu.
+Przeglądarka powinna mieć możliwość rysowania bądź zaznaczania linii lub innych kształtów, możliwość analizy i wyznaczania odległości w jednostkach długości na obrazie.
+Jest to możliwe, gdyż nagłówki pliku \DICOM zawierają parametry sprzętowe urządzenia (np. ilość pikseli na milimetr).
+Adnotacje (opisy), które były wytworzone przez personel medyczny powinny być zapisywane w odpowiedni sposób w pliku.
 
 \subsubsection{Obrazowanie trójwymiarowe}
 
-Rekonstrukcja wielopłaszczyznowa, zwykle dane dotyczące objętości medycznej są gromadzone wzdłuż jednej osi ciała (np. poprzecznej).
+Przeglądarka zawiera opcje rekonstrukcji wielopłaszczyznowej.
+Zwykle dane dotyczące objętości medycznej są gromadzone wzdłuż jednej osi ciała (np. poprzecznej).
 W wielu przypadkach ważne jest przeglądanie danych w innych kierunkach (np. strzałkowych lub czołowych), aby poprawić wizualizację niektórych struktur.
 W tym celu należy zapewnić funkcje rekonstrukcji osi pomocniczej na podstawie kierunku pierwotnego.
-% Plastry objętości kostki \fromEng{Slice Cube Volume}, przekroje mogą być lepiej wyświetlane w określonej pozycji.
-% Funkcjonalność kostki plasterka umożliwia niezależną regulację położenia różnych osi wycinków (np. poprzecznych, strzałkowych lub czołowych) w modelu objętościowym.
-% Podczas tego przekroje są pokazane w osobnym oknie.
-Generowanie obrazów wolumetrycznych –- dane obrazu 3D są bezpośrednio wizualizowane jako objętość, z którą użytkownik może wchodzić w interakcje poprzez obracanie lub skalowanie.
-MTF \fromEng{Modulation Transfer Function} służąca do odwzorowania wartości szarości obrazów wokseli na wartości krycia typów tkanek (np. kości).
-Możliwość podświetlania struktur obrazu pasujących do wzorców wartości.
+Generowanie obrazów wolumetrycznych -- dane obrazu 3D są bezpośrednio wizualizowane jako objętość, z którą użytkownik może wchodzić w interakcje poprzez obracanie lub skalowanie.
+Istnieje możliwość podświetlania struktur obrazu pasujących do wzorców wartości.
 Niewykorzystane szare wartości są wyświetlane jako przezroczyste, dzięki czemu specyficzne struktury stają się lepiej widoczne.
-Generowanie powierzchni, dzięki różnym algorytmom można generować powierzchnie w postaci wokselów. Reprezentacje powierzchni można również zastosować do poprawy wizualizacji niektórych struktur obrazu.
+Przeglądarka pozwala na generowanie powierzchni.
+Dzięki różnym algorytmom można generować powierzchnie w postaci wokselów. Reprezentacje powierzchni można również zastosować do poprawy wizualizacji niektórych struktur obrazu.
