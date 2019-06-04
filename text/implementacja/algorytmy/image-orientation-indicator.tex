@@ -11,11 +11,11 @@ Informacje o orientacji oraz pozycji względem pacjenta znajdują się w odpowie
 \par
 Standard \DICOM zdefiniował ułożenie osi we współrzędnych kartezjańskich następująco:
 \begin{itemize}
-    \item \quotett{x} --- oś przechodząca od prawej do lewej strony pacjenta, \enquote{L} oznacza zwrot zgodny z osią, a \enquote{R} oznacza zwrot przeciwny
+    \item \quotett{x} --- oś przechodząca od prawej do lewej strony pacjenta, \enquote{L} oznacza zwrot zgodny z osią, a \enquote{R} oznacza zwrot przeciwny,
 
-    \item \quotett{y} --- oś przechodząca od przodu do tyłu pacjenta, \enquote{P} oznacza zwrot zgodny z osią, a \enquote{A} oznacza zwrot przeciwny
+    \item \quotett{y} --- oś przechodząca od przodu do tyłu pacjenta, \enquote{P} oznacza zwrot zgodny z osią, a \enquote{A} oznacza zwrot przeciwny,
 
-    \item \quotett{z} --- oś przechodząca od dołu do góry pacjenta, \enquote{H} oznacza zwrot zgodny z osią, a \enquote{F} oznacza zwrot przeciwny
+    \item \quotett{z} --- oś przechodząca od dołu do góry pacjenta, \enquote{H} oznacza zwrot zgodny z osią, a \enquote{F} oznacza zwrot przeciwny.
 
 \end{itemize}
 
@@ -51,11 +51,11 @@ Standard \DICOM definiuje następujący sposób interpretowania danych:
 \]
 gdzie:
 \begin{itemize}
-    \item $P_{xyz}$ --- koordynaty woksela (i,j) we współrzędnych obrazu wyrażone w milimetrach
+    \item $P_{xyz}$ --- koordynaty woksela (i,j) we współrzędnych obrazu wyrażone w milimetrach,
     \item $S_{xyz}$ --- trzy wartości z elementu ze znacznikiem \dicomtag{Image Position}{0020}{0032}. Oznacza on punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar.
-    \item $X_{xyz}$ --- trzy pierwsze wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037}
-    \item $Y_{xyz}$ --- trzy ostatnie wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037}
-    \item $i$ i $j$ --- oznaczają współrzędne na macierzy obrazu, odpowiednio kolumnę i wiersz. Zero oznacza początek.
+    \item $X_{xyz}$ --- trzy pierwsze wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037},
+    \item $Y_{xyz}$ --- trzy ostatnie wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037},
+    \item $i$ i $j$ --- oznaczają współrzędne na macierzy obrazu, odpowiednio kolumnę i wiersz. Zero oznacza początek,
     \item $\Delta_i$ i $\Delta_j$ --- rzeczywista wielkość piksela obrazu wyrażona w milimetrach.
           W algorytmie wyznaczania strony pacjenta ta wartość może wynosić 1, ponieważ odpowiada za skale.
 \end{itemize}
@@ -68,12 +68,12 @@ Interesuje nas wyznaczenie pozycji sześciu punktów na płaszczyźnie obrazu.
 Załóżmy, że pacjent znajduje się w środku układu współrzędnych i jest nieskończenie mały.
 Możemy więc zdefiniować sześć punktów o następujących współrzędnych, dalej używanych pod nazwą $PatientPosition$, które będą odpowiadały stronom pacjenta:
 \begin{itemize}
-    \item \enquote{R} --- $[-1, 0, 0, 1]$
-    \item \enquote{L} --- $[+1, 0, 0, 1]$
-    \item \enquote{A} --- $[0, -1, 0, 1]$
-    \item \enquote{P} --- $[0, +1, 0, 1]$
-    \item \enquote{F} --- $[0, 0, -1, 1]$
-    \item \enquote{H} --- $[0, 0, +1, 1]$
+    \item \enquote{R} --- $[-1, 0, 0, 1]$,
+    \item \enquote{L} --- $[+1, 0, 0, 1]$,
+    \item \enquote{A} --- $[0, -1, 0, 1]$,
+    \item \enquote{P} --- $[0, +1, 0, 1]$,
+    \item \enquote{F} --- $[0, 0, -1, 1]$,
+    \item \enquote{H} --- $[0, 0, +1, 1]$.
 \end{itemize}
 Punkty $PatientPosition$ odpowiadają punktom $P_{xyz}$ z równania ze standardu \DICOM.
 
@@ -88,8 +88,8 @@ Na równaniu z poprzedniego punktu wykonuje takie przekształcenie:
 \[ScenePosition = imgMatrix^{-1} * PatientPosition\]
 gdzie:
 \begin{itemize}
-    \item $imgMatrix$ --- macierz przekształcenia obrazu, o której będzie później opisana
-    \item $ScenePosition$ --- pozycja na obrazie, która nas interesuje
+    \item $imgMatrix$ --- macierz przekształcenia obrazu, o której będzie później opisana,
+    \item $ScenePosition$ --- pozycja na obrazie, która nas interesuje,
     \item $PatientPosition$ --- jeden z punktów względem pacjenta.
 \end{itemize}
 \par
@@ -126,10 +126,10 @@ Tej płaszczyźnie nadawany jest tytuł w postaci litery, która oznacza stronę
 Jeżeli punkt znajduje się w centrum, na przecięciu osi, to oznacza, że punkt znajduje się za lub przed ekranem, więc jest pomijany.
 Następnie do czterech pól wyświetlających zostają wstawione następujące teksty:
 \begin{itemize}
-    \item lewe pole: tytuł części 7, tytuł części 0 i tytuł części 1
-    \item górne pole: tytuł części 1, tytuł części 2 i tytuł części 3
-    \item prawe pole: tytuł części 3, tytuł części 4 i tytuł części 5
-    \item dolne pole: tytuł części 7, tytuł części 6 i tytuł części 5
+    \item lewe pole: tytuł części 7, tytuł części 0 i tytuł części 1,
+    \item górne pole: tytuł części 1, tytuł części 2 i tytuł części 3,
+    \item prawe pole: tytuł części 3, tytuł części 4 i tytuł części 5,
+    \item dolne pole: tytuł części 7, tytuł części 6 i tytuł części 5.
 \end{itemize}
 
 \par

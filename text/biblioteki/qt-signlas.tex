@@ -14,13 +14,15 @@ Taka implementacja umożliwia programowanie zdarzeniowe.
 Przykład użycia sygnałów do propagacji zdarzenia.
 
 \begin{lstlisting}
-/* Tworzymy dwa obiekty klasy Counter (definicja w następnej sekcji) */
+/* Tworzymy dwa obiekty klasy Counter (definicja w następnej sekcji) 
+   Definicja klasy Counter jest w dalszej części dokumentu*/
 Counter a, b;
 
 /* Łączymy sygnał Counter::valueChanged obiektu "a",
    do slotu Counter::setValue obiektu "b" */
 QObject::connect(&a, &Counter::valueChanged,
                  &b, &Counter::setValue);
+/* Do slotu można też podpiąć wyrażenie lambda */
 
 /* Ustawiamy wartość licznika obiektu "a" na 12 */
 a.setValue(12);

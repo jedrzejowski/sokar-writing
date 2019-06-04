@@ -76,17 +76,17 @@ Obecna odsłona DICOM definiuje znaczenie ponad 4000 publicznych znaczników ora
 Oto kilka przykładów:
 \begin{itemize}
     \item \dicomtag{Patient Name}{0010}{0010} --- nazwa pacjenta, czyli znacznik, który zawsze musi się pojawić.
-          Może być pusty w przypadku kiedy pacjent jest bezimienny
-    \item \dicomtag{Patient ID}{0010}{0020} --- id pacjenta, unikalny identyfikator pacjenta, najczęściej jest to numer HIS(Hospital Information System)
-    \item \dicomtag{Patient BirthDate}{0010}{0030} --- data urodzenia pacjenta
-    \item \dicomtag{Patient Sex}{0010}{0040} --- płeć pacjenta
-    \item \dicomtag{Patient Age}{0010}{1010} --- wiek pacjenta w czasie badania
-    \item \dicomtag{Study Description}{0008}{1030} --- opis badania, pole wypełniane przez technika lub lekarza
-    \item \dicomtag{Series Description}{0008}{103E} --- opis serii, pole wypełniane przez technika lub lekarza
-    \item \dicomtag{Series Instance UID}{0020}{000E} --- unikalny numer serii, który jest nadawany każdemu badaniu
-    \item \dicomtag{Instance Number}{0020}{0013} --- numer instancji ramki, używany w przypadku kiedy z jednego badania zostało utworzonych kilka plików DICOM
-    \item \dicomtag{Modality}{0008}{0060} --- modalność określająca rodzaj techniki diagnostycznej
-    \item \dicomtag{Study Date}{0008}{0020} --- data wykonania badania
+          Może być pusty w przypadku kiedy pacjent jest bezimienny.
+    \item \dicomtag{Patient ID}{0010}{0020} --- id pacjenta, unikalny identyfikator pacjenta, najczęściej jest to numer HIS(Hospital Information System),
+    \item \dicomtag{Patient BirthDate}{0010}{0030} --- data urodzenia pacjenta,
+    \item \dicomtag{Patient Sex}{0010}{0040} --- płeć pacjenta,
+    \item \dicomtag{Patient Age}{0010}{1010} --- wiek pacjenta w czasie badania,
+    \item \dicomtag{Study Description}{0008}{1030} --- opis badania, pole wypełniane przez technika lub lekarza,
+    \item \dicomtag{Series Description}{0008}{103E} --- opis serii, pole wypełniane przez technika lub lekarza,
+    \item \dicomtag{Series Instance UID}{0020}{000E} --- unikalny numer serii, który jest nadawany każdemu badaniu,
+    \item \dicomtag{Instance Number}{0020}{0013} --- numer instancji ramki, używany w przypadku kiedy z jednego badania zostało utworzonych kilka plików DICOM,
+    \item \dicomtag{Modality}{0008}{0060} --- modalność określająca rodzaj techniki diagnostycznej,
+    \item \dicomtag{Study Date}{0008}{0020} --- data wykonania badania.
 \end{itemize}
 
 
@@ -146,11 +146,11 @@ Przykładowe VR:
           Ponieważ pacjenta, bądź obiekt badany można nazwać w sposób dowolny i odbiegający od polskiego standardu nazewnictwa, standard DICOM nie przewiduje rozdzielenia poszczególnych składowych nazwy na oznaczone fragmenty.
           \enquote{Person Name} dzieli nazwę na podane fragmenty, rozdzielony znakiem \dataword{\^{}} (94 znak kodu ASCII):
           \begin{itemize}
-              \item family name complex --- nazwisko, np. Smolik
-              \item given name complex --- imię, np. Adam
-              \item middle name --- środkowe imię, brak odpowiednika w polskim nazewnictwie
-              \item name prefix --- prefiks przed imieniem, np: mgr. inż.
-              \item name suffix --- sufiks po imieniu, brak odpowiednika
+              \item family name complex --- nazwisko, np. Smolik,
+              \item given name complex --- imię, np. Adam,
+              \item middle name --- środkowe imię, brak odpowiednika w polskim nazewnictwie,
+              \item name prefix --- prefiks przed imieniem, np: mgr. inż.,
+              \item name suffix --- sufiks po imieniu, brak odpowiednika.
           \end{itemize}
           Długość jednego fragmentu powinna maksymalne wynosić 64 znaki.
           W przypadku mniejszej ilości segmentów, mamy założyć, że są puste.

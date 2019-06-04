@@ -30,6 +30,14 @@ Funkcja \enquote{okna} wygląda następująco:
 
 gdzie $v$ to wartość piksela danych obrazu.
 
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{img/windowing-chart.png}
+    \caption{Wykres funkcji okna dla C1720 W1208 z histogramem w tle. Zdjęcie własne.}
+    \label{fig:algorithm-pixmap-monochrome-window-chart}
+\end{figure}
+
+\par
 Następnie iterujemy przez wszystkie woksele obrazu, używamy na nich funkcji \enquote{okna} i otrzymujemy obraz w skali od $0$ do $255$.
 Obraz w 256 poziomach jest możliwy do wyświetlenia na obrazie RGB.
 Natomiast standard \DICOM przewiduje, że obraz można jeszcze wyświetlić w wielokolorowej palecie barw.
@@ -49,7 +57,7 @@ Teraz iterujemy po wszystkich możliwych wartościach obrazu i wykonujemy takie 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{img/monochrome-002.png}
-    \caption{Porównanie jednego obrazu w trzech różnych \enquote{oknach}.  Zdjęcie własne.}
+    \caption{Porównanie jednego obrazu w trzech \enquote{oknach}, odpowiednio C40 W80, C50 W350 i C600 W2800. Zdjęcie własne.}
     \label{fig:algorithm-pixmap-monochrome-multiwindow}
 \end{figure}
 
@@ -93,9 +101,9 @@ Najpierw wyznaczane jest  okienko, które zmienia wartości obrazu na skalę od 
 \[y_0 = 1.0\]
 gdzie:
 \begin{itemize}
-    \item $center$ --- środek okienka
-    \item $width$ --- szerokość okienka
-    \item $x0$ i $y0$ --- współrzędne pierwszego punktu
+    \item $center$ --- środek okienka,
+    \item $width$ --- szerokość okienka,
+    \item $x0$ i $y0$ --- współrzędne pierwszego punktu,
     \item $x1$ i $y1$ --- współrzędne drugiego punktu.
 \end{itemize}
 Przeglądarka pozwala na inwersje okienka.
@@ -105,9 +113,9 @@ Standard \DICOM przewiduje, że wszystkie dane powinny być wyskalowane za pomoc
 \[OutputUnits = m*SV + b\]
 gdzie:
 \begin{itemize}
-    \item $m$ --- wartość z \dicomtag{RescaleSlope}{0028}{1053}
-    \item $b$ --- wartość z \dicomtag{RescaleIntercept}{0028}{1052}
-    \item $SV$ --- stored values --- wartość woksela z pliku
+    \item $m$ --- wartość z \dicomtag{RescaleSlope}{0028}{1053},
+    \item $b$ --- wartość z \dicomtag{RescaleIntercept}{0028}{1052},
+    \item $SV$ --- stored values --- wartość woksela z pliku,
     \item $OutputUnits$ --- wartość wynikowa.
 \end{itemize}
 

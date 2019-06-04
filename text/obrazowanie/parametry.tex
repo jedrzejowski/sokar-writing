@@ -10,7 +10,7 @@ Standard \DICOM definiuje następujące wartości tego tagu (wraz z wyjaśnienie
 \begin{itemize}
     \item \dataword{MONOCHROME1} i \dataword{MONOCHROME2} --- ta wartość woksela odwzorowuje skale monochromatyczną, odpowiednio od jasnego do ciemnego i od ciemnego do jasnego.
 
-    \item \dataword{PALETTE COLOR} --- ta wartość woksela jest używana jako indeks w każdej z tabel wyszukiwania kolorów palety czerwonej, niebieskiej i zielonej.
+    \item \dataword{PALETTE COLOR} --- ta wartość woksela jest używana jako indeks w każdej z tabel wyszukiwania kolorów palety czerwonej, niebieskiej i zielonej,
           Palety mają swoje własne tagi.
           Wartość raczej rzadka i nie spotykana.
 
@@ -36,10 +36,10 @@ Standard \DICOM definiuje następujące wartości tego tagu (wraz z wyjaśnienie
 \par
 Kwantyzacja obrazu, czyli liczba poziomów obrazu, jest zapisana na czterech znacznikach:
 \begin{itemize}
-    \item \dicomtag{Bits Allocated}{0028}{0100} --- informuje jak wiele bitów zostało zaalokowanych do zapisania jednego piksela
-    \item \dicomtag{Bits Stored}{0028}{0101} --- informuje jak wiele bitów z zaalokowanych posiada wartość piksela
-    \item \dicomtag{High Bit}{0028}{0102} --- informuje gdzie znajduje się najstarszy bit
-    \item \dicomtag{Pixel Representation}{0028}{0103} --- informuje czy poziomy są ze znakiem czy bez
+    \item \dicomtag{Bits Allocated}{0028}{0100} --- informuje jak wiele bitów zostało zaalokowanych do zapisania jednego piksela,
+    \item \dicomtag{Bits Stored}{0028}{0101} --- informuje jak wiele bitów z zaalokowanych posiada wartość piksela,
+    \item \dicomtag{High Bit}{0028}{0102} --- informuje gdzie znajduje się najstarszy bit,
+    \item \dicomtag{Pixel Representation}{0028}{0103} --- informuje czy poziomy są ze znakiem czy bez.
 \end{itemize}
 
 \par

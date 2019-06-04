@@ -24,9 +24,9 @@ Zawierają następujące linie:
 
           Płeć, zapisana jest w \dicomtag{Patient Sex}{0010}{0040} i może mieć następujące wartości:
           \begin{itemize}
-              \item \dataword{M } --- oznacza mężczyznę, wyświetlana jako znak \utfMaleSign
-              \item \dataword{F } --- oznacza kobietę, wyświetlana jako znak \utfFemaleSign
-              \item \dataword{O } --- oznacza inną płeć i nie jest wyświetlana
+              \item \dataword{M } --- oznacza mężczyznę, wyświetlana jako znak \utfMaleSign,
+              \item \dataword{F } --- oznacza kobietę, wyświetlana jako znak \utfFemaleSign,
+              \item \dataword{O } --- oznacza inną płeć i nie jest wyświetlana.
           \end{itemize}
 
           Przykład: \enquote{Jan Nowak \utfMaleSign}.
@@ -102,11 +102,11 @@ Obiekt posiada cztery pola: lewe, górne, prawe i dolne.
 \par
 Każda z sześciu możliwych liter oznacza kierunek oraz zwrot w jakim jest ułożony pacjent:
 \begin{itemize}
-    \item \enquote{R} --- right --- część prawa pacjenta
-    \item \enquote{L} --- left --- część lewa pacjenta
-    \item \enquote{A} --- anterior --- przód pacjenta
-    \item \enquote{P} --- posterior --- tył pacjenta
-    \item \enquote{F} --- feet --- część dolna pacjenta
+    \item \enquote{R} --- right --- część prawa pacjenta,
+    \item \enquote{L} --- left --- część lewa pacjenta,
+    \item \enquote{A} --- anterior --- przód pacjenta,
+    \item \enquote{P} --- posterior --- tył pacjenta,
+    \item \enquote{F} --- feet --- część dolna pacjenta,
     \item \enquote{H} --- head --- część górna pacjenta.
 \end{itemize}
 
@@ -130,30 +130,30 @@ Obiekt wyświetla informacje o akwizycji obrazu.
 Dane różnią się w zależności od modalności obrazu.
 Domyślnie zawierają następujące linie:
 \begin{itemize}
-    \item \enquote{Modality} --- modalność --- pobierana ze znacznika \dicomtag{Modality}{0008}{0060}.
-    \item \enquote{Series} --- numer serii --- pobierany ze znacznika \dicomtag{Series Number}{0020}{0011}.
-    \item \enquote{Instance number} --- numer instancji w serii --- pobierany ze znacznika \dicomtag{Instance Number}{0020}{0013}.
-    \item Wartości odnoszące się do właściwości plastra obrazu.
-          \enquote{Slice thickness} --- grubość plastra --- pobierana ze znacznika \dicomtag{Slice Thickness}{0018}{0050}.
+    \item \enquote{Modality} --- modalność --- pobierana ze znacznika \dicomtag{Modality}{0008}{0060},
+    \item \enquote{Series} --- numer serii --- pobierany ze znacznika \dicomtag{Series Number}{0020}{0011},
+    \item \enquote{Instance number} --- numer instancji w serii --- pobierany ze znacznika \dicomtag{Instance Number}{0020}{0013},
+    \item Wartości odnoszące się do właściwości plastra obrazu:
+          \enquote{Slice thickness} --- grubość plastra --- pobierana ze znacznika \dicomtag{Slice Thickness}{0018}{0050},
           \enquote{Slice location} --- pozycja plastra --- pobierana ze znacznika \dicomtag{Slice Location}{0020}{1041}.
 \end{itemize}
 
 W przypadku następujących modalności zawierają również następujące informacje:
 \begin{itemize}
-    \item CT --- tomografia komputerowa
+    \item CT --- tomografia komputerowa:
           \begin{itemize}
               \item \enquote{KVP} --- szczytowe napięcie wyjściowe generatora promieniowania rentgenowskiego --- wyrażone w kilovoltach, pobierane z \dicomtag{KVP}{0018}{0060}
               \item \enquote{Exposure time} --- czas ekspozycji --- pobierany ze znacznika \dicomtag{Exposure Time}{0018}{1150}.
               \item \enquote{Exposure} --- ekspozycja --- wyrażona w $mAs$, pobierana ze znacznika \dicomtag{Exposure}{0018}{1152}.
           \end{itemize}
 
-    \item RT/CR --- radiologia analogowa i cyfrowa
+    \item RT/CR --- radiologia analogowa i cyfrowa:
           \begin{itemize}
               \item \enquote{Exposure time} --- czas ekspozycji --- pobierany ze znacznika \dicomtag{Exposure Time}{0018}{1150}.
               \item \enquote{KVP} --- szczytowe napięcie wyjściowe generatora promieniowania rentgenowskiego wyrażone w kilovoltach, pobierane z \dicomtag{KVP}{0018}{0060}
           \end{itemize}
 
-    \item MR --- rezonans magnetyczny
+    \item MR --- rezonans magnetyczny:
           \begin{itemize}
               \item \enquote{Repetition time} --- czas repetycji --- pobierany ze znacznika \dicomtag{Repetition Time}{0018}{0080}.
               \item \enquote{Echo time} --- czas echa --- pobierany ze znacznika \dicomtag{Echo Time}{0018}{0081}.

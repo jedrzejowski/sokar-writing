@@ -2,11 +2,11 @@
 
 Klasa \sokarclass{DicomScene} dostarcza następujące obiekty do generowania obrazu:
 \begin{itemize}
-    \item \cppcode{processing} --- obiekt klasy \qtclass{QMutex}, zamek do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmieniane podczas jego generowania.
+    \item \cppcode{processing} --- obiekt klasy \qtclass{QMutex}, zamek do zablokowania podczas generowania obrazu, aby parametry obrazu nie mogły być zmieniane podczas jego generowania,
 
-    \item \cppcode{imgDimX} --- zmienna typu \cppcode{uint}, oznacza szerokość obrazu w pikselach.
+    \item \cppcode{imgDimX} --- zmienna typu \cppcode{uint}, oznacza szerokość obrazu w pikselach,
 
-    \item \cppcode{imgDimY} --- zmienna typu \cppcode{uint}, oznacza wysokość obrazu w pikselach.
+    \item \cppcode{imgDimY} --- zmienna typu \cppcode{uint}, oznacza wysokość obrazu w pikselach,
 
     \item \cppcode{targetBuffer} --- wektor docelowego obrazu RGB o długości $imgDimX*imgDimY$, typu \cppcode{std::vector<Pixel>}.
 
@@ -23,7 +23,7 @@ struct Pixel {
         C++ od standardu C++03 przewiduje, że elementy znajdujące się w \stdclass{vector}{container/vector} są ułożone ciągiem, jeden za drugim.
         Dlatego odwołując się do wskaźnika pierwszego elementu w ten sposób \cppcode{\&targetBuffer[0]}, można potraktować to jako tablicę.
 
-    \item \cppcode{originBuffer} --- wektor danych wypełniona danymi z jednej ramki o długości iloczynu $imgDimX*imgDimY$ i ilości bajtów jednego piksela obrazu.
+    \item \cppcode{originBuffer} --- wektor danych wypełniona danymi z jednej ramki o długości iloczynu $imgDimX*imgDimY$ i ilości bajtów jednego piksela obrazu,
 
     \item \cppcode{qImage} --- obiekt obrazu klasy \qtclass{QImage}.
 
@@ -65,16 +65,16 @@ Sposób posortowania wartości w pliku określa znacznik \dicomtag{Planar Config
 Może on przyjąć dwie następujące wartości:
 
 \begin{itemize}
-    \item 0 --- oznacza to, że wartości pikseli są ułożone w taki sposób
+    \item 0 --- oznacza to, że wartości pikseli są ułożone w taki sposób:
         \[R_1, G_1, B_1, R_2, G_2, B_2, R_3, G_3, B_3, R_4, G_4, B_4,  ...\]
-    \item 1 --- oznacza to, że wartości pikseli są ułożone w taki sposób
+    \item 1 --- oznacza to, że wartości pikseli są ułożone w taki sposób:
         \[R_1, R_2, R_3, R_4, ... , G_1, G_2, G_3, G_4, ..., B_1, B_2, B_3, B_4, ...\]
 \end{itemize}
 gdzie:
 \begin{itemize}
-    \item $R_n$ --- wartość czerwonego kanału
-    \item $G_n$ --- wartość zielonego kanału
-    \item $B_n$ --- wartość niebieskiego kanału
+    \item $R_n$ --- wartość czerwonego kanału,
+    \item $G_n$ --- wartość zielonego kanału,
+    \item $B_n$ --- wartość niebieskiego kanału.
 \end{itemize}
 
 Wartości obrazu są przepisywane do \cppcode{targetBuffer} dla biblioteki QT.

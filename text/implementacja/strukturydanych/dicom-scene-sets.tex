@@ -19,9 +19,9 @@ Diagram klas UML znajduje się na rysunku \ref{uml:sokar-scene-sets}.
 Sekwencja scen implementuje strukturę danych informującą o przejściach pomiędzy scenami poprzez klasę \sokarclass{SceneSequence}.
 Sekwencja to wektor zawierający kroki z dodatkowymi informacjami o stanie sekwencji:
 \begin{itemize}
-    \item indeks, w którym obecnie znajduje się sekwencja
-    \item kierunek sekwencji --- sekwencja może iść w stronę początku lub końca
-    \item rodzaj przemiatania --- wartość logiczna informująca w jaki sposób ma zachować się, gdy sekwencja dojdzie do końca, lub początku
+    \item indeks, w którym obecnie znajduje się sekwencja,
+    \item kierunek sekwencji --- sekwencja może iść w stronę początku lub końca,
+    \item rodzaj przemiatania --- wartość logiczna informująca w jaki sposób ma zachować się, gdy sekwencja dojdzie do końca, lub początku.
 \end{itemize}
 Po dojściu do końca sekwencja skoczy do pierwszego elementu lub może zmienić kierunek i zacząć iść do tyłu.
 
@@ -31,9 +31,9 @@ Kroki implementowane przez klasę \sokarclass{Step} zawierają następujące inf
 \par
 Sekwencja ma wbudowane funkcje zapewniające przesuwanie się po indeksie na wektorze:
 \begin{itemize}
-    \item \sokarfunction{SceneSequence}{stepForward} --- krok do przodu --- zwiększa indeks tym samym wykonując krok w stronę końca sekwencji
-    \item \sokarfunction{SceneSequence}{stepBackward} --- krok do tyłu --- zmniejsza indeks tym samym wykonując krok w stronę początku sekwencji
-    \item \sokarfunction{SceneSequence}{step} --- wykonuje krok w tył lub przód w zależności od kierunku sekwencji
+    \item \sokarfunction{SceneSequence}{stepForward} --- krok do przodu --- zwiększa indeks tym samym wykonując krok w stronę końca sekwencji,
+    \item \sokarfunction{SceneSequence}{stepBackward} --- krok do tyłu --- zmniejsza indeks tym samym wykonując krok w stronę początku sekwencji,
+    \item \sokarfunction{SceneSequence}{step} --- wykonuje krok w tył lub przód w zależności od kierunku sekwencji.
 \end{itemize}
 Wszystkie powyższe funkcje są zarazem slotami dla sygnałów oraz emitują sygnał \sokarfunction{SceneSequence}{steped}.
 
@@ -55,7 +55,7 @@ Zawiera on wskaźnik do elementu o zadanym znaczniku.
 Została zaimplementowana obsługa poniższych znaczników:
 \begin{itemize}
     \item \dicomtag{Frame Time}{0018}{1063} --- element z tym znacznikiem zawiera czas trwania jednej ramki w milisekundach.
-          Każdemu krokowi jest przypisywana ta wartość trwania
+          Każdemu krokowi jest przypisywana ta wartość trwania.
 
     \item \dicomtag{Frame Time Vector}{0018}{1065} --- zawiera tablice z przyrostami czasu w milisekundach między n-tą ramką a poprzednią klatką.
           Pierwsza ramka ma zawsze przyrost czasu równy 0.

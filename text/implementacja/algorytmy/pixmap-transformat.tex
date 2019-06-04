@@ -37,21 +37,21 @@ Odbiór wszystkich sygnałów jest implementowany przez wirtualną funkcję \sok
 Lista opisów reakcji na sygnały (stan zerowy macierzy, to stan w którym macierz nie wykonuje żadnych operacji):
 \begin{itemize}
 
-    \item \cppcode{ClearPan} --- przywraca macierz przesunięcia do stanu zerowego
+    \item \cppcode{ClearPan} --- przywraca macierz przesunięcia do stanu zerowego,
 
-    \item \cppcode{Fit2Screen} --- przywraca macierz skali do stanu zerowego, następnie wylicza nową skalę w zależności od wymiarów obrazu i sceny
+    \item \cppcode{Fit2Screen} --- przywraca macierz skali do stanu zerowego, następnie wylicza nową skalę w zależności od wymiarów obrazu i sceny,
 
-    \item \cppcode{OriginalResolution} --- przywraca macierz skali do stanu zerowego
+    \item \cppcode{OriginalResolution} --- przywraca macierz skali do stanu zerowego,
 
-    \item \cppcode{RotateRight90} --- na macierzy rotacji zostaje użyta funkcja \qtfunction{QTransform}{rotate} z parametrem $90$.
+    \item \cppcode{RotateRight90} --- na macierzy rotacji zostaje użyta funkcja \qtfunction{QTransform}{rotate} z parametrem $90$,
 
-    \item \cppcode{RotateLeft90} --- na macierzy rotacji zostaje użyta funkcja \qtfunction{QTransform}{rotate} z parametrem $-90$.
+    \item \cppcode{RotateLeft90} --- na macierzy rotacji zostaje użyta funkcja \qtfunction{QTransform}{rotate} z parametrem $-90$,
 
-    \item \cppcode{FlipHorizontal} --- na macierzy rotacji zostaje użyta funkcja \qtfunction{QTransform}{scale} z parametrami $1$ i $-1$.
+    \item \cppcode{FlipHorizontal} --- na macierzy rotacji zostaje użyta funkcja \qtfunction{QTransform}{scale} z parametrami $1$ i $-1$,
 
-    \item \cppcode{FlipVertical} --- na macierzy rotacji zostaje użyta funkcja \qtfunction{QTransform}{scale} z parametrami $-1$ i $1$.
+    \item \cppcode{FlipVertical} --- na macierzy rotacji zostaje użyta funkcja \qtfunction{QTransform}{scale} z parametrami $-1$ i $1$,
 
-    \item \cppcode{ClearRotate} --- przywraca macierz rotacji do stanu zerowego
+    \item \cppcode{ClearRotate} --- przywraca macierz rotacji do stanu zerowego.
 
 \end{itemize}
 Po jakiejkolwiek zmianie macierzy jest wywoływana funkcja \sokarfunction{DicomScene}{updatePixmapTransformation}, która odświeża macierz przekształcenia na obiekcie \cppcode{pixmapItem}.
