@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.6.21)  24 JUN 2019 11:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.6.23)  25 JUN 2019 01:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex
-(/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex
+**/opt/dev-files/studia/sokar/sokar-writing/presentation.tex
+(/opt/dev-files/studia/sokar/sokar-writing/presentation.tex
 LaTeX2e <2018-12-01>
 (/usr/share/texmf-dist/tex/latex/beamer/beamer.cls
 Document Class: beamer 2018/12/02 v3.55 A class for typesetting presentations
@@ -549,24 +549,55 @@ Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@posthook=\toks44
 ) (/usr/share/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
-) (/home/adam/Programowanie/studia/sokar/sokar-writing/commands.tex (/home/adam/Programowanie/studia/sokar/sokar-writing/commands2.tex)) (/home/adam/Programowanie/studia/sokar/sokar-writing/packages-listings.tex (/usr/share/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count156
-\lst@gtempboxa=\box54
-\lst@token=\toks45
-\lst@length=\count157
-\lst@currlwidth=\dimen187
-\lst@column=\count158
-\lst@pos=\count159
-\lst@lostspace=\dimen188
-\lst@width=\dimen189
-\lst@newlines=\count160
-\lst@lineno=\count161
-\lst@maxwidth=\dimen190
+) (/usr/share/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2018/04/13 v5.2d context-sensitive quotations (JAW)
+\csq@reset=\count156
+\csq@gtype=\count157
+\csq@glevel=\count158
+\csq@qlevel=\count159
+\csq@maxlvl=\count160
+\csq@tshold=\count161
+\csq@ltx@everypar=\toks45
+ (/usr/share/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2018/04/13 v5.2d csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+ (/usr/share/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+)
+Package csquotes Info: Enabling multilingual quotes.
+) (/usr/share/texmf-dist/tex/latex/textpos/textpos.sty
+Package: textpos 2016/06/07 v1.8
+
+Package: textpos 2016/06/07 1.8, absolute positioning of text on the page
+\TP@textbox=\box54
+\TPHorizModule=\dimen187
+\TPVertModule=\dimen188
+\TP@margin=\dimen189
+\TP@absmargin=\dimen190
+Grid set 16 x 16 = 28.45274pt x 16.00467pt
+\TPboxrulesize=\dimen191
+\TP@tbargs=\toks46
+\TP@prevdepth=\dimen192
+) (/opt/dev-files/studia/sokar/sokar-writing/commands.tex (/opt/dev-files/studia/sokar/sokar-writing/commands2.tex)) (/opt/dev-files/studia/sokar/sokar-writing/packages-listings.tex (/usr/share/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count162
+\lst@gtempboxa=\box55
+\lst@token=\toks47
+\lst@length=\count163
+\lst@currlwidth=\dimen193
+\lst@column=\count164
+\lst@pos=\count165
+\lst@lostspace=\dimen194
+\lst@width=\dimen195
+\lst@newlines=\count166
+\lst@lineno=\count167
+\lst@maxwidth=\dimen196
  (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
-\c@lstnumber=\count162
-\lst@skipnumbers=\count163
-\lst@framebox=\box55
+\c@lstnumber=\count168
+\lst@skipnumbers=\count169
+\lst@framebox=\box56
 ) (/usr/share/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2019/02/27 1.8b listings configuration
 ))
@@ -577,29 +608,37 @@ File: lstlang1.sty 2019/02/27 1.8b listings language file
 File: lstlang1.sty 2019/02/27 1.8b listings language file
 ) (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
-)) (/usr/share/texmf-dist/tex/latex/beamer/beamerthemeBoadilla.sty (/usr/share/texmf-dist/tex/latex/beamer/beamercolorthemerose.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamercolorthemedolphin.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty)) (/usr/share/texmf-dist/tex/latex/beamer/beamercolorthemecrane.sty) (/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.aux)
+)) (/usr/share/texmf-dist/tex/latex/beamer/beamerthemeBoadilla.sty (/usr/share/texmf-dist/tex/latex/beamer/beamercolorthemerose.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamerinnerthemerounded.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamercolorthemedolphin.sty) (/usr/share/texmf-dist/tex/latex/beamer/beamerouterthemeinfolines.sty)) (/usr/share/texmf-dist/tex/latex/beamer/beamercolorthemestructure.sty)
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... none found.
+
+
+Package csquotes Warning: No multilingual support.
+(csquotes)                Cannot enable multilingual quotes on input line 25.
+
+(/opt/dev-files/studia/sokar/sokar-writing/presentation.aux)
 \openout1 = `presentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 18.
-LaTeX Font Info:    Try loading font information for OT4+cmr on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 25.
+LaTeX Font Info:    Try loading font information for OT4+cmr on input line 25.
  (/usr/share/texmf-dist/tex/latex/polski/ot4cmr.fd
 File: ot4cmr.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    ... okay on input line 25.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -637,17 +676,17 @@ LaTeX Font Info:    ... okay on input line 18.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count164
-\scratchdimen=\dimen191
-\scratchbox=\box56
-\nofMPsegments=\count165
-\nofMParguments=\count166
-\everyMPshowfont=\toks46
-\MPscratchCnt=\count167
-\MPscratchDim=\dimen192
-\MPnumerator=\count168
-\makeMPintoPDFobject=\count169
-\everyMPtoPDFconversion=\toks47
+\scratchcounter=\count170
+\scratchdimen=\dimen197
+\scratchbox=\box57
+\nofMPsegments=\count171
+\nofMParguments=\count172
+\everyMPshowfont=\toks48
+\MPscratchCnt=\count173
+\MPscratchDim=\dimen198
+\MPnumerator=\count174
+\makeMPintoPDFobject=\count175
+\everyMPtoPDFconversion=\toks49
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
  (/usr/share/texmf-dist/tex/latex/oberdiek/grfext.sty
@@ -660,78 +699,79 @@ Package grfext Info: Graphics extension search list:
  (/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 )) ABD: EveryShipout initializing macros
-\AtBeginShipoutBox=\box57
-Package hyperref Info: Link coloring OFF on input line 18.
+\AtBeginShipoutBox=\box58
+Package hyperref Info: Link coloring OFF on input line 25.
  (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
  (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count170
+\c@section@level=\count176
 )
-LaTeX Info: Redefining \ref on input line 18.
-LaTeX Info: Redefining \pageref on input line 18.
-LaTeX Info: Redefining \nameref on input line 18.
+LaTeX Info: Redefining \ref on input line 25.
+LaTeX Info: Redefining \pageref on input line 25.
+LaTeX Info: Redefining \nameref on input line 25.
+ (/opt/dev-files/studia/sokar/sokar-writing/presentation.out) (/opt/dev-files/studia/sokar/sokar-writing/presentation.out)
 \@outlinefile=\write5
 \openout5 = `presentation.out'.
 
 LaTeX Font Info:    Encoding `OT4' has changed to `OT1' for symbol font
-(Font)              `operators' in the math version `normal' on input line 18.
+(Font)              `operators' in the math version `normal' on input line 25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT4/cmr/m/n --> OT1/cmss/m/n on input line 18.
+(Font)                  OT4/cmr/m/n --> OT1/cmss/m/n on input line 25.
 LaTeX Font Info:    Encoding `OT4' has changed to `OT1' for symbol font
-(Font)              `operators' in the math version `bold' on input line 18.
+(Font)              `operators' in the math version `bold' on input line 25.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT4/cmr/bx/n --> OT1/cmss/bx/n on input line 18.
+(Font)                  OT4/cmr/bx/n --> OT1/cmss/bx/n on input line 25.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT4/cmr/m/n on input line 18.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 18.
+(Font)                  OT1/cmss/m/n --> OT4/cmr/m/n on input line 25.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT4/cmr/bx/n --> OT4/cmss/bx/n on input line 18.
+(Font)                  OT4/cmr/bx/n --> OT4/cmss/bx/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT4/cmss/bx/n on input line 18.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 18.
+(Font)                  OT1/cmr/bx/n --> OT4/cmss/bx/n on input line 25.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT4/cmss/m/n --> OT4/cmss/m/n on input line 18.
+(Font)                  OT4/cmss/m/n --> OT4/cmss/m/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT4/cmss/bx/n --> OT4/cmss/m/n on input line 18.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 18.
+(Font)                  OT4/cmss/bx/n --> OT4/cmss/m/n on input line 25.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT4/cmr/m/it --> OT4/cmss/m/it on input line 18.
+(Font)                  OT4/cmr/m/it --> OT4/cmss/m/it on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT4/cmr/bx/it --> OT4/cmss/m/it on input line 18.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 18.
+(Font)                  OT4/cmr/bx/it --> OT4/cmss/m/it on input line 25.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT4/cmtt/m/n --> OT4/cmtt/m/n on input line 18.
+(Font)                  OT4/cmtt/m/n --> OT4/cmtt/m/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT4/cmtt/m/n on input line 18.
+(Font)                  OT1/cmtt/m/n --> OT4/cmtt/m/n on input line 25.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT4/cmss/m/n --> OT4/cmss/bx/n on input line 18.
+(Font)                  OT4/cmss/m/n --> OT4/cmss/bx/n on input line 25.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT4/cmss/m/it --> OT4/cmss/bx/it on input line 18.
+(Font)                  OT4/cmss/m/it --> OT4/cmss/bx/it on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT4/cmr/bx/n on input line 18.
+(Font)                  OT1/cmss/bx/n --> OT4/cmr/bx/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT4/cmss/bx/n --> OT4/cmss/bx/n on input line 18.
+(Font)                  OT4/cmss/bx/n --> OT4/cmss/bx/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT4/cmss/m/n --> OT4/cmss/bx/n on input line 18.
+(Font)                  OT4/cmss/m/n --> OT4/cmss/bx/n on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT4/cmss/m/it --> OT4/cmss/bx/it on input line 18.
+(Font)                  OT4/cmss/m/it --> OT4/cmss/bx/it on input line 25.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT4/cmtt/m/n --> OT4/cmtt/bx/n on input line 18.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 18.
+(Font)                  OT4/cmtt/m/n --> OT4/cmtt/bx/n on input line 25.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 25.
 LaTeX Font Info:    Encoding `OT4' has changed to `OT1' for symbol font
-(Font)              `pureletters' in the math version `normal' on input line 18.
+(Font)              `pureletters' in the math version `normal' on input line 25.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
-(Font)                  OT4/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 18.
+(Font)                  OT4/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 25.
 LaTeX Font Info:    Encoding `OT4' has changed to `OT1' for symbol font
-(Font)              `pureletters' in the math version `bold' on input line 18.
+(Font)              `pureletters' in the math version `bold' on input line 25.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT4/cmss/bx/it --> OT1/mathkerncmss/m/sl on input line 18.
+(Font)                  OT4/cmss/bx/it --> OT1/mathkerncmss/m/sl on input line 25.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on input line 18.
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on input line 25.
  (/usr/share/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (/usr/share/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
@@ -745,264 +785,298 @@ Dictionary: translator-numbers-dictionary, Language: English
 ) (/usr/share/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-\c@lstlisting=\count171
- (/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.nav) [1
+\c@lstlisting=\count177
+ (/opt/dev-files/studia/sokar/sokar-writing/presentation.nav)
+<img/logo-weiti.png, id=14, 647.41875pt x 125.46875pt>
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 34.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 34--34
+[][]  
+ []
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </opt/dev-files/studia/sokar/sokar-writing/img/logo-weiti.png>]
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 57.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
+
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 57--57
+[][]  
+ []
+
+[2
 
 ]
-LaTeX Font Info:    Try loading font information for OML+plm on input line 67.
+LaTeX Font Info:    Try loading font information for OML+plm on input line 106.
  (/usr/share/texmf-dist/tex/latex/polski/omlplm.fd
 File: omlplm.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMS+plsy on input line 67.
+LaTeX Font Info:    Try loading font information for OMS+plsy on input line 106.
  (/usr/share/texmf-dist/tex/latex/polski/omsplsy.fd
 File: omsplsy.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMX+plex on input line 67.
+LaTeX Font Info:    Try loading font information for OMX+plex on input line 106.
  (/usr/share/texmf-dist/tex/latex/polski/omxplex.fd
 File: omxplex.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <6> on input line 67.
+(Font)              <6> on input line 106.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <5> on input line 67.
-LaTeX Font Info:    Try loading font information for U+msa on input line 67.
+(Font)              <5> on input line 106.
+LaTeX Font Info:    Try loading font information for U+msa on input line 106.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 67.
+LaTeX Font Info:    Try loading font information for U+msb on input line 106.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input line 67.
+LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input line 106.
  (/usr/share/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/mathkerncmss.
 )
-<img/dicom-dataelement002.pdf, id=80, 377.91188pt x 163.3603pt>
+Overfull \hbox (2.31589pt too wide) in paragraph at lines 106--106
+[][]  
+ []
+
+<img/dicom-dataelement002.pdf, id=77, 377.91188pt x 163.3603pt>
 File: img/dicom-dataelement002.pdf Graphic file (type pdf)
 <use img/dicom-dataelement002.pdf>
-Package pdftex.def Info: img/dicom-dataelement002.pdf  used on input line 67.
-(pdftex.def)             Requested size: 182.00554pt x 85.99498pt.
+Package pdftex.def Info: img/dicom-dataelement002.pdf  used on input line 106.
+(pdftex.def)             Requested size: 182.00554pt x 75.95943pt.
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 106.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
 
-Overfull \hbox (2.31589pt too wide) in paragraph at lines 67--67
-[][] 
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 106--106
+[][]  
  []
 
 [3
 
- </home/adam/Programowanie/studia/sokar/sokar-writing/img/dicom-dataelement002.pdf>] [4
+ </opt/dev-files/studia/sokar/sokar-writing/img/dicom-dataelement002.pdf>]
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 127.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
 
-] [5
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 127--127
+[][]  
+ []
+
+[4
 
 ]
-<img/sokar-gui-002.png, id=171, 1134.2375pt x 811.03pt>
-File: img/sokar-gui-002.png Graphic file (type png)
-<use img/sokar-gui-002.png>
-Package pdftex.def Info: img/sokar-gui-002.png  used on input line 130.
-(pdftex.def)             Requested size: 272.3264pt x 194.72728pt.
- [6
+<img/logo-qt.png, id=150, 294.3798pt x 216.81pt>
+File: img/logo-qt.png Graphic file (type png)
+<use img/logo-qt.png>
+Package pdftex.def Info: img/logo-qt.png  used on input line 179.
+(pdftex.def)             Requested size: 71.50215pt x 52.66072pt.
+LaTeX Font Info:    External font `plex10' loaded for size
+(Font)              <10.95> on input line 179.
+LaTeX Font Info:    External font `plex10' loaded for size
+(Font)              <8> on input line 179.
+<img/logo-gdcm.png, id=151, 1204.5pt x 301.125pt>
+File: img/logo-gdcm.png Graphic file (type png)
+<use img/logo-gdcm.png>
+Package pdftex.def Info: img/logo-gdcm.png  used on input line 179.
+(pdftex.def)             Requested size: 147.33537pt x 36.83185pt.
+<img/logo-cmake.png, id=152, 2079.77pt x 2079.77pt>
+File: img/logo-cmake.png Graphic file (type png)
+<use img/logo-cmake.png>
+Package pdftex.def Info: img/logo-cmake.png  used on input line 179.
+(pdftex.def)             Requested size: 71.50215pt x 71.49826pt.
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 179.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
 
- </home/adam/Programowanie/studia/sokar/sokar-writing/img/sokar-gui-002.png>]
-<img/sokar-gui-003.png, id=200, 782.925pt x 487.06969pt>
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 179--179
+[][]  
+ []
+
+[5
+
+ </opt/dev-files/studia/sokar/sokar-writing/img/logo-qt.png> </opt/dev-files/studia/sokar/sokar-writing/img/logo-gdcm.png (PNG copy)> </opt/dev-files/studia/sokar/sokar-writing/img/logo-cmake.png>]
+<img/sokar-gui-004.png, id=181, 1403.2425pt x 608.2725pt>
+File: img/sokar-gui-004.png Graphic file (type png)
+<use img/sokar-gui-004.png>
+Package pdftex.def Info: img/sokar-gui-004.png  used on input line 186.
+(pdftex.def)             Requested size: 449.21806pt x 194.72728pt.
+
+Overfull \hbox (15.87404pt too wide) in paragraph at lines 186--186
+ [] 
+ []
+
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 186.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
+
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 186--186
+[][]  
+ []
+
+
+Overfull \vbox (5.32852pt too high) detected at line 186
+ []
+
+[6
+
+ </opt/dev-files/studia/sokar/sokar-writing/img/sokar-gui-004.png>]
+<img/sokar-gui-003.png, id=209, 782.925pt x 487.06969pt>
 File: img/sokar-gui-003.png Graphic file (type png)
 <use img/sokar-gui-003.png>
-Package pdftex.def Info: img/sokar-gui-003.png  used on input line 137.
-(pdftex.def)             Requested size: 313.00916pt x 194.72728pt.
- [7
+Package pdftex.def Info: img/sokar-gui-003.png  used on input line 232.
+(pdftex.def)             Requested size: 303.3395pt x 188.71524pt.
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 232.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
 
- </home/adam/Programowanie/studia/sokar/sokar-writing/img/sokar-gui-003.png>]
-<img/uml/global-sturcture.png, id=228, 798.985pt x 349.305pt>
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 232--232
+[][]  
+ []
+
+[7
+
+ </opt/dev-files/studia/sokar/sokar-writing/img/sokar-gui-003.png>]
+<img/uml/global-sturcture.png, id=238, 798.985pt x 349.305pt>
 File: img/uml/global-sturcture.png Graphic file (type png)
 <use img/uml/global-sturcture.png>
-Package pdftex.def Info: img/uml/global-sturcture.png  used on input line 160.
+Package pdftex.def Info: img/uml/global-sturcture.png  used on input line 255.
 (pdftex.def)             Requested size: 205.83774pt x 89.98567pt.
-<img/uml/sokar-scene-sets.png, id=229, 839.135pt x 495.8525pt>
+<img/uml/sokar-scene-sets.png, id=239, 839.135pt x 495.8525pt>
 File: img/uml/sokar-scene-sets.png Graphic file (type png)
 <use img/uml/sokar-scene-sets.png>
-Package pdftex.def Info: img/uml/sokar-scene-sets.png  used on input line 160.
+Package pdftex.def Info: img/uml/sokar-scene-sets.png  used on input line 255.
 (pdftex.def)             Requested size: 205.83774pt x 121.63246pt.
-LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <10.95> on input line 160.
-LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <8> on input line 160.
-<img/uml/dicom-view.png, id=230, 757.83125pt x 584.1825pt>
+<img/uml/dicom-view.png, id=240, 757.83125pt x 584.1825pt>
 File: img/uml/dicom-view.png Graphic file (type png)
 <use img/uml/dicom-view.png>
-Package pdftex.def Info: img/uml/dicom-view.png  used on input line 160.
+Package pdftex.def Info: img/uml/dicom-view.png  used on input line 255.
 (pdftex.def)             Requested size: 205.83774pt x 158.66733pt.
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 255.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
 
-Overfull \vbox (6.71931pt too high) detected at line 160
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 255--255
+[][]  
+ []
+
+
+Overfull \vbox (7.71931pt too high) detected at line 255
  []
 
 [8
 
- </home/adam/Programowanie/studia/sokar/sokar-writing/img/uml/global-sturcture.png> </home/adam/Programowanie/studia/sokar/sokar-writing/img/uml/sokar-scene-sets.png> </home/adam/Programowanie/studia/sokar/sokar-writing/img/uml/dicom-view.png>]
+ </opt/dev-files/studia/sokar/sokar-writing/img/uml/global-sturcture.png> </opt/dev-files/studia/sokar/sokar-writing/img/uml/sokar-scene-sets.png> </opt/dev-files/studia/sokar/sokar-writing/img/uml/dicom-view.png>]
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <9> on input line 188.
-LaTeX Font Info:    Try loading font information for OT4+cmtt on input line 188.
- (/usr/share/texmf-dist/tex/latex/polski/ot4cmtt.fd
-File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
-)
-Runaway argument?
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:188: Paragraph ended before \lst@next was complete.
-<to be read again> 
-                   \par 
-l.188 \end{frame}
-                 
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
+(Font)              <9> on input line 283.
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 283.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
 
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 283--283
+[][]  
+ []
 
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:188: LaTeX Error: \begin{lstlisting} on input line 188 ended by \end{beamer@framepauses}.
+[9
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.188 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:188: Missing } inserted.
-<inserted text> 
-                }
-l.188 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:188: Extra }, or forgotten \endgroup.
-\endbeamer@frameslide ...amer@framepauses}\egroup 
-                                                  \ifx \beamer@frametitle \@...
-l.188 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:188: LaTeX Error: \begin{lstlisting} on input line 188 ended by \end{beamer@frameslide}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.188 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-<img/windowing-chart.png, id=260, 962.09438pt x 370.38374pt>
+]
+<img/windowing-chart.png, id=299, 962.09438pt x 370.38374pt>
 File: img/windowing-chart.png Graphic file (type png)
 <use img/windowing-chart.png>
-Package pdftex.def Info: img/windowing-chart.png  used on input line 200.
+Package pdftex.def Info: img/windowing-chart.png  used on input line 342.
 (pdftex.def)             Requested size: 216.67201pt x 83.41187pt.
-<img/monochrome-002.png, id=261, 1156.32pt x 385.44pt>
+<img/monochrome-002.png, id=300, 1156.32pt x 385.44pt>
 File: img/monochrome-002.png Graphic file (type png)
 <use img/monochrome-002.png>
-Package pdftex.def Info: img/monochrome-002.png  used on input line 204.
+Package pdftex.def Info: img/monochrome-002.png  used on input line 342.
 (pdftex.def)             Requested size: 216.67201pt x 56.22855pt.
-<img/monochrome-003.png, id=263, 1156.32pt x 385.44pt>
+<img/monochrome-003.png, id=302, 1156.32pt x 385.44pt>
 File: img/monochrome-003.png Graphic file (type png)
 <use img/monochrome-003.png>
-Package pdftex.def Info: img/monochrome-003.png  used on input line 208.
+Package pdftex.def Info: img/monochrome-003.png  used on input line 342.
 (pdftex.def)             Requested size: 216.67201pt x 56.22855pt.
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:247: Extra }, or forgotten \endgroup.
-\endframe ->\egroup 
-                    \begingroup \def \@currenvir {frame}
-l.247 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 342.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
 
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:315: Extra }, or forgotten \endgroup.
-\endframe ->\egroup 
-                    \begingroup \def \@currenvir {frame}
-l.315 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 342--342
+[][]  
+ []
 
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:318: Missing number, treated as zero.
-<to be read again> 
-                   }
-l.318     \frametitle
-                     {Funckje przeglądarki}
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
+[10
 
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:318: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   }
-l.318     \frametitle
-                     {Funckje przeglądarki}
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
+ </opt/dev-files/studia/sokar/sokar-writing/img/monochrome-002.png> </opt/dev-files/studia/sokar/sokar-writing/img/monochrome-003.png> </opt/dev-files/studia/sokar/sokar-writing/img/windowing-chart.png (PNG copy)>]
+<img/imageorientationindicator-005.png, id=338, 158.84344pt x 161.85469pt>
+File: img/imageorientationindicator-005.png Graphic file (type png)
+<use img/imageorientationindicator-005.png>
+Package pdftex.def Info: img/imageorientationindicator-005.png  used on input line 410.
+(pdftex.def)             Requested size: 83.76973pt x 85.35826pt.
+<img/imageorientationindicator-004.pdf, id=339, 397.485pt x 348.30125pt>
+File: img/imageorientationindicator-004.pdf Graphic file (type pdf)
+<use img/imageorientationindicator-004.pdf>
+Package pdftex.def Info: img/imageorientationindicator-004.pdf  used on input line 410.
+(pdftex.def)             Requested size: 97.41196pt x 85.35826pt.
+<img/imageorientationindicator-003.pdf, id=340, 447.6725pt x 204.765pt>
+File: img/imageorientationindicator-003.pdf Graphic file (type pdf)
+<use img/imageorientationindicator-003.pdf>
+Package pdftex.def Info: img/imageorientationindicator-003.pdf  used on input line 410.
+(pdftex.def)             Requested size: 124.4116pt x 56.9055pt.
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 410.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
 
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:324: Extra }, or forgotten \endgroup.
-\endframe ->\egroup 
-                    \begingroup \def \@currenvir {frame}
-l.324 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 410--410
+[][]  
+ []
 
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:327: Missing number, treated as zero.
-<to be read again> 
-                   }
-l.327     \frametitle
-                     {Wnioski}
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
 
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:327: Illegal unit of measure (pt inserted).
-<to be read again> 
-                   }
-l.327     \frametitle
-                     {Wnioski}
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
+Overfull \vbox (1.94695pt too high) detected at line 410
+ []
 
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:334: Extra }, or forgotten \endgroup.
-\endframe ->\egroup 
-                    \begingroup \def \@currenvir {frame}
-l.334 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
+[11
 
+ </opt/dev-files/studia/sokar/sokar-writing/img/imageorientationindicator-005.png> </opt/dev-files/studia/sokar/sokar-writing/img/imageorientationindicator-004.pdf> </opt/dev-files/studia/sokar/sokar-writing/img/imageorientationindicator-003.pdf
+
+pdfTeX warning: pdflatex (file /opt/dev-files/studia/sokar/sokar-writing/img/imageorientationindicator-003.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 419.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
+
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 419--419
+[][]  
+ []
+
+[12
+
+]
+File: img/logo-weiti.png Graphic file (type png)
+<use img/logo-weiti.png>
+Package pdftex.def Info: img/logo-weiti.png  used on input line 429.
+(pdftex.def)             Requested size: 117.44907pt x 22.76228pt.
+
+Overfull \hbox (117.44907pt too wide) in paragraph at lines 429--429
+[][]  
+ []
+
+[13
+
+]
 \tf@nav=\write6
 \openout6 = `presentation.nav'.
 
@@ -1012,69 +1086,27 @@ deleted material, e.g., by typing `I$}'.
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
-
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:336: LaTeX Error: \begin{frame} on input line 326 ended by \end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.336 \end{document}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 336.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 336.
-(/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 336.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 336.
-
-
-Package rerunfilecheck Warning: File `presentation.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `presentation.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:336: You can't use `\end' in internal vertical mode.
-\enddocument ...cumenthook \deadcycles \z@ \@@end 
-                                                  
-l.336 \end{document}
-                    
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-
-/home/adam/Programowanie/studia/sokar/sokar-writing/presentation.tex:336: LaTeX Error: \begin{frame} on input line 326 ended by \end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.336 \end{document}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-)
-! Emergency stop.
-<*> ...studia/sokar/sokar-writing/presentation.tex
-                                                  
-*** (job aborted, no legal \end found)
-
- 
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 431.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 431.
+ (/opt/dev-files/studia/sokar/sokar-writing/presentation.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 431.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 431.
+Package rerunfilecheck Info: File `presentation.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+ ) 
 Here is how much of TeX's memory you used:
- 19333 strings out of 492623
- 357125 string characters out of 6135669
- 631876 words of memory out of 5000000
- 22753 multiletter control sequences out of 15000+600000
- 18434 words of font info for 58 fonts, out of 8000000 for 9000
+ 19700 strings out of 492623
+ 366795 string characters out of 6135669
+ 655144 words of memory out of 5000000
+ 23092 multiletter control sequences out of 15000+600000
+ 18332 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,15n,70p,850b,1262s stack positions out of 5000i,500n,10000p,200000b,80000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 56i,15n,70p,840b,635s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texmf-dist/fonts/enc/dvips/pl/plme.enc}{/usr/share/texmf-dist/fonts/enc/dvips/pl/plmi.enc}{/usr/share/texmf-dist/fonts/enc/dvips/pl/plrm.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plex10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plmi6.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plss10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plss12.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plss8.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plss9.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plssbx10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plsy5.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plsy6.pfb>
+Output written on /opt/dev-files/studia/sokar/sokar-writing/presentation.pdf (13 pages, 2106739 bytes).
+PDF statistics:
+ 491 PDF objects out of 1000 (max. 8388607)
+ 412 compressed objects within 5 object streams
+ 27 named destinations out of 1000 (max. 500000)
+ 171 words of extra memory for PDF output out of 10000 (max. 10000000)
+

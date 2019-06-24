@@ -84,10 +84,7 @@
 			<line fill="none" stroke="#9D9FA2" stroke-width="0.5" stroke-linecap="square" stroke-linejoin="bevel" stroke-dasharray="3,3" x1="324.421" y1="124.305" x2="384.729" y2="159.846"/>
 		
 			<line fill="none" stroke="#000000" stroke-linecap="square" stroke-linejoin="bevel" stroke-dasharray="4" x1="225.901" y1="66.245" x2="324.421" y2="124.305"/>
-		<polyline fill="none" stroke="#010101" stroke-miterlimit="1" points="157.701,184.833 146.068,184.833 133.229,154.487 		"/>
-		<g>
-			<text transform="matrix(1 0 0 1 162.5586 186.7949)"><tspan x="0" y="0" font-size="10">optional field - dependent on</tspan><tspan x="3.071" y="10.473" font-size="10">negotiated Transfer Syntax</tspan></text>
-		</g>
+		
 		<g>
 			<text transform="matrix(1 0 0 1 225.5474 25.3018)" font-size="10">order of transmission</text>
 		</g>

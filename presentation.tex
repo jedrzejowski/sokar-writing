@@ -2,6 +2,8 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc} % utf8
 \usepackage{xspace}
+\usepackage[autostyle]{csquotes} 
+\usepackage{textpos}
 \input{commands.tex}
 \input{packages-listings.tex}
 
@@ -9,17 +11,36 @@
 \def\dicomtagprefix{}
 
 \usetheme{Boadilla}
-\usecolortheme{crane}
+\definecolor{WEITI_grafitowy}{rgb}{0.235294118, 0.235294118, 0.298039216}
+\usecolortheme[named=WEITI_grafitowy]{structure}
 
 \title{Wieloplatformowa przeglądarka obrazów DICOM w C++}
 \author{Adam Jędrzejowski}
 \date{\today}
+\institute[]{
+    Wydział Elektroniki i Technik Informacyjnych Politechniki Warszawskiej\\
+    Instytut Radioelektroniki i Technik Multimedialnych\\ 
+    Zakład Elektroniki Jądrowej i Medycznej}
 
 \begin{document}
 
 \begin{frame}
+
+    \begin{textblock*}{0mm}(0.5cm,0cm)
+        \includegraphics[height=0.8cm]{img/logo-weiti.png}
+    \end{textblock*}
+    \vspace{1cm}
     \titlepage
 \end{frame}
+
+% logo wydziału
+\addtobeamertemplate{frametitle}{}{%
+    \begin{textblock*}{0mm}(11.2cm,-0.5cm)
+        \includegraphics[height=0.8cm]{img/logo-weiti.png}
+    \end{textblock*}}
+
+\addtobeamertemplate{frametitle}{\vspace*{0cm}}{\vspace*{0.3cm}}
+
 
 \begin{frame}
     \frametitle{Obrazowe techniki medyczne}
@@ -35,14 +56,29 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
     \frametitle{Standard DICOM}
-    \tiny
-
-    \begin{columns}
+    \begin{columns}[t]
         \column{0.4\textwidth}
 
+        \scriptsize
+        \vspace{-7em}
+        Standard DICOM jest odpowiedzią społeczności radiologów, radiofarmaceutów, fizyków medycznych na potrzebę wymiany danych pomiędzy różnymi systemami komputerowymi, przeglądarek obrazów, stacji do przetwarzania i analizowania obrazów medycznych.
+
+        \vspace{1em}
+        Standard \DICOM v3 definiuje ujednolicony sposób zapisu i przekazywania danych medycznych reprezentujących lub związanych z obrazami diagnostycznymi w medycynie.
+
+        \vspace{1em}
+        W obecnej chwili standard DICOM definiuje 81 różnych typów badań.
+
+        \vspace{1em}
+        Plik w formacie \DICOM przypomina zbiór elementów danych z rekordami.
+        Zbiór nazywa się \enquote{Data Set} i składa się z rekordów, które nazywają się \enquote{Data Element}.
+        Elementy danych są ułożone w postaci listy.
+        Element danych może zawierać w sobie listę elementów danych.
+
         \column{0.6\textwidth}
+        \tiny
         \begin{tabular}{|l|c|c|l|}
             \hline
             \thead{Nazwa}             & \thead{Identyfikator} & \thead{Typ danych} & \thead{Opis}                \\\hline
@@ -61,13 +97,33 @@
             Rows                      & (0028,0010)           & US                 & Wysokość zdjęcia            \\\hline
             Columns                   & (0028,0011)           & CS                 & Szerokość zdjęcia           \\\hline
         \end{tabular}
-        \vspace{-1em}
-        \includegraphics[trim={1.2cm 0.4cm 1.2cm 0.2cm},clip,width=0.7\textwidth]{img/dicom-dataelement002.pdf}
+
+        \begin{figure}
+            \includegraphics[trim={1.2cm 1cm 1.2cm 0.2cm},clip,width=0.7\textwidth]{img/dicom-dataelement002.pdf}
+        \end{figure}
+
     \end{columns}
 \end{frame}
 
 \begin{frame}
     \frametitle{Cel pracy i założenia}
+
+    \begin{alertblock}{}
+        Celem pracy było zrobienie wielopratformowej przeglądarki obrazów DICOM w C++.
+    \end{alertblock}
+
+    \begin{block}{Wieloplatformowość}
+        Można ją uzyskać na wiele sposobów: wirtualizacje kodu binarnego z pomocą maszyny wirtualnej takiej jak JVM, napisanie w języku skryptowym, których interpretacja kodu jest równoległa z wykonywaniem lub napisanie kodu źródłowego w taki sposób aby była możliwość jego kompilacji na wskazane platformy.
+    \end{block}
+
+    \begin{block}{Obsługa systemów}
+        MS Windows, Mac OS, Linux
+    \end{block}
+
+    \begin{block}{Wczytywanie obrazów DICOM}
+        Możliwość wczytania wielu plików w standardzie DICOM i ich przeglądania
+    \end{block}
+
 \end{frame}
 
 \begin{frame}[t]
@@ -102,38 +158,77 @@
 
     % Obrazki
 
-    % \begin{columns}[c]
-    %     \column{0.33\textwidth}
+    \begin{columns}[c]
 
-    %     \begin{figure}
-    %         \includegraphics[width=0.5\textwidth]{img/logo-cmake.png}
-    %     \end{figure}
+        \column{0.33\textwidth}
+        \begin{figure}
+            \includegraphics[width=0.5\textwidth]{img/logo-qt.png}
+        \end{figure}
 
-    %     \column{0.34\textwidth}
-    %     \begin{figure}
-    %         \includegraphics[width=0.5\textwidth]{img/logo-qt.png}
-    %     \end{figure}
+        \column{0.34\textwidth}
+        \begin{figure}
+            \includegraphics[width=1\textwidth]{img/logo-gdcm.png}
+        \end{figure}
 
-    %     \column{0.33\textwidth}
-    %     \begin{figure}
-    %         \includegraphics[width=1\textwidth]{img/logo-gdcm.png}
-    %     \end{figure}
+        \column{0.33\textwidth}
+        \begin{figure}
+            \includegraphics[width=0.5\textwidth]{img/logo-cmake.png}
+        \end{figure}
 
-    % \end{columns}
+    \end{columns}
 \end{frame}
 
 \begin{frame}
     \frametitle{Projekt interfejsu graficznego}
     \begin{figure}
-        \includegraphics[height=0.8\textheight]{img/sokar-gui-002.png}
+        \includegraphics[height=0.8\textheight]{img/sokar-gui-004.png}
     \end{figure}
 \end{frame}
 
 \begin{frame}
     \frametitle{Projekt interfejsu graficznego}
-    \begin{figure}
-        \includegraphics[height=0.8\textheight]{img/sokar-gui-003.png}
-    \end{figure}
+    \setbeamertemplate{itemize items}[circle]
+    \tiny
+    \begin{columns}[t]
+
+        \column{0.15\textwidth}
+
+        Dane pacjenta:\\
+        - imię i nazwisko\\
+        - identyfikator\\
+        - data urodzenia i wiek\\
+        - opis badania\\
+        - opis serii\\
+
+        \vspace{8em}
+        Litera orientacji
+
+        \vspace{10em}
+        Dane akwizycji badania\\
+        różnią się w zależności od modalności
+
+
+        \column{0.7\textwidth}
+        \centering
+        Litera orientacji
+        \includegraphics[width=\textwidth]{img/sokar-gui-003.png}
+        Podziałka i litera orientacji
+
+        \column{0.15\textwidth}
+
+        Dane szpitala:\\
+        - nazwa instytucji\\
+        - producent i model urządzenia\\
+        - lekarz wykonujący badanie\\
+        - operator wykonujący badanie
+
+        \vspace{5em}
+        Litera orientacji i podziałka
+
+        \vspace{11em}
+        Parametry z jakimi jest wyświetlany obraz
+
+    \end{columns}
 \end{frame}
 
 \begin{frame}
@@ -180,10 +275,10 @@
         \end{tabular}
     \end{center}
 
-    
-\begin{lstlisting}
-auto origin = (quint16 *) \&originBuffer[0];
-\end{lstlisting}
+
+    % \begin{lstlisting}
+    % auto origin = (quint16 *) \&originBuffer[0];
+    % \end{lstlisting}
 
 \end{frame}
 
@@ -251,7 +346,7 @@ auto origin = (quint16 *) \&originBuffer[0];
     \begin{columns}[t]
 
         \column{0.5\textwidth}
-        Zapis DICOM
+        Zapis informacji o orientacji w DICOM
         \tiny
         \[
             \begin{bmatrix}
@@ -267,33 +362,32 @@ auto origin = (quint16 *) \&originBuffer[0];
             \begin{bmatrix}
                 i \\ j \\ 0 \\ 1
             \end{bmatrix}
-            =
-            M
-            \begin{bmatrix}
-                i \\ j \\ 0 \\ 1
-            \end{bmatrix}
         \]
-        gdzie:
+        \vspace{-1em}
         \begin{itemize}
-            \item $P_{xyz}$ --- koordynaty woksela (i,j) we współrzędnych obrazu wyrażone w milimetrach,
-            \item $S_{xyz}$ --- trzy wartości z elementu ze znacznikiem \dicomtag{Image Position}{0020}{0032}. Oznacza on punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar.
-            \item $X_{xyz}$ --- trzy pierwsze wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037},
-            \item $Y_{xyz}$ --- trzy ostatnie wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037},
-            \item $i$ i $j$ --- oznaczają współrzędne na macierzy obrazu, odpowiednio kolumnę i wiersz. Zero oznacza początek,
-            \item $\Delta_i$ i $\Delta_j$ --- rzeczywista wielkość piksela obrazu wyrażona w milimetrach.
-                  W algorytmie wyznaczania strony pacjenta ta wartość może wynosić 1, ponieważ odpowiada za skale.
+            \item $P$ -- koordynaty woksela we współrzędnych obrazu,
+            \item $S$ -- trzy wartości z elementu ze znacznikiem Image Position,
+            \item $X$, $Y$ -- trzy pierwsze i trzy drugie wartości z Image Orientation,
+            \item $i$ i $j$ --- oznaczają współrzędne na macierzy obrazu,
+            \item $\Delta_i$ i $\Delta_j$ --- rzeczywista wielkość piksela obrazu w $mm$.
         \end{itemize}
+
+        \includegraphics[height=3cm]{img/imageorientationindicator-005.png}
+        \includegraphics[height=3cm]{img/imageorientationindicator-004.pdf}
 
         \column{0.5\textwidth}
         Implementacja
         \tiny
         \[PatientPosition = imgMatrix * ScenePosition\]
+        \vspace{-2em}
         \[imgMatrix^{-1} * PatientPosition = imgMatrix^{-1} * imgMatrix * ScenePosition\]
+        \vspace{-1.5em}
         \[imgMatrix^{-1} * PatientPosition = ScenePosition\]
+        \vspace{-1.5em}
         \[ScenePosition = imgMatrix^{-1} * PatientPosition\]
-        gdzie:
+        \vspace{-1em}
         \begin{itemize}
-            \item $imgMatrix$ --- macierz przekształcenia obrazu, o której będzie później opisana,
+            \item $imgMatrix$ --- macierz przekształcenia obrazu,
             \item $ScenePosition$ --- pozycja na obrazie, która nas interesuje,
             \item $PatientPosition$ --- jeden z punktów względem pacjenta.
         \end{itemize}
@@ -309,6 +403,7 @@ auto origin = (quint16 *) \&originBuffer[0];
             \end{bmatrix}
             * PatientPosition)
         \]
+        \hspace*{-5em}\includegraphics[height=2cm]{img/imageorientationindicator-003.pdf}
     \end{columns}
 
 
