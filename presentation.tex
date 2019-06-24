@@ -4,6 +4,7 @@
 \usepackage{xspace}
 \input{commands.tex}
 
+\newcommand*{\thead}[1]{\multicolumn{1}{|c|}{\bfseries #1}}
 \def\dicomtagprefix{}
 
 \usetheme{Boadilla}
@@ -21,10 +22,47 @@
 
 \begin{frame}
     \frametitle{Obrazowe techniki medyczne}
+
+    \begin{itemize}
+        \item Radiografia --- RTG
+        \item Tomografia komputerowa --- CT
+        \item Obrazowanie metodą rezonansu magnetycznego --- MRI
+        \item Ultrasonografia
+        \item Scyntygrafia
+        \item Tomografia SPECT
+        \item Tomografia PET
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Standard DICOM}
+    \tiny
+
+    \begin{columns}
+        \column{0.4\textwidth}
+
+        \column{0.6\textwidth}
+        \begin{tabular}{|l|c|c|l|}
+            \hline
+            \thead{Nazwa}             & \thead{Identyfikator} & \thead{Typ danych} & \thead{Opis}                \\\hline
+            SpecificCharacterSet      & (0008,0005)           & CS                 & Używana specyfikacja        \\\hline
+            InstitutionName           & (0008,0080)           & LO                 & Miejsce wykonywania badania \\\hline
+            Manufacturer              & (0008,0070)           & LO                 & Producent aplikacji         \\\hline
+            StationName               & (0008,1010)           & SH                 & Nazwa urządzenia            \\\hline
+            PatientID                 & (0010,0020)           & LO                 & Identyfikator pacjenta      \\\hline
+            PatientsName              & (0010,0010)           & PN                 & Nazwisko pacjenta           \\\hline
+            PatientsBirthDate         & (0010,0030)           & DA                 & Data urodzin pacjenta       \\\hline
+            PatientsSex               & (0010,0040)           & CS                 & Płeć pacjenta               \\\hline
+            PatientsAge               & (0010,1010)           & AS                 & Wiek pacjenta               \\\hline
+            BodyPartExamined          & (0018,0015)           & CS                 & Badana część ciała          \\\hline
+            StudyDate                 & (0008,0020)           & DA                 & Data badania                \\\hline
+            PhotometricInterpretation & (0028,0004)           & CS                 & Format zapisu obrazu        \\\hline
+            Rows                      & (0028,0010)           & US                 & Wysokość zdjęcia            \\\hline
+            Columns                   & (0028,0011)           & CS                 & Szerokość zdjęcia           \\\hline
+        \end{tabular}
+        \vspace{-1em}
+        \includegraphics[trim={1.2cm 0.4cm 1.2cm 0.2cm},clip,width=0.7\textwidth]{img/dicom-dataelement002.pdf}
+    \end{columns}
 \end{frame}
 
 \begin{frame}
@@ -63,24 +101,24 @@
 
     % Obrazki
 
-    \begin{columns}[c]
-        \column{0.33\textwidth}
+    % \begin{columns}[c]
+    %     \column{0.33\textwidth}
 
-        \begin{figure}
-            \includegraphics[width=0.5\textwidth]{img/logo-cmake.png}
-        \end{figure}
+    %     \begin{figure}
+    %         \includegraphics[width=0.5\textwidth]{img/logo-cmake.png}
+    %     \end{figure}
 
-        \column{0.34\textwidth}
-        \begin{figure}
-            \includegraphics[width=0.5\textwidth]{img/logo-qt.png}
-        \end{figure}
+    %     \column{0.34\textwidth}
+    %     \begin{figure}
+    %         \includegraphics[width=0.5\textwidth]{img/logo-qt.png}
+    %     \end{figure}
 
-        \column{0.33\textwidth}
-        \begin{figure}
-            \includegraphics[width=1\textwidth]{img/logo-gdcm.png}
-        \end{figure}
+    %     \column{0.33\textwidth}
+    %     \begin{figure}
+    %         \includegraphics[width=1\textwidth]{img/logo-gdcm.png}
+    %     \end{figure}
 
-    \end{columns}
+    % \end{columns}
 \end{frame}
 
 \begin{frame}
