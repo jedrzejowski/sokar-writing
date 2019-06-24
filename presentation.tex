@@ -1,0 +1,282 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{polski}
+\usepackage[utf8]{inputenc} % utf8
+\usepackage{xspace}
+\input{commands.tex}
+
+\def\dicomtagprefix{}
+
+\usetheme{Boadilla}
+\usecolortheme{crane}
+
+\title{Wieloplatformowa przeglądarka obrazów DICOM w C++}
+\author{Adam Jędrzejowski}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}
+    \frametitle{Obrazowe techniki medyczne}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Standard DICOM}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Cel pracy i założenia}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Narzędzia i biblioteki}
+
+    % Tekst
+    \begin{columns}[t]
+        \column{0.33\textwidth}
+        \textbf{\LARGE CMake}
+        \scriptsize
+        to wieloplatformowe narzędzie do automatycznego zarządzania procesem kompilacji programu.
+        Jest to niezależne od kompilatora narzędzie pozwalające napisać jeden plik, z którego można wygenerować odpowiednie pliki budowania dla dowolnej platformy.
+
+        \column{0.34\textwidth}
+        \textbf{\LARGE Qt}
+        \scriptsize
+        jest zbiorem bibliotek i narzędzi programistycznych dedykowanych dla języków C++, QML i Java.
+        Qt posiada bibliotekę do tworzenia interfejsu graficznego, oraz wiele innych rozwiązań ułatwiających programowanie obiektowe i zdarzeniowe.
+
+        Posiadanych normy: IEC 62304:2015, IEC 61508:2010-3 7.4.4, ISO 9001:2015.
+
+        Posiada systemy rodzicielstwa i sygnałów.
+
+        \column{0.33\textwidth}
+        \textbf{\LARGE GDCM}
+        \scriptsize
+        to biblioteka do obsługi standardu DICOM.
+        Posiada możliwość wczytywania plików z dysku jak i z lokalizacji sieciowych oraz wczytywania plików DICOMDIR.
+        Ma wbudowaną dekompresje obrazów i obsługi różnych kodowań tekstu.
+
+    \end{columns}
+
+    % Obrazki
+
+    \begin{columns}[c]
+        \column{0.33\textwidth}
+
+        \begin{figure}
+            \includegraphics[width=0.5\textwidth]{img/logo-cmake.png}
+        \end{figure}
+
+        \column{0.34\textwidth}
+        \begin{figure}
+            \includegraphics[width=0.5\textwidth]{img/logo-qt.png}
+        \end{figure}
+
+        \column{0.33\textwidth}
+        \begin{figure}
+            \includegraphics[width=1\textwidth]{img/logo-gdcm.png}
+        \end{figure}
+
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Projekt interfejsu graficznego}
+    \begin{figure}
+        \includegraphics[height=0.8\textheight]{img/sokar-gui-002.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Projekt interfejsu graficznego - scena}
+    \begin{figure}
+        \includegraphics[height=0.8\textheight]{img/sokar-gui-003.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Budowa obiektowa programu}
+
+    \begin{columns}[c]
+        \column{0.5\textwidth}
+
+        \begin{figure}
+            \includegraphics[width=0.95\textwidth]{img/uml/global-sturcture.png}
+        \end{figure}
+        \kern-2em
+        \begin{figure}
+            \includegraphics[width=0.95\textwidth]{img/uml/sokar-scene-sets.png}
+        \end{figure}
+
+        \column{0.5\textwidth}
+        \begin{figure}
+            \includegraphics[width=0.95\textwidth]{img/uml/dicom-view.png}
+        \end{figure}
+
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Dekoder DICOM}
+    \begin{center}
+        \footnotesize
+        \def\arraystretch{1.5}
+        \setlength{\tabcolsep}{5pt}
+        \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+            \hline
+            char*  & $8b_1$                        & $8b_2$                        & $8b_3$                        & $8b_4$                        & $8b_5$                        & $8b_6$                        & $8b_7$                        & $8b_8$                        & $8b_9$ & $8b_10$ & $8b_{11}$ & $8b_{12}$ & $8b_{13}$ & $8b_{14}$ & $8b_{15}$ & $8b_{16}$ \\
+            \hline
+            int8*  & $8b_1$                        & $8b_2$                        & $8b_3$                        & $8b_4$                        & $8b_5$                        & $8b_6$                        & $8b_7$                        & $8b_8$                        & $8b_9$ & $8b_10$ & $8b_{11}$ & $8b_{12}$ & $8b_{13}$ & $8b_{14}$ & $8b_{15}$ & $8b_{16}$ \\
+            \hline
+            int16* & \multicolumn{2}{|c|}{$16b_1$} & \multicolumn{2}{|c|}{$16b_2$} & \multicolumn{2}{|c|}{$16b_3$} & \multicolumn{2}{|c|}{$16b_4$} & \multicolumn{2}{|c|}{$16b_5$} & \multicolumn{2}{|c|}{$16b_6$} & \multicolumn{2}{|c|}{$16b_7$} & \multicolumn{2}{|c|}{$16b_8$}                                                                                            \\
+            \hline
+            int32* & \multicolumn{4}{|c|}{$32b_1$} & \multicolumn{4}{|c|}{$32b_2$} & \multicolumn{4}{|c|}{$32b_3$} & \multicolumn{4}{|c|}{$32b_4$}                                                                                                                                                                                                                            \\
+            \hline
+            int64* & \multicolumn{8}{|c|}{$64b_1$} & \multicolumn{8}{|c|}{$64b_2$}                                                                                                                                                                                                                                                                                            \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+    auto origin = (quint16 *) \&originBuffer[0];
+\end{frame}
+
+\begin{frame}[t]
+
+    \frametitle{Okienkowanie}
+
+    \vspace{-1em}
+
+    \begin{columns}[t]
+        \column{0.5\textwidth}
+        \vspace{-1.0em}
+        \begin{figure}
+            \includegraphics[width=1\textwidth]{img/windowing-chart.png}
+        \end{figure}
+        \vspace{-1.0em}
+        \begin{figure}
+            \includegraphics[trim={0 1cm 0 2cm},clip,width=1\textwidth]{img/monochrome-002.png}
+        \end{figure}
+        \vspace{-2.0em}
+        \begin{figure}
+            \includegraphics[trim={0 1cm 0 2cm},clip,width=1\textwidth]{img/monochrome-003.png}
+        \end{figure}
+
+        \column{0.5\textwidth}
+        \tiny
+
+        Standard \DICOM przewiduje, że wszystkie dane powinny być wyskalowane za pomocą wzoru:
+        \[OutputUnits = m*SV + b\]
+        \vspace{-2em}
+        \begin{itemize}
+            \item $m$ --- wartość z \dicomtag{RescaleSlope}{0028}{1053},
+            \item $b$ --- wartość z \dicomtag{RescaleIntercept}{0028}{1052},
+            \item $SV$ --- stored values --- wartość woksela z pliku,
+            \item $OutputUnits$ --- wartość wynikowa.
+        \end{itemize}
+
+        \vspace{1em}
+        {\normalsize Implementacja}
+
+        \[x_0 = center - width / 2 \qquad y_0 = 1.0\]
+        \vspace{-2em}
+        \[x_1 = center + width / 2 \qquad y_1 = 0.0\]
+        \[(OutputUnits - b ) / m = SV \]
+        \[x_0 -= rescaleIntercept \qquad x_0 /= rescaleSlope\]
+        \vspace{-2em}
+        \[x_1 -= rescaleIntercept \qquad x_1 /= rescaleSlope\]
+        \[a = (y_1 - y_0) / (x_1 - x_0) \qquad b = y_1 - a * x_1\]
+
+        {\normalsize Tablica LUT}
+        \begin{center}
+            \begin{tabular}{ |c|c|c|c|c| }
+                \hline
+                $8 b$   & $12 b$   & $16 b$   & $32 b$    & $64 b$        \\
+                \hline
+                $768 B$ & $196 kB$ & $196 kB$ & $12,5 GB$ & $55*10^{6}TB$ \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]
+    \frametitle{Orientacja pacjenta}
+    \begin{columns}[t]
+
+        \column{0.5\textwidth}
+        Definicja standardu DICOM
+        \tiny
+        \[
+            \begin{bmatrix}
+                P_x \\ P_y \\ P_z \\ 1
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                X_x\Delta_i & Y_x\Delta_j & 0 & S_x \\
+                X_y\Delta_i & Y_y\Delta_j & 0 & S_y \\
+                X_z\Delta_i & Y_z\Delta_j & 0 & S_z \\
+                0           & 0           & 0 & 1
+            \end{bmatrix}
+            \begin{bmatrix}
+                i \\ j \\ 0 \\ 1
+            \end{bmatrix}
+            =
+            M
+            \begin{bmatrix}
+                i \\ j \\ 0 \\ 1
+            \end{bmatrix}
+        \]
+        gdzie:
+        \begin{itemize}
+            \item $P_{xyz}$ --- koordynaty woksela (i,j) we współrzędnych obrazu wyrażone w milimetrach,
+            \item $S_{xyz}$ --- trzy wartości z elementu ze znacznikiem \dicomtag{Image Position}{0020}{0032}. Oznacza on punkt pozycji pacjenta wyrażony w milimetrach w stosunku do urządzenia wykonującego pomiar.
+            \item $X_{xyz}$ --- trzy pierwsze wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037},
+            \item $Y_{xyz}$ --- trzy ostatnie wartości ze znacznika \dicomtag{Image Orientation}{0020}{0037},
+            \item $i$ i $j$ --- oznaczają współrzędne na macierzy obrazu, odpowiednio kolumnę i wiersz. Zero oznacza początek,
+            \item $\Delta_i$ i $\Delta_j$ --- rzeczywista wielkość piksela obrazu wyrażona w milimetrach.
+                  W algorytmie wyznaczania strony pacjenta ta wartość może wynosić 1, ponieważ odpowiada za skale.
+        \end{itemize}
+
+        \column{0.5\textwidth}
+        Implementacja
+        \tiny
+        \[PatientPosition = imgMatrix * ScenePosition\]
+        \[imgMatrix^{-1} * PatientPosition = imgMatrix^{-1} * imgMatrix * ScenePosition\]
+        \[imgMatrix^{-1} * PatientPosition = ScenePosition\]
+        \[ScenePosition = imgMatrix^{-1} * PatientPosition\]
+        gdzie:
+        \begin{itemize}
+            \item $imgMatrix$ --- macierz przekształcenia obrazu, o której będzie później opisana,
+            \item $ScenePosition$ --- pozycja na obrazie, która nas interesuje,
+            \item $PatientPosition$ --- jeden z punktów względem pacjenta.
+        \end{itemize}
+        \par
+        \[
+            rotateTransform*
+            (
+            \begin{bmatrix}
+                X_x & Y_x & 0 & 0 \\
+                X_y & Y_y & 0 & 0 \\
+                X_z & Y_z & 0 & 0 \\
+                0   & 0   & 0 & 1
+            \end{bmatrix}
+            * PatientPosition)
+        \]
+    \end{columns}
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Funckje przeglądarki}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Wnioski}
+\end{frame}
+
+\end{document}
