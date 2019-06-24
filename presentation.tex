@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc} % utf8
 \usepackage{xspace}
 \input{commands.tex}
+\input{packages-listings.tex}
 
 \newcommand*{\thead}[1]{\multicolumn{1}{|c|}{\bfseries #1}}
 \def\dicomtagprefix{}
@@ -70,16 +71,10 @@
 \end{frame}
 
 \begin{frame}[t]
-    \frametitle{Narzędzia i biblioteki}
+    \frametitle{Biblioteki i narzędzia}
 
     % Tekst
     \begin{columns}[t]
-        \column{0.33\textwidth}
-        \textbf{\LARGE CMake}
-        \scriptsize
-        to wieloplatformowe narzędzie do automatycznego zarządzania procesem kompilacji programu.
-        Jest to niezależne od kompilatora narzędzie pozwalające napisać jeden plik, z którego można wygenerować odpowiednie pliki budowania dla dowolnej platformy.
-
         \column{0.34\textwidth}
         \textbf{\LARGE Qt}
         \scriptsize
@@ -96,6 +91,12 @@
         to biblioteka do obsługi standardu DICOM.
         Posiada możliwość wczytywania plików z dysku jak i z lokalizacji sieciowych oraz wczytywania plików DICOMDIR.
         Ma wbudowaną dekompresje obrazów i obsługi różnych kodowań tekstu.
+
+        \column{0.33\textwidth}
+        \textbf{\LARGE CMake}
+        \scriptsize
+        to wieloplatformowe narzędzie do automatycznego zarządzania procesem kompilacji programu.
+        Jest to niezależne od kompilatora narzędzie pozwalające napisać jeden plik, z którego można wygenerować odpowiednie pliki budowania dla dowolnej platformy.
 
     \end{columns}
 
@@ -129,7 +130,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Projekt interfejsu graficznego - scena}
+    \frametitle{Projekt interfejsu graficznego}
     \begin{figure}
         \includegraphics[height=0.8\textheight]{img/sokar-gui-003.png}
     \end{figure}
@@ -166,20 +167,24 @@
         \setlength{\tabcolsep}{5pt}
         \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
             \hline
-            char*  & $8b_1$                        & $8b_2$                        & $8b_3$                        & $8b_4$                        & $8b_5$                        & $8b_6$                        & $8b_7$                        & $8b_8$                        & $8b_9$ & $8b_10$ & $8b_{11}$ & $8b_{12}$ & $8b_{13}$ & $8b_{14}$ & $8b_{15}$ & $8b_{16}$ \\
+            char*  & $8b_1$                        & $8b_2$                        & $8b_3$                        & $8b_4$                        & $8b_5$                        & $8b_6$                        & $8b_7$                        & $8b_8$                        & $8b_9$ & $8b_{10}$ & $8b_{11}$ & $8b_{12}$ & $8b_{13}$ & $8b_{14}$ & $8b_{15}$ & $8b_{16}$ \\
             \hline
-            int8*  & $8b_1$                        & $8b_2$                        & $8b_3$                        & $8b_4$                        & $8b_5$                        & $8b_6$                        & $8b_7$                        & $8b_8$                        & $8b_9$ & $8b_10$ & $8b_{11}$ & $8b_{12}$ & $8b_{13}$ & $8b_{14}$ & $8b_{15}$ & $8b_{16}$ \\
+            int8*  & $8b_1$                        & $8b_2$                        & $8b_3$                        & $8b_4$                        & $8b_5$                        & $8b_6$                        & $8b_7$                        & $8b_8$                        & $8b_9$ & $8b_{10}$ & $8b_{11}$ & $8b_{12}$ & $8b_{13}$ & $8b_{14}$ & $8b_{15}$ & $8b_{16}$ \\
             \hline
-            int16* & \multicolumn{2}{|c|}{$16b_1$} & \multicolumn{2}{|c|}{$16b_2$} & \multicolumn{2}{|c|}{$16b_3$} & \multicolumn{2}{|c|}{$16b_4$} & \multicolumn{2}{|c|}{$16b_5$} & \multicolumn{2}{|c|}{$16b_6$} & \multicolumn{2}{|c|}{$16b_7$} & \multicolumn{2}{|c|}{$16b_8$}                                                                                            \\
+            int16* & \multicolumn{2}{|c|}{$16b_1$} & \multicolumn{2}{|c|}{$16b_2$} & \multicolumn{2}{|c|}{$16b_3$} & \multicolumn{2}{|c|}{$16b_4$} & \multicolumn{2}{|c|}{$16b_5$} & \multicolumn{2}{|c|}{$16b_6$} & \multicolumn{2}{|c|}{$16b_7$} & \multicolumn{2}{|c|}{$16b_8$}                                                                                              \\
             \hline
-            int32* & \multicolumn{4}{|c|}{$32b_1$} & \multicolumn{4}{|c|}{$32b_2$} & \multicolumn{4}{|c|}{$32b_3$} & \multicolumn{4}{|c|}{$32b_4$}                                                                                                                                                                                                                            \\
+            int32* & \multicolumn{4}{|c|}{$32b_1$} & \multicolumn{4}{|c|}{$32b_2$} & \multicolumn{4}{|c|}{$32b_3$} & \multicolumn{4}{|c|}{$32b_4$}                                                                                                                                                                                                                              \\
             \hline
-            int64* & \multicolumn{8}{|c|}{$64b_1$} & \multicolumn{8}{|c|}{$64b_2$}                                                                                                                                                                                                                                                                                            \\
+            int64* & \multicolumn{8}{|c|}{$64b_1$} & \multicolumn{8}{|c|}{$64b_2$}                                                                                                                                                                                                                                                                                              \\
             \hline
         \end{tabular}
     \end{center}
 
-    auto origin = (quint16 *) \&originBuffer[0];
+    
+\begin{lstlisting}
+auto origin = (quint16 *) \&originBuffer[0];
+\end{lstlisting}
+
 \end{frame}
 
 \begin{frame}[t]
@@ -246,7 +251,7 @@
     \begin{columns}[t]
 
         \column{0.5\textwidth}
-        Definicja standardu DICOM
+        Zapis DICOM
         \tiny
         \[
             \begin{bmatrix}
@@ -311,10 +316,21 @@
 
 \begin{frame}
     \frametitle{Funckje przeglądarki}
+    \begin{itemize}
+        \item Podstawowe operacje na orazie
+        \item Okienkowanie i pseudokolorowanie
+        \item Możliwość wczytania wielu plików i animacji
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{Wnioski}
+    przetestowano
+
+    automatycznie sie kompiluje
+
+    intefjes jest podobny
+
 \end{frame}
 
 \end{document}
