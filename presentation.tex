@@ -4,6 +4,7 @@
 \usepackage{xspace}
 \usepackage[autostyle]{csquotes} 
 \usepackage{textpos}
+\usepackage{animate}
 \input{commands.tex}
 \input{packages-listings.tex}
 
@@ -42,18 +43,36 @@
 \addtobeamertemplate{frametitle}{\vspace*{0cm}}{\vspace*{0.3cm}}
 
 
-\begin{frame}
-    \frametitle{Obrazowe techniki medyczne}
+\begin{frame}[t]
+    \frametitle{DICOM}
+    \normalsize
+    \textbf{D}igital \textbf{I}maging and \textbf{Co}mmunications in \textbf{M}edicine
 
+    \vspace{1em}
+    \scriptsize
+    Standard DICOM jest odpowiedzią społeczności radiologów, radiofarmaceutów, fizyków medycznych na potrzebę wymiany danych pomiędzy różnymi systemami komputerowymi, przeglądarek obrazów, stacji do przetwarzania i analizowania obrazów medycznych.
+
+    \vspace{1em}
+    Standard \DICOM v3 definiuje ujednolicony sposób zapisu i przekazywania danych medycznych reprezentujących lub związanych z obrazami diagnostycznymi w medycynie.
+
+    \begin{textblock}{5}(10,5)
+        \includegraphics[height=0.4\textheight]{img/usg.png}
+    \end{textblock}
+
+    \vspace{1em}
+    \normalsize
+    Obrazowe techniki medyczne:
+    \scriptsize
     \begin{itemize}
-        \item Radiografia --- RTG
-        \item Tomografia komputerowa --- CT
-        \item Obrazowanie metodą rezonansu magnetycznego --- MRI
-        \item Ultrasonografia
-        \item Scyntygrafia
+        \item Radiografia -- współczynnik natężenia promieniowania X przez obiekt
+        \item Tomografia komputerowa -- współczynnik natężenia promieniowania X przez obiekt
+        \item Obrazowanie metodą rezonansu magnetycznego -- sumaryczna gęstość atomów wodoru
+        \item Ultrasonografia -- różnica gęstości poszczególnych warstw znajdujących się w obiekcie
+        \item Scyntygrafia -- rozkład radiofarmaceutyka w obiekcie
         \item Tomografia SPECT
         \item Tomografia PET
     \end{itemize}
+
 \end{frame}
 
 \begin{frame}[t]
@@ -62,23 +81,22 @@
         \column{0.4\textwidth}
 
         \scriptsize
-        \vspace{-7em}
-        Standard DICOM jest odpowiedzią społeczności radiologów, radiofarmaceutów, fizyków medycznych na potrzebę wymiany danych pomiędzy różnymi systemami komputerowymi, przeglądarek obrazów, stacji do przetwarzania i analizowania obrazów medycznych.
 
-        \vspace{1em}
-        Standard \DICOM v3 definiuje ujednolicony sposób zapisu i przekazywania danych medycznych reprezentujących lub związanych z obrazami diagnostycznymi w medycynie.
-
-        \vspace{1em}
-        W obecnej chwili standard DICOM definiuje 81 różnych typów badań.
-
-        \vspace{1em}
-        Plik w formacie \DICOM przypomina zbiór elementów danych z rekordami.
+        \vspace{-8em}
+        Plik w formacie \DICOM można traktować jako zbiór elementów danych.
         Zbiór nazywa się \enquote{Data Set} i składa się z rekordów, które nazywają się \enquote{Data Element}.
         Elementy danych są ułożone w postaci listy.
         Element danych może zawierać w sobie listę elementów danych.
 
+
+        W obecnej chwili standard DICOM definiuje 81 różnych typów badań.
+
+        Coś o tej tabeli
+
         \column{0.6\textwidth}
         \tiny
+        \centering
+        \includegraphics[trim={1.2cm 1cm 1.2cm 0.2cm},clip,width=0.7\textwidth]{img/dicom-dataelement002.pdf}
         \begin{tabular}{|l|c|c|l|}
             \hline
             \thead{Nazwa}             & \thead{Identyfikator} & \thead{Typ danych} & \thead{Opis}                \\\hline
@@ -95,34 +113,29 @@
             StudyDate                 & (0008,0020)           & DA                 & Data badania                \\\hline
             PhotometricInterpretation & (0028,0004)           & CS                 & Format zapisu obrazu        \\\hline
             Rows                      & (0028,0010)           & US                 & Wysokość zdjęcia            \\\hline
-            Columns                   & (0028,0011)           & CS                 & Szerokość zdjęcia           \\\hline
+            Columns                   & (0028,0011)           & US                 & Szerokość zdjęcia           \\\hline
         \end{tabular}
-
-        \begin{figure}
-            \includegraphics[trim={1.2cm 1cm 1.2cm 0.2cm},clip,width=0.7\textwidth]{img/dicom-dataelement002.pdf}
-        \end{figure}
 
     \end{columns}
 \end{frame}
 
-\begin{frame}
+\begin{frame} % jako 3 slajd
     \frametitle{Cel pracy i założenia}
 
-    \begin{alertblock}{}
-        Celem pracy było zrobienie wielopratformowej przeglądarki obrazów DICOM w C++.
+    \begin{alertblock}{Cel pracy}
+        Opracowanie przeglądarki obrazów DICOM, działającej w wielu systemach operacyjnych
     \end{alertblock}
 
-    \begin{block}{Wieloplatformowość}
-        Można ją uzyskać na wiele sposobów: wirtualizacje kodu binarnego z pomocą maszyny wirtualnej takiej jak JVM, napisanie w języku skryptowym, których interpretacja kodu jest równoległa z wykonywaniem lub napisanie kodu źródłowego w taki sposób aby była możliwość jego kompilacji na wskazane platformy.
-    \end{block}
-
-    \begin{block}{Obsługa systemów}
-        MS Windows, Mac OS, Linux
-    \end{block}
-
-    \begin{block}{Wczytywanie obrazów DICOM}
-        Możliwość wczytania wielu plików w standardzie DICOM i ich przeglądania
-    \end{block}
+    Założenia:
+    \begin{itemize}
+        \item Wieloplatformowość:
+              \begin{itemize}
+                  \item eliminacja start wydajności spowodowanych wykonaniem kodu wirtualnego (wirtualizacja kodu binarnego z pomocą maszyny wirtualnej JVM; języki skryptowe, których interpretacja kodu jest równoległa z wykonywaniem)
+                  \item kod źródłowy z możliwością kompilacji na wskazane platformy: Linux, MacOS, Windows.
+              \end{itemize}
+        \item Obsługa obrazów statycznych i dynamicznych, serii przekrojów tomograficznych
+        \item Realizacja podstawowych funkcji typowej przeglądarki obrazów medycznych: zmiana kontrastu z pomocą \enquote{okienkowanie}, skalowanie, rotacja.
+    \end{itemize}
 
 \end{frame}
 
@@ -137,7 +150,7 @@
         jest zbiorem bibliotek i narzędzi programistycznych dedykowanych dla języków C++, QML i Java.
         Qt posiada bibliotekę do tworzenia interfejsu graficznego, oraz wiele innych rozwiązań ułatwiających programowanie obiektowe i zdarzeniowe.
 
-        Posiadanych normy: IEC 62304:2015, IEC 61508:2010-3 7.4.4, ISO 9001:2015.
+        Normy: IEC 62304:2015, IEC 61508:2010-3 7.4.4, ISO 9001:2015.
 
         Posiada systemy rodzicielstwa i sygnałów.
 
@@ -146,7 +159,7 @@
         \scriptsize
         to biblioteka do obsługi standardu DICOM.
         Posiada możliwość wczytywania plików z dysku jak i z lokalizacji sieciowych oraz wczytywania plików DICOMDIR.
-        Ma wbudowaną dekompresje obrazów i obsługi różnych kodowań tekstu.
+        Ma wbudowaną dekompresję obrazów i obsługi różnych kodowań tekstu.
 
         \column{0.33\textwidth}
         \textbf{\LARGE CMake}
@@ -180,14 +193,13 @@
 
 \begin{frame}
     \frametitle{Projekt interfejsu graficznego}
-    \begin{figure}
-        \includegraphics[height=0.8\textheight]{img/sokar-gui-004.png}
-    \end{figure}
+    \centering
+    przeglądarka struktury katalogów i plików
+    \includegraphics[height=0.8\textheight]{img/sokar-gui-004.png}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Projekt interfejsu graficznego}
-    \setbeamertemplate{itemize items}[circle]
+    \frametitle{Projekt interfejsu graficznego -- scena}
     \tiny
     \begin{columns}[t]
 
@@ -219,10 +231,10 @@
         Dane szpitala:\\
         - nazwa instytucji\\
         - producent i model urządzenia\\
-        - lekarz wykonujący badanie\\
-        - operator wykonujący badanie
+        - lekarz\\
+        - operator
 
-        \vspace{5em}
+        \vspace{7em}
         Litera orientacji i podziałka
 
         \vspace{11em}
@@ -236,63 +248,101 @@
 
     \begin{columns}[c]
         \column{0.5\textwidth}
+        Globalna struktura
+        \includegraphics[width=0.95\textwidth]{img/uml/global-sturcture.png}
 
-        \begin{figure}
-            \includegraphics[width=0.95\textwidth]{img/uml/global-sturcture.png}
-        \end{figure}
-        \kern-2em
-        \begin{figure}
-            \includegraphics[width=0.95\textwidth]{img/uml/sokar-scene-sets.png}
-        \end{figure}
+        Zbiory ramek obrazowych
+        \includegraphics[width=0.95\textwidth]{img/uml/sokar-scene-sets.png}
 
         \column{0.5\textwidth}
-        \begin{figure}
-            \includegraphics[width=0.95\textwidth]{img/uml/dicom-view.png}
-        \end{figure}
+        Obiekt zakładki
+        \includegraphics[width=0.95\textwidth]{img/uml/dicom-view.png}
 
     \end{columns}
 
 \end{frame}
 
-\begin{frame}[t]
+\begin{frame}[t,fragile]
     \frametitle{Dekoder DICOM}
-    \begin{center}
-        \footnotesize
-        \def\arraystretch{1.5}
-        \setlength{\tabcolsep}{5pt}
-        \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-            \hline
-            char*  & $8b_1$                        & $8b_2$                        & $8b_3$                        & $8b_4$                        & $8b_5$                        & $8b_6$                        & $8b_7$                        & $8b_8$                        & $8b_9$ & $8b_{10}$ & $8b_{11}$ & $8b_{12}$ & $8b_{13}$ & $8b_{14}$ & $8b_{15}$ & $8b_{16}$ \\
-            \hline
-            int8*  & $8b_1$                        & $8b_2$                        & $8b_3$                        & $8b_4$                        & $8b_5$                        & $8b_6$                        & $8b_7$                        & $8b_8$                        & $8b_9$ & $8b_{10}$ & $8b_{11}$ & $8b_{12}$ & $8b_{13}$ & $8b_{14}$ & $8b_{15}$ & $8b_{16}$ \\
-            \hline
-            int16* & \multicolumn{2}{|c|}{$16b_1$} & \multicolumn{2}{|c|}{$16b_2$} & \multicolumn{2}{|c|}{$16b_3$} & \multicolumn{2}{|c|}{$16b_4$} & \multicolumn{2}{|c|}{$16b_5$} & \multicolumn{2}{|c|}{$16b_6$} & \multicolumn{2}{|c|}{$16b_7$} & \multicolumn{2}{|c|}{$16b_8$}                                                                                              \\
-            \hline
-            int32* & \multicolumn{4}{|c|}{$32b_1$} & \multicolumn{4}{|c|}{$32b_2$} & \multicolumn{4}{|c|}{$32b_3$} & \multicolumn{4}{|c|}{$32b_4$}                                                                                                                                                                                                                              \\
-            \hline
-            int64* & \multicolumn{8}{|c|}{$64b_1$} & \multicolumn{8}{|c|}{$64b_2$}                                                                                                                                                                                                                                                                                              \\
-            \hline
-        \end{tabular}
-    \end{center}
+    \vspace{-1em}
+    \begin{columns}[t]
+        \column{0.5\textwidth}
+        Odczyt danych nieobrazowych
+        \begin{lstlisting}[basicstyle=\ttfamily\tiny,numbers=none]
+gdcm::Reader reader;
+reader.SetFileName("/path/to/file");
+if (!reader.Read()) return 1;
 
+/* Pobranie obiektu pliku */
+const gdcm::File &file = reader.GetFile();
 
-    % \begin{lstlisting}
-    % auto origin = (quint16 *) \&originBuffer[0];
-    % \end{lstlisting}
+/* Pobranie obiektu zbioru danych */
+const gdcm::DataSet &dataset = file.GetDataSet();
 
+/* Inicjalizacja klasy konwersji danych na string */
+gdcm::StringFilter stringFilter;
+stringFilter.SetFile(file);
+
+/* Definicja znaczników wybranych elementów */
+const static gdcm::Tag
+    TagPatientName(0x0010, 0x0010),
+    TagWindowCenter(0x0028, 0x1050);
+
+/* Odczyt danej tekstowej */
+if (dataset->FindDataElement(TagPatientName))
+  string name = stringFilter.GetString(TagPatientName);
+
+/* Odczyt danej binarnej */
+if (dataset->FindDataElement(TagWindowCenter)) {
+  auto& ele = dataset->GetDataElement(TagWindowCenter);
+  quint16 center = ele.GetByteValue()->GetPointer(); }
+\end{lstlisting}
+
+        \column{0.5\textwidth}
+        Odczyt obrazów
+        \begin{lstlisting}[basicstyle=\ttfamily\tiny,numbers=none]
+gdcm::ImageReader ir;
+ir.SetFileName("/path/to/file");
+if (!ir.Read()) return 1;
+
+/* Pobranie obiektu obrazu */
+const gdcm::Image &gimage = ir.GetImage();
+
+/* Utworzenie buffora i jego wypełnienie */
+std::vector<char> imgbuffer;
+imgbuffer.resize(gimage.GetBufferLength());
+gimage.GetBuffer(&imgbuffer[0]);
+
+/* Odczyt parametrów obrazu */
+const quint* dimension = gimage.GetDimensions();
+quint dimX = dimension[0];
+quint dimY = dimension[1];
+
+if (gimage.GetPhotometricInterpretation() == 
+    gdcm::PhotometricInterpretation::RGB)
+    cout << "Jest to obraz RGB";
+
+if (gimage.GetPhotometricInterpretation() == 
+    gdcm::PhotometricInterpretation::MONOCHROME2)  
+    cout << "Jest to obraz monochromatyczny 2";
+
+if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
+    cout << "Pixel jest 8-bitową liczbą całkowitą";
+\end{lstlisting}
+    \end{columns}
 \end{frame}
 
 \begin{frame}[t]
 
-    \frametitle{Okienkowanie}
+    \frametitle{Poprawa kontrastu za pomocą \enquote{okienkowania}}
 
     \vspace{-1em}
 
     \begin{columns}[t]
         \column{0.5\textwidth}
-        \vspace{-1.0em}
+        \vspace{-2.0em}
         \begin{figure}
-            \includegraphics[width=1\textwidth]{img/windowing-chart.png}
+            \includegraphics[width=1\textwidth]{img/windowing-chart2.png}
         \end{figure}
         \vspace{-1.0em}
         \begin{figure}
@@ -319,9 +369,9 @@
         \vspace{1em}
         {\normalsize Implementacja}
 
-        \[x_0 = center - width / 2 \qquad y_0 = 1.0\]
+        \[P_0: \qquad x_0 = center - width / 2 \qquad y_0 = 1.0\]
         \vspace{-2em}
-        \[x_1 = center + width / 2 \qquad y_1 = 0.0\]
+        \[P_1: \qquad x_1 = center + width / 2 \qquad y_1 = 0.0\]
         \[(OutputUnits - b ) / m = SV \]
         \[x_0 -= rescaleIntercept \qquad x_0 /= rescaleSlope\]
         \vspace{-2em}
@@ -348,35 +398,38 @@
         \column{0.5\textwidth}
         Zapis informacji o orientacji w DICOM
         \tiny
-        \[
-            \begin{bmatrix}
-                P_x \\ P_y \\ P_z \\ 1
-            \end{bmatrix}
-            =
-            \begin{bmatrix}
-                X_x\Delta_i & Y_x\Delta_j & 0 & S_x \\
-                X_y\Delta_i & Y_y\Delta_j & 0 & S_y \\
-                X_z\Delta_i & Y_z\Delta_j & 0 & S_z \\
-                0           & 0           & 0 & 1
-            \end{bmatrix}
-            \begin{bmatrix}
-                i \\ j \\ 0 \\ 1
-            \end{bmatrix}
-        \]
-        \vspace{-1em}
+        \vspace{1em}
+        \begin{columns}
+            \column{0.6\textwidth}
+            \vspace{-2em}
+            \[
+                \begin{bmatrix}
+                    P_x \\ P_y \\ P_z \\ 1
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    X_x\Delta_i & Y_x\Delta_j & 0 & S_x \\
+                    X_y\Delta_i & Y_y\Delta_j & 0 & S_y \\
+                    X_z\Delta_i & Y_z\Delta_j & 0 & S_z \\
+                    0           & 0           & 0 & 1
+                \end{bmatrix}
+                \begin{bmatrix}
+                    i \\ j \\ 0 \\ 1
+                \end{bmatrix}
+            \]
+            \column{0.4\textwidth}
+            \includegraphics[width=\textwidth]{img/imageorientationindicator-003.pdf}
+        \end{columns}
+
         \begin{itemize}
             \item $P$ -- koordynaty woksela we współrzędnych obrazu,
             \item $S$ -- trzy wartości z elementu ze znacznikiem Image Position,
-            \item $X$, $Y$ -- trzy pierwsze i trzy drugie wartości z Image Orientation,
+            \item $X$, $Y$ -- położenie pierwszego wiersza i kolumny względem układu współrzędnych związanych z pacjentem
             \item $i$ i $j$ --- oznaczają współrzędne na macierzy obrazu,
             \item $\Delta_i$ i $\Delta_j$ --- rzeczywista wielkość piksela obrazu w $mm$.
         \end{itemize}
-
-        \includegraphics[height=3cm]{img/imageorientationindicator-005.png}
-        \includegraphics[height=3cm]{img/imageorientationindicator-004.pdf}
-
-        \column{0.5\textwidth}
-        Implementacja
+        \vspace{2em}
+        {\normalsize Implementacja}
         \tiny
         \[PatientPosition = imgMatrix * ScenePosition\]
         \vspace{-2em}
@@ -385,13 +438,9 @@
         \[imgMatrix^{-1} * PatientPosition = ScenePosition\]
         \vspace{-1.5em}
         \[ScenePosition = imgMatrix^{-1} * PatientPosition\]
-        \vspace{-1em}
-        \begin{itemize}
-            \item $imgMatrix$ --- macierz przekształcenia obrazu,
-            \item $ScenePosition$ --- pozycja na obrazie, która nas interesuje,
-            \item $PatientPosition$ --- jeden z punktów względem pacjenta.
-        \end{itemize}
-        \par
+
+        \column{0.5\textwidth}
+        \tiny
         \[
             rotateTransform*
             (
@@ -400,31 +449,54 @@
                 X_y & Y_y & 0 & 0 \\
                 X_z & Y_z & 0 & 0 \\
                 0   & 0   & 0 & 1
-            \end{bmatrix}
+            \end{bmatrix}^{-1}
             * PatientPosition)
         \]
-        \hspace*{-5em}\includegraphics[height=2cm]{img/imageorientationindicator-003.pdf}
+
+        \includegraphics[width=0.49\textwidth]{img/imageorientationindicator-004.pdf}
+        \includegraphics[width=0.49\textwidth]{img/imageorientationindicator-005.png}
     \end{columns}
-
-
 \end{frame}
 
 \begin{frame}
-    \frametitle{Funckje przeglądarki}
+    \frametitle{Funkcje przeglądarki}
     \begin{itemize}
-        \item Podstawowe operacje na orazie
-        \item Okienkowanie i pseudokolorowanie
-        \item Możliwość wczytania wielu plików i animacji
+        \item Wczytywanie wielu plików i tworzenie interaktywnej animacji.
+        \item Podstawowe operacje na obrazie: przesuwanie, skalowanie, rotacja.
+        \item Dynamiczna zmiana parametrów wyświetlania obrazu: okienkowanie i pseudokolorowanie.
+        \item Przeglądanie obrazów w systemie.
+        \item Zaplanowano i dodano obsługę podstawowych operacji na obrazie ułatwiających jego oglądanie i ocenienie, takich jak: przenoszenie; skalowanie; obrót.
+        \item Zaimplementowano pseudokolorowanie obrazów monochromatycznych z możliwością dodawania nowych palet.
+        \item Wprowadzono obsługę serii obrazów jako całości, włączając w to przegląd obrazów w serii, animacje, wspólne okna w skali barwnej oraz wspólne przekształcenia macierzowe.
     \end{itemize}
 \end{frame}
 
 \begin{frame}
+    \frametitle{Testy}
+    \begin{itemize}
+        \item Zapewniono jednolity sposób kompilacji na platformach przy użyciu narzędzia CMake.
+        \item Napotkano problem z biblioteką GDCM -- biblioteka wymaga kompilacji przez użytkownika.
+        \item Skompilowano i przetestowano na platformach: Linux, MacOS i Windows.
+        \item Wykonano testy na obrazach różnych modalności:
+        \begin{itemize}
+            \item CT z zakładowego tomografu
+            \item MR z zakładowego tomografu
+            \item USG zapisanego w formacie RGB
+            \item Medycyna nuklearna -- obsługa obrazów multiframe
+        \end{itemize}
+        \item Wykonano testy algorytmu wyznaczania orientacji pacjenta na obrazie -- porównanie z innymi przeglądarkami
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
     \frametitle{Wnioski}
-    przetestowano
-
-    automatycznie sie kompiluje
-
-    intefjes jest podobny
+    \begin{itemize}
+        \item Opracowano aplikację do obsługi obrazów \DICOM w C++ z możliwością kompilacji na wiele platform.
+        \item Zastosowano biblioteki dostępne na różnych platformach: Qt i GDCM, które również zostały napisane w C++, dzięki czemu uzyskano jednolity program napisany w jednym języku.
+        \item Jednolity wygląd aplikacji zapewniła biblioteka Qt, co sprawia, że interfejs aplikacji jest prawie taki sam na każdym systemie.
+        \item Przeprowadzone testy pokazały poprawność implementacji algorytmów.
+    \end{itemize}
 
 \end{frame}
 

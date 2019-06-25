@@ -1,0 +1,67 @@
+\frametitle{Dekoder DICOM}
+    \vspace{-1em}
+    \begin{columns}[t]
+        \column{0.5\textwidth}
+        Odczyt danych nieobrazowych
+        \begin{lstlisting}[basicstyle=\ttfamily\tiny,numbers=none]
+gdcm::Reader reader;
+reader.SetFileName("/path/to/file");
+if (!reader.Read()) return 1;
+
+/* Pobranie obiektu pliku */
+const gdcm::File &file = reader.GetFile();
+
+/* Pobranie obiektu zbioru danych */
+const gdcm::DataSet &dataset = file.GetDataSet();
+
+/* Inicjalizacja klasy konwersji danych na string */
+gdcm::StringFilter stringFilter;
+stringFilter.SetFile(file);
+
+/* Definicja znaczników wybranych elementów */
+const static gdcm::Tag
+    TagPatientName(0x0010, 0x0010),
+    TagWindowCenter(0x0028, 0x1050);
+
+/* Odczyt danej tekstowej */
+if (dataset->FindDataElement(TagPatientName))
+  string name = stringFilter.GetString(TagPatientName);
+
+/* Odczyt danej binarnej */
+if (dataset->FindDataElement(TagWindowCenter)) {
+  auto& ele = dataset->GetDataElement(TagWindowCenter);
+  quint16 center = ele.GetByteValue()->GetPointer(); }
+\end{lstlisting}
+
+        \column{0.5\textwidth}
+        Odczyt obrazów
+        \begin{lstlisting}[basicstyle=\ttfamily\tiny,numbers=none]
+gdcm::ImageReader ir;
+ir.SetFileName("/path/to/file");
+if (!ir.Read()) return 1;
+
+/* Pobranie obiektu obrazu */
+const gdcm::Image &gimage = ir.GetImage();
+
+/* Utworzenie buffora i jego wypełnienie */
+std::vector<char> imgbuffer;
+imgbuffer.resize(gimage.GetBufferLength());
+gimage.GetBuffer(&imgbuffer[0]);
+
+/* Odczyt parametrów obrazu */
+const quint* dimension = gimage.GetDimensions();
+quint dimX = dimension[0];
+quint dimY = dimension[1];
+
+if (gimage.GetPhotometricInterpretation() ==
+    gdcm::PhotometricInterpretation::RGB)
+    cout << "Jest to obraz RGB";
+
+if (gimage.GetPhotometricInterpretation() ==
+    gdcm::PhotometricInterpretation::MONOCHROME2)
+    cout << "Jest to obraz monochromatyczny 2";
+
+if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
+    cout << "Pixel jest 8-bitową liczbą całkowitą";
+\end{lstlisting}
+    \end{columns}
