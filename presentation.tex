@@ -14,6 +14,7 @@
 \usetheme{Boadilla}
 \definecolor{WEITI_grafitowy}{rgb}{0.235294118, 0.235294118, 0.298039216}
 \usecolortheme[named=WEITI_grafitowy]{structure}
+\beamertemplatenavigationsymbolsempty
 
 \title{Wieloplatformowa przeglądarka obrazów DICOM w C++}
 \author{Adam Jędrzejowski}
@@ -458,34 +459,51 @@ if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
     \end{columns}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
     \frametitle{Funkcje przeglądarki}
-    \begin{itemize}
-        \item Wczytywanie wielu plików i tworzenie interaktywnej animacji.
-        \item Podstawowe operacje na obrazie: przesuwanie, skalowanie, rotacja.
-        \item Dynamiczna zmiana parametrów wyświetlania obrazu: okienkowanie i pseudokolorowanie.
-        \item Przeglądanie obrazów w systemie.
-        \item Zaplanowano i dodano obsługę podstawowych operacji na obrazie ułatwiających jego oglądanie i ocenienie, takich jak: przenoszenie; skalowanie; obrót.
-        \item Zaimplementowano pseudokolorowanie obrazów monochromatycznych z możliwością dodawania nowych palet.
-        \item Wprowadzono obsługę serii obrazów jako całości, włączając w to przegląd obrazów w serii, animacje, wspólne okna w skali barwnej oraz wspólne przekształcenia macierzowe.
-    \end{itemize}
+    \vspace{-3mm}
+    \begin{columns}[T]
+        \column{0.55\textwidth}
+        \scriptsize
+        \begin{itemize}
+            \item Wczytywanie wielu plików i tworzenie interaktywnej animacji.
+            \item Podstawowe operacje na obrazie: przesuwanie, skalowanie, rotacja.
+            \item Dynamiczna zmiana parametrów wyświetlania obrazu: okienkowanie i pseudokolorowanie.
+            \item Przeglądanie obrazów w systemie.
+            \item Zaplanowano i dodano obsługę podstawowych operacji na obrazie ułatwiających jego oglądanie i ocenienie, takich jak: przenoszenie; skalowanie; obrót.
+            \item Zaimplementowano pseudokolorowanie obrazów monochromatycznych z możliwością dodawania nowych palet.
+            \item Wprowadzono obsługę serii obrazów jako całości, włączając w to przegląd obrazów w serii, animacje, wspólne okna w skali barwnej oraz wspólne przekształcenia macierzowe.
+        \end{itemize}
+
+        \column{0.45\textwidth}
+        \includegraphics[width=\textwidth]{img/test003.png}
+    \end{columns}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
     \frametitle{Testy}
-    \begin{itemize}
-        \item Zapewniono jednolity sposób kompilacji na platformach przy użyciu narzędzia CMake.
-        \item Napotkano problem z biblioteką GDCM -- biblioteka wymaga kompilacji przez użytkownika.
-        \item Skompilowano i przetestowano na platformach: Linux, MacOS i Windows.
-        \item Wykonano testy na obrazach różnych modalności:
+
+    \vspace{-3mm}
+    \begin{columns}[T]
+        \column{0.64\textwidth}
+
         \begin{itemize}
-            \item CT z zakładowego tomografu
-            \item MR z zakładowego tomografu
-            \item USG zapisanego w formacie RGB
-            \item Medycyna nuklearna -- obsługa obrazów multiframe
+            \item Zapewniono jednolity sposób kompilacji na platformach przy użyciu narzędzia CMake.
+            \item Napotkano problem z biblioteką GDCM -- biblioteka wymaga kompilacji przez użytkownika.
+            \item Skompilowano i przetestowano na platformach: Linux, MacOS i Windows.
+            \item Wykonano testy na obrazach różnych modalności:
+                  \begin{itemize}
+                      \item CT z zakładowego tomografu
+                      \item MR z zakładowego tomografu
+                      \item USG zapisanego w formacie RGB
+                      \item Medycyna nuklearna -- obsługa obrazów multiframe
+                  \end{itemize}
+            \item Wykonano testy algorytmu wyznaczania orientacji pacjenta na obrazie -- porównanie z innymi przeglądarkami
         \end{itemize}
-        \item Wykonano testy algorytmu wyznaczania orientacji pacjenta na obrazie -- porównanie z innymi przeglądarkami
-    \end{itemize}
+        \column{0.36\textwidth}
+        \includegraphics[width=\textwidth]{img/test001.png}
+        \includegraphics[width=\textwidth]{img/test002.png}
+    \end{columns}
 
 \end{frame}
 
