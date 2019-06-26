@@ -55,47 +55,51 @@
     \vspace{1em}
     Standard \DICOM v3 definiuje ujednolicony sposób zapisu i przekazywania danych medycznych reprezentujących lub związanych z obrazami diagnostycznymi w medycynie.
 
-    \begin{textblock}{5}(10,5)
+    
+    \begin{columns}[T]
+        \column{0.6\textwidth}
+        \vspace{1em}
+        \normalsize
+        \hspace*{0.3em}Obrazowe techniki medyczne:
+        \scriptsize
+        \begin{itemize}
+            \item Radiografia, Tomografia komputerowa -- współczynnik natężenia promieniowania X przez obiekt
+            \item Obrazowanie metodą rezonansu magnetycznego -- sumaryczna gęstość atomów wodoru
+            \item Ultrasonografia -- różnica gęstości poszczególnych warstw znajdujących się w obiekcie
+            \item Scyntygrafia, Tomografia SPECT, Tomografia PET -- rozkład radiofarmaceutyka w obiekcie
+        \end{itemize}
+
+        \column{0.4\textwidth}
         \includegraphics[height=0.4\textheight]{img/usg.png}
-    \end{textblock}
+        
 
-    \vspace{1em}
-    \normalsize
-    Obrazowe techniki medyczne:
-    \scriptsize
-    \begin{itemize}
-        \item Radiografia -- współczynnik natężenia promieniowania X przez obiekt
-        \item Tomografia komputerowa -- współczynnik natężenia promieniowania X przez obiekt
-        \item Obrazowanie metodą rezonansu magnetycznego -- sumaryczna gęstość atomów wodoru
-        \item Ultrasonografia -- różnica gęstości poszczególnych warstw znajdujących się w obiekcie
-        \item Scyntygrafia -- rozkład radiofarmaceutyka w obiekcie
-        \item Tomografia SPECT
-        \item Tomografia PET
-    \end{itemize}
-
+    \end{columns}
 \end{frame}
 
 \begin{frame}[t]
     \frametitle{Standard DICOM}
-    \begin{columns}[t]
+    \begin{columns}[T]
         \column{0.4\textwidth}
-
         \scriptsize
-
-        \vspace{-8em}
         Plik w formacie \DICOM można traktować jako zbiór elementów danych.
         Zbiór nazywa się \enquote{Data Set} i składa się z rekordów, które nazywają się \enquote{Data Element}.
         Elementy danych są ułożone w postaci listy.
         Element danych może zawierać w sobie listę elementów danych.
 
+        \vspace{1em}
+        Element danych składa się ze znacznika, interpretacji danych, długości danych i danych.
 
-        W obecnej chwili standard DICOM definiuje 81 różnych typów badań.
+        \vspace{1em}
+        Znacznik składa się z dwóch liczb (grupy i elementu grupy) i informuje co dane zapisują.
+        \DICOM definiuje dwa typy znaczników: publiczne i prywatne.
 
-        Coś o tej tabeli
+        \vspace{1em}
+        W obecnej chwili standard DICOM definiuje 81 różnych typów badań i ponad 4000 publicznych znaczników.
 
         \column{0.6\textwidth}
-        \tiny
         \centering
+        \tiny
+        \vspace{-0.1cm}
         \includegraphics[trim={1.2cm 1cm 1.2cm 0.2cm},clip,width=0.7\textwidth]{img/dicom-dataelement002.pdf}
         \begin{tabular}{|l|c|c|l|}
             \hline
@@ -244,19 +248,23 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Budowa obiektowa programu}
+    \frametitle{Budowa obiektowa programu -- perspektywy}
 
     \begin{columns}[c]
+        \def\umlsize{0.9\textwidth}
         \column{0.5\textwidth}
-        Globalna struktura
-        \includegraphics[width=0.95\textwidth]{img/uml/global-sturcture.png}
+        \centering
+        Układ globalnej struktury programu
+        \includegraphics[width=\umlsize]{img/uml/global-sturcture.png}
 
-        Zbiory ramek obrazowych
-        \includegraphics[width=0.95\textwidth]{img/uml/sokar-scene-sets.png}
+        \vspace{-0.3cm}
+        Struktura przechowywania ramek obrazowych
+        \includegraphics[width=\umlsize]{img/uml/sokar-scene-sets.png}
 
         \column{0.5\textwidth}
-        Obiekt zakładki
-        \includegraphics[width=0.95\textwidth]{img/uml/dicom-view.png}
+        \centering
+        Obiekt zakładki wyświetlający sekwencje ramek
+        \includegraphics[width=\umlsize]{img/uml/dicom-view.png}
 
     \end{columns}
 
@@ -461,13 +469,11 @@ if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
 \begin{frame}
     \frametitle{Funkcje przeglądarki}
     \begin{itemize}
-        \item Wczytywanie wielu plików i tworzenie interaktywnej animacji.
-        \item Podstawowe operacje na obrazie: przesuwanie, skalowanie, rotacja.
-        \item Dynamiczna zmiana parametrów wyświetlania obrazu: okienkowanie i pseudokolorowanie.
-        \item Przeglądanie obrazów w systemie.
-        \item Zaplanowano i dodano obsługę podstawowych operacji na obrazie ułatwiających jego oglądanie i ocenienie, takich jak: przenoszenie; skalowanie; obrót.
-        \item Zaimplementowano pseudokolorowanie obrazów monochromatycznych z możliwością dodawania nowych palet.
         \item Wprowadzono obsługę serii obrazów jako całości, włączając w to przegląd obrazów w serii, animacje, wspólne okna w skali barwnej oraz wspólne przekształcenia macierzowe.
+        \item Obsługa podstawowych operacji na obrazie ułatwiających jego oglądanie i ocenienie, takich jak: przenoszenie, skalowanie, obrót.
+        \item Dynamiczna zmiana parametrów wyświetlania obrazu, polepszanie kontrstu za pomocą \enquote{okienkowania} z możliwością zastosowania wielokolorowych palet.
+        \item Wyliczanie orientacji pacjenta w stosunku do obrazu.
+        \item Przeglądanie obrazów w systemie.
     \end{itemize}
 \end{frame}
 
@@ -478,12 +484,12 @@ if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
         \item Napotkano problem z biblioteką GDCM -- biblioteka wymaga kompilacji przez użytkownika.
         \item Skompilowano i przetestowano na platformach: Linux, MacOS i Windows.
         \item Wykonano testy na obrazach różnych modalności:
-        \begin{itemize}
-            \item CT z zakładowego tomografu
-            \item MR z zakładowego tomografu
-            \item USG zapisanego w formacie RGB
-            \item Medycyna nuklearna -- obsługa obrazów multiframe
-        \end{itemize}
+              \begin{itemize}
+                  \item CT z zakładowego tomografu
+                  \item MR z zakładowego tomografu
+                  \item USG zapisanego w formacie RGB
+                  \item Medycyna nuklearna -- obsługa obrazów multiframe
+              \end{itemize}
         \item Wykonano testy algorytmu wyznaczania orientacji pacjenta na obrazie -- porównanie z innymi przeglądarkami
     \end{itemize}
 
