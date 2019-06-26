@@ -479,9 +479,10 @@ INPUT /opt/dev-files/studia/sokar/sokar-writing/img/imageorientationindicator-00
 INPUT /opt/dev-files/studia/sokar/sokar-writing/img/imageorientationindicator-005.png
 INPUT /opt/dev-files/studia/sokar/sokar-writing/img/logo-weiti.png
 INPUT /opt/dev-files/studia/sokar/sokar-writing/img/logo-weiti.png
-INPUT /opt/dev-files/studia/sokar/sokar-writing/img/test003.png
-INPUT /opt/dev-files/studia/sokar/sokar-writing/img/test003.png
-INPUT /opt/dev-files/studia/sokar/sokar-writing/img/test003.png
+INPUT /usr/share/texmf-dist/fonts/tfm/public/pl/plss9.tfm
+INPUT /opt/dev-files/studia/sokar/sokar-writing/img/test004.png
+INPUT /opt/dev-files/studia/sokar/sokar-writing/img/test004.png
+INPUT /opt/dev-files/studia/sokar/sokar-writing/img/test004.png
 INPUT /opt/dev-files/studia/sokar/sokar-writing/img/logo-weiti.png
 INPUT /opt/dev-files/studia/sokar/sokar-writing/img/logo-weiti.png
 INPUT /opt/dev-files/studia/sokar/sokar-writing/img/test001.png
@@ -500,11 +501,11 @@ OUTPUT /opt/dev-files/studia/sokar/sokar-writing/presentation.snm
 INPUT /opt/dev-files/studia/sokar/sokar-writing/presentation.aux
 INPUT /opt/dev-files/studia/sokar/sokar-writing/presentation.out
 INPUT /opt/dev-files/studia/sokar/sokar-writing/presentation.out
+INPUT /usr/share/texmf-dist/fonts/enc/dvips/pl/plrm.enc
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/pl/plms.enc
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/pl/plme.enc
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/pl/plmi.enc
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/pl/pltt.enc
-INPUT /usr/share/texmf-dist/fonts/enc/dvips/pl/plrm.enc
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb
@@ -513,6 +514,7 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/pl/plmi6.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/pl/plss10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/pl/plss12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/pl/plss8.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/pl/plss9.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/pl/plssbx10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/pl/plsy5.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/pl/plsy6.pfb
