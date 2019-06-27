@@ -5,6 +5,7 @@
 \usepackage[autostyle]{csquotes} 
 \usepackage{textpos}
 \usepackage{animate}
+\usepackage{grffile}
 \input{commands.tex}
 \input{packages-listings.tex}
 
@@ -71,7 +72,7 @@
         \end{itemize}
 
         \column{0.4\textwidth}
-        \includegraphics[height=0.4\textheight]{img/usg.png}
+        \includegraphics[trim={0 40px 0px 60px},clip,width=0.9\textwidth]{img/windowing.pet.50.350.png}
 
 
     \end{columns}
@@ -342,18 +343,17 @@ if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
 \end{frame}
 
 \begin{frame}[t]
-
     \frametitle{Poprawa kontrastu za pomocą \enquote{okienkowania}}
-
     \vspace{-1em}
-
     \begin{columns}[t]
         \column{0.5\textwidth}
-        \vspace{-2.0em}
+        \vspace{-3.0em}
         \begin{figure}
-            \includegraphics[width=1\textwidth]{img/windowing-chart2.png}
+            \href{https://www.geogebra.org/graphing/xpwanjem}{
+                \includegraphics[width=1\textwidth]{img/windowing-chart2.png}
+            }
         \end{figure}
-        \vspace{-1.0em}
+        \vspace{-2.5em}
         \begin{figure}
             \includegraphics[trim={0 1cm 0 2cm},clip,width=1\textwidth]{img/monochrome-002.png}
         \end{figure}
@@ -433,7 +433,7 @@ if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
         \begin{itemize}
             \item $P$ -- koordynaty woksela we współrzędnych obrazu,
             \item $S$ -- trzy wartości z elementu ze znacznikiem Image Position,
-            \item $X$, $Y$ -- położenie pierwszego wiersza i kolumny względem układu współrzędnych związanych z pacjentem
+            \item $X$, $Y$ -- położenie pierwszego wiersza i pierwszej kolumny względem układu współrzędnych związanych z pacjentem
             \item $i$ i $j$ --- oznaczają współrzędne na macierzy obrazu,
             \item $\Delta_i$ i $\Delta_j$ --- rzeczywista wielkość piksela obrazu w $mm$.
         \end{itemize}
@@ -471,6 +471,7 @@ if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
     \frametitle{Funkcje przeglądarki}
     \begin{columns}[T]
         \column{0.5\textwidth}
+        \vspace{-1em}
         \footnotesize
         \begin{itemize}
             \item Wprowadzono obsługę serii obrazów jako całości, włączając w to przegląd obrazów w serii, animacje, wspólne okna w skali barwnej oraz wspólne przekształcenia macierzowe.
@@ -478,6 +479,7 @@ if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
             \item Dynamiczna zmiana parametrów wyświetlania obrazu, polepszanie kontrstu za pomocą \enquote{okienkowania} z możliwością zastosowania wielokolorowych palet.
             \item Wyliczanie orientacji pacjenta w stosunku do obrazu.
             \item Przeglądanie obrazów w systemie.
+            \item Zaimplementowano eksport obrazów DICOM\\ do obrazów JPEG, PNG, BMP, GIF.
         \end{itemize}
 
         \column{0.50\textwidth}
@@ -491,7 +493,7 @@ if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
     \vspace{-3mm}
     \begin{columns}[T]
         \column{0.64\textwidth}
-
+        \footnotesize
         \begin{itemize}
             \item Zapewniono jednolity sposób kompilacji na platformach przy użyciu narzędzia CMake.
             \item Napotkano problem z biblioteką GDCM -- biblioteka wymaga kompilacji przez użytkownika.
@@ -520,6 +522,17 @@ if (gimage.GetPixelFormat() == gdcm::PixelFormat::UINT8)
         \item Jednolity wygląd aplikacji zapewniła biblioteka Qt, co sprawia, że interfejs aplikacji jest prawie taki sam na każdym systemie.
         \item Przeprowadzone testy pokazały poprawność implementacji algorytmów.
     \end{itemize}
+
+    \begin{columns}
+        \column{0.25\textwidth}
+        \includegraphics[width=\textwidth]{img/end1.png}
+        \column{0.25\textwidth}
+        \includegraphics[width=\textwidth]{img/end2.png}
+        \column{0.25\textwidth}
+        \includegraphics[width=\textwidth]{img/end4.png}
+        \column{0.25\textwidth}
+        \includegraphics[width=\textwidth]{img/end3.png}
+    \end{columns}
 
 \end{frame}
 
